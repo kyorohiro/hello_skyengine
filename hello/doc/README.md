@@ -1,6 +1,18 @@
 # HelloWorld
 * https://github.com/kyorohiro/hello_skyengine/tree/master/hello
 
+![](screen.png)
+
+```
+import 'package:sky/widgets.dart';
+
+void main() {
+  Text t = new Text("Hello World");
+  Center c= new Center (child: t);
+  runApp(c);
+}
+```
+
 ## 環境の設定
 2015/10/1の時点では、Flutterの開発環境としてはAtomが良い感じです。ですが、まずはメモ帳から初めてみましょう。
 
