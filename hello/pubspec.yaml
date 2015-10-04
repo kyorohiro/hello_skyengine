@@ -1,0 +1,4 @@
+name: hello
+dependencies:
+  sky: any
+  sky_tools: any
