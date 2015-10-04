@@ -25,4 +25,14 @@ dependencies:
   sky_tools: any
 ```
 
-#### 
+#### libフォルダを作成する
+```
+./pubspec.yaml
+./lib/
+```
+#### Pubコマンドでsky関連のライブラリをダウンロードする
+"./" で、pubコマンドを入力する。
+```
+> pub get
+```
+
