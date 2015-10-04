@@ -44,7 +44,7 @@ dependencies:
 
 ```
 #### mainプログラムを書く
-"./lib/main.dartを作成して以下を書く。
+"./lib/main.dart" を作成して以下を書く。
 ```
 import 'package:sky/widgets.dart';
 
@@ -54,3 +54,4 @@ void main() {
   runApp(c);
 }
 ```
+
