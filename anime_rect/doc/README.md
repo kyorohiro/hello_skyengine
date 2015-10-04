@@ -1,6 +1,6 @@
 # Draw Rect Anime
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
+https://github.com/kyorohiro/hello_skyengine/tree/master/anime_rect
 
 ![](screen.png)
 
