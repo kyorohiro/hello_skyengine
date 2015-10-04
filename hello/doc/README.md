@@ -19,5 +19,10 @@ adbコマンドが使えるようにしましょう。
 ## アプリを作成する。
 #### pubspec.yamlを作成する
 ```
-
+name: hello
+dependencies:
+  sky: any
+  sky_tools: any
 ```
+
+#### 
