@@ -55,3 +55,13 @@ void main() {
 }
 ```
 
+#### アプリを起動する
+"./" で、以下のコマンドを入力する。
+
+```
+./packages/sky/sky_tool start --checked && ./packages/sky/sky_tool logs
+```
+
+これで完了です。
+
+
