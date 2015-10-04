@@ -8,7 +8,7 @@
 ### Dart SDKをインストール
 コマンドラインから、pubコマンドとdartコマンドを使えるようにしましょう。
 
-##### [Macの場合]
+* [Macの場合]
 brew tap dart-lang/dart && brew install dart --devel
 
 
