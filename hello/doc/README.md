@@ -8,13 +8,13 @@
 ### Dart SDKをインストール
 コマンドラインから、pubコマンドとdartコマンドを使えるようにしましょう。
 
-#### Macの場合
+##### [Macの場合]
 brew tap dart-lang/dart && brew install dart --devel
 
 
 ### Android SDKのインストール
 adbコマンドが使えるようにしましょう。
-
+TODO
 
 ## アプリを作成する。
 #### pubspec.yamlを作成する
