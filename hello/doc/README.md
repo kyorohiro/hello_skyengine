@@ -15,6 +15,7 @@ brew tap dart-lang/dart && brew install dart --devel
 ### Android SDKのインストール
 adbコマンドが使えるようにしましょう。
 TODO
+* [Android SDK](https://developer.android.com/sdk/installing/index.html?pkg=tools)
 
 ## アプリを作成する。
 #### pubspec.yamlを作成する
