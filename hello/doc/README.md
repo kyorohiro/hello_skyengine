@@ -31,8 +31,25 @@ dependencies:
 ./lib/
 ```
 #### Pubコマンドでsky関連のライブラリをダウンロードする
+
 "./" で、pubコマンドを入力する。
 ```
 > pub get
-```
+..
+..
+> pub upgrade
+..
+..
+``
 
+```
+#### mainプログラムを書く
+"./lib/main.dartを作成して以下を書く。
+```
+import 'package:sky/widgets.dart';
+
+void main() {
+  Center c= new Center (child: new Text("Hello World"));
+  runApp(c);
+}
+```
