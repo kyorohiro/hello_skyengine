@@ -1,6 +1,7 @@
 import 'package:sky/widgets.dart';
 
 void main() {
-  Center c= new Center (child: new Text("Hello World"));
+  Text t = new Text("Hello World");
+  Center c= new Center (child: t);
   runApp(c);
 }
