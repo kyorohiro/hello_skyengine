@@ -1,6 +1,6 @@
 # Rotate Image
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
+https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 
 ![](screen.png)
 
