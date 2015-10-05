@@ -6,6 +6,8 @@
 * [draw_image](draw_image/doc/README.md)
 * [rotate_image](rotate_image/doc/README.md)
 * [sound_test](sound_test/doc/README.md)
+* [touch_test](touch_event/doc/README.md)
+* [try to make a mini game]
 
 
 

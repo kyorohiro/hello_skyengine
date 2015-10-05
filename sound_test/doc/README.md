@@ -46,10 +46,8 @@ class SoundTest {
   }
 
   play() async {
-    print("start play");
     player.ptr.seekTo(0);
     player.ptr.start();
-    print("/start play");
   }
 
   pause() async {
