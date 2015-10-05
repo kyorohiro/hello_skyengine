@@ -1,4 +1,4 @@
-# Draw Rect
+# Touch Event
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 
