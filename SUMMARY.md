@@ -7,7 +7,7 @@
 * [rotate_image](rotate_image/doc/README.md)
 * [sound_test](sound_test/doc/README.md)
 * [touch_test](touch_event/doc/README.md)
-* [game]
+* [try to make a mini game]
 
 
 
