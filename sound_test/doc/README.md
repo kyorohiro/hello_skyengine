@@ -17,7 +17,12 @@ main() async {
   MojoDataPipeConsumer data =
       await ResouceLoader.load("bgm_maoudamashii_acoustic09.mp3");
   SoundTest test = new SoundTest(data);
-  test.play();
+  await test.init();
+  await test.play();
+  await new Future.delayed(new Duration(seconds:5));
+  await test.pause();
+  await new Future.delayed(new Duration(seconds:5));
+  await test.play();
 }
 
 class ResouceLoader {
@@ -34,17 +39,20 @@ class SoundTest {
   MediaServiceProxy service = new MediaServiceProxy.unbound();
   MediaPlayerProxy player = new MediaPlayerProxy.unbound();
 
-  play() async {
-    print("start play");
+  init() async {
     shell.requestService(null, service);
     service.ptr.createPlayer(player);
     await player.ptr.prepare(data);
+  }
+
+  play() async {
+    print("start play");
     player.ptr.seekTo(0);
     player.ptr.start();
     print("/start play");
   }
 
-  stop() async {
+  pause() async {
     player.ptr.pause();
   }
 }
