@@ -1,4 +1,4 @@
-# draw image
+# Draw Image
 
 ![](screen.png)
 
