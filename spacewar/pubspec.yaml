@@ -1,0 +1,4 @@
+name: spacewar
+dependencies:
+  sky: any
+  sky_tools: any
