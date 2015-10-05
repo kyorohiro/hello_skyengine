@@ -1,0 +1,5 @@
+name: hello_003
+description: A minimal Sky project.
+dependencies:
+  sky: any
+  sky_tools: any
