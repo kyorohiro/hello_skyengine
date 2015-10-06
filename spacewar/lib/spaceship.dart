@@ -14,13 +14,11 @@ class SpaceShip extends DisplayObject {
 
   @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
-
     Paint paint = new Paint();
     paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
-
-    canvas.drawLine(conv(x, y), conv(x + 10.0, y + 30.0), paint);
-    canvas.drawLine(conv(x - 10.0, y + 30.0), conv(x + 10.0, y + 30.0), paint);
-    canvas.drawLine(conv(x - 10.0, y + 30.0), conv(x, y), paint);
+    canvas.drawLine(conv(x, y-15),               conv(x + 10.0, y-15 + 30.0), paint);
+    canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x + 10.0, y-15 + 30.0), paint);
+    canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x, y-15), paint);
   }
 
   Point conv(double x, double y) {
