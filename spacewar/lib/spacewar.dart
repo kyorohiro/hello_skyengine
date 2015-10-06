@@ -6,9 +6,20 @@ import 'dart:math' as math;
 import 'dart:sky' as sky;
 part 'sun.dart';
 
-abstract class DisplayObject {
+class DisplayObject {
   List<DisplayObject> child = [];
-  void onPaint(Stage stage, PaintingCanvas canvas);
+  DisplayObject({this.child:null}){
+    if(child == null) {
+      child = [];
+    }
+  }
+  void onPaint(Stage stage, PaintingCanvas canvas){;}
+  void paint(Stage stage, PaintingCanvas canvas) {
+    onPaint(stage, canvas);
+    for(DisplayObject d in child) {
+      d.paint(stage, canvas);
+    }
+  }
 }
 
 class Stage extends RenderBox {
@@ -28,7 +39,7 @@ class Stage extends RenderBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     //print("paint");
-    root.onPaint(this, context.canvas);
+    root.paint(this, context.canvas);
     /*
     Paint p = new Paint();
     p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);

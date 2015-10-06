@@ -9,6 +9,7 @@ void main() {
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    return new Stage(new Sun());
+    return new Stage(
+      new DisplayObject(child:[new Sun(), new SpaceShip()]));
   }
 }
