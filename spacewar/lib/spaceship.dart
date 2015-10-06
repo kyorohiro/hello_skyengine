@@ -37,8 +37,13 @@ class SpaceShip extends GravityDisplayObject {
         dy += joystick.directionY * math.sin(math.PI*(angle-90)/180) / 5000;
       } else {
         isThrust = false;
-        if(joystick.directionY < -1*joystick.directionMax*3/4) {
-          stage.root.addChild(new Bullet()..x = this.x..y=this.y..dx=this.dx/2..dy=this.dy/2);
+        if(joystick.directionY < -1*joystick.directionMax*2/5) {
+          Bullet b = new Bullet();
+          b.x = this.x;
+          b.y = this.y;
+          b.dx = this.dx + -1*joystick.directionY * math.cos(math.PI*(angle-90)/180) / 500;
+          b.dy = this.dy + -1*joystick.directionY * math.sin(math.PI*(angle-90)/180) / 500;
+          stage.root.addChild(b);
         }
       }
     }
