@@ -8,26 +8,47 @@ import 'dart:sky' as sky;
 part 'sun.dart';
 
 class DisplayObject {
+  double x = 0.0;
+  double y = 0.0;
+  String objectName = "none";
   List<DisplayObject> child = [];
-  DisplayObject({this.child:null}){
-    if(child == null) {
+  DisplayObject({this.child: null}) {
+    if (child == null) {
       child = [];
     }
   }
-  void onTick(Stage stage, double timeStamp){
+
+  DisplayObject fincObjectFromObjectName(String objectName) {
+    if(this.objectName == objectName) {
+      return this;
+    }
+    for(DisplayObject d in child) {
+      DisplayObject t = d.fincObjectFromObjectName(objectName);
+      if(t != null) {
+        return t;
+      }
+    }
+    return null;
+  }
+
+  void onTick(Stage stage, double timeStamp) {
 
   }
+
   void tick(Stage stage, double timeStamp) {
     onTick(stage, timeStamp);
-    for(DisplayObject d in child) {
+    for (DisplayObject d in child) {
       d.onTick(stage, timeStamp);
     }
   }
 
-  void onPaint(Stage stage, PaintingCanvas canvas){;}
+  void onPaint(Stage stage, PaintingCanvas canvas) {
+    ;
+  }
+
   void paint(Stage stage, PaintingCanvas canvas) {
     onPaint(stage, canvas);
-    for(DisplayObject d in child) {
+    for (DisplayObject d in child) {
       d.paint(stage, canvas);
     }
   }
@@ -38,22 +59,34 @@ class Stage extends RenderBox {
   double get y => paintBounds.top;
   double get w => paintBounds.width;
   double get h => paintBounds.height;
-  int animationId = null;
-  DisplayObject root;
-  Stage(this.root){}
+  bool animeIsStart = false;
+  int animeId = 0;
+  DisplayObject _root;
+  DisplayObject get root => _root;
+  Stage(this._root) {}
 
   void start() {
-    if(animationId != null) {
-      throw "already run";
+    if (animeIsStart == true) {
+      return;
     }
-    animationId = scheduler.requestAnimationFrame((double timeStamp){
-    });
-
+    animeIsStart = true;
+    innerTick(double timeStamp) {
+      if (animeIsStart == true) {
+        animeId = scheduler.requestAnimationFrame(innerTick);
+        if(_root != null){
+          _root.tick(this, timeStamp);
+        }
+      }
+      this.markNeedsPaint();
+    }
+    animeId = scheduler.requestAnimationFrame(innerTick);
   }
 
   void stop() {
-    scheduler.cancelAnimationFrame(animationId);
-    animationId = null;
+    if (animeIsStart == true) {
+      scheduler.cancelAnimationFrame(animeId);
+    }
+    animeIsStart = false;
   }
 
   @override
@@ -63,17 +96,9 @@ class Stage extends RenderBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    //print("paint");
     root.paint(this, context.canvas);
-    /*
-    Paint p = new Paint();
-    p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
-    Rect r = new Rect.fromLTWH(x - 50.0, y - 50.0, 100.0, 100.0);
-    context.canvas.drawRect(r, p);
-    */
   }
 
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-  }
+  void handleEvent(sky.Event event, BoxHitTestEntry entry) {}
 }
