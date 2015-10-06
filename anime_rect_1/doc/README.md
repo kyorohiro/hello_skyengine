@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/blob/master/anime_rect_1
 ```
 import 'package:sky/widgets.dart';
 import 'package:sky/rendering.dart';
-import 'dart:async';
+import 'package:sky/animation.dart';
 import 'dart:math';
 
 void main() {
@@ -21,14 +21,17 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
     return o;
   }
 
-  Future anime() async {
-    while (true) {
-      await new Future.delayed(new Duration(milliseconds: 20));
+  double prevTimeStamp = 0.0;
+  void anime() {
+    scheduler.requestAnimationFrame((double timeStamp) {
+      print("${timeStamp-prevTimeStamp}");
+      prevTimeStamp = timeStamp;
       o.x = 100 * cos(PI * angle / 180.0) + 100.0;
       o.y = 100 * sin(PI * angle / 180.0) + 100.0;
       angle++;
       o.markNeedsPaint();
-    }
+      anime();
+    });
   }
 }
 
