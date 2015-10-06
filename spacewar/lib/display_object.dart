@@ -1,4 +1,5 @@
 part of spacewar;
+
 class DisplayObject {
   double x = 0.0;
   double y = 0.0;
@@ -11,21 +12,19 @@ class DisplayObject {
   }
 
   DisplayObject fincObjectFromObjectName(String objectName) {
-    if(this.objectName == objectName) {
+    if (this.objectName == objectName) {
       return this;
     }
-    for(DisplayObject d in child) {
+    for (DisplayObject d in child) {
       DisplayObject t = d.fincObjectFromObjectName(objectName);
-      if(t != null) {
+      if (t != null) {
         return t;
       }
     }
     return null;
   }
 
-  void onInit(Stage stage) {
-
-  }
+  void onInit(Stage stage) {}
 
   void init(Stage stage) {
     onInit(stage);
@@ -34,9 +33,7 @@ class DisplayObject {
     }
   }
 
-  void onTick(Stage stage, double timeStamp) {
-
-  }
+  void onTick(Stage stage, double timeStamp) {}
 
   void tick(Stage stage, double timeStamp) {
     onTick(stage, timeStamp);
@@ -55,4 +52,13 @@ class DisplayObject {
       d.paint(stage, canvas);
     }
   }
+
+  void touch(Stage stage, int id,  String type, double x, double y, double dx, double dy) {
+    onTouch(stage, id, type, x, y, dx, dy);
+    for (DisplayObject d in child) {
+      d.touch(stage, id, type, x, y, dx, dy);
+    }
+  }
+
+  void onTouch(Stage stage, int id, String type, double x, double y, double dx, double dy) {}
 }

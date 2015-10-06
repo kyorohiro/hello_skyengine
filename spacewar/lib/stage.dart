@@ -9,8 +9,11 @@ class Stage extends RenderBox {
   int animeId = 0;
   DisplayObject _root;
   DisplayObject get root => _root;
-  Stage(this._root) {}
   bool startable = false;
+
+  Stage(this._root) {
+    init();
+  }
 
   void start() {
     if (animeIsStart == true) {
@@ -54,6 +57,41 @@ class Stage extends RenderBox {
     root.paint(this, context.canvas);
   }
 
+  static const int kMaxOfTouch = 5;
+  List<TouchPoint> touchPoints = [];
+
+  void init() {
+    for (int i = 0; i < kMaxOfTouch; i++) {
+      touchPoints.add(new TouchPoint(-1.0, -1.0));
+    }
+  }
+
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {}
+  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
+    if (!(event is sky.PointerEvent)) {
+      return;
+    }
+    sky.PointerEvent e = event;
+    if (e.pointer >=5) {
+      return;
+    }
+
+    e.pointer;
+    if (event.type == "pointerdown") {
+      touchPoints[e.pointer].x = entry.localPosition.x;
+      touchPoints[e.pointer].y = entry.localPosition.y;
+    } else {
+      touchPoints[e.pointer].x += e.dx;
+      touchPoints[e.pointer].y += e.dy;
+    }
+    _root.touch(this, e.pointer, event.type,
+      touchPoints[e.pointer].x, touchPoints[e.pointer].y,
+       e.dx, e.dy);
+    print(" point ${x} ${y} ${e.pointer}");
+  }
+}
+class TouchPoint {
+  double x;
+  double y;
+  TouchPoint(this.x, this.y) {}
 }
