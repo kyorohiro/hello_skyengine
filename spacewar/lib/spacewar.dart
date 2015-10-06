@@ -10,3 +10,4 @@ part 'stage.dart';
 part 'display_object.dart';
 part 'sun.dart';
 part 'spaceship.dart';
+part 'joystick.dart';

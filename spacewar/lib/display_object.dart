@@ -23,6 +23,17 @@ class DisplayObject {
     return null;
   }
 
+  void onInit(Stage stage) {
+
+  }
+
+  void init(Stage stage) {
+    onInit(stage);
+    for (DisplayObject d in child) {
+      d.init(stage);
+    }
+  }
+
   void onTick(Stage stage, double timeStamp) {
 
   }

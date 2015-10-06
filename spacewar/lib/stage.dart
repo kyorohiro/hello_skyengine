@@ -10,20 +10,28 @@ class Stage extends RenderBox {
   DisplayObject _root;
   DisplayObject get root => _root;
   Stage(this._root) {}
+  bool startable = false;
 
   void start() {
     if (animeIsStart == true) {
       return;
     }
     animeIsStart = true;
+    bool isInit = false;
     innerTick(double timeStamp) {
-      if (animeIsStart == true) {
-        animeId = scheduler.requestAnimationFrame(innerTick);
-        if(_root != null){
+      if (startable) {
+        if (isInit == false) {
+          _root.init(this);
+          isInit = true;
+        }
+        if (_root != null) {
           _root.tick(this, timeStamp);
         }
+        this.markNeedsPaint();
       }
-      this.markNeedsPaint();
+      if (animeIsStart == true) {
+        animeId = scheduler.requestAnimationFrame(innerTick);
+      }
     }
     animeId = scheduler.requestAnimationFrame(innerTick);
   }
@@ -38,6 +46,7 @@ class Stage extends RenderBox {
   @override
   void performLayout() {
     size = constraints.biggest;
+    startable = true;
   }
 
   @override

@@ -4,7 +4,8 @@ class Sun extends DisplayObject {
   @override
   String objectName = "sun";
 
-  void onTick(Stage stage, double timeStamp) {
+  @override
+  void onInit(Stage stage) {
     this.x = stage.w / 2 + stage.x;
     this.y = stage.h / 2 + stage.y;
   }

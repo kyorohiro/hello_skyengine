@@ -2,6 +2,7 @@ import 'package:sky/widgets.dart';
 import 'package:sky/rendering.dart';
 import 'dart:sky' as sky;
 import 'spacewar.dart';
+import 'dart:async';
 
 void main() {
   runApp(new DrawRectWidget());
@@ -9,7 +10,7 @@ void main() {
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    Stage stage = new Stage(new DisplayObject(child: [new Sun(), new SpaceShip()]));
+    Stage stage = new Stage(new DisplayObject(child:[new Sun(), new SpaceShip(), new Joystick()]));
     stage.start();
     return stage;
   }
