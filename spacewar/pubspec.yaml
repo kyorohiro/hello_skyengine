@@ -2,3 +2,5 @@ name: spacewar
 dependencies:
   sky: any
   sky_tools: any
+  vector_math: any
+  benchmark_harness: any

@@ -90,6 +90,7 @@ class Stage extends RenderBox {
     print(" point ${x} ${y} ${e.pointer}");
   }
 }
+
 class TouchPoint {
   double x;
   double y;

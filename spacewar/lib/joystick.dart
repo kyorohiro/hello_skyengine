@@ -1,12 +1,17 @@
 part of spacewar;
 
 class Joystick extends DisplayObject {
+  @override
+  String objectName = "joystick";
+
   double width = 50.0;
   double minWidth = 25.0;
   bool isTouch = false;
   int touchId = 0;
   double minX = 0.0;
   double minY = 0.0;
+  double get directionX => x - minX;
+  double get directionY => y - minY;
 
   @override
   void onInit(Stage stage) {
@@ -35,7 +40,6 @@ class Joystick extends DisplayObject {
 
   @override
   void onTouch(Stage stage, int id, String type, double x, double y, double dx, double dy) {
-    print("onTouch ${id} ${type} ${x} ${y} ${dx} ${dy}");
     if (isTouch == false) {
       if (distance(x, y, this.x, this.y) < minWidth) {
         isTouch = true;
