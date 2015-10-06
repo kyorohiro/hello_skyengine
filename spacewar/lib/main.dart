@@ -1,8 +1,6 @@
 import 'package:sky/widgets.dart';
 import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
 import 'spacewar.dart';
-import 'dart:async';
 
 void main() {
   runApp(new DrawRectWidget());
