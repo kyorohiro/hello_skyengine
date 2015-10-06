@@ -13,6 +13,12 @@ class SpaceShip extends DisplayObject {
   }
 
   @override
+  void onInit(Stage stage) {
+    this.x = stage.w * 2/ 3 + stage.x;
+    this.y = stage.h * 2/ 3 + stage.y;
+  }
+
+  @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint paint = new Paint();
     paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
@@ -42,7 +48,7 @@ class SpaceShip extends DisplayObject {
       dy += da * (ty / tt);
     }
     if(joystick != null) {
-      angle += joystick.directionX/10.0;
+      angle -= joystick.directionX/20.0;
     }
     x += dx;
     y += dy;
