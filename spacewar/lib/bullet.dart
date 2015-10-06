@@ -2,7 +2,7 @@ part of spacewar;
 
 class Bullet extends GravityDisplayObject {
 
-  int liveTime = 15000;
+  int liveTime = 60*1000;
   int birthTime = 0;
 
   Bullet() {
