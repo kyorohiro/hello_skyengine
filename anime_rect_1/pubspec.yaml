@@ -1,0 +1,4 @@
+name: anime_rect
+dependencies:
+  sky: any
+  sky_tools: any
