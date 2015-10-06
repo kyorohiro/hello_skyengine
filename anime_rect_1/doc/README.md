@@ -1,4 +1,4 @@
-# Draw Rect Anime
+# Draw Rect Anime (use animation.dart)
 
 https://github.com/kyorohiro/hello_skyengine/blob/master/anime_rect_1
 
