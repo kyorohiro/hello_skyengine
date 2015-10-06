@@ -49,8 +49,15 @@ class SpaceShip extends DisplayObject {
     }
     if(joystick != null) {
       angle -= joystick.directionX/20.0;
+      dx += abs(joystick.directionY)*math.cos(math.PI*(angle-90)/180) / 5000;
+      dy += abs(joystick.directionY)*math.sin(math.PI*(angle-90)/180) / 5000;
     }
     x += dx;
     y += dy;
   }
+
+  double abs(double v) {
+    return (v > 0 ? v : -1 * v);
+  }
+
 }
