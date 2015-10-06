@@ -4,6 +4,7 @@ class SpaceShip extends DisplayObject {
   double angle = 0.0;
   double dx = 0.0;
   double dy = 0.5;
+  bool isThrust = false;
   @override
   String objectName = "spaceship";
 
@@ -21,7 +22,11 @@ class SpaceShip extends DisplayObject {
   @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint paint = new Paint();
-    paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
+    if(isThrust == true) {
+      paint.color = const Color.fromARGB(0xaa, 0xff, 0x22, 0x22);
+    } else {
+      paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
+    }
     canvas.drawLine(conv(x, y-15),               conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x, y-15), paint);
@@ -49,8 +54,13 @@ class SpaceShip extends DisplayObject {
     }
     if(joystick != null) {
       angle -= joystick.directionX/20.0;
-      dx += abs(joystick.directionY)*math.cos(math.PI*(angle-90)/180) / 5000;
-      dy += abs(joystick.directionY)*math.sin(math.PI*(angle-90)/180) / 5000;
+      if(joystick.directionY > 0) {
+        isThrust = true;
+        dx += joystick.directionY * math.cos(math.PI*(angle-90)/180) / 5000;
+        dy += joystick.directionY * math.sin(math.PI*(angle-90)/180) / 5000;
+      } else {
+        isThrust = false;
+      }
     }
     x += dx;
     y += dy;
