@@ -5,6 +5,7 @@ class DisplayObject {
   double y = 0.0;
   String objectName = "none";
   List<DisplayObject> child = [];
+
   DisplayObject({this.child: null}) {
     if (child == null) {
       child = [];
@@ -22,6 +23,16 @@ class DisplayObject {
       }
     }
     return null;
+  }
+
+  addChild(DisplayObject d) async {
+    await new Future.value();
+    child.add(d);
+  }
+
+  rmChild(DisplayObject d) async {
+    await new Future.value();
+    child.remove(d);
   }
 
   void onInit(Stage stage) {}
