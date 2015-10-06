@@ -2,6 +2,7 @@ library spacewar;
 
 import 'package:sky/widgets.dart';
 import 'package:sky/rendering.dart';
+import 'package:sky/animation.dart';
 import 'dart:math' as math;
 import 'dart:sky' as sky;
 part 'sun.dart';
@@ -13,6 +14,16 @@ class DisplayObject {
       child = [];
     }
   }
+  void onTick(Stage stage, double timeStamp){
+
+  }
+  void tick(Stage stage, double timeStamp) {
+    onTick(stage, timeStamp);
+    for(DisplayObject d in child) {
+      d.onTick(stage, timeStamp);
+    }
+  }
+
   void onPaint(Stage stage, PaintingCanvas canvas){;}
   void paint(Stage stage, PaintingCanvas canvas) {
     onPaint(stage, canvas);
@@ -27,9 +38,23 @@ class Stage extends RenderBox {
   double get y => paintBounds.top;
   double get w => paintBounds.width;
   double get h => paintBounds.height;
-
+  int animationId = null;
   DisplayObject root;
   Stage(this.root){}
+
+  void start() {
+    if(animationId != null) {
+      throw "already run";
+    }
+    animationId = scheduler.requestAnimationFrame((double timeStamp){
+    });
+
+  }
+
+  void stop() {
+    scheduler.cancelAnimationFrame(animationId);
+    animationId = null;
+  }
 
   @override
   void performLayout() {
