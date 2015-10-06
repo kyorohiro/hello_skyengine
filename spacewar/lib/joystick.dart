@@ -10,6 +10,7 @@ class Joystick extends DisplayObject {
   int touchId = 0;
   double minX = 0.0;
   double minY = 0.0;
+  double get directionMax => width/2;
   double get directionX => x - minX;
   double get directionY => y - minY;
 
