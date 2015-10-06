@@ -6,6 +6,7 @@ import 'package:sky/animation.dart';
 import 'dart:math' as math;
 import 'dart:sky' as sky;
 part 'sun.dart';
+part 'spaceship.dart';
 
 class DisplayObject {
   double x = 0.0;
