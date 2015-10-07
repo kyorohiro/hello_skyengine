@@ -9,6 +9,7 @@
 * [sound_test](sound_test/doc/README.md)
 * [touch_test](touch_event/doc/README.md)
 * [try to make a mini game](spacewar/doc/README.md)
+* [draw_text](draw_text/doc/README.md)
 
 
 
