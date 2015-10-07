@@ -21,11 +21,11 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
     return o;
   }
 
-  double prevTimeStamp = 0.0;
+  int prevTimeStamp = 0;
   void anime() {
-    scheduler.requestAnimationFrame((double timeStamp) {
-      print("${timeStamp-prevTimeStamp}");
-      prevTimeStamp = timeStamp;
+    scheduler.requestAnimationFrame((Duration timeStamp) {
+      print("${timeStamp.inMilliseconds-prevTimeStamp}");
+      prevTimeStamp = timeStamp.inMilliseconds;
       o.x = 100 * cos(PI * angle / 180.0) + 100.0;
       o.y = 100 * sin(PI * angle / 180.0) + 100.0;
       angle++;
