@@ -33,6 +33,7 @@ class DisplayObject {
   rmChild(DisplayObject d) async {
     await new Future.value();
     child.remove(d);
+    d.unattach();
   }
 
   void onInit(Stage stage) {}
@@ -64,12 +65,23 @@ class DisplayObject {
     }
   }
 
-  void touch(Stage stage, int id,  String type, double x, double y, double dx, double dy) {
+  void touch(Stage stage, int id, String type,
+    double x, double y, double dx, double dy) {
     onTouch(stage, id, type, x, y, dx, dy);
     for (DisplayObject d in child) {
       d.touch(stage, id, type, x, y, dx, dy);
     }
   }
 
-  void onTouch(Stage stage, int id, String type, double x, double y, double dx, double dy) {}
+  void onTouch(Stage stage, int id, String type,
+    double x, double y, double dx, double dy) {}
+
+  void onUnattach() {}
+
+  void unattach() {
+    onUnattach();
+    for (DisplayObject d in child) {
+      d.unattach();
+    }
+  }
 }

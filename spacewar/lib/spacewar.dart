@@ -17,4 +17,5 @@ part 'joystick.dart';
 part 'gravity_displayobject.dart';
 part 'bullet.dart';
 part 'enemy.dart';
+part 'enemy_bullet.dart';
 part 'logic.dart';
