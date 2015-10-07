@@ -44,9 +44,9 @@ class DisplayObject {
     }
   }
 
-  void onTick(Stage stage, double timeStamp) {}
+  void onTick(Stage stage, int timeStamp) {}
 
-  void tick(Stage stage, double timeStamp) {
+  void tick(Stage stage, int timeStamp) {
     onTick(stage, timeStamp);
     for (DisplayObject d in child) {
       d.onTick(stage, timeStamp);

@@ -21,14 +21,14 @@ class Stage extends RenderBox {
     }
     animeIsStart = true;
     bool isInit = false;
-    innerTick(double timeStamp) {
+    innerTick(Duration timeStamp){
       if (startable) {
         if (isInit == false) {
           _root.init(this);
           isInit = true;
         }
         if (_root != null) {
-          _root.tick(this, timeStamp);
+          _root.tick(this, timeStamp.inMilliseconds);
         }
         this.markNeedsPaint();
       }

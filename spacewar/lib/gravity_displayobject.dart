@@ -10,11 +10,11 @@ class GravityDisplayObject extends DisplayObject {
     ;
   }
 
-  void onTick(Stage stage, double timeStamp) {
+  void onTick(Stage stage, int timeStamp) {
     updateFromSun(stage, timeStamp);
   }
 
-  void updateFromSun(Stage stage, double timeStamp) {
+  void updateFromSun(Stage stage, int timeStamp) {
     DisplayObject sun = stage.root.fincObjectFromObjectName("sun");
     Joystick joystick = stage.root.fincObjectFromObjectName("joystick");
     if (sun != null) {
