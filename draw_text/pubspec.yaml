@@ -1,0 +1,4 @@
+name: draw_text
+dependencies:
+  sky: any
+  sky_tools: any
