@@ -16,6 +16,7 @@ class SpaceShip extends GravityDisplayObject {
     this.dx = 0.0;
     this.dy = 0.5;
     this.life = maxlife;
+    this.isLoop = true;
   }
 
   @override
@@ -31,19 +32,6 @@ class SpaceShip extends GravityDisplayObject {
     canvas.drawLine(conv(x, y-15),               conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x, y-15), paint);
-
-    if(stage.w - this.x < 30) {
-      this.x = stage.x+30;
-    }
-    else if(this.x < 30) {
-      this.x = stage.w-30;
-    }
-    if(stage.h - this.y < 30) {
-      this.y = stage.y+30;
-    }
-    else if(this.y < 30) {
-      this.y = stage.h-30;
-    }
   }
 
 

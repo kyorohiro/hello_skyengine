@@ -1,10 +1,10 @@
 part of spacewar;
 
-class Enemy extends DisplayObject {
+class Enemy extends GravityDisplayObject {
   @override
   String objectName = "enemy";
   math.Random rand = new math.Random();
-  double maxlife = 10.0;
+  double maxlife = 50.0;
   double life = 200.0;
   double size = 50.0;
 
@@ -16,8 +16,11 @@ class Enemy extends DisplayObject {
     //  } else {
     this.x = stage.w * (rand.nextInt(5) + 1) / 6.0 + stage.x;
     this.y = stage.h * (rand.nextInt(5) + 1) / 6.0 + stage.y;
+    this.dx = 0.0;
+    this.dy = 0.0;
     //  }
     this.life = this.maxlife;
+    this.isLoop = true;
   }
 
   @override
@@ -33,6 +36,9 @@ class Enemy extends DisplayObject {
   int prevTime = 0;
   int numOfBullet = 0;
   void onTick(Stage stage, int timeStamp) {
+    this.updateFromSun(stage, timeStamp);
+    dx = (dx > 0?(dx>0.5?0.5:dx):(dx<-0.5?-0.5:dx));
+    dy = (dy > 0?(dy>0.5?0.5:dy):(dy<-0.5?-0.5:dy));
     if (timeStamp - prevTime > 500) {
       EnemyBullet bullet = new EnemyBullet();
       bullet.x = this.x;
@@ -60,11 +66,21 @@ class Enemy extends DisplayObject {
             bullet.dy = (sun.x - this.x) / 800.0;
             bullet.dx = -1*(sun.y - this.y) / 800.0;
           }
+
           break;
       }
       stage.root.addChild(bullet);
       numOfBullet++;
       prevTime = timeStamp;
+    } else {
+      Sun sun = stage.root.fincObjectFromObjectName("sun");
+      if (sun != null) {
+        List<double> dxdy = this.calcGravityDxDy(sun);
+        this.dx += -1.2*dxdy[1];
+        this.dy += 1.2*dxdy[0];
+      }
+      dx = (dx > 0?(dx>0.5?0.5:dx):(dx<-0.5?-0.5:dx));
+      dy = (dy > 0?(dy>0.5?0.5:dy):(dy<-0.5?-0.5:dy));
     }
   }
 }
