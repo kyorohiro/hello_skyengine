@@ -4,22 +4,22 @@ class Joystick extends DisplayObject {
   @override
   String objectName = "joystick";
 
-  double width = 50.0;
+  double size = 50.0;
   double minWidth = 25.0;
   bool isTouch = false;
   int touchId = 0;
   double minX = 0.0;
   double minY = 0.0;
-  double get directionMax => width/2;
+  double get directionMax => size/2;
   double get directionX => x - minX;
   double get directionY => y - minY;
 
   @override
   void onInit(Stage stage) {
-    this.width = stage.h / 6;
-    this.minWidth = this.width / 2;
+    this.size = stage.h / 6;
+    this.minWidth = this.size / 2;
     this.x = stage.w / 2 + stage.x;
-    this.y = (stage.h - this.width) + stage.y;
+    this.y = (stage.h - this.size) + stage.y;
     this.minX = this.x;
     this.minY = this.y;
   }
@@ -32,7 +32,7 @@ class Joystick extends DisplayObject {
     } else {
       paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
     }
-    Rect r1 = new Rect.fromLTWH(x - width / 2, y - width / 2, width, width);
+    Rect r1 = new Rect.fromLTWH(x - size / 2, y - size / 2, size, size);
     Rect r2 = new Rect.fromLTWH(
         minX - minWidth / 2, minY - minWidth / 2, minWidth, minWidth);
     canvas.drawOval(r1, paint);
@@ -57,10 +57,10 @@ class Joystick extends DisplayObject {
           this.minX = x;
           this.minY = y;
           double d = distance(this.x, this.y, this.minX, this.minY);
-          if (d > width / 2) {
+          if (d > size / 2) {
             double dd = abs(this.minX-this.x) + abs(this.minY-this.y);
-            this.minX = this.x + width / 2 * (this.minX-this.x) / dd;
-            this.minY = this.y + width / 2 * (this.minY-this.y) / dd;
+            this.minX = this.x + size / 2 * (this.minX-this.x) / dd;
+            this.minY = this.y + size / 2 * (this.minY-this.y) / dd;
           }
         }
       }
