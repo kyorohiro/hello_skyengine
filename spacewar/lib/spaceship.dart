@@ -50,7 +50,7 @@ class SpaceShip extends GravityDisplayObject {
       } else {
         isThrust = false;
         int time = new DateTime.now().millisecondsSinceEpoch;
-        if(time - prevTime > 100 && joystick.directionY < -1*joystick.directionMax*2/5) {
+        if(time - prevTime > 60 && joystick.directionY < -1*joystick.directionMax*2/5) {
           prevTime = time;
           Bullet b = new Bullet();
           b.x = this.x;
