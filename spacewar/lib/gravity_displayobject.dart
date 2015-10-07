@@ -26,7 +26,6 @@ class GravityDisplayObject extends DisplayObject {
 
   void updateFromSun(Stage stage, int timeStamp) {
     DisplayObject sun = stage.root.fincObjectFromObjectName("sun");
-    Joystick joystick = stage.root.fincObjectFromObjectName("joystick");
     if (sun != null) {
       List<double> dxdy = calcGravityDxDy(sun);
       dx += dxdy[0];
