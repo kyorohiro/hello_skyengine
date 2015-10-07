@@ -9,14 +9,23 @@ void main() {
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
+    return new DrawRectObject();
+  }
+}
+
+class DrawRectObject extends RenderBox {
+  void paint(PaintingContext context, Offset offset) {
     Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
     PlainTextSpan textSpan = new PlainTextSpan("Hello Text!! こんにちは!!");
     TextStyle textStyle = new TextStyle(fontSize: 50.0, color: textColor);
     StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
-    RenderParagraph textRenderParagraph = new RenderParagraph(testStyledSpan);
+    TextPainter textPainter = new TextPainter(testStyledSpan);
 
-    RenderBox root = new RenderBlock();
-    root.add(textRenderParagraph);
-    return root;
+    textPainter.maxWidth = 200; //constraints.maxWidth;
+    textPainter.minWidth = 200; //constraints.minWidth;
+    textPainter.minHeight = constraints.minHeight;
+    textPainter.maxHeight = constraints.maxHeight;
+    textPainter.layout();
+    textPainter.paint(context.canvas, new sky.Offset(100, 100));
   }
 }
