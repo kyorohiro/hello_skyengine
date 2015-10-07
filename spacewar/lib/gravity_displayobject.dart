@@ -6,11 +6,6 @@ class GravityDisplayObject extends DisplayObject {
   double dy = 0.5;
   bool isLoop = false;
 
-  @override
-  void onPaint(Stage stage, PaintingCanvas canvas) {
-    ;
-  }
-
   void onTick(Stage stage, int timeStamp) {
     updateFromSun(stage, timeStamp);
   }
@@ -21,7 +16,7 @@ class GravityDisplayObject extends DisplayObject {
     double distance = math.sqrt(math.pow(tx, 2) + math.pow(ty, 2));
     double da = 100.0 / math.pow(distance, 2);
     double tt = abs(tx) + abs(ty);
-    return [da * (tx / tt),da * (ty / tt)];
+    return [da * (tx / tt), da * (ty / tt)];
   }
 
   void updateFromSun(Stage stage, int timeStamp) {
@@ -34,16 +29,20 @@ class GravityDisplayObject extends DisplayObject {
     x += dx;
     y += dy;
     if (isLoop == true) {
-      if (stage.w - this.x < 30) {
-        this.x = stage.x + 30;
-      } else if (this.x < 30) {
-        this.x = stage.w - 30;
-      }
-      if (stage.h - this.y < 30) {
-        this.y = stage.y + 30;
-      } else if (this.y < 30) {
-        this.y = stage.h - 30;
-      }
+      updateFromScreenEdge(stage, timeStamp);
+    }
+  }
+
+  void updateFromScreenEdge(Stage stage, int timeStamp) {
+    if (stage.w - this.x < 30) {
+      this.x = stage.x + 30;
+    } else if (this.x < 30) {
+      this.x = stage.w - 30;
+    }
+    if (stage.h - this.y < 30) {
+      this.y = stage.y + 30;
+    } else if (this.y < 30) {
+      this.y = stage.h - 30;
     }
   }
 
