@@ -5,6 +5,7 @@ class SpaceShip extends GravityDisplayObject {
   int size = 20;
   double maxlife = 20.0;
   double life = 20.0;
+
   @override
   String objectName = "spaceship";
 
@@ -43,8 +44,8 @@ class SpaceShip extends GravityDisplayObject {
       angle -= joystick.directionX/20.0;
       if(joystick.directionY > 0) {
         isThrust = true;
-        dx += joystick.directionY * math.cos(math.PI*(angle-90)/180) / 5000;
-        dy += joystick.directionY * math.sin(math.PI*(angle-90)/180) / 5000;
+        dx += joystick.directionY * math.cos(math.PI*(angle-90)/180) / 10000;
+        dy += joystick.directionY * math.sin(math.PI*(angle-90)/180) / 10000;
       } else {
         isThrust = false;
         if(joystick.directionY < -1*joystick.directionMax*2/5) {
