@@ -16,7 +16,7 @@ class GravityDisplayObject extends DisplayObject {
     double distance = math.sqrt(math.pow(tx, 2) + math.pow(ty, 2));
     double da = 100.0 / math.pow(distance, 2);
     double tt = abs(tx) + abs(ty);
-    return [da * (tx / tt), da * (ty / tt)];
+    return [da * (tx / tt), da * (ty / tt), da, distance, tx, ty];
   }
 
   void updateFromSun(Stage stage, int timeStamp) {
