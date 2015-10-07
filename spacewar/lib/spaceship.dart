@@ -24,12 +24,14 @@ class SpaceShip extends GravityDisplayObject {
   @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint paint = new Paint();
+    double colorDepth = (255.0*life/maxlife);
+    if(colorDepth > 255.0) {
+      colorDepth = 255.0;
+    }
     if(isThrust == true) {
-      double v = (255.0*life/maxlife);
-      paint.color = new  Color.fromARGB(0xaa, v.floor(), 0x22, 0x22);
+      paint.color = new  Color.fromARGB(0xaa, colorDepth.floor(), 0x22, 0x22);
     } else {
-      double v = (255.0*life/maxlife);
-      paint.color = new Color.fromARGB(0xaa, v.floor(), 0xaa, 0xaa);
+      paint.color = new Color.fromARGB(0xaa, colorDepth.floor(), 0xaa, 0xaa);
     }
     canvas.drawLine(conv(x, y-15),               conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x + 10.0, y-15 + 30.0), paint);
