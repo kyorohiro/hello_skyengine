@@ -38,7 +38,7 @@ class SpaceShip extends GravityDisplayObject {
   }
 
 
-  void onTick(Stage stage, double timeStamp) {
+  void onTick(Stage stage, int timeStamp) {
     this.updateFromSun(stage, timeStamp);
     Joystick joystick = stage.root.fincObjectFromObjectName("joystick");
 
