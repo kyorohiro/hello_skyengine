@@ -11,6 +11,7 @@ class Enemy extends GravityDisplayObject {
   int numOfBullet = 0;
   Rect enemySize = new Rect();
   Paint enemyPaint = new Paint();
+
   @override
   void onInit(Stage stage) {
     this.x = stage.w * (rand.nextDouble() * 4.0 + 1.0) / 6.0 + stage.x;
@@ -29,6 +30,12 @@ class Enemy extends GravityDisplayObject {
     enemyPaint.color = new Color.fromARGB(0xaa, 0x00, 0x00, colorDepth.floor());
     enemySize = new Rect.fromLTWH(x - size / 2, y - size / 2, size, size);
     canvas.drawOval(enemySize, enemyPaint);
+  }
+
+  @override
+  void onTick(Stage stage, int timeStamp) {
+    updateFromSun(stage, timeStamp);
+    shot(stage, timeStamp);
   }
 
   @override
@@ -77,10 +84,5 @@ class Enemy extends GravityDisplayObject {
       numOfBullet++;
       prevTime = timeStamp;
     }
-  }
-
-  void onTick(Stage stage, int timeStamp) {
-    updateFromSun(stage, timeStamp);
-    shot(stage, timeStamp);
   }
 }
