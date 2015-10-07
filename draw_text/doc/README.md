@@ -8,23 +8,32 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
 import 'package:sky/widgets.dart';
 import 'package:sky/painting.dart';
 import 'package:sky/rendering.dart';
+import 'dart:sky' as sky;
 
 void main() {
-  runApp(new DrawRectWidget());//new GameTest());
+  runApp(new DrawTextWidget()); //new GameTest());
 }
 
-class DrawRectWidget extends OneChildRenderObjectWidget {
-    RenderObject createRenderObject() {
-      return new DrawRectObject();
-    }
+class DrawTextWidget extends OneChildRenderObjectWidget {
+  RenderObject createRenderObject() {
+    return new DrawTextObject();
+  }
 }
 
-class DrawRectObject extends RenderBox {
+class DrawTextObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
-    Paint p = new Paint();
-    p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
-    Rect r = new Rect.fromLTWH(50.0, 100.0, 150.0, 25.0);
-    context.canvas.drawRect(r, p);
+    Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
+    PlainTextSpan textSpan = new PlainTextSpan("Hello Text!! こんにちは!!");
+    TextStyle textStyle = new TextStyle(fontSize: 50.0, color: textColor);
+    StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
+    TextPainter textPainter = new TextPainter(testStyledSpan);
+
+    textPainter.maxWidth = 200; //constraints.maxWidth;
+    textPainter.minWidth = 200; //constraints.minWidth;
+    textPainter.minHeight = constraints.minHeight;
+    textPainter.maxHeight = constraints.maxHeight;
+    textPainter.layout();
+    textPainter.paint(context.canvas, new sky.Offset(100, 100));
   }
 }
 ```
