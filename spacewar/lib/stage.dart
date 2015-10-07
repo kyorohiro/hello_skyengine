@@ -87,7 +87,6 @@ class Stage extends RenderBox {
     _root.touch(this, e.pointer, event.type,
       touchPoints[e.pointer].x, touchPoints[e.pointer].y,
        e.dx, e.dy);
-    print(" point ${x} ${y} ${e.pointer}");
   }
 }
 

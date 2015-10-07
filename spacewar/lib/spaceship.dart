@@ -9,6 +9,9 @@ class SpaceShip extends GravityDisplayObject {
   void onInit(Stage stage) {
     this.x = stage.w * 2/ 3 + stage.x;
     this.y = stage.h * 2/ 3 + stage.y;
+    this.angle = 0.0;
+    this.dx = 0.0;
+    this.dy = 0.5;
   }
 
   @override

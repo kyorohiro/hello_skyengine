@@ -15,6 +15,16 @@ class Logic extends DisplayObject {
   }
 
   void onTick(Stage stage, int timeStamp) {
-    ;
+    double v = spaceShip.dx + spaceShip.dy;
+    if(v >2.0) {
+      // game over
+      child.clear();
+      child.add(sun);
+      child.add(spaceShip);
+      child.add(joystick);
+      sun.onInit(stage);
+      spaceShip.onInit(stage);
+      joystick.onInit(stage);
+    }
   }
 }
