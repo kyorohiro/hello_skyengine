@@ -43,7 +43,6 @@ class Enemy extends GravityDisplayObject {
       }
       //[da * (tx / tt), da * (ty / tt), da, distance, tx, ty];
       if (abs(dx -dxdy[0])+abs(dy -dxdy[1]) < 0.5) {
-        print("##${abs(dx -dxdy[0])} ${abs(dy -dxdy[1])}");
         double m = 0.25;
         this.dx += -m * dxdy[1] / dxdy[2];
         this.dy += m * dxdy[0] / dxdy[2];
@@ -52,11 +51,11 @@ class Enemy extends GravityDisplayObject {
   }
 
   void shot(Stage stage, int timeStamp) {
-    if (timeStamp - prevTime > 250) {
+    if (timeStamp - prevTime > 300) {
       EnemyBullet bullet = new EnemyBullet();
       bullet.x = this.x;
       bullet.y = this.y;
-      switch (numOfBullet % 2) {
+      switch (numOfBullet % 3) {
         case 0:
           bullet.dx = this.dx*0.8-0.2*this.dy;
           bullet.dy = this.dy*0.8+0.2*this.dx;
@@ -65,19 +64,12 @@ class Enemy extends GravityDisplayObject {
           bullet.dx = this.dx*0.8+0.2*this.dy;
           bullet.dy = this.dy*0.8-0.2*this.dx;
         break;
-        case 4:
+        case 3:
           SpaceShip spaceship =
               stage.root.fincObjectFromObjectName("spaceship");
           if (spaceship != null) {
-            bullet.dx = (spaceship.x - this.x) / 800.0;
-            bullet.dy = (spaceship.y - this.y) / 800.0;
-          }
-          break;
-        case 5:
-          Sun sun = stage.root.fincObjectFromObjectName("sun");
-          if (sun != null) {
-            bullet.dy = (sun.x - this.x) / 800.0;
-            bullet.dx = -1 * (sun.y - this.y) / 800.0;
+            bullet.dx = (spaceship.x - this.x) / 300.0;
+            bullet.dy = (spaceship.y - this.y) / 300.0;
           }
           break;
       }
