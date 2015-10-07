@@ -5,6 +5,7 @@ class SpaceShip extends GravityDisplayObject {
   int size = 20;
   double maxlife = 20.0;
   double life = 20.0;
+  int prevTime = new DateTime.now().millisecondsSinceEpoch;
 
   @override
   String objectName = "spaceship";
@@ -48,7 +49,9 @@ class SpaceShip extends GravityDisplayObject {
         dy += joystick.directionY * math.sin(math.PI*(angle-90)/180) / 10000;
       } else {
         isThrust = false;
-        if(joystick.directionY < -1*joystick.directionMax*2/5) {
+        int time = new DateTime.now().millisecondsSinceEpoch;
+        if(time - prevTime > 100 && joystick.directionY < -1*joystick.directionMax*2/5) {
+          prevTime = time;
           Bullet b = new Bullet();
           b.x = this.x;
           b.y = this.y;
