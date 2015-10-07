@@ -8,7 +8,7 @@ void main() {
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    Stage stage = new Stage(new DisplayObject(child:[new Sun(), new SpaceShip(), new Joystick()]));
+    Stage stage = new Stage(new Logic());
     stage.start();
     return stage;
   }
