@@ -30,6 +30,9 @@ class Logic extends DisplayObject {
       spaceShip.onInit(stage);
       joystick.onInit(stage);
       enemy.onInit(stage);
+    } else if(enemy.life < 0) {
+      // clear game
+      enemy.onInit(stage);
     }
   }
 }

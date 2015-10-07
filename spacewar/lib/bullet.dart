@@ -20,5 +20,16 @@ class Bullet extends GravityDisplayObject {
     if(time-birthTime > liveTime) {
       stage.root.rmChild(this);
     }
+
+    Enemy enemy = stage.root.fincObjectFromObjectName("enemy");
+    if(enemy != null) {
+      double tx = enemy.x - this.x;
+      double ty = enemy.y - this.y;
+      double distance = math.sqrt(math.pow(tx, 2) + math.pow(ty, 2));
+      if(distance < enemy.size/2) {
+        enemy.life -= 1;
+        stage.root.rmChild(this);
+      }
+    }
   }
 }

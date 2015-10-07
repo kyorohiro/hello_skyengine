@@ -1,18 +1,33 @@
 part of spacewar;
 
 class Enemy extends DisplayObject {
-  double width = 50.0;
+  @override
+  String objectName = "enemy";
+  math.Random rand = new math.Random();
+  double maxlife = 10.0;
+  double life = 200.0;
+  double size = 50.0;
+
+
   @override
   void onInit(Stage stage) {
-    this.x = stage.w * 2/ 3 + stage.x;
-    this.y = stage.h * 1/ 3 + stage.y;
+  //  if(this.life > 0) {
+  //    this.x = stage.w * 2/ 3 + stage.x;
+  //    this.y = stage.h * 1/ 3 + stage.y;
+  //  } else {
+      this.x = stage.w * (rand.nextInt(5)+1)/6.0 + stage.x;
+      this.y = stage.h * (rand.nextInt(5)+1)/6.0 + stage.y;
+  //  }
+    this.life = this.maxlife;
   }
 
   @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint paint = new Paint();
-    paint.color = const Color.fromARGB(0xaa, 0x00, 0x00, 0xff);
-    Rect r = new Rect.fromLTWH(x - width/2, y - width/2, width, width);
+    double v = (255.0*life/maxlife);
+    v = (v>0?v:0);
+    paint.color = new Color.fromARGB(0xaa, 0x00, 0x00, v.floor());
+    Rect r = new Rect.fromLTWH(x - size/2, y - size/2, size, size);
     canvas.drawOval(r, paint);
   }
 
