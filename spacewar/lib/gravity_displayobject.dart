@@ -22,7 +22,7 @@ class GravityDisplayObject extends DisplayObject {
       double ty = sun.y - this.y;
       double distance = math.sqrt(math.pow(tx, 2) + math.pow(ty, 2));
       double da = 100.0 / math.pow(distance, 2);
-      double tt = (tx > 0 ? tx : -1 * tx) + (ty > 0 ? ty : -1 * ty);
+      double tt = abs(tx) + abs(ty);
       dx += da * (tx / tt);
       dy += da * (ty / tt);
     }

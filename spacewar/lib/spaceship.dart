@@ -2,6 +2,9 @@ part of spacewar;
 
 class SpaceShip extends GravityDisplayObject {
   bool isThrust = false;
+  int size = 20;
+  double maxlife = 20.0;
+  double life = 20.0;
   @override
   String objectName = "spaceship";
 
@@ -12,15 +15,18 @@ class SpaceShip extends GravityDisplayObject {
     this.angle = 0.0;
     this.dx = 0.0;
     this.dy = 0.5;
+    this.life = maxlife;
   }
 
   @override
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint paint = new Paint();
     if(isThrust == true) {
-      paint.color = const Color.fromARGB(0xaa, 0xff, 0x22, 0x22);
+      double v = (255.0*life/maxlife);
+      paint.color = new  Color.fromARGB(0xaa, v.floor(), 0x22, 0x22);
     } else {
-      paint.color = const Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
+      double v = (255.0*life/maxlife);
+      paint.color = new Color.fromARGB(0xaa, v.floor(), 0xaa, 0xaa);
     }
     canvas.drawLine(conv(x, y-15),               conv(x + 10.0, y-15 + 30.0), paint);
     canvas.drawLine(conv(x - 10.0, y-15 + 30.0), conv(x + 10.0, y-15 + 30.0), paint);

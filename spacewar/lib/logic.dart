@@ -8,23 +8,28 @@ class Logic extends DisplayObject {
   Sun sun = new Sun();
   SpaceShip spaceShip = new SpaceShip();
   Joystick joystick = new Joystick();
+  Enemy enemy = new Enemy();
+
   Logic() {
     child.add(sun);
     child.add(spaceShip);
     child.add(joystick);
+    child.add(enemy);
   }
 
   void onTick(Stage stage, int timeStamp) {
     double v = spaceShip.dx + spaceShip.dy;
-    if(v >3.0) {
+    if(v >2.5 || spaceShip.life < 0) {
       // game over
       child.clear();
       child.add(sun);
       child.add(spaceShip);
       child.add(joystick);
+      child.add(enemy);
       sun.onInit(stage);
       spaceShip.onInit(stage);
       joystick.onInit(stage);
+      enemy.onInit(stage);
     }
   }
 }
