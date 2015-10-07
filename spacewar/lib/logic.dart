@@ -32,6 +32,7 @@ class Logic extends DisplayObject {
       enemy.onInit(stage);
     } else if(enemy.life < 0) {
       // clear game
+      spaceShip.life += 5;
       enemy.onInit(stage);
     }
   }
