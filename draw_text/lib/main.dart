@@ -4,16 +4,16 @@ import 'package:sky/rendering.dart';
 import 'dart:sky' as sky;
 
 void main() {
-  runApp(new DrawRectWidget()); //new GameTest());
+  runApp(new DrawTextWidget()); //new GameTest());
 }
 
-class DrawRectWidget extends OneChildRenderObjectWidget {
+class DrawTextWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    return new DrawRectObject();
+    return new DrawTextObject();
   }
 }
 
-class DrawRectObject extends RenderBox {
+class DrawTextObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
     PlainTextSpan textSpan = new PlainTextSpan("Hello Text!! こんにちは!!");
