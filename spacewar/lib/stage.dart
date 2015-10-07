@@ -10,9 +10,18 @@ class Stage extends RenderBox {
   DisplayObject _root;
   DisplayObject get root => _root;
   bool startable = false;
+  static const int kMaxOfTouch = 5;
+  List<TouchPoint> touchPoints = [];
+  bool isInit = false;
 
   Stage(this._root) {
     init();
+  }
+
+  void init() {
+    for (int i = 0; i < kMaxOfTouch; i++) {
+      touchPoints.add(new TouchPoint(-1.0, -1.0));
+    }
   }
 
   void start() {
@@ -20,23 +29,22 @@ class Stage extends RenderBox {
       return;
     }
     animeIsStart = true;
-    bool isInit = false;
-    innerTick(Duration timeStamp){
-      if (startable) {
-        if (isInit == false) {
-          _root.init(this);
-          isInit = true;
-        }
-        if (_root != null) {
-          _root.tick(this, timeStamp.inMilliseconds);
-        }
-        this.markNeedsPaint();
+    isInit = false;
+    animeId = scheduler.requestAnimationFrame(_innerTick);
+  }
+
+  void _innerTick(Duration timeStamp) {
+    if (startable) {
+      if (isInit == false) {
+        _root.init(this);
+        isInit = true;
       }
-      if (animeIsStart == true) {
-        animeId = scheduler.requestAnimationFrame(innerTick);
-      }
+      _root.tick(this, timeStamp.inMilliseconds);
+      this.markNeedsPaint();
     }
-    animeId = scheduler.requestAnimationFrame(innerTick);
+    if (animeIsStart == true) {
+      animeId = scheduler.requestAnimationFrame(_innerTick);
+    }
   }
 
   void stop() {
@@ -57,26 +65,16 @@ class Stage extends RenderBox {
     root.paint(this, context.canvas);
   }
 
-  static const int kMaxOfTouch = 5;
-  List<TouchPoint> touchPoints = [];
-
-  void init() {
-    for (int i = 0; i < kMaxOfTouch; i++) {
-      touchPoints.add(new TouchPoint(-1.0, -1.0));
-    }
-  }
-
   @override
   void handleEvent(sky.Event event, BoxHitTestEntry entry) {
     if (!(event is sky.PointerEvent)) {
       return;
     }
     sky.PointerEvent e = event;
-    if (e.pointer >=5) {
+    if (e.pointer >= kMaxOfTouch) {
       return;
     }
 
-    e.pointer;
     if (event.type == "pointerdown") {
       touchPoints[e.pointer].x = entry.localPosition.x;
       touchPoints[e.pointer].y = entry.localPosition.y;
@@ -84,9 +82,8 @@ class Stage extends RenderBox {
       touchPoints[e.pointer].x += e.dx;
       touchPoints[e.pointer].y += e.dy;
     }
-    _root.touch(this, e.pointer, event.type,
-      touchPoints[e.pointer].x, touchPoints[e.pointer].y,
-       e.dx, e.dy);
+    _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
+        touchPoints[e.pointer].y, e.dx, e.dy);
   }
 }
 
