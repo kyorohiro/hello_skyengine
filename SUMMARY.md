@@ -13,7 +13,7 @@
 * [draw_path](draw_path/doc/README.md)
 * [draw_vertexs](draw_vertices/doc/README.md)
 * [draw_vertexs_with_image](draw_vertices_1/doc/README.md)
-* [try to make a mini game]
+* [try to make a mini game 3d like]
 
 
 
