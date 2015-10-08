@@ -15,6 +15,7 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 
 class DrawRectObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
+    context.canvas.scale(2.5, 2.5);
     context.canvas.translate(50.0, 50.0);
     paintWithStroke(context, offset);
     context.canvas.translate(50.0, 0.0);
@@ -26,10 +27,10 @@ class DrawRectObject extends RenderBox {
     p.strokeWidth = 2.0;
     p.setStyle(sky.PaintingStyle.stroke);
     Path path = new Path();
-    path.moveTo(50.0, 100.0);
-    path.lineTo(60.0, 150.0);
-    path.lineTo(100.0, 160.0);
-    path.lineTo(90.0, 110.0);
+    path.moveTo(0.0, 0.0);
+    path.lineTo(10.0, 50.0);
+    path.lineTo(50.0, 60.0);
+    path.lineTo(40.0, 10.0);
     path.close();
     p.color = new Color.fromARGB(0xaa, 0xaa, 0xff, 0xff);
     context.canvas.drawPath(path, p);
@@ -46,17 +47,17 @@ class DrawRectObject extends RenderBox {
     ];
     List<double> stops = [0.0, 0.5, 1.0];
     LinearGradient gg = new LinearGradient(
-        begin: new Point(50.0, 100.0),
-        end: new Point(100.0, 160.0),
+        begin: new Point(0.0, 0.0),
+        end: new Point(50.0, 60.0),
         colors: colors,
         stops: stops);
     p.setShader(gg.createShader());
 
     Path path = new Path();
-    path.moveTo(50.0, 100.0);
-    path.lineTo(60.0, 150.0);
-    path.lineTo(100.0, 160.0);
-    path.lineTo(90.0, 110.0);
+    path.moveTo(0.0, 0.0);
+    path.lineTo(10.0, 50.0);
+    path.lineTo(50.0, 60.0);
+    path.lineTo(40.0, 10.0);
     path.close();
     p.color = new Color.fromARGB(0xaa, 0xaa, 0xff, 0xff);
     context.canvas.drawPath(path, p);
