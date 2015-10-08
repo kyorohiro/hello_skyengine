@@ -59,7 +59,6 @@ class DrawRectObject extends RenderBox {
     path.lineTo(50.0, 60.0);
     path.lineTo(40.0, 10.0);
     path.close();
-    p.color = new Color.fromARGB(0xaa, 0xaa, 0xff, 0xff);
     context.canvas.drawPath(path, p);
   }
 }
