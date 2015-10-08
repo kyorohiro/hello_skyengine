@@ -1,4 +1,4 @@
-# Draw Rect
+# Draw Path
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
 
