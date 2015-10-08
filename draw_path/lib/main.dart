@@ -4,22 +4,22 @@ import 'package:sky/rendering.dart';
 import 'dart:sky' as sky;
 
 void main() {
-  runApp(new DrawRectWidget()); //new GameTest());
+  runApp(new DrawPathWidget()); //new GameTest());
 }
 
-class DrawRectWidget extends OneChildRenderObjectWidget {
+class DrawPathWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    return new DrawRectObject();
+    return new DrawPathObject();
   }
 }
 
-class DrawRectObject extends RenderBox {
+class DrawPathObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     context.canvas.scale(2.5, 2.5);
     context.canvas.translate(50.0, 50.0);
     paintWithStroke(context, offset);
     context.canvas.translate(50.0, 0.0);
-    paintWithGradient(context, offset);
+    paintWithLinearGradient(context, offset);
   }
 
   void paintWithStroke(PaintingContext context, Offset offset) {
@@ -36,7 +36,7 @@ class DrawRectObject extends RenderBox {
     context.canvas.drawPath(path, p);
   }
 
-  void paintWithGradient(PaintingContext context, Offset offset) {
+  void paintWithLinearGradient(PaintingContext context, Offset offset) {
     Paint p = new Paint();
     p.setStyle(sky.PaintingStyle.strokeAndFill);
 
