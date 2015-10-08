@@ -1,6 +1,6 @@
 # Draw Path
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/draw_path
+https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_1
 
 ![](screen.png)
 
