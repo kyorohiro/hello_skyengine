@@ -38,4 +38,5 @@ class DrawVertexsObject extends RenderBox {
     context.canvas.drawVertices(vertexMode, vertices, textureCoordinates,
         colors, transferMode, indicies, paint);
   }
+
 }
