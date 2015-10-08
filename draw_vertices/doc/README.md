@@ -1,4 +1,4 @@
-# Draw Path
+# Draw Vertexs
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/draw_path
 
