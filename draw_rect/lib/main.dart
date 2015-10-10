@@ -1,9 +1,9 @@
-import 'package:sky/widgets.dart';
-import 'package:sky/painting.dart';
-import 'package:sky/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
-  runApp(new DrawRectWidget());//new GameTest());
+  runApp(new DrawRectWidget());
 }
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
