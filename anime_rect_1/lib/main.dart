@@ -1,6 +1,6 @@
-import 'package:sky/widgets.dart';
-import 'package:sky/rendering.dart';
-import 'package:sky/animation.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/animation.dart';
 import 'dart:math';
 
 void main() {
