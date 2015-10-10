@@ -2,4 +2,5 @@ name: rotate_image
 description: A minimal Sky project.
 dependencies:
   sky: any
+  flutter: any
   sky_tools: any
