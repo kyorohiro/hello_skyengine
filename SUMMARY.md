@@ -16,7 +16,7 @@
   * [draw_vertexs_with_image](draw_vertices_1/doc/README.md)
   * [try to make a mini game 3d like]
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
-* widget
+* [widget](doc/widgets/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
 
 
