@@ -51,6 +51,7 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     if (event is sky.PointerEvent) {
       if (event.type == "pointerdown") {
         keyboard.show(this.stub, KeyboardType.TEXT);
+        pService.ptr.showByRequest();
       }
       markNeedsPaint();
     }
@@ -82,7 +83,6 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
   }
 
   void commitText(String text, int newCursorPosition) {
-    print("commitText : ${text}");
     this.keyboardClientBase.commitText(text, newCursorPosition);
     this.markNeedsPaint();
   }
@@ -107,4 +107,5 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     this.markNeedsPaint();
   }
 }
+
 ```
