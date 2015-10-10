@@ -1,6 +1,6 @@
 # Input Text From IME (RenderObject)
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
+https://github.com/kyorohiro/hello_skyengine/tree/master/edit_text_1
 
 ![](screen.png)
 
