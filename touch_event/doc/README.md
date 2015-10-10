@@ -5,9 +5,9 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 ![](screen.png)
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
 
 void main() {
   runApp(new DrawRectWidget());
@@ -51,4 +51,5 @@ class DrawRectObject extends RenderBox {
     }
   }
 }
+
 ```
