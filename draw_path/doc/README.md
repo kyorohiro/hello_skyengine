@@ -5,28 +5,28 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_path
 ![](screen.png)
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/painting.dart';
-import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
 
 void main() {
-  runApp(new DrawRectWidget()); //new GameTest());
+  runApp(new DrawPathWidget()); //new GameTest());
 }
 
-class DrawRectWidget extends OneChildRenderObjectWidget {
+class DrawPathWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    return new DrawRectObject();
+    return new DrawPathObject();
   }
 }
 
-class DrawRectObject extends RenderBox {
+class DrawPathObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     context.canvas.scale(2.5, 2.5);
     context.canvas.translate(50.0, 50.0);
     paintWithStroke(context, offset);
     context.canvas.translate(50.0, 0.0);
-    paintWithGradient(context, offset);
+    paintWithLinearGradient(context, offset);
   }
 
   void paintWithStroke(PaintingContext context, Offset offset) {
@@ -43,7 +43,7 @@ class DrawRectObject extends RenderBox {
     context.canvas.drawPath(path, p);
   }
 
-  void paintWithGradient(PaintingContext context, Offset offset) {
+  void paintWithLinearGradient(PaintingContext context, Offset offset) {
     Paint p = new Paint();
     p.setStyle(sky.PaintingStyle.strokeAndFill);
 
@@ -66,8 +66,8 @@ class DrawRectObject extends RenderBox {
     path.lineTo(50.0, 60.0);
     path.lineTo(40.0, 10.0);
     path.close();
-    p.color = new Color.fromARGB(0xaa, 0xaa, 0xff, 0xff);
     context.canvas.drawPath(path, p);
   }
 }
+
 ```
