@@ -1,7 +1,7 @@
 # Summary
 * [hello](doc/hello/README.md)
   * [helloworld](hello/doc/README.md)
-* rendering
+* [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
   * [anime_rect(use animation.dart)](anime_rect_1/doc/README.md)
