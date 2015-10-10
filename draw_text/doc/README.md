@@ -5,13 +5,13 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
 ![](screen.png)
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/painting.dart';
-import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
 
 void main() {
-  runApp(new DrawTextWidget()); //new GameTest());
+  runApp(new DrawTextWidget());
 }
 
 class DrawTextWidget extends OneChildRenderObjectWidget {
@@ -36,4 +36,5 @@ class DrawTextObject extends RenderBox {
     textPainter.paint(context.canvas, new sky.Offset(100, 100));
   }
 }
+
 ```
