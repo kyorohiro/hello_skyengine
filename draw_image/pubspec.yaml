@@ -2,4 +2,5 @@ name: hello_003
 description: A minimal Sky project.
 dependencies:
   sky: any
+  flutter: any
   sky_tools: any
