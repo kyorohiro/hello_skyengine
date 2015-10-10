@@ -1,4 +1,4 @@
-import 'package:sky/widgets.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   Text t = new Text("Hello World");
