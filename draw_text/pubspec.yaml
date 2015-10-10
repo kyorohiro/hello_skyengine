@@ -1,4 +1,5 @@
 name: draw_text
 dependencies:
   sky: any
+  flutter: any
   sky_tools: any
