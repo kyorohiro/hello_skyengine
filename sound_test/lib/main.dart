@@ -1,9 +1,9 @@
-import 'package:sky/widgets.dart';
 import 'dart:async';
-import 'package:sky/src/services/fetch.dart';
+import 'package:flutter/src/services/fetch.dart';
 import 'package:mojo/core.dart';
 import 'package:sky_services/media/media.mojom.dart';
-import 'package:sky/services.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 
 main() async {
   runApp(new Center(child: new Text("Sound Test")));
