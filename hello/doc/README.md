@@ -65,7 +65,7 @@ dependencies:
 #### mainプログラムを書く
 "./lib/main.dart" を作成して以下を書く。
 ```
-import 'package:sky/widgets.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   Text t = new Text("Hello World");
