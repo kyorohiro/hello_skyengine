@@ -6,11 +6,11 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
 import 'dart:async';
-import 'package:sky/src/services/fetch.dart';
+import 'package:flutter/src/services/fetch.dart';
 
 main() async {
   runApp(new DrawImageWidget());
