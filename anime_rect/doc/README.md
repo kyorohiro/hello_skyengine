@@ -5,8 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/anime_rect
 ![](screen.png)
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -42,4 +42,5 @@ class DrawRectObject extends RenderBox {
     context.canvas.drawRect(r, p);
   }
 }
+
 ```
