@@ -1,4 +1,4 @@
-# Input Text From IME
+# Input Text From IME (EditableText)
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/edit_text
 
