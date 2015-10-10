@@ -5,26 +5,34 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
 ![](screen.png)
 
 ```
-import 'package:sky/widgets.dart';
-import 'package:sky/painting.dart';
-import 'package:sky/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(new DrawRectWidget());//new GameTest());
-}
+main() async {
+// setup keyboard
+  KeyboardServiceProxy pService = new KeyboardServiceProxy.unbound();
+  await shell.requestService(null, pService);
+  Keyboard keyboard = new Keyboard(pService.ptr);
 
-class DrawRectWidget extends OneChildRenderObjectWidget {
-    RenderObject createRenderObject() {
-      return new DrawRectObject();
-    }
-}
+// setup editable text
+  Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
+  sky.Offset offset = new sky.Offset(0.0, 0.0);
+  TextStyle textStyle = new TextStyle(fontSize: 50.0, color: textColor);
+  EditableString st = new EditableString(text: "test:", onUpdated: () {});
+  EditableText text = new EditableText(
+      key: new Key("editabletext"),
+      value: st,
+      style: textStyle,
+      scrollOffset: offset,
+      focused: true,
+      cursorColor: textColor, onContentSizeChanged: (Size newSize) {});
+  Center r = new Center(child: text);
 
-class DrawRectObject extends RenderBox {
-  void paint(PaintingContext context, Offset offset) {
-    Paint p = new Paint();
-    p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
-    Rect r = new Rect.fromLTWH(50.0, 100.0, 150.0, 25.0);
-    context.canvas.drawRect(r, p);
-  }
+// run & show ime
+  runApp(r);
+  keyboard.show(st.stub, KeyboardType.TEXT);
 }
 ```
