@@ -40,6 +40,7 @@ TODO
 name: hello
 dependencies:
   sky: any
+  flutter: any
   sky_tools: any
 ```
 
