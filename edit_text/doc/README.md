@@ -1,4 +1,4 @@
-# Draw Rect
+# Input Text From IME
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/draw_rect
 
