@@ -1,6 +1,6 @@
-import 'package:sky/widgets.dart';
-import 'package:sky/rendering.dart';
-import 'dart:sky' as sky;
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'dart:ui' as sky;
 
 void main() {
   runApp(new DrawRectWidget());
