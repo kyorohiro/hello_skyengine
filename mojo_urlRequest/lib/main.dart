@@ -10,6 +10,7 @@ import 'package:mojo_services/mojo/network_service.mojom.dart';
 import 'package:mojo_services/mojo/url_loader.mojom.dart';
 export 'package:mojo/mojo/url_response.mojom.dart' show UrlResponse;
 
+// Normally use 'package:flutter/src/services/fetch.dart'
 class MyGet {
   static Future<UrlResponse> load(String url, {method: "GET", redirect: true}) async {
     NetworkServiceProxy networkService = new NetworkServiceProxy.unbound();
