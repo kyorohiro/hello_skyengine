@@ -1,0 +1,6 @@
+name: draw_rect
+dependencies:
+  mojo_services: any
+  sky: any
+  flutter: any
+  sky_tools: any
