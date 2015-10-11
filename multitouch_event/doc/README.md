@@ -1,6 +1,6 @@
 # MultiTouch Event
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
+https://github.com/kyorohiro/hello_skyengine/tree/master/multitouch_event
 
 ![](screen.png)
 
