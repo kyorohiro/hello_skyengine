@@ -2,6 +2,7 @@
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
+![](screen.png)
 
 ```
 import 'package:flutter/services.dart';
