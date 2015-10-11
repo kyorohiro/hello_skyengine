@@ -1,7 +1,6 @@
 # Sensor Test
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_urlRequest
-
+https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor
 
 ```
 import 'dart:async';
