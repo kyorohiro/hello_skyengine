@@ -1,4 +1,4 @@
-# Post Request, Get Request
+# Gravity Sensor demo
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
