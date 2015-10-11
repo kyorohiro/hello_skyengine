@@ -22,6 +22,7 @@
 * [mojo](doc/mojo/README.md)
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor teset](mojo_sensor/doc/README.md)
+  * [gravity sensor demo](mojo_sensor_demo/doc/README.md)
 
 
 
