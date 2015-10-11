@@ -85,6 +85,16 @@ class Stage extends RenderBox {
     _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
         touchPoints[e.pointer].y, e.dx, e.dy);
   }
+
+  double envY(double y) {
+    Size s = constraints.biggest;
+    return s.height/2-y;
+  }
+
+  double envX(double x) {
+    Size s = constraints.biggest;
+    return x + s.width/2;
+  }
 }
 
 class TouchPoint {
