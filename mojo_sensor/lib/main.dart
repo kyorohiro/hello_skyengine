@@ -1,9 +1,4 @@
-import 'dart:async';
-import 'dart:typed_data';
-import 'dart:convert';
-import 'dart:ui' as sky;
 import 'package:flutter/services.dart';
-import 'package:mojo/core.dart' as core;
 import 'package:mojo_services/sensors/sensors.mojom.dart';
 
 main() async {

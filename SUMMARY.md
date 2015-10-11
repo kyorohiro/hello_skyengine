@@ -9,6 +9,7 @@
   * [rotate_image](rotate_image/doc/README.md)
   * [sound_test](sound_test/doc/README.md)
   * [touch_test](touch_event/doc/README.md)
+  * [multitouch_test](multitouch_event/doc/README.md)
   * [try to make a mini game(spacewar!)](spacewar/doc/README.md)
   * [draw_text](draw_text/doc/README.md)
   * [draw_path](draw_path/doc/README.md)
@@ -18,7 +19,7 @@
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
-* [mojo]
+* [mojo](doc/mojo/README.md)
   * [get and post request](mojo_urlRequest/doc/README.md)
 
 
