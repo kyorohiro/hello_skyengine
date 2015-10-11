@@ -2,7 +2,6 @@
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_urlRequest
 
-![](screen.png)
 
 ```
 import 'package:flutter/widgets.dart';
