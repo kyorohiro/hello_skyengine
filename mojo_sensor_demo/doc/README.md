@@ -4,121 +4,96 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
 
 ```
-import 'dart:async';
-import 'dart:typed_data';
-import 'dart:convert';
-import 'dart:ui' as sky;
 import 'package:flutter/services.dart';
-import 'package:mojo/core.dart' as core;
-import 'package:mojo/mojo/url_request.mojom.dart';
-import 'package:mojo/mojo/url_response.mojom.dart';
-import 'package:mojo_services/mojo/network_service.mojom.dart';
-import 'package:mojo_services/mojo/url_loader.mojom.dart';
-export 'package:mojo/mojo/url_response.mojom.dart' show UrlResponse;
+import 'package:mojo_services/sensors/sensors.mojom.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/animation.dart';
+import 'dart:ui' as sky;
 
-// Normally use 'package:flutter/src/services/fetch.dart'
-class MyGet {
-  static Future<UrlResponse> load(String url, {method: "GET", redirect: true}) async {
-    NetworkServiceProxy networkService = new NetworkServiceProxy.unbound();
-    shell.requestService("m", networkService);
-    UrlLoaderProxy loader = new UrlLoaderProxy.unbound();
-    networkService.ptr.createUrlLoader(loader);
-    UrlRequest request = new UrlRequest();
-    request.url = Uri.base.resolve(url).toString();
-    request.autoFollowRedirects = redirect;
-    request.method = method;
-    networkService.close();
-    return (await loader.ptr.start(request)).response;
-  }
-
-  static Future<sky.Image> loadAsImage(String url, {method: "GET", redirect: true}) async {
-    UrlResponse response = await load(url, method: method, redirect: redirect);
-    if (response.body == null) {
-      return null;
-    }
-
-    Completer<sky.Image> completer = new Completer();
-    new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
-    return completer.future;
-  }
-
-  static Future<Stream<ByteData>> loadAsStream(String url, {method: "GET", redirect: true}) async {
-    UrlResponse response = await load(url, method: method, redirect: redirect);
-
-    // Normally we use the DataPipeDrainer#drain()
-    core.MojoDataPipeConsumer consumer = response.body;
-    return MojoDataPipeConsumer2ByteDataStream.loadAsStream(consumer);
-
-  }
-
-  static Future<ByteData> loadAsByteData(String url, {method: "GET", redirect: true}) async {
-    Stream<ByteData> stream =
-        await loadAsStream(url, method: method, redirect: redirect);
-    StreamIterator<ByteData> itr = new StreamIterator(stream);
-    List<ByteData> buffers = [];
-
-    int dataLength = 0;
-    while (await itr.moveNext()) {
-      buffers.add(itr.current);
-      dataLength += itr.current.lengthInBytes;
-    }
-    ByteData data = new ByteData(dataLength);
-    int index = 0;
-    for (ByteData d in buffers) {
-      data.buffer.asUint8List().setAll(index, d.buffer.asUint8List());
-      index += d.lengthInBytes;
-    }
-    return data;
-  }
-}
-
-class MojoDataPipeConsumer2ByteDataStream {
-  static ByteData _cloneByteData(ByteData byteData) {
-    Uint8List d = byteData.buffer.asUint8List();
-    ByteBuffer b = new Uint8List.fromList(d).buffer;
-    return new ByteData.view(b);
-  }
-
-  // Normally we use the DataPipeDrainer#drain()
-  static Stream<ByteData> loadAsStream(core.MojoDataPipeConsumer consumer) {
-    StreamController<ByteData> returnStream = new StreamController<ByteData>();
-    core.MojoEventStream eventStream = new core.MojoEventStream(consumer.handle);
-    eventStream.listen((List<int> v) {
-      core.MojoHandleSignals signals = new core.MojoHandleSignals(v[1]);
-      if (!signals.isReadable && signals.isPeerClosed) {
-        eventStream.close();
-        returnStream.close();
-        return;
-      }
-      if (!signals.isReadable) {
-        returnStream.addError("");
-        returnStream.close();
-        return;
-      }
-
-      ByteData d = consumer.beginRead();
-      if (d == null) {
-        returnStream.addError("");
-        returnStream.close();
-        eventStream.close();
-        return;
-      }
-      returnStream.add(_cloneByteData(d));
-      if (!consumer.endRead(d.lengthInBytes).isOk) {
-        eventStream.close();
-        returnStream.close();
-        return;
-      }
-      eventStream.enableReadEvents();
-    });
-    return returnStream.stream;
-  }
-}
+//
+double worldDx = 0.0;
+double worldDy = 0.0;
+double worldDz = 0.0;
 
 main() async {
-  print("######====================######");
-  ByteData data = await MyGet.loadAsByteData("https://raw.githubusercontent.com/kyorohiro/hello_skyengine/master/SUMMARY.md");
-  String s1 = UTF8.decode(data.buffer.asUint8List(), allowMalformed: true);
-  print("### ${data.buffer.lengthInBytes} ${s1}");
+  print("######====================####s##");
+  SensorServiceProxy sensor = new SensorServiceProxy.unbound();
+  shell.requestService("h", sensor);
+
+  SensorListenerStub stub = new SensorListenerStub.unbound();
+  stub.impl = new MySensorListener();
+  sensor.ptr.addListener(SensorType.GRAVITY, stub);
+  print("######====================###s###");
+
+  runApp(new DrawRectWidget());
+}
+
+class MySensorListener extends SensorListener {
+  void onAccuracyChanged(int accuracy) {
+    print("accuracy: ${accuracy}");
+  }
+
+  void onSensorChanged(SensorData data) {
+    print("data: ${data.accuracy} ${data.values}");
+    worldDx = data.values[0];
+    worldDy = data.values[1];
+    worldDz = data.values[2];
+  }
+}
+class DrawRectWidget extends OneChildRenderObjectWidget {
+  RenderObject createRenderObject() {
+    return new DrawRectObject();
+  }
+}
+
+class DrawRectObject extends RenderBox {
+  double s = 100.0;
+  double x = 100.0;
+  double y = 100.0;
+  double dx = 0.0;
+  double dy = 0.0;
+
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+    scheduler.requestAnimationFrame(onTick);
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    Paint p = new Paint();
+    p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
+    Rect r = new Rect.fromLTWH(x - s/2.0, y - s/2.0, s, s);
+    context.canvas.drawOval(r, p);
+    p.setStyle(sky.PaintingStyle.stroke);
+    Rect w = new Rect.fromLTWH(s/2, s/2, this.paintBounds.width-s, this.paintBounds.height-s);
+    context.canvas.drawRect(w, p);
+  }
+
+  onTick(Duration timeStamp) {
+    scheduler.requestAnimationFrame(onTick);
+    x += dx;
+    y += dy;
+    if(y-s < paintBounds.top) {
+      y = paintBounds.top+s;
+      dy = -0.8*dy;
+    }
+    if(y+s > paintBounds.bottom) {
+      y = paintBounds.bottom-s;
+      dy = -0.8*dy;
+    }
+    if(x-s < paintBounds.left) {
+      x = paintBounds.left+s;
+      dx = -0.8*dx;
+    }
+    if(x+s > paintBounds.right) {
+      x = paintBounds.right-s;
+      dx = -0.8*dx;
+    }
+    dx += -1*worldDx/3.0;
+    dy += worldDy/3.0;
+    markNeedsPaint();
+  }
 }
 ```
