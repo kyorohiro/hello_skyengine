@@ -1,6 +1,6 @@
 # Flutter (skyengine)
 
-本書は、kyorohiroがFlutterについて試行錯誤した時のメモです。
+This book is memo that kyorohiro have been learning about flutter with dart/ 
 
 ### Flutterがリリースされた
 Dart Mobile として、Flutterがリリースされました。｀
