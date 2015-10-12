@@ -5,7 +5,6 @@ This book is memo that kyorohiro have been learning about flutter with dart.
 ### About Flutter
 
 Flutter is dartlang framework for mobile platform.
-クです。
 
 
 ## REF
