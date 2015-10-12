@@ -1,67 +1,99 @@
 part of gragravity;
 
-class RegidBody extends Particle {
-  double a = 0.0; // anglar
-  double da = 0.0;
-}
+class Primitive {
+  bool checkCollision(Primitive p) {
+    return false;
+  }
+  void next(int t) {
+  }
 
-class StaticparticlRect extends RegidBody {
-  @override
-  void onTick(Stage stage, int timeStamp) {
+  void collision(Primitive p) {
+
   }
 }
 
-class Particle extends DisplayObject {
-  // F = M * L / (T**2)
-  // F = M * a
-  // M / (L**3)
-  // L / T
-  // L**2
-  double m = 0.1;
-  double x = 100.0;// center of gravity
-  double y = 100.0;// center of gravity
-  double dx = 2.0;
-  double dy = 0.0;
-
-  void onTick(Stage stage, int timeStamp) {
-    x += dx;
-    y += dy;
-    print("${dx} ${dy} ${x} ${y}");
-  }
-
-  void onPaint(Stage stage, PaintingCanvas canvas) {
-    double size = 20.0;
-    Paint p = new Paint()..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
-    canvas.drawOval(new Rect.fromLTWH(stage.envX(x-size/2), stage.envY(y-size/2), size, size), p);
-  }
-
-}
-
-class PlanetWorld extends DisplayObject {
-  double gravity = 0.9807/10;
-  void onTick(Stage stage, int timeStamp) {
-    for(DisplayObject d in child) {
-      if(d is Particle) {
-        (d as Particle).dy -= gravity;
-        if(d.y < 0) {
-          d.dy = -1*d.dy * 0.95;
-          d.y = 0.0;
+class World {
+  List<Primitive> primitives = [];
+  next(int time) {
+    for(Primitive a in primitives) {
+      for(Primitive b in primitives) {
+        if(a.checkCollision(b)) {
+          a.collision(b);
         }
-        else if(d.y > 200) {
-          d.dy = -1*d.dy * 0.95;
-          d.y = 200.0;
-        }
-        else if(d.x < 0) {
-          d.dx = -1*d.dx * 0.95;
-          d.x = 0.0;
-        }
-        else if(d.x > 200) {
-          d.dx = -1*d.dx * 0.95;
-          d.x = 200.0;
-        }
+        next(time);
       }
     }
   }
+}
+class Box extends Primitive {
+  double mass = 1.0;
+  double angle = 0.0;
+  double elastic = 0.8;
 
+  Vector3 centerOfGravity = new Vector3.zero();
+  Vector3 leftTop = new Vector3(-25.0, -25.0, 0.0);
+  Vector3 rightBottom = new Vector3(25.0, 25.0, 0.0);
+  Vector3 speed = new Vector3(0.0, 0.0, 0.0);
 
+  bool checkCollision(Primitive p) {
+    if (p is Box) {
+      if (rightBottom.x < p.leftTop.x || leftTop.x > p.rightBottom.x) {
+        return false;
+      }
+      if (rightBottom.y < p.leftTop.y || leftTop.y > p.rightBottom.y) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  void size(double w, double h) {
+    leftTop.x = centerOfGravity.x - w/2;
+    leftTop.y = centerOfGravity.y - h/2;
+    rightBottom.x = centerOfGravity.x + w/2;
+    rightBottom.y = centerOfGravity.x + h/2;
+  }
+
+  void move(double dx, double dy) {
+    centerOfGravity.x +=dx;
+    centerOfGravity.y +=dy;
+    rightBottom.x += dx;
+    rightBottom.y += dy;
+    leftTop.x += dx;
+    leftTop.y += dy;
+  }
+  void next(int t) {
+    double dx = speed.x*t;
+    double dy = speed.y*t;
+    move(dx, dy);
+  }
+
+  void collision(Primitive p) {
+    speed.y = -1*speed.y * elastic;
+  }
+}
+
+class PlanetWorld extends DisplayObject {
+  World w  = new World();
+  PlanetWorld() {
+    w.primitives.add(new Box()..move(0.0, 100.0));
+    w.primitives.add(new Box()..size(400.0,20.0));
+  }
+  void onTick(Stage stage, int timeStamp) {
+    w.next(timeStamp);
+    stage.markNeedsPaint();
+  }
+
+  void onPaint(Stage stage, PaintingCanvas canvas) {
+    for(Primitive p in w.primitives) {
+      if(p is Box) {
+        Rect r = new Rect.fromLTRB(
+          stage.envX(p.leftTop.x), stage.envY(p.leftTop.y),
+          stage.envX(p.rightBottom.x), stage.envY(p.rightBottom.y));
+        Paint pa = new Paint()..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
+       canvas.drawRect(r, pa);
+      }
+    }
+  }
 }

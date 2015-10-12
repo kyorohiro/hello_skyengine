@@ -7,7 +7,6 @@ class Logic extends DisplayObject {
   Logic() {
     PlanetWorld world = new PlanetWorld();
     child.add(world);
-    world.child.add(new Particle());
    }
 
   void onTick(Stage stage, int timeStamp) {
