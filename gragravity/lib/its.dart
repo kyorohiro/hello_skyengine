@@ -17,11 +17,12 @@ class World {
   next(int time) {
     for(Primitive a in primitives) {
       for(Primitive b in primitives) {
-        if(a.checkCollision(b)) {
+        if(a!=b && a.checkCollision(b)) {
+          print("----coll");
           a.collision(b);
         }
-        next(time);
       }
+      a.next(time);
     }
   }
 }
@@ -37,12 +38,14 @@ class Box extends Primitive {
 
   bool checkCollision(Primitive p) {
     if (p is Box) {
-      if (rightBottom.x < p.leftTop.x || leftTop.x > p.rightBottom.x) {
-        return false;
-      }
+    //  if (rightBottom.x < p.leftTop.x || leftTop.x > p.rightBottom.x) {
+    //    return false;
+    //  }
+    //
       if (rightBottom.y < p.leftTop.y || leftTop.y > p.rightBottom.y) {
         return false;
       }
+      print("${rightBottom.y} < ${p.leftTop.y} || ${leftTop.y} > ${p.rightBottom.y}");
       return true;
     }
     return false;
@@ -64,8 +67,8 @@ class Box extends Primitive {
     leftTop.y += dy;
   }
   void next(int t) {
-    double dx = speed.x*t;
-    double dy = speed.y*t;
+    double dx = speed.x;
+    double dy = speed.y;
     move(dx, dy);
   }
 
@@ -77,7 +80,7 @@ class Box extends Primitive {
 class PlanetWorld extends DisplayObject {
   World w  = new World();
   PlanetWorld() {
-    w.primitives.add(new Box()..move(0.0, 100.0));
+    w.primitives.add(new Box()..move(0.0, 100.0)..speed.y=-1.0);
     w.primitives.add(new Box()..size(400.0,20.0));
   }
   void onTick(Stage stage, int timeStamp) {
