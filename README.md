@@ -2,7 +2,7 @@
 
 This book is memo that kyorohiro have been learning about flutter with dart. 
 
-### Flutterが
+### About Flutter
 Dart Mobile として、Flutterがリリースされました。｀
 Dart Mobile といえば、Chrome Mobile を利用したフレームワークを思い浮かぶかも知れません。
 残念ながら別物です。
