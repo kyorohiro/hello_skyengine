@@ -37,6 +37,7 @@ FlutterはMojoをベースとしてDart VM上で動作する別物のフレー�
   * [draw_path](draw_path/doc/README.md)
   * [draw_vertexs](draw_vertices/doc/README.md)
   * [draw_vertexs_with_image](draw_vertices_1/doc/README.md)
+  * [draw_vertex_demo(1)](draw_vertices_demo/doc/README.md)
   * [try to make a mini game 3d like]
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
@@ -45,3 +46,4 @@ FlutterはMojoをベースとしてDart VM上で動作する別物のフレー�
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor test](mojo_sensor/doc/README.md)
   * [gravity sensor demo](mojo_sensor_demo/doc/README.md)
+  * [a]
