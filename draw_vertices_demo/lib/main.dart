@@ -37,20 +37,20 @@ class DrawVertexsObject extends RenderBox {
     Matrix4 mat = new Matrix4.identity();
     mat.rotateY(math.PI / 2.0 + angle);
     mat.rotateX(angle);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
     mat.rotateY(math.PI / 2.0);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
     mat.rotateY(math.PI / 2.0);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
     mat.rotateY(math.PI / 2.0);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
     mat.rotateX(math.PI / 2.0);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
     mat.rotateX(math.PI / 1.0);
-    paintWithImage(context, offset, mat);
+    drawSurface(context, offset, mat);
   }
 
-  void paintWithImage(PaintingContext context, Offset offset, Matrix4 mat) {
+  void drawSurface(PaintingContext context, Offset offset, Matrix4 mat) {
     Paint paint = new Paint();
     sky.VertexMode vertexMode = sky.VertexMode.triangleFan;
     Vector3 vec1 = mat * new Vector3(-25.0, -25.0, -25.0);
