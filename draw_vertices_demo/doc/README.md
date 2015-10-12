@@ -7,10 +7,14 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
 ```
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/animation.dart';
+
 import 'dart:ui' as sky;
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/src/services/fetch.dart';
+import 'package:vector_math/vector_math_64.dart';
+import 'dart:math' as math;
 
 sky.Image img = null;
 main() async {
@@ -20,25 +24,55 @@ main() async {
 
 class DrawVertexsWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    return new DrawVertexsObject();
+    return new DrawVertexsObject()..anime();
   }
 }
 
 class DrawVertexsObject extends RenderBox {
-  void paint(PaintingContext context, Offset offset) {
-    context.canvas.translate(50.0, 50.0);
-    context.canvas.scale(8.0, 8.0);
-    paintWithImage(context, offset);
+  double angle = 0.0;
+  void anime() {
+    scheduler.requestAnimationFrame((Duration timeStamp) {
+      angle += math.PI / 90.0;
+      this.markNeedsPaint();
+      anime();
+    });
   }
 
-  void paintWithImage(PaintingContext context, Offset offset) {
+  void paint(PaintingContext context, Offset offset) {
+    context.canvas.scale(4.0, 4.0);
+    context.canvas.translate(80.0, 80.0);
+    Matrix4 mat = new Matrix4.identity();
+    mat.rotateY(math.PI / 2.0 + angle);
+    mat.rotateX(angle);
+    paintWithImage(context, offset, mat);
+    mat.rotateY(math.PI / 2.0);
+    paintWithImage(context, offset, mat);
+    mat.rotateY(math.PI / 2.0);
+    paintWithImage(context, offset, mat);
+    mat.rotateY(math.PI / 2.0);
+    paintWithImage(context, offset, mat);
+    mat.rotateX(math.PI / 2.0);
+    paintWithImage(context, offset, mat);
+    mat.rotateX(math.PI / 1.0);
+    paintWithImage(context, offset, mat);
+  }
+
+  void paintWithImage(PaintingContext context, Offset offset, Matrix4 mat) {
     Paint paint = new Paint();
     sky.VertexMode vertexMode = sky.VertexMode.triangleFan;
+    Vector3 vec1 = mat * new Vector3(-25.0, -25.0, -25.0);
+    Vector3 vec2 = mat * new Vector3(-25.0, 25.0, -25.0);
+    Vector3 vec3 = mat * new Vector3(25.0, 25.0, -25.0);
+    Vector3 vec4 = mat * new Vector3(25.0, -25.0, -25.0);
+    Vector3 normal = (vec1 - vec2).cross(vec1 - vec3);
+    if (normal.z < 0) {
+      return;
+    }
     List<Point> vertices = [
-      new Point(0.0, 0.0),
-      new Point(10.0, 50.0),
-      new Point(50.0, 60.0),
-      new Point(40.0, 10.0)
+      new Point(vec1.x, vec1.y),
+      new Point(vec2.x, vec2.y),
+      new Point(vec3.x, vec3.y),
+      new Point(vec4.x, vec4.y)
     ];
     List<Point> textureCoordinates = [
       new Point(0.0, 0.0),
@@ -47,10 +81,10 @@ class DrawVertexsObject extends RenderBox {
       new Point(1.0 * img.width, 0.0)
     ];
     List<Color> colors = [
-      const Color.fromARGB(0xaa, 0x00, 0x00, 0xff),
-      const Color.fromARGB(0xaa, 0x00, 0x00, 0xff),
-      const Color.fromARGB(0xaa, 0x00, 0x00, 0xff),
-      const Color.fromARGB(0xaa, 0x00, 0x00, 0xff)
+      const Color.fromARGB(0xaa, 0xff, 0xff, 0xff),
+      const Color.fromARGB(0xaa, 0xff, 0xff, 0xff),
+      const Color.fromARGB(0xaa, 0xff, 0xff, 0xff),
+      const Color.fromARGB(0xaa, 0xff, 0xff, 0xff)
     ];
     sky.TransferMode transferMode = sky.TransferMode.color;
     sky.TileMode tmx = sky.TileMode.clamp;
@@ -67,13 +101,12 @@ class DrawVertexsObject extends RenderBox {
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
     UrlResponse response = await fetchUrl(url);
-    if (response.statusCode >= 400) {
+    if (response.body == null) {
       throw "failed load ${url}";
-    } else {
-      Completer<sky.Image> completer = new Completer();
-      new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
-      return completer.future;
     }
+    Completer<sky.Image> completer = new Completer();
+    new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
+    return completer.future;
   }
 }
 ```
