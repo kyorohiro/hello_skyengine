@@ -1,4 +1,4 @@
-# Draw Vertexs demo 3d cube
+# Draw Vertexs demo, 3d cube animation
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
 
