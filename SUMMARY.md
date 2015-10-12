@@ -15,7 +15,7 @@
   * [draw_path](draw_path/doc/README.md)
   * [draw_vertexs](draw_vertices/doc/README.md)
   * [draw_vertexs_with_image](draw_vertices_1/doc/README.md)
-  * [draw_vertex_demo(1)]
+  * [draw_vertex_demo(1)](draw_vertices_demo/doc/README.md)
   * [try to make a mini game 3d like]
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
