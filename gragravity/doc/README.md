@@ -1,5 +1,2 @@
-# Make a mini game (Spacewar! Mock)
+# 2D physics test
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/spacewar
-
-![](screen.png)
