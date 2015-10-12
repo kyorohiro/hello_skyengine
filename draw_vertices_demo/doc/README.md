@@ -1,4 +1,4 @@
-# Draw Vertexs with a image
+# Draw Vertexs demo 3d
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_1
 
