@@ -1,9 +1,17 @@
 part of gragravity;
 
 class Primitive {
+
+  Vector3 centerOfGravity = new Vector3.zero();
+  Vector3 speed = new Vector3(0.0, 0.0, 0.0);
   bool checkCollision(Primitive p) {
     return false;
   }
+  void move(double dx, double dy) {
+    centerOfGravity.x += dx;
+    centerOfGravity.y += dy;
+  }
+
   void next(int t) {
   }
 
@@ -13,6 +21,7 @@ class Primitive {
 }
 
 class World {
+  Vector3 gravity = new Vector3(0.0, -9.8/100.0, 0.0);
   List<Primitive> primitives = [];
   next(int time) {
     for(Primitive a in primitives) {
@@ -22,6 +31,8 @@ class World {
           a.collision(b);
         }
       }
+      a.speed.x += gravity.x;
+      a.speed.y += gravity.y;
       a.next(time);
     }
   }
@@ -30,11 +41,12 @@ class Box extends Primitive {
   double mass = 1.0;
   double angle = 0.0;
   double elastic = 0.8;
+  bool isFixing = false;
 
-  Vector3 centerOfGravity = new Vector3.zero();
+
   Vector3 leftTop = new Vector3(-25.0, -25.0, 0.0);
   Vector3 rightBottom = new Vector3(25.0, 25.0, 0.0);
-  Vector3 speed = new Vector3(0.0, 0.0, 0.0);
+
 
   bool checkCollision(Primitive p) {
     if (p is Box) {
@@ -59,6 +71,9 @@ class Box extends Primitive {
   }
 
   void move(double dx, double dy) {
+    if(isFixing == true) {
+      return;
+    }
     centerOfGravity.x +=dx;
     centerOfGravity.y +=dy;
     rightBottom.x += dx;
@@ -81,7 +96,7 @@ class PlanetWorld extends DisplayObject {
   World w  = new World();
   PlanetWorld() {
     w.primitives.add(new Box()..move(0.0, 100.0)..speed.y=-1.0);
-    w.primitives.add(new Box()..size(400.0,20.0));
+    w.primitives.add(new Box()..size(400.0,20.0)..isFixing = true);
   }
   void onTick(Stage stage, int timeStamp) {
     w.next(timeStamp);
