@@ -5,6 +5,8 @@ class Primitive {
   Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
   bool isFixing = false;
   double elastic = 0.6;
+  double angle = 0.0;
+  double dangle = 0.0;
   bool checkCollision(Primitive p) {
     return false;
   }
@@ -109,7 +111,6 @@ class PlanetWorld extends DisplayObject {
   void onPaint(Stage stage, PaintingCanvas canvas) {
     Paint pa = new Paint()
       ..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
-    int i = 0;
     for (Primitive p in w.primitives) {
       if (p is CirclePrimitive) {
         CirclePrimitive c = p;
@@ -124,6 +125,14 @@ class PlanetWorld extends DisplayObject {
           Rect r = new Rect.fromLTWH(
               stage.envX(c.xy.x) - rd, stage.envY(c.xy.y) - rd, rd * 2, rd * 2);
           canvas.drawOval(r, pa);
+        }
+        {
+          double rd = c.radius;
+          double endX = rd*math.cos(c.angle);
+          double endY = rd*math.sin(c.angle);
+          canvas.drawLine(
+          new Point(stage.envX(c.xy.x), stage.envY(c.xy.y)),
+          new Point(stage.envX(endX+c.xy.x), stage.envY(c.xy.y+endY)), pa);
         }
       }
     }
