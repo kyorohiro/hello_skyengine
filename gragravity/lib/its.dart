@@ -72,9 +72,11 @@ class CirclePrimitive extends Primitive {
       Vector3 vv = p.xy - this.xy;
       Vector3 nn = vv.normalize();
       double v = dxy.length;
-      p.dxy = nn * v * elastic;
-      p.xy += nn*(boundary-distance);
       this.dxy = nn.negate() * v * elastic;
+      if(p.isFixing == false) {
+        p.xy += nn*(distance-boundary);
+        p.dxy = nn * v * elastic;
+      }
     }
   }
 }
