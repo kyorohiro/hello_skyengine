@@ -42,9 +42,7 @@ class CirclePrimitive extends Primitive {
   bool checkCollision(Primitive p) {
     if (p is CirclePrimitive) {
       CirclePrimitive c = p;
-      double dX = math.pow(c.xy.x - this.xy.x, 2);
-      double dY = math.pow(c.xy.y - this.xy.y, 2);
-      double distance = math.sqrt(dX + dY);
+      double distance = calcXYDistance(p);
       double boundary = this.radius + c.radius;
       if (boundary > distance) {
         return true;
@@ -55,15 +53,27 @@ class CirclePrimitive extends Primitive {
     return false;
   }
 
+  double calcXYDistance(Primitive p) {
+    double dX = math.pow(p.xy.x - this.xy.x, 2);
+    double dY = math.pow(p.xy.y - this.xy.y, 2);
+    double distance = math.sqrt(dX + dY);
+    return distance;
+  }
+
   void collision(Primitive p) {
     if (this.isFixing == true) {
       return;
     }
     if (p is CirclePrimitive) {
+      CirclePrimitive c = p;
+      double distance = calcXYDistance(p);
+      double boundary = this.radius + c.radius;
+
       Vector3 vv = p.xy - this.xy;
       Vector3 nn = vv.normalize();
       double v = dxy.length;
       p.dxy = nn * v * elastic;
+      p.xy += nn*(boundary-distance);
       this.dxy = nn.negate() * v * elastic;
     }
   }
