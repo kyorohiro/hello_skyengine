@@ -1,116 +1,130 @@
 part of gragravity;
 
 class Primitive {
-
-  Vector3 centerOfGravity = new Vector3.zero();
-  Vector3 speed = new Vector3(0.0, 0.0, 0.0);
+  Vector3 xy = new Vector3.zero();
+  Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
+  bool isFixing = false;
+  double elastic = 0.6;
   bool checkCollision(Primitive p) {
     return false;
   }
+
   void move(double dx, double dy) {
-    centerOfGravity.x += dx;
-    centerOfGravity.y += dy;
+    if (isFixing == false) {
+      xy.x += dx;
+      xy.y += dy;
+    }
   }
 
-  void next(int t) {
+  void next(double t) {}
+
+  void collision(Primitive p) {}
+}
+
+class CirclePrimitive extends Primitive {
+  double radius = 10.0;
+  Vector3 xy = new Vector3.zero();
+  Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
+
+  void next(double t) {
+    move(dxy.x * t, dxy.y * t);
+  }
+
+  void move(double dx, double dy) {
+    if (isFixing == false) {
+      xy.x += dx;
+      xy.y += dy;
+    }
+  }
+
+  bool checkCollision(Primitive p) {
+    if (p is CirclePrimitive) {
+      CirclePrimitive c = p;
+      double dX = math.pow(c.xy.x - this.xy.x, 2);
+      double dY = math.pow(c.xy.y - this.xy.y, 2);
+      double distance = math.sqrt(dX + dY);
+      double boundary = this.radius + c.radius;
+      if (boundary > distance) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
   }
 
   void collision(Primitive p) {
-
+    if (this.isFixing == true) {
+      return;
+    }
+    if (p is CirclePrimitive) {
+      Vector3 vv = p.xy - this.xy;
+      Vector3 nn = vv.normalize();
+      double v = dxy.length;
+      p.dxy = nn * v * elastic;
+      this.dxy = nn.negate() * v * elastic;
+    }
   }
 }
 
 class World {
-  Vector3 gravity = new Vector3(0.0, -9.8/100.0, 0.0);
+  Vector3 gravity = new Vector3(0.0, -9.8 / 500.0, 0.0);
   List<Primitive> primitives = [];
-  next(int time) {
-    for(Primitive a in primitives) {
-      for(Primitive b in primitives) {
-        if(a!=b && a.checkCollision(b)) {
-          print("----coll");
+  next(double time) {
+    for (Primitive a in primitives) {
+      for (Primitive b in primitives) {
+        if (a != b && a.checkCollision(b)) {
           a.collision(b);
         }
       }
-      a.speed.x += gravity.x;
-      a.speed.y += gravity.y;
+      a.dxy.x += gravity.x;
+      a.dxy.y += gravity.y;
       a.next(time);
     }
   }
 }
-class Box extends Primitive {
-  double mass = 1.0;
-  double angle = 0.0;
-  double elastic = 0.8;
-  bool isFixing = false;
-
-
-  Vector3 leftTop = new Vector3(-25.0, -25.0, 0.0);
-  Vector3 rightBottom = new Vector3(25.0, 25.0, 0.0);
-
-
-  bool checkCollision(Primitive p) {
-    if (p is Box) {
-    //  if (rightBottom.x < p.leftTop.x || leftTop.x > p.rightBottom.x) {
-    //    return false;
-    //  }
-    //
-      if (rightBottom.y < p.leftTop.y || leftTop.y > p.rightBottom.y) {
-        return false;
-      }
-      print("${rightBottom.y} < ${p.leftTop.y} || ${leftTop.y} > ${p.rightBottom.y}");
-      return true;
-    }
-    return false;
-  }
-
-  void size(double w, double h) {
-    leftTop.x = centerOfGravity.x - w/2;
-    leftTop.y = centerOfGravity.y - h/2;
-    rightBottom.x = centerOfGravity.x + w/2;
-    rightBottom.y = centerOfGravity.x + h/2;
-  }
-
-  void move(double dx, double dy) {
-    if(isFixing == true) {
-      return;
-    }
-    centerOfGravity.x +=dx;
-    centerOfGravity.y +=dy;
-    rightBottom.x += dx;
-    rightBottom.y += dy;
-    leftTop.x += dx;
-    leftTop.y += dy;
-  }
-  void next(int t) {
-    double dx = speed.x;
-    double dy = speed.y;
-    move(dx, dy);
-  }
-
-  void collision(Primitive p) {
-    speed.y = -1*speed.y * elastic;
-  }
-}
 
 class PlanetWorld extends DisplayObject {
-  World w  = new World();
+  World w = new World();
   PlanetWorld() {
-    w.primitives.add(new Box()..move(0.0, 100.0)..speed.y=-1.0);
-    w.primitives.add(new Box()..size(400.0,20.0)..isFixing = true);
+    w.primitives.add(new CirclePrimitive()
+      ..move(0.0, 100.0)
+      ..dxy.y = -1.0
+      ..dxy.x = -1.0
+      ..radius = 25.0);
+
+    for (int i = 0; i < 20; i++) {
+      w.primitives.add(new CirclePrimitive()
+        ..move(-200.0 + i * 20, 0.0)
+        ..isFixing = true);
+    }
   }
   void onTick(Stage stage, int timeStamp) {
-    w.next(timeStamp);
+    for (int i = 0; i < 20; i++) {
+      w.next(0.01);
+    }
     stage.markNeedsPaint();
   }
 
   void onPaint(Stage stage, PaintingCanvas canvas) {
-    for(Primitive p in w.primitives) {
-      if(p is Box) {
-        Rect r = new Rect.fromLTRB(
-          stage.envX(p.leftTop.x), stage.envY(p.leftTop.y),
-          stage.envX(p.rightBottom.x), stage.envY(p.rightBottom.y));
-        Paint pa = new Paint()..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
-       canvas.drawRect(r, pa);
+    Paint pa = new Paint()
+      ..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
+    int i = 0;
+    for (Primitive p in w.primitives) {
+      if (p is CirclePrimitive) {
+        CirclePrimitive c = p;
+        {
+          double rd = 5.0; //c.radius;
+          Rect r = new Rect.fromLTWH(
+              stage.envX(c.xy.x) - rd, stage.envY(c.xy.y) - rd, rd * 2, rd * 2);
+          canvas.drawOval(r, pa);
+        }
+        {
+          double rd = c.radius;
+          Rect r = new Rect.fromLTWH(
+              stage.envX(c.xy.x) - rd, stage.envY(c.xy.y) - rd, rd * 2, rd * 2);
+          canvas.drawOval(r, pa);
+        }
       }
     }
   }
