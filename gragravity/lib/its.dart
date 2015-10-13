@@ -114,12 +114,12 @@ class PlanetWorld extends DisplayObject {
         ..dxy.y = -1.0
         ..dxy.x = -10.0
         ..radius = 15.0);
-        /*
+
       w.primitives.add(new CirclePrimitive()
           ..move(-50.0, 300.0)
           ..dxy.y = -1.0
           ..dxy.x = -10.0
-          ..radius = 15.0);*/
+          ..radius = 15.0);
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
