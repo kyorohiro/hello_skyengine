@@ -45,7 +45,6 @@ class CirclePrimitive extends Primitive {
       double distance = calcXYDistance(p);
       double boundary = this.radius + c.radius;
       if (boundary > distance) {
-        print("collision ${boundary} > ${distance}");
         return true;
       } else {
         return false;
@@ -62,9 +61,10 @@ class CirclePrimitive extends Primitive {
   }
 
   void collision(Primitive p) {
-//    if (this.isFixing == true) {
-//      return;
-//    }
+    if (this.isFixing == true) {
+      this.dxy.x = 0.0;
+      this.dxy.y = 0.0;
+    }
     if (p is CirclePrimitive) {
       CirclePrimitive c = p;
       double distance = calcXYDistance(p);
@@ -76,8 +76,12 @@ class CirclePrimitive extends Primitive {
       this.dxy += nn.negate() * v * elastic/2.0;
       if(p.isFixing == false) {
         print("--${nn} ${distance}-${boundary})");
-        p.xy += nn*(distance-boundary)/2.0;
-      //  p.dxy += nn * v * elastic/2.0;
+        p.xy += nn*(distance-boundary);
+        Vector3 d = nn * v * elastic/2.0;
+        if(this.isFixing) {
+          print("ss## ${d}");
+       }
+      //  p.dxy += d;
       }
     }
   }
@@ -93,8 +97,10 @@ class World {
           a.collision(b);
         }
       }
-      a.dxy.x += gravity.x;
-      a.dxy.y += gravity.y;
+      if(a.isFixing == false) {
+        a.dxy.x += gravity.x;
+        a.dxy.y += gravity.y;
+      }
       a.next(time);
     }
   }
@@ -134,7 +140,13 @@ class PlanetWorld extends DisplayObject {
     }
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
-        ..move(200.0, 0.0 + i * 20)
+        ..move(180.0, 0.0 + i * 20)
+        ..radius=9.0
+        ..isFixing = true);
+    }
+    for (int i = 0; i < 20; i++) {
+      w.primitives.add(new CirclePrimitive()
+        ..move(-200.0 + i * 20, 400.0)
         ..radius=9.0
         ..isFixing = true);
     }
