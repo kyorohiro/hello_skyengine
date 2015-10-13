@@ -45,6 +45,7 @@ class CirclePrimitive extends Primitive {
       double distance = calcXYDistance(p);
       double boundary = this.radius + c.radius;
       if (boundary > distance) {
+        print("collision ${boundary} > ${distance}");
         return true;
       } else {
         return false;
@@ -61,9 +62,9 @@ class CirclePrimitive extends Primitive {
   }
 
   void collision(Primitive p) {
-    if (this.isFixing == true) {
-      return;
-    }
+//    if (this.isFixing == true) {
+//      return;
+//    }
     if (p is CirclePrimitive) {
       CirclePrimitive c = p;
       double distance = calcXYDistance(p);
@@ -74,8 +75,9 @@ class CirclePrimitive extends Primitive {
       double v = dxy.length;
       this.dxy = nn.negate() * v * elastic;
       if(p.isFixing == false) {
+        print("--${nn} ${distance}-${boundary})");
         p.xy += nn*(distance-boundary);
-        p.dxy = nn * v * elastic;
+       //  p.dxy = nn * v * elastic;
       }
     }
   }
@@ -106,35 +108,40 @@ class PlanetWorld extends DisplayObject {
       ..dxy.y = -1.0
       ..dxy.x = -10.0
       ..radius = 25.0);
+
       w.primitives.add(new CirclePrimitive()
         ..move(0.0, 300.0)
         ..dxy.y = -1.0
         ..dxy.x = -10.0
         ..radius = 15.0);
+        /*
       w.primitives.add(new CirclePrimitive()
           ..move(-50.0, 300.0)
           ..dxy.y = -1.0
           ..dxy.x = -10.0
-          ..radius = 15.0);
+          ..radius = 15.0);*/
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
+        ..radius=9.0
         ..isFixing = true);
     }
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0, 0.0 + i * 20)
+        ..radius=9.0
         ..isFixing = true);
     }
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(200.0, 0.0 + i * 20)
+        ..radius=9.0
         ..isFixing = true);
     }
   }
   void onTick(Stage stage, int timeStamp) {
-    for (int i = 0; i < 20; i++) {
-      w.next(0.01);
+    for (int i = 0; i < 10; i++) {
+      w.next(0.1);
     }
     stage.markNeedsPaint();
   }
