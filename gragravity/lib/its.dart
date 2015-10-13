@@ -73,15 +73,16 @@ class CirclePrimitive extends Primitive {
       Vector3 vv = p.xy - this.xy;
       Vector3 nn = vv.normalize();
       double v = dxy.length;
-      this.dxy += nn.negate() * v * elastic/2.0;
+      this.dxy += nn.negate() * v * elastic;
       if(p.isFixing == false) {
-        print("--${nn} ${distance}-${boundary})");
+//        print("--${nn} ${distance}-${boundary})");
         p.xy += nn*(distance-boundary);
-        Vector3 d = nn * v * elastic/2.0;
-        if(this.isFixing) {
-          print("ss## ${d}");
-       }
-      //  p.dxy += d;
+
+//        if(this.isFixing) {
+//          print("ss## ${d}");
+//       }
+       //Vector3 d = nn * v * elastic/3.0;
+       //p.dxy += d;
       }
     }
   }
