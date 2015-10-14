@@ -1,20 +1,20 @@
 part of tinygame;
 
-class FlutterStage extends RenderBox with Stage{
+class TinyFlutterStage extends RenderBox with TinyStage{
   double get x => paintBounds.left;
   double get y => paintBounds.top;
   double get w => paintBounds.width;
   double get h => paintBounds.height;
   bool animeIsStart = false;
   int animeId = 0;
-  DisplayObject _root;
-  DisplayObject get root => _root;
+  TinyDisplayObject _root;
+  TinyDisplayObject get root => _root;
   bool startable = false;
   static const int kMaxOfTouch = 5;
   List<TouchPoint> touchPoints = [];
   bool isInit = false;
 
-  FlutterStage(this._root) {
+  TinyFlutterStage(this._root) {
     init();
   }
 

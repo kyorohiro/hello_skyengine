@@ -10,14 +10,14 @@ void main() {
 
 class GameWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    GameBuilderForFlutter f = new GameBuilderForFlutter();
-    Stage stage = f.createStage(new PlanetWorld());
+    TinyGameBuilderForFlutter f = new TinyGameBuilderForFlutter();
+    TinyStage stage = f.createStage(new PlanetWorld());
     stage.start();
-    return (stage as FlutterStage);
+    return (stage as TinyFlutterStage);
   }
 }
 
-class PlanetWorld extends DisplayObject {
+class PlanetWorld extends TinyDisplayObject {
   World w = new World();
   PlanetWorld() {
     w.primitives.add(new CirclePrimitive()
@@ -61,14 +61,14 @@ class PlanetWorld extends DisplayObject {
         ..isFixing = true);
     }
   }
-  void onTick(Stage stage, int timeStamp) {
+  void onTick(TinyStage stage, int timeStamp) {
     for (int i = 0; i < 10; i++) {
       w.next(0.1);
     }
     stage.markNeedsPaint();
   }
 
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(TinyStage stage, PaintingCanvas canvas) {
     Paint pa = new Paint()
       ..color = const Color.fromARGB(0xaa, 0xff, 0xff, 0xaa);
     for (Primitive p in w.primitives) {

@@ -1,24 +1,24 @@
 part of tinygame;
 
-abstract class GameBuilder {
-  Stage createStage(DisplayObject root);
+abstract class TinyGameBuilder {
+  TinyStage createStage(TinyDisplayObject root);
 }
 
-class GameBuilderForFlutter extends GameBuilder {
-  Stage createStage(DisplayObject root) {
-    return new FlutterStage(root);
+class TinyGameBuilderForFlutter extends TinyGameBuilder {
+  TinyStage createStage(TinyDisplayObject root) {
+    return new TinyFlutterStage(root);
   }
 }
 
-abstract class Stage {
+abstract class TinyStage {
   double get x;
   double get y;
   double get w;
   double get h;
   bool animeIsStart = false;
   int animeId = 0;
-  DisplayObject _root;
-  DisplayObject get root => _root;
+  TinyDisplayObject _root;
+  TinyDisplayObject get root => _root;
   bool startable = false;
   bool isInit = false;
   void start();
