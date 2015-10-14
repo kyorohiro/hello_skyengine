@@ -26,7 +26,7 @@
   * [gravity sensor demo](mojo_sensor_demo/doc/README.md)
   * [a]
 * [2d physics](doc/physics2d/README.md)
-  * [b](ph_2d_boun_no_rot/doc/README.md)
+  * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
 
 
 
