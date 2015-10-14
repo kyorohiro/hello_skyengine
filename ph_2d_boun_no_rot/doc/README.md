@@ -1,1 +1,1 @@
-# 2D physics test
+# 2D physics test: collision without rotation
