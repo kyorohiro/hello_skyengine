@@ -62,7 +62,7 @@ class TinyFlutterStage extends RenderBox with TinyStage{
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    root.paint(this, context.canvas);
+    root.paint(this, new TinyFlutterCanvas(context.canvas));
   }
 
   @override
@@ -87,6 +87,17 @@ class TinyFlutterStage extends RenderBox with TinyStage{
   }
 
 
+}
+
+class TinyFlutterCanvas extends TinyCanvas {
+  PaintingCanvas canvas;
+  TinyFlutterCanvas(this.canvas) {
+  }
+
+  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
+    Paint p = new Paint()..color=new Color(paint.color.value);
+    canvas.drawOval(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h), p);
+  }
 }
 
 class TouchPoint {

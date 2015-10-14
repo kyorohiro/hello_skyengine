@@ -54,11 +54,11 @@ class TinyDisplayObject {
     }
   }
 
-  void onPaint(TinyStage stage, PaintingCanvas canvas) {
+  void onPaint(TinyStage stage, TinyCanvas canvas) {
     ;
   }
 
-  void paint(TinyStage stage, PaintingCanvas canvas) {
+  void paint(TinyStage stage, TinyCanvas canvas) {
     onPaint(stage, canvas);
     for (TinyDisplayObject d in child) {
       d.paint(stage, canvas);
