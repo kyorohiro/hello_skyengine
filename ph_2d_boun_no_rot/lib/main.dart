@@ -21,6 +21,7 @@ class GameWidget extends OneChildRenderObjectWidget {
 class PlanetWorld extends TinyDisplayObject {
   World w = new World();
   PlanetWorld() {
+    // ball
     w.primitives.add(new CirclePrimitive()
       ..move(-100.0, 300.0)
       ..dxy.y = -1.0
@@ -36,6 +37,13 @@ class PlanetWorld extends TinyDisplayObject {
       ..dxy.y = -1.0
       ..dxy.x = -10.0
       ..radius = 15.0);
+    w.primitives.add(new CirclePrimitive()
+        ..move(-50.0, 200.0)
+        ..dxy.y = -1.0
+        ..dxy.x = -10.0
+        ..radius = 50.0);
+
+    // frame
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
