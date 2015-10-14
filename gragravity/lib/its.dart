@@ -3,10 +3,12 @@ part of gragravity;
 class Primitive {
   Vector3 xy = new Vector3.zero();
   Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
+  double mass = 1.0;
   bool isFixing = false;
   double elastic = 0.6;
   double angle = 0.0;
   double dangle = 0.0;
+
   bool checkCollision(Primitive p) {
     return false;
   }
@@ -25,8 +27,7 @@ class Primitive {
 
 class CirclePrimitive extends Primitive {
   double radius = 10.0;
-  Vector3 xy = new Vector3.zero();
-  Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
+
 
   void next(double t) {
     move(dxy.x * t, dxy.y * t);
@@ -60,6 +61,11 @@ class CirclePrimitive extends Primitive {
     return distance;
   }
 
+  Vector3 calcXYDistanceDirection(Primitive p) {
+    Vector3 vv = p.xy - this.xy;
+    return vv.normalize();
+  }
+
   void collision(Primitive p) {
     if (this.isFixing == true) {
       this.dxy.x = 0.0;
@@ -69,20 +75,30 @@ class CirclePrimitive extends Primitive {
       CirclePrimitive c = p;
       double distance = calcXYDistance(p);
       double boundary = this.radius + c.radius;
+      Vector3 distanceDirection =  calcXYDistanceDirection(p);
+      Vector3 collisionDirection = calcXYDistanceDirection(p);
+      Vector3 relativeSpeed = p.dxy -this.dxy;
 
-      Vector3 vv = p.xy - this.xy;
-      Vector3 nn = vv.normalize();
-      double v = dxy.length;
-      this.dxy += nn.negate() * v * elastic;
+      // e is 0-1
+      // J = -(v1p- v2p) * (e+1) / (1/m1 + 1/m2)
+      double bounce = 1.0;
+      double j1 = -1.0*(1.0+bounce)*(relativeSpeed.dot(collisionDirection));
+      double j2 = (1.0/p.mass + 1.0/this.mass);
+      double j = j1/j2;
+
+      Vector3 p_dv = (collisionDirection*j)/p.mass;
+      Vector3 t_dv = (collisionDirection*-1.0*j)/this.mass;
+
+
+
+      //double v = dxy.length;
+      // calc collision power
+      if(this.isFixing == false) {
+        this.dxy += t_dv;
+      }
       if(p.isFixing == false) {
-//        print("--${nn} ${distance}-${boundary})");
-        p.xy += nn*(distance-boundary);
-
-//        if(this.isFixing) {
-//          print("ss## ${d}");
-//       }
-       //Vector3 d = nn * v * elastic/3.0;
-       //p.dxy += d;
+        p.xy += distanceDirection *(boundary-distance+0.1)/1.0;
+        p.dxy += p_dv;
       }
     }
   }
@@ -113,9 +129,8 @@ class PlanetWorld extends DisplayObject {
     w.primitives.add(new CirclePrimitive()
       ..move(-100.0, 300.0)
       ..dxy.y = -1.0
-      ..dxy.x = -10.0
-      ..radius = 25.0);
-
+      ..dxy.x = -5.0
+      ..radius = 10.0);
       w.primitives.add(new CirclePrimitive()
         ..move(0.0, 300.0)
         ..dxy.y = -1.0
