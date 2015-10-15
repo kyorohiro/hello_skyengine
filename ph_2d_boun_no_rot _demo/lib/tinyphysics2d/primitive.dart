@@ -39,7 +39,7 @@ class CirclePrimitive extends Primitive {
   void next(double t) {
     move(dxy.x * t, dxy.y * t);
     dangle -= 0.01*dangle;
-    rotate(dangle*t);
+    rotate(dangle*t*10.0);
   }
 
   bool checkCollision(Primitive p) {

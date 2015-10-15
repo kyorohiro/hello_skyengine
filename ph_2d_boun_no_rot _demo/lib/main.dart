@@ -45,7 +45,7 @@ class PlanetWorld extends TinyDisplayObject {
         ..move(-50.0, 200.0)
         ..dxy.y = 5.0
         ..dxy.x = -10.0
-        ..mass= 100.0
+        ..mass= 50.0
         ..radius = 50.0);
 
     // frame
