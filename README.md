@@ -15,7 +15,7 @@ Flutter is dartlang framework for mobile platform.
 
 * [hello](doc/hello/README.md)
   * [helloworld](hello/doc/README.md)
-* [rendering and game](doc/rendering/README.md)
+* [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
   * [anime_rect(use animation.dart)](anime_rect_1/doc/README.md)
@@ -39,3 +39,5 @@ Flutter is dartlang framework for mobile platform.
   * [sensor test](mojo_sensor/doc/README.md)
   * [gravity sensor demo](mojo_sensor_demo/doc/README.md)
   * [a]
+* [2d physics](doc/physics2d/README.md)
+  * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
