@@ -100,7 +100,7 @@ class CirclePrimitive extends Primitive {
       }
       if (p.isFixing == false) {
         p.xy += distanceDirection * (boundary - distance) / 1.0;
-        p.dxy += (distanceDirection * (boundary - distance) / 1.0)/1000.0;
+        //p.dxy += (distanceDirection * (boundary - distance) / 1.0)/1000.0;
         p.dxy += p_dv;
         p.dangle += p_da.z*1000.0;
       }

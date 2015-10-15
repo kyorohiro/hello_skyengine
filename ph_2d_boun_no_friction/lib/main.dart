@@ -3,11 +3,43 @@ import 'package:flutter/rendering.dart';
 import 'tinyphysics2d.dart';
 import 'tinygame.dart';
 import 'dart:math' as math;
+//
+import 'package:flutter/services.dart';
+import 'package:mojo_services/sensors/sensors.mojom.dart';
 
 TinyGameBuilderForFlutter f = new TinyGameBuilderForFlutter();
 
+double worldDx = 0.0;
+double worldDy = 0.0;
+double worldDz = 0.0;
+
+void intiSensor() {
+  print("######====================####s##");
+SensorServiceProxy sensor = new SensorServiceProxy.unbound();
+shell.requestService("h", sensor);
+
+SensorListenerStub stub = new SensorListenerStub.unbound();
+stub.impl = new MySensorListener();
+sensor.ptr.addListener(SensorType.GRAVITY, stub);
+print("######====================###s###");
+}
+
+class MySensorListener extends SensorListener {
+  void onAccuracyChanged(int accuracy) {
+    //print("accuracy: ${accuracy}");
+  }
+
+  void onSensorChanged(SensorData data) {
+  //  print("data: ${data.accuracy} ${data.values}");
+    worldDx = data.values[0];
+    worldDy = data.values[1];
+    worldDz = data.values[2];
+  }
+}
+
 void main() {
   runApp(new GameWidget());
+  intiSensor();
 }
 
 class GameWidget extends OneChildRenderObjectWidget {
@@ -44,7 +76,7 @@ class PlanetWorld extends TinyDisplayObject {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
         ..radius = 9.0
-        ..mass = 500.0
+        ..mass = 50.0
         ..isFixing = true);
     }
     for (int i = 0; i < 20; i++) {
@@ -67,6 +99,8 @@ class PlanetWorld extends TinyDisplayObject {
     }
   }
   void onTick(TinyStage stage, int timeStamp) {
+    w.gravity.x = -1.0*worldDx/50.0;
+    w.gravity.y = -1.0*worldDy/50.0;
     for (int i = 0; i < 10; i++) {
       w.next(0.1);
     }
