@@ -27,21 +27,25 @@ class PlanetWorld extends TinyDisplayObject {
       ..dxy.y = -1.0
       ..dxy.x = -5.0
       ..radius = 10.0
+      ..mass= 10.0
       ..name="f");
     w.primitives.add(new CirclePrimitive()
       ..move(0.0, 300.0)
       ..dxy.y = -1.0
       ..dxy.x = -10.0
+      ..mass= 10.0
       ..radius = 15.0);
     w.primitives.add(new CirclePrimitive()
       ..move(-50.0, 300.0)
       ..dxy.y = 5.0
       ..dxy.x = 10.0
+      ..mass= 10.0
       ..radius = 15.0);
     w.primitives.add(new CirclePrimitive()
         ..move(-50.0, 200.0)
         ..dxy.y = 5.0
         ..dxy.x = -10.0
+        ..mass= 100.0
         ..radius = 50.0);
 
     // frame
@@ -49,6 +53,7 @@ class PlanetWorld extends TinyDisplayObject {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
         ..radius = 9.0
+        ..mass= 500.0
         ..isFixing = true);
     }
     for (int i = 0; i < 20; i++) {

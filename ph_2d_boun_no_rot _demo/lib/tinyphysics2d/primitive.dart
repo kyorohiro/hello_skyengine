@@ -8,6 +8,7 @@ class Primitive {
   double elastic = 0.6;
   double angle = 0.0;
   double dangle = 0.0;
+  double bouncing = 0.8;
   String name = "none";
 
   bool checkCollision(Primitive p) {
@@ -37,7 +38,8 @@ class CirclePrimitive extends Primitive {
 
   void next(double t) {
     move(dxy.x * t, dxy.y * t);
-    rotate(dangle*1000.0*1000.0);
+    dangle -= 0.01*dangle;
+    rotate(dangle*t);
   }
 
   bool checkCollision(Primitive p) {
@@ -79,7 +81,7 @@ class CirclePrimitive extends Primitive {
       // calc J
       // e is 0-1
       // J = -(v1p- v2p) * (e+1) / (1/m1 + 1/m2)
-      double bounce = 1.0;
+      double bounce = (this.bouncing+p.bouncing)/2;
       double j1 = -1.0 * (1.0 + bounce) * (relativeSpeed.dot(collisionDirection));
       double j2 = (1.0 / p.mass + 1.0 / this.mass);
       double j = j1 / j2;
@@ -89,17 +91,17 @@ class CirclePrimitive extends Primitive {
       Vector3 t_dv = (collisionDirection * -1.0 * j) / this.mass;
 
       // calc angle speed
-      Vector3 p_da = (distanceDirection*-1.0*this.radius).cross(collisionDirection* 1.0*j);
-      Vector3 t_da = (distanceDirection* 1.0*this.radius).cross(collisionDirection*-1.0*j);
+      Vector3 p_da = (distanceDirection*-1.0*this.radius).cross(collisionDirection* 1.0*j)/0.0000001;
+      Vector3 t_da = (distanceDirection* 1.0*this.radius).cross(collisionDirection*-1.0*j)/0.0000001;
 
       if (this.isFixing == false) {
         this.dxy += t_dv;
-        this.dangle += t_da.z;
+        this.dangle += t_da.z*1000.0;
       }
       if (p.isFixing == false) {
-        p.xy += distanceDirection * (boundary - distance + 0.1) / 1.0;
+        p.xy += distanceDirection * (boundary - distance) / 1.0;
         p.dxy += p_dv;
-        p.dangle += p_da.z;
+        p.dangle += p_da.z*1000.0;
       }
     }
   }
