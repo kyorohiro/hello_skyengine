@@ -62,7 +62,7 @@ class PlanetWorld extends TinyDisplayObject {
         ..dxy.y = (0.5-rand.nextDouble())*5.0
         ..dxy.x = (0.5-rand.nextDouble())*5.0
         ..radius = size
-        ..mass = size);
+        ..mass = size/10.0);
     }
     w.primitives.add(new CirclePrimitive()
       ..move(-50.0, 200.0)
@@ -101,8 +101,8 @@ class PlanetWorld extends TinyDisplayObject {
   void onTick(TinyStage stage, int timeStamp) {
     w.gravity.x = -1.0*worldDx/50.0;
     w.gravity.y = -1.0*worldDy/50.0;
-    for (int i = 0; i < 10; i++) {
-      w.next(0.1);
+    for (int i = 0; i < 20; i++) {
+      w.next(0.05);
     }
     stage.markNeedsPaint();
   }
