@@ -1,0 +1,6 @@
+name: shrill_star_6606
+description: A minimal Flutter project.
+dependencies:
+  flutter: ">=0.0.2 <0.1.0"
+dev_dependencies:
+  sky_tools: any
