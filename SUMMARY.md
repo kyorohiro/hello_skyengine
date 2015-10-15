@@ -23,10 +23,11 @@
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor test](mojo_sensor/doc/README.md)
   * [gravity sensor demo](mojo_sensor_demo/doc/README.md)
-* [2d physics](doc/physics2d/README.md)
+* [2d physics for scratch](doc/physics2d/README.md)
   * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
   * [collision without friction](ph_2d_boun_no_friction/doc/README.md)
   * [b]
+* [2d physics for newton]
 
 
 
