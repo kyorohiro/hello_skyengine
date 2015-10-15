@@ -27,7 +27,7 @@
   * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
   * [collision without friction](ph_2d_boun_no_friction/doc/README.md)
   * [b]
-* [2d physics for newton]
+* [2d physics for newton](doc/physics2d_newton/README.md)
 
 
 
