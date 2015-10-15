@@ -19,41 +19,32 @@ class GameWidget extends OneChildRenderObjectWidget {
 }
 
 class PlanetWorld extends TinyDisplayObject {
+  math.Random rand = new math.Random();
   World w = new World();
   PlanetWorld() {
     // ball
+    for (int i = 0; i < 40; i++) {
+      double size = rand.nextDouble()*12.0+5.0;
+      w.primitives.add(new CirclePrimitive()
+        ..move(0.0, 250.0)
+        ..dxy.y = (0.5-rand.nextDouble())*5.0
+        ..dxy.x = (0.5-rand.nextDouble())*5.0
+        ..radius = size
+        ..mass = size);
+    }
     w.primitives.add(new CirclePrimitive()
-      ..move(-100.0, 300.0)
-      ..dxy.y = -1.0
-      ..dxy.x = -5.0
-      ..radius = 10.0
-      ..mass= 10.0
-      ..name="f");
-    w.primitives.add(new CirclePrimitive()
-      ..move(0.0, 300.0)
-      ..dxy.y = -1.0
-      ..dxy.x = -10.0
-      ..mass= 10.0
-      ..radius = 15.0);
-    w.primitives.add(new CirclePrimitive()
-      ..move(-50.0, 300.0)
+      ..move(-50.0, 200.0)
       ..dxy.y = 5.0
-      ..dxy.x = 10.0
-      ..mass= 10.0
-      ..radius = 15.0);
-    w.primitives.add(new CirclePrimitive()
-        ..move(-50.0, 200.0)
-        ..dxy.y = 5.0
-        ..dxy.x = -10.0
-        ..mass= 50.0
-        ..radius = 50.0);
+      ..dxy.x = -10.0
+      ..mass = 50.0
+      ..radius = 50.0);
 
     // frame
     for (int i = 0; i < 20; i++) {
       w.primitives.add(new CirclePrimitive()
         ..move(-200.0 + i * 20, 0.0)
         ..radius = 9.0
-        ..mass= 500.0
+        ..mass = 500.0
         ..isFixing = true);
     }
     for (int i = 0; i < 20; i++) {
@@ -82,9 +73,7 @@ class PlanetWorld extends TinyDisplayObject {
     stage.markNeedsPaint();
   }
 
- int i=0;
   void onPaint(TinyStage stage, TinyCanvas canvas) {
-    i++;
     TinyPaint pa = f.createPaint();
     pa.color = f.createColor(0xaa, 0xff, 0xff, 0xaa);
     for (Primitive p in w.primitives) {
@@ -103,9 +92,8 @@ class PlanetWorld extends TinyDisplayObject {
         {
           TinyPoint p1 = f.createPoint(c.xy.x, c.xy.y);
           TinyPoint p2 = f.createPoint(
-            c.xy.x+c.radius*math.cos(math.PI*c.angle),
-            c.xy.y+c.radius*math.sin(math.PI*c.angle)
-           );
+              c.xy.x + c.radius * math.cos(math.PI * c.angle),
+              c.xy.y + c.radius * math.sin(math.PI * c.angle));
           canvas.drawLine(stage, p1, p2, pa);
         }
       }

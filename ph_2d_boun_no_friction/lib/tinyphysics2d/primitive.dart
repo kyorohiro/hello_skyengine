@@ -91,8 +91,8 @@ class CirclePrimitive extends Primitive {
       Vector3 t_dv = (collisionDirection * -1.0 * j) / this.mass;
 
       // calc angle speed
-      Vector3 p_da = (distanceDirection*-1.0*this.radius).cross(collisionDirection* 1.0*j)/0.0000001;
-      Vector3 t_da = (distanceDirection* 1.0*this.radius).cross(collisionDirection*-1.0*j)/0.0000001;
+      Vector3 p_da = (distanceDirection*-1.0*this.radius).cross(collisionDirection* 1.0*j)/0.00000005;
+      Vector3 t_da = (distanceDirection* 1.0*this.radius).cross(collisionDirection*-1.0*j)/0.00000005;
 
       if (this.isFixing == false) {
         this.dxy += t_dv;
@@ -100,6 +100,7 @@ class CirclePrimitive extends Primitive {
       }
       if (p.isFixing == false) {
         p.xy += distanceDirection * (boundary - distance) / 1.0;
+        p.dxy += (distanceDirection * (boundary - distance) / 1.0)/1000.0;
         p.dxy += p_dv;
         p.dangle += p_da.z*1000.0;
       }
