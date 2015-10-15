@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'tinyphysics2d.dart';
 import 'tinygame.dart';
 import 'dart:math' as math;
+import 'dart:async';
 //
 import 'package:flutter/services.dart';
 import 'package:mojo_services/sensors/sensors.mojom.dart';
