@@ -18,6 +18,6 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * sudo apt-get install curl
 * sudo apt-get install emacs
 
-## [2] install gclient
+## [2] install depot_tools
 ### [1] install gclint 
 http://www.chromium.org/developers/how-tos/install-depot-tools
