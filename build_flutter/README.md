@@ -70,7 +70,7 @@ target_os = ["android"]
 * ./build/install-build-deps.sh
 * ./sky/tools/gn
 * ninja -C out/Debug
-*  ./out/Debug/sky_shell --package-root=./examples/hello_world/packages ./examples/hello_world/lib/main.dart 
+*  ./out/Debug/sky_shell --package-root=./examples/hello_world/packages  ./examples/hello_world/lib/main.dart 
 
 
 
