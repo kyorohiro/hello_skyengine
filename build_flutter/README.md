@@ -48,7 +48,7 @@ solutions = [
   {
     "managed": False,
     "name": "src",
-    "url": "git@github.com:<your_name_here>/engine.git",
+    "url": "https://github.com/flutter/engine.git",
     "custom_deps": {},
     "deps_file": "DEPS",
     "safesync_url": "",
