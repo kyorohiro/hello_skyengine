@@ -14,7 +14,9 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 
 ## [1] install Curl and git
 #### [1-1]
-* sudo apt-get install 
+* sudo apt-get install git
+* sudo apt-get install curl
+* sudo apt-get install emacs
 ## install 
 ### [1] install gclint 
 http://www.chromium.org/developers/how-tos/install-depot-tools
