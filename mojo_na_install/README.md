@@ -70,6 +70,7 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * sudo netstat -lpn |grep :80
 * sudo kill xxxx
 
+
 ### kill adb server
 * adb kill-server
 
