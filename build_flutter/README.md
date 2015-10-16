@@ -54,7 +54,9 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
 ### [2-2] set path
-* export PATH=`pwd`/depot_tools:"$PATH"
+```
+export PATH=`pwd`/depot_tools:"$PATH"
+```
 
 ## [3] Checkout code
 ####[3-1]
