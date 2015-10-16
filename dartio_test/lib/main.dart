@@ -7,6 +7,16 @@ main() async {
   Text t = new Text("${await getTest('http://example.com')}");
   Center c = new Center(child: t);
   runApp(c);
+
+  try {
+    //
+    // 2015/10/16
+    //
+    // ANDROID: I/sky     : Invalid argument(s): Secure Sockets unsupported on this platform
+    print("${await getTest('https://raw.githubusercontent.com/kyorohiro/hello_skyengine/master/SUMMARY.md')}");
+  } catch(e) {
+    print("${e}");
+  }
 }
 
 Future<String> getTest(String uri) async {
