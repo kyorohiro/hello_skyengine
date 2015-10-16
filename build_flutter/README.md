@@ -20,7 +20,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 
 ## Result 
 * ok
- can make shell for android
+ can make flutter shell for android
 * error
 execute Linux hello world sample ,but not display
 * comment out deps to faild build.
