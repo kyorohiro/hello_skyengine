@@ -34,6 +34,8 @@ Flutter is dartlang framework for mobile platform.
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
+* [dart:io]
+  * [HttpClient]
 * [mojo for flutter](doc/mojo/README.md)
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor test](mojo_sensor/doc/README.md)
