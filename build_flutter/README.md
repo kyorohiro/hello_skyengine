@@ -18,6 +18,9 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * maybe, need storage 30GB
   * assign 2core and 4GB MEMORY
 
+## Result 
+* execute Linux hello world sample the throw error;
+
 ## [1] Install Curl and git and JDK
 #### [1-1]
 * sudo apt-get install git
