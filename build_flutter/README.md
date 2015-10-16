@@ -20,6 +20,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 
 ## Result 
 execute Linux hello world sample ,but not display
+
 ## [1] Install Curl and git and JDK
 #### [1-1]
 * sudo apt-get install git
