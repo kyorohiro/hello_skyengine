@@ -58,10 +58,11 @@ target_os = ["android"]
 ```
 * gclient sync
 * cd src
-* ./sky/tools/gn
+* 
 
 ## [4] Build and Run mojo on Linux
 ![](mono_na_sample.png)
+* ./sky/tools/gn
 * ninja -C out/Debug -j 10
 * out/Debug/mojo_shell mojo:spinning_cube
 
