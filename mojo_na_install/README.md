@@ -56,5 +56,10 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * mojo/tools/mojob.py build --android
 
 ### [5-3] run sample app
-* 
+
+![](screen.png)
+
+* source build/android/envsetup.sh
+* export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
+* mojo/devtools/common/mojo_run https://core.mojoapps.io/spinning_cube.mojo
 
