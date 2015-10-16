@@ -58,7 +58,7 @@ target_os = ["android"]
 ```
 * gclient sync
 * cd src
-* 
+* ./sky/tools/gn
 
 ## [4] Build and Run mojo on Linux
 ![](mono_na_sample.png)
