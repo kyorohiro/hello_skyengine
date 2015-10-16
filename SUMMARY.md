@@ -19,7 +19,7 @@
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
-* [mojo](doc/mojo/README.md)
+* [mojo for flutter](doc/mojo/README.md)
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor test](mojo_sensor/doc/README.md)
   * [**[@]demo:gravity sensor**](mojo_sensor_demo/doc/README.md)
