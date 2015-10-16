@@ -37,13 +37,14 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * ./build/install-build-deps.sh
 * mojo/tools/mojob.py gn
 
-### [4] Build and Run mojo on Linux
+## [4] Build and Run mojo on Linux
 ![](mono_na_sample.png)
 * ninja -C out/Debug -j 10
 * out/Debug/mojo_shell mojo:spinning_cube
 
 
-### [5] Build and Run mojo on Android
+## [5] Build and Run mojo on Android
+### [5-1] install jdk
 http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 
 * sudo add-apt-repository ppa:webupd8team/java
