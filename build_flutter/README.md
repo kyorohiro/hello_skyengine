@@ -2,7 +2,6 @@
 
 now writing
 
-Flutter is exeutable multiplatform Linux and android ..etc by build it  yourself now.
 
 * https://github.com/flutter/engine/
 * https://github.com/flutter/engine/blob/master/CONTRIBUTING.md
