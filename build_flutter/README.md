@@ -64,7 +64,7 @@ target_os = ["android"]
 ![](mono_na_sample.png)
 * ./build/install-build-deps.sh
 * ./sky/tools/gn
-* ninja -C out/Debug -j 10
+* ninja -C out/Debug
 * out/Debug/mojo_shell mojo:spinning_cube
 
 
