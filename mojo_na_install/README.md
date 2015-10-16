@@ -35,7 +35,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * mojo/tools/mojob.py gn
 
 ### [4] Build and Run mojo on Linux
-
+![](mono_na_sample.png)
 * ninja -C out/Debug -j 10
 * out/Debug/mojo_shell mojo:spinning_cube
 
