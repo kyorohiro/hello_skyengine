@@ -67,7 +67,8 @@ target_os = ["android"]
 * ./build/install-build-deps.sh
 * ./sky/tools/gn
 * ninja -C out/Debug
-* out/Debug/mojo_shell mojo:spinning_cube
+*  ./out/Debug/sky_shell --package-root=./examples/hello_world/ ./examples/hello_world/lib/main.dart 
+
 
 
 ## [5] Build and Run mojo on Android
