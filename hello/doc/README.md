@@ -78,7 +78,7 @@ void main() {
 "./" で、以下のコマンドを入力する。
 
 ```
-./packages/sky/sky_tool start --checked && ./packages/sky/sky_tool logs
+./packages/flutter/sky_tool start --checked && ./packages/sky/sky_tool logs
 ```
 
 これで完了です。
