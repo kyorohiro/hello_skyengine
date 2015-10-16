@@ -28,7 +28,7 @@
   * [collision without friction](ph_2d_boun_no_friction/doc/README.md)
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
-* [mojo native]
+* [mojo for native]
   * [install mojo](mojo_na_install/README.md)
 
 
