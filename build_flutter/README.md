@@ -19,7 +19,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * assign 2core and 4GB MEMORY
 
 ## Result 
-* execute Linux hello world sample the throw error;
+* execute Linux hello world sample the throw error;CopyFromFileHandler::OpenFile
 
 ## [1] Install Curl and git and JDK
 #### [1-1]
