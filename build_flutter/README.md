@@ -13,7 +13,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * date
   * 2015/10/16
 * vmware setting 
-  * maybe, need storage 40GB
+  * maybe, need storage 30GB
   * assign 2core and 4GB MEMORY
 
 ## [1] Install Curl and git and JDK
