@@ -63,3 +63,12 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
 * mojo/devtools/common/mojo_run https://core.mojoapps.io/spinning_cube.mojo --android
 
+
+
+## [Memo]
+### kill a process that use a particula port
+** sudo netstat -lpn |grep :80
+```
+tcp6       0      0 :::8080                 :::*                    LISTEN      6782/java
+```
+** sudo kill 6782
