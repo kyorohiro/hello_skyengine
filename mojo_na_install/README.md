@@ -27,5 +27,12 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ### [2-2] set path
 * export PATH=`pwd`/depot_tools:"$PATH"
 
-### [2-3] checkout code
-* fetch mojo
+## [3] checkout code
+### [3-1]
+* fetch mojo --target_os=android
+* cd src
+* ./build/install-build-deps.sh
+* mojo/tools/mojob.py gn
+
+### [3-2]
+
