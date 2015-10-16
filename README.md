@@ -43,4 +43,4 @@ Flutter is dartlang framework for mobile platform.
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo native]
-  * 
+  * [install mojo]
