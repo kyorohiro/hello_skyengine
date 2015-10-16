@@ -37,3 +37,4 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ### [4] Build and Run mojo on Linux
 * ninja -C out/Debug -j 10
 * out/Debug/mojo_shell mojo:spinning_cube
+
