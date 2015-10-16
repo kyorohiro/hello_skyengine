@@ -78,13 +78,6 @@ target_os = ["android"]
 * ninja -C out/android_Debug
 * ./sky/tools/shelldb start out/android_Debug/ examples/hello_world/lib/main.dart
 
-### [5-3] run sample app
-
-![](screen.png)
-
-* source build/android/envsetup.sh
-* export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
-
 
 
 ## [Memo]
