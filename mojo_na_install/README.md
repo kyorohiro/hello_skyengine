@@ -19,5 +19,8 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * sudo apt-get install emacs
 
 ## [2] install depot_tools
-### [1] install gclint 
+### [2-1] clone depot_tools form git repository
+* git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+* 
 http://www.chromium.org/developers/how-tos/install-depot-tools
