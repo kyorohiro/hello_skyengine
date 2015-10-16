@@ -1,4 +1,4 @@
-# Install native mojo
+# Build native mojo
 
 Mojo application is exeutable multiplatform Linux and android ..etc.
 
