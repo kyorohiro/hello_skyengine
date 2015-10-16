@@ -19,7 +19,8 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * assign 2core and 4GB MEMORY
 
 ## Result 
-
+* ok
+ can make shell for android
 * error
 execute Linux hello world sample ,but not display
 * comment out deps to faild build.
