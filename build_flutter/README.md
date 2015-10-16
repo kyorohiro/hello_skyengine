@@ -19,7 +19,19 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * assign 2core and 4GB MEMORY
 
 ## Result 
+
+* error
 execute Linux hello world sample ,but not display
+* comment out deps 
+emacs ./examples/BUILD.gn 
+```
+  deps = [
+ #   "//examples/fitness",
+ #   "//examples/game",
+ #   "//examples/mine_digger",
+ #   "//examples/stocks",
+  ]
+```
 
 ## [1] Install Curl and git and JDK
 #### [1-1]
