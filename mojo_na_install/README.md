@@ -11,6 +11,9 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * https://www.ubuntulinux.jp/download/ja-remix
 * date
   * 2015/10/16
+* vmware setting 
+  * maybe, need storage 40GB
+  * assign 2core 4GB MEMORY
 
 ## [1] install Curl and git
 #### [1-1]
