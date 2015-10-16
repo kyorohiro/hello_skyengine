@@ -72,6 +72,10 @@ target_os = ["android"]
 
 ## [5] Build and Run mojo on Android
 #### [5-1]
+* source build/android/envsetup.sh
+* export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
+* 
+#### [5-2]
 * ./tools/android/download_android_tools.py
 * sudo ./build/install-build-deps-android.sh
 * ./sky/tools/gn --android
