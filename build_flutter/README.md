@@ -84,7 +84,6 @@ target_os = ["android"]
 
 * source build/android/envsetup.sh
 * export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
-* mojo/devtools/common/mojo_run https://core.mojoapps.io/spinning_cube.mojo --android
 
 
 
