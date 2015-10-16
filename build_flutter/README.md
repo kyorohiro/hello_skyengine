@@ -40,11 +40,8 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * export PATH=`pwd`/depot_tools:"$PATH"
 
 ## [3] Checkout code
-### [3-1]
-* fetch mojo --target_os=android
-* cd src
-* ./build/install-build-deps.sh
-* mojo/tools/mojob.py gn
+####[3-1]
+
 
 ## [4] Build and Run mojo on Linux
 ![](mono_na_sample.png)
