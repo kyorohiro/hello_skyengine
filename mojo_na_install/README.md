@@ -34,5 +34,6 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * ./build/install-build-deps.sh
 * mojo/tools/mojob.py gn
 
-### [3-2]
+### [4] Build mojo
+* ninja -C out/Debug -j 10
 
