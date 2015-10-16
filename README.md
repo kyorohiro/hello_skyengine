@@ -43,5 +43,7 @@ Flutter is dartlang framework for mobile platform.
   * [collision without friction](ph_2d_boun_no_friction/doc/README.md)
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
-* [mojo native]
-  * [install mojo](mojo_na_install/README.md)
+* [mojo for native](doc/mojo_native/README.md)
+  * [build mojo](mojo_na_install/README.md)
+
+
