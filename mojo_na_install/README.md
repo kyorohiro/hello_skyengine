@@ -13,4 +13,5 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * 2015/10/16
 
 ## install 
+### [1] install gclint 
 http://www.chromium.org/developers/how-tos/install-depot-tools
