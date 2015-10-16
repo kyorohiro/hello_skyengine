@@ -22,7 +22,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 
 * error
 execute Linux hello world sample ,but not display
-* comment out deps by failding build.
+* comment out deps to faild build.
 emacs ./examples/BUILD.gn 
 ```
   deps = [
