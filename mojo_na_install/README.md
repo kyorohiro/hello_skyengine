@@ -1,3 +1,5 @@
 # use native mojo
 
-mojo application is exeutable multiplatform Linux and android ..etc.
+Mojo application is exeutable multiplatform Linux and android ..etc.
+
+https://github.com/domokit/mojo
