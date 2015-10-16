@@ -23,7 +23,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
  can make flutter shell for android
 * error:
 execute Linux hello world sample ,but not display
-* comment out deps to faild build.
+* mod:comment out deps to faild build.
 emacs ./examples/BUILD.gn 
 ```
   deps = [
