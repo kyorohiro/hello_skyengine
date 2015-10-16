@@ -56,7 +56,7 @@ solutions = [
 ]
 target_os = ["android"]
 ```
-* "gclient sync" on ./
+* gclient sync
 * cd src
 * 
 
