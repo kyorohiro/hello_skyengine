@@ -39,3 +39,6 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * ninja -C out/Debug -j 10
 * out/Debug/mojo_shell mojo:spinning_cube
 
+
+
+
