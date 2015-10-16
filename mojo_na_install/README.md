@@ -27,3 +27,5 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ### [2-2] set path
 * export PATH=`pwd`/depot_tools:"$PATH"
 
+### [2-3] checkout code
+* fetch mojo
