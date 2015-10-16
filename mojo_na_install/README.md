@@ -51,7 +51,10 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 * sudo apt-get update
 * sudo apt-get install oracle-java8-installer
 
-### [5-2] 
+### [5-2] build android env
 * mojo/tools/mojob.py gn --android
 * mojo/tools/mojob.py build --android
+
+### [5-3] run sample app
+* 
 
