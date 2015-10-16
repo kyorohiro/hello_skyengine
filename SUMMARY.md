@@ -29,6 +29,6 @@
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo native]
-  * [install mojo]
+  * [install mojo](mojo_na_install/README.md)
 
 
