@@ -15,6 +15,7 @@ Flutter is dartlang framework for mobile platform.
 
 * [hello](doc/hello/README.md)
   * [helloworld](hello/doc/README.md)
+  * [build flutter]
 * [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
