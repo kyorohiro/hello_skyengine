@@ -15,13 +15,13 @@ This is memo when I tried to install into ubuntu on vmware fusion.
   * maybe, need storage 40GB
   * assign 2core and 4GB MEMORY
 
-## [1] install Curl and git
+## [1] Install Curl and git
 #### [1-1]
 * sudo apt-get install git
 * sudo apt-get install curl
 * sudo apt-get install emacs
 
-## [2] install depot_tools
+## [2] Install depot_tools
 * http://www.chromium.org/developers/how-tos/install-depot-tools
 
 ### [2-1] clone depot_tools form git repository
@@ -30,7 +30,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ### [2-2] set path
 * export PATH=`pwd`/depot_tools:"$PATH"
 
-## [3] checkout code
+## [3] Checkout code
 ### [3-1]
 * fetch mojo --target_os=android
 * cd src
