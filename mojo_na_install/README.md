@@ -68,7 +68,4 @@ http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 ## [Memo]
 ### kill a process that use a particula port
 ** sudo netstat -lpn |grep :80
-```
-tcp6       0      0 :::8080                 :::*                    LISTEN      6782/java
-```
 ** sudo kill 6782
