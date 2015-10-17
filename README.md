@@ -22,7 +22,7 @@ Flutter is dartlang framework for mobile platform.
   * [anime_rect(use animation.dart)](anime_rect_1/doc/README.md)
   * [draw_image](draw_image/doc/README.md)
   * [rotate_image](rotate_image/doc/README.md)
-  * [sound_test](sound_test/doc/README.md)
+  * [sound_test(rendering & service)](sound_test/doc/README.md)
   * [touch_test](touch_event/doc/README.md)
   * [multitouch_test](multitouch_event/doc/README.md)
   * [**[@]demo::mini game(spacewar!)**](spacewar/doc/README.md)
@@ -40,6 +40,7 @@ Flutter is dartlang framework for mobile platform.
   * [TCP Socket](dartio_tcp/doc/README.md)
   * [UDP Socket](dartio_udp/doc/README.md)
   * [File Path(dart:io & service)](dartio_service_path/doc/README.md)
+  * [File Create & Permission](dartio_file/doc/README.md)
 * [mojo for flutter](doc/mojo/README.md)
   * [get and post request](mojo_urlRequest/doc/README.md)
   * [sensor test](mojo_sensor/doc/README.md)
@@ -51,3 +52,4 @@ Flutter is dartlang framework for mobile platform.
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo for native](doc/mojo_native/README.md)
   * [build mojo](mojo_na_install/README.md)
+
