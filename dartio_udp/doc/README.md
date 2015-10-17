@@ -3,46 +3,68 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/hello
 
 
 ```
-import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
 main() async {
-  Text t = new Text("${await getTest('http://example.com')}");
-  Center c = new Center(child: t);
-  runApp(c);
+  //
+  // 2015/10/16
+  //  ANDROID: E/chromium: [ERROR:dart_error.cc(16)] Unhandled exception:ANDROID:
+  //  E/chromium: SocketException: Receive failed (OS Error: Bad address, errno = 14),
+  //  address = 0.0.0.0, port = 38081ANDROID: E/chromium: #0
+  //  EchoServer.startServer.<startServer_async_body> (http://localhost:9888/lib/main.dart)
+  EchoServer echo = new EchoServer();
+  echo.startServer("0.0.0.0", 28081);
+  HelloClient hello = new HelloClient();
+  String te = await hello.sendHello("0.0.0.0", 28081);
+  print("### ${te}");
+}
 
-  try {
-    //
-    // 2015/10/16
-    //
-    // ANDROID: I/sky     : Invalid argument(s): Secure Sockets unsupported on this platform
-    print("${await getTest('https://raw.githubusercontent.com/kyorohiro/hello_skyengine/master/SUMMARY.md')}");
-  } catch(e) {
-    print("${e}");
+class HelloClient {
+  Future<String> sendHello(String address, int port) async {
+    List<int> buffer = [];
+    RawDatagramSocket socket = await RawDatagramSocket.bind("0.0.0.0", 0);
+    InternetAddress ad = new InternetAddress(address);
+    socket.send(UTF8.encode("hello!!"), ad, port);
+    await for (RawSocketEvent ev in socket.asBroadcastStream()) {
+      if (ev == RawSocketEvent.READ) {
+        Datagram dg = socket.receive();
+        if (dg != null) {
+          buffer.addAll(dg.data);
+          if (buffer.length >= 7) {
+            break;
+          }
+        }
+      }
+    }
+    socket.close();
+    return UTF8.decode(buffer);
   }
 }
 
-Future<String> getTest(String uri) async {
-  HttpClient client = new HttpClient();
-  HttpClientRequest request = await client.getUrl(Uri.parse(uri));
-  HttpClientResponse response = await request.close();
-  StringBuffer builder = new StringBuffer();
-  await for (String a in await response.transform(UTF8.decoder)) {
-    builder.write(a);
+class EchoServer {
+  RawDatagramSocket socket;
+  startServer(String host, int port) async {
+    socket = await RawDatagramSocket.bind(host, port);
+    await for (RawSocketEvent ev in socket.asBroadcastStream()) {
+      if (ev == RawSocketEvent.READ) {
+        try {
+          Datagram dg = socket.receive();
+          if (dg != null) {
+            print("${dg.address} ${dg.port} ${dg.data}");
+            socket.send(dg.data, dg.address, dg.port);
+          }
+        } catch (e) {
+          print("#########${e}");
+        }
+      }
+    }
   }
-  return builder.toString();
+
+  bye() async {
+    socket.close();
+  }
 }
 
-Future<String> postTest(String uri, String message) async {
-  HttpClient client = new HttpClient();
-  HttpClientRequest request = await client.postUrl(Uri.parse(uri));
-  request.write(message);
-  HttpClientResponse response = await request.close();
-  StringBuffer builder = new StringBuffer();
-  await for (String a in await response.transform(UTF8.decoder)) {
-    builder.write(a);
-  }
-  return builder.toString();
-}```
+```
