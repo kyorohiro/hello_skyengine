@@ -6,52 +6,24 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_service_path
 
 ```
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
 main() async {
-  EchoServer echo = new EchoServer();
-  echo.startServer("0.0.0.0", 28080);
-
-  HelloClient hello = new HelloClient();
-  String te = await hello.sendHello("0.0.0.0", 28080);
-
-  Text t = new Text("#${te}#");
+  PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
+  shell.requestService("dummy", pathServiceProxy);
+  StringBuffer buffer = new StringBuffer();
+  buffer.write("Directory.current = ${Directory.current} \n");
+  buffer.write("Directory.systemTemp = ${Directory.systemTemp} \n");
+  buffer.write("Directory.systemTemp = ${new Directory("./").absolute} \n");
+  buffer.write("PathService.getAppDataDir = ${await pathServiceProxy.ptr.getAppDataDir()} \n");
+  buffer.write("PathService.getCacheDir = ${await pathServiceProxy.ptr.getCacheDir()} \n");
+  buffer.write("PathService.getFileDir = ${await pathServiceProxy.ptr.getFilesDir()} \n");
+  pathServiceProxy.close();
+  Text t = new Text("${buffer.toString()}");
   Center c = new Center(child: t);
   runApp(c);
-}
-
-class HelloClient {
-  Future<String> sendHello(String address, int port) async {
-    Socket socket = await Socket.connect(address, port);
-    socket.add(UTF8.encode("hello!!"));
-    List<int> buffer = [];
-    await for (List<int> v in socket.asBroadcastStream()) {
-      buffer.addAll(v);
-      if (buffer.length >= 7) {
-        break;
-      }
-    }
-
-    return UTF8.decode(buffer);
-  }
-}
-
-class EchoServer {
-  ServerSocket server = null;
-  startServer(String address, int port) async {
-    server = await ServerSocket.bind(address, port);
-    server.listen((Socket socket) async {
-      await for (List<int> d in socket.asBroadcastStream()) {
-        socket.add(d);
-      }
-      socket.close();
-    });
-  }
-
-  bye() async {
-    server.close();
-  }
 }
 ```
