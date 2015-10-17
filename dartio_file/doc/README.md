@@ -1,57 +1,63 @@
-# Dart:io TCP Socket
+# Dart:io File
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_tcp
+https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_file
 
 ![](screen.png)
 
 ```
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
 main() async {
-  EchoServer echo = new EchoServer();
-  echo.startServer("0.0.0.0", 28080);
+  StringBuffer buffer = new StringBuffer();
 
-  HelloClient hello = new HelloClient();
-  String te = await hello.sendHello("0.0.0.0", 28080);
+  PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
+  shell.requestService("dummy", pathServiceProxy);
+  PathServiceGetFilesDirResponseParams dirResponse = await pathServiceProxy.ptr.getFilesDir();
+  Directory dir = new Directory(dirResponse.path);
 
-  Text t = new Text("#${te}#");
+
+  //
+  // create File
+  print("###${dir.path}/dummy.txt");
+  File f = new File("${dir.path}/dummy.txt");
+  try {
+    await f.create(recursive: true);
+    RandomAccessFile rfile = await f.open();
+    await rfile.writeString("hello!!");
+    rfile.close();
+  } catch(e) {
+    print("${e}");
+  }
+
+  // permission
+  // https://github.com/dart-lang/sdk/issues/15078
+  // https://github.com/dart-lang/sdk/issues/22036
+  // (await f.stat()).mode = 777;
+  Permission.chmod(777, f);
+
+  // list
+  await for(FileSystemEntity fse in dir.list()) {
+    print("${fse} ${(await fse.stat()).modeString()} ${(await fse.stat()).modified}");
+    buffer.write("${fse} ${(await fse.stat()).modeString()} ${(await fse.stat()).modified}\n");
+  }
+
+  Text t = new Text("${buffer.toString()}");
   Center c = new Center(child: t);
   runApp(c);
+  pathServiceProxy.close();
 }
 
-class HelloClient {
-  Future<String> sendHello(String address, int port) async {
-    Socket socket = await Socket.connect(address, port);
-    socket.add(UTF8.encode("hello!!"));
-    List<int> buffer = [];
-    await for (List<int> v in socket.asBroadcastStream()) {
-      buffer.addAll(v);
-      if (buffer.length >= 7) {
-        break;
-      }
-    }
-
-    return UTF8.decode(buffer);
-  }
-}
-
-class EchoServer {
-  ServerSocket server = null;
-  startServer(String address, int port) async {
-    server = await ServerSocket.bind(address, port);
-    server.listen((Socket socket) async {
-      await for (List<int> d in socket.asBroadcastStream()) {
-        socket.add(d);
-      }
-      socket.close();
-    });
-  }
-
-  bye() async {
-    server.close();
+class Permission {
+  // http://stackoverflow.com/questions/27494933/create-write-a-file-which-is-having-execute-permission
+  static chmod(int mode, File f) {
+    ProcessResult result =
+    Process.runSync(
+      "chmod",["${mode}", "${f.absolute.path}"]);
+    return result.exitCode;
   }
 }
 ```

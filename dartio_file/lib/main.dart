@@ -5,18 +5,23 @@ import 'dart:convert';
 import 'dart:async';
 
 main() async {
+  StringBuffer buffer = new StringBuffer();
+
   PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
   shell.requestService("dummy", pathServiceProxy);
-  StringBuffer buffer = new StringBuffer();
   PathServiceGetFilesDirResponseParams dirResponse = await pathServiceProxy.ptr.getFilesDir();
   Directory dir = new Directory(dirResponse.path);
 
 
+  //
   // create File
   print("###${dir.path}/dummy.txt");
   File f = new File("${dir.path}/dummy.txt");
   try {
     await f.create(recursive: true);
+    RandomAccessFile rfile = await f.open();
+    await rfile.writeString("hello!!");
+    rfile.close();
   } catch(e) {
     print("${e}");
   }
@@ -29,10 +34,9 @@ main() async {
 
   // list
   await for(FileSystemEntity fse in dir.list()) {
-    print("${fse} ${(await fse.stat()).modeString()}");
+    print("${fse} ${(await fse.stat()).modeString()} ${(await fse.stat()).modified}");
+    buffer.write("${fse} ${(await fse.stat()).modeString()} ${(await fse.stat()).modified}\n");
   }
-
-  //
 
   Text t = new Text("${buffer.toString()}");
   Center c = new Center(child: t);
