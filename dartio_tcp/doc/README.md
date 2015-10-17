@@ -1,6 +1,6 @@
-# Dart:io HttpClient Post & Get
+# Dart:io TCP Socket
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/hello
+https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_tcp
 
 ![](screen.png)
 
@@ -11,40 +11,47 @@ import 'dart:convert';
 import 'dart:async';
 
 main() async {
-  Text t = new Text("${await getTest('http://example.com')}");
+  EchoServer echo = new EchoServer();
+  echo.startServer("0.0.0.0", 28080);
+
+  HelloClient hello = new HelloClient();
+  String te = await hello.sendHello("0.0.0.0", 28080);
+
+  Text t = new Text("#${te}#");
   Center c = new Center(child: t);
   runApp(c);
+}
 
-  try {
-    //
-    // 2015/10/16
-    //
-    // ANDROID: I/sky     : Invalid argument(s): Secure Sockets unsupported on this platform
-    print("${await getTest('https://raw.githubusercontent.com/kyorohiro/hello_skyengine/master/SUMMARY.md')}");
-  } catch(e) {
-    print("${e}");
+class HelloClient {
+  Future<String> sendHello(String address, int port) async {
+    Socket socket = await Socket.connect(address, port);
+    socket.add(UTF8.encode("hello!!"));
+    List<int> buffer = [];
+    await for (List<int> v in socket.asBroadcastStream()) {
+      buffer.addAll(v);
+      if (buffer.length >= 7) {
+        break;
+      }
+    }
+
+    return UTF8.decode(buffer);
   }
 }
 
-Future<String> getTest(String uri) async {
-  HttpClient client = new HttpClient();
-  HttpClientRequest request = await client.getUrl(Uri.parse(uri));
-  HttpClientResponse response = await request.close();
-  StringBuffer builder = new StringBuffer();
-  await for (String a in await response.transform(UTF8.decoder)) {
-    builder.write(a);
+class EchoServer {
+  ServerSocket server = null;
+  startServer(String address, int port) async {
+    server = await ServerSocket.bind(address, port);
+    server.listen((Socket socket) async {
+      await for (List<int> d in socket.asBroadcastStream()) {
+        socket.add(d);
+      }
+      socket.close();
+    });
   }
-  return builder.toString();
-}
 
-Future<String> postTest(String uri, String message) async {
-  HttpClient client = new HttpClient();
-  HttpClientRequest request = await client.postUrl(Uri.parse(uri));
-  request.write(message);
-  HttpClientResponse response = await request.close();
-  StringBuffer builder = new StringBuffer();
-  await for (String a in await response.transform(UTF8.decoder)) {
-    builder.write(a);
+  bye() async {
+    server.close();
   }
-  return builder.toString();
-}```
+}
+```
