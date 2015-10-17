@@ -2,7 +2,6 @@
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/hello
 
-![](screen.png)
 
 ```
 import 'package:flutter/widgets.dart';
