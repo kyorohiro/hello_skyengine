@@ -45,10 +45,9 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
   void performLayout() {
     size = constraints.biggest;
   }
-
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-    if (event is sky.PointerEvent) {
+  void handleEvent(InputEvent event, HitTestEntry entry) {
+    if (event is PointerInputEvent) {
       if (event.type == "pointerdown") {
         keyboard.show(this.stub, KeyboardType.TEXT);
         pService.ptr.showByRequest();
@@ -64,12 +63,18 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
     TextPainter textPainter = new TextPainter(testStyledSpan);
 
-    textPainter.maxWidth = 200; //constraints.maxWidth;
-    textPainter.minWidth = 200; //constraints.minWidth;
+    textPainter.maxWidth = 200.0; //constraints.maxWidth;
+    textPainter.minWidth = 200.0; //constraints.minWidth;
     textPainter.minHeight = constraints.minHeight;
     textPainter.maxHeight = constraints.maxHeight;
     textPainter.layout();
     textPainter.paint(context.canvas, new sky.Offset(100, 100));
+  }
+
+  @override
+  void submit(SubmitAction action) {
+    this.keyboardClientBase.submit(action);
+    this.markNeedsPaint();
   }
 
   void commitCompletion(CompletionData completion) {
@@ -107,5 +112,4 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     this.markNeedsPaint();
   }
 }
-
 ```
