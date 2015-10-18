@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/edit_text
 **[ERROR]**
  * https://github.com/flutter/engine/issues/1662
  * https://github.com/flutter/engine/issues/1663
- * 
+
 ```
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
