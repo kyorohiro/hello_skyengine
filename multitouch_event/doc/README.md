@@ -28,19 +28,16 @@ class TouchInfo {
 }
 
 class DrawRectObject extends RenderBox {
-  List<TouchInfo> touchInfos = [];
+  Map<int, TouchInfo> touchInfos = {};
   @override
   void performLayout() {
     size = constraints.biggest;
-    for (int i = 0; i < 100; i++) {
-      touchInfos.add(new TouchInfo());
-    }
   }
 
   @override
   void paint(PaintingContext context, Offset offset) {
     Paint p = new Paint();
-    for (TouchInfo t in touchInfos) {
+    for (TouchInfo t in touchInfos.values) {
       if (t.isTouch) {
         p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
         double size = 100*t.pressure;
@@ -57,6 +54,7 @@ class DrawRectObject extends RenderBox {
       BoxHitTestEntry boxEntry = entry;
       switch (event.type) {
         case "pointerdown":
+          touchInfos[e.pointer] = new TouchInfo();
           touchInfos[e.pointer].x = entry.localPosition.x;
           touchInfos[e.pointer].y = entry.localPosition.y;
           touchInfos[e.pointer].pressure = e.pressure/e.pressureMax;
