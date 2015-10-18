@@ -13,6 +13,9 @@ Flutter is dartlang framework for mobile platform.
 * http://flutter.io/
 * https://github.com/domokit/mojo
 
+## LICENSES
+http://creativecommons.org/licenses/by/4.0/
+
 ## CONTENT
 
 * [hello](doc/hello/README.md)
