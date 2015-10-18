@@ -18,6 +18,7 @@ main() async {
   double width = 300.0;
   double height = 300.0;
   Container c = new Container(
+    child:new Text("Hello!!"),
     constraints:constraints,
     decoration:decoration,
     //foregroundDecoration:foregroundDecoration,
