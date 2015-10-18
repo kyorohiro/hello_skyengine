@@ -7,7 +7,6 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 ```
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:ui' as sky;
 
 void main() {
   runApp(new DrawRectWidget());
