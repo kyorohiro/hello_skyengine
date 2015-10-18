@@ -11,18 +11,12 @@ class TinyFlutterStage extends RenderBox with TinyStage{
   TinyDisplayObject get root => _root;
   bool startable = false;
   static const int kMaxOfTouch = 5;
-  List<TouchPoint> touchPoints = [];
+  Map<int, TouchPoint> touchPoints = {};
   bool isInit = false;
 
   TinyFlutterStage(this._root) {
-    init();
   }
 
-  void init() {
-    for (int i = 0; i < kMaxOfTouch; i++) {
-      touchPoints.add(new TouchPoint(-1.0, -1.0));
-    }
-  }
 
   void start() {
     if (animeIsStart == true) {
@@ -66,24 +60,34 @@ class TinyFlutterStage extends RenderBox with TinyStage{
   }
 
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-    if (!(event is sky.PointerEvent)) {
+  void handleEvent(InputEvent event, HitTestEntry en) {
+    if (!(event is PointerInputEvent || !(en is BoxHitTestEntry))) {
       return;
     }
-    sky.PointerEvent e = event;
-    if (e.pointer >= kMaxOfTouch) {
-      return;
+
+    BoxHitTestEntry entry = en;
+    PointerInputEvent e = event;
+    if(touchPoints.containsKey(e.pointer)) {
+      touchPoints[e.pointer] = new TouchPoint(-1.0, -1.0);
     }
+
 
     if (event.type == "pointerdown") {
       touchPoints[e.pointer].x = entry.localPosition.x;
       touchPoints[e.pointer].y = entry.localPosition.y;
     } else {
-      touchPoints[e.pointer].x += e.dx;
-      touchPoints[e.pointer].y += e.dy;
+      touchPoints[e.pointer].x += (e.dx == null?0:e.dx);
+      touchPoints[e.pointer].y += (e.dy == null?0:e.dy);
     }
     _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
-        touchPoints[e.pointer].y, e.dx, e.dy);
+        touchPoints[e.pointer].y, (e.dx == null?0:e.dx), (e.dy == null?0:e.dy));
+
+    if (event.type == "pointerup") {
+      touchPoints.remove(e.pointer);
+    }
+    if(event.type == "pointercancel") {
+      touchPoints.clear();
+    }
   }
 
 
