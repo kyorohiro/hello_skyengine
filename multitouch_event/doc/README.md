@@ -9,7 +9,6 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/multitouch_event
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/gestures.dart';
-import 'dart:ui' as sky;
 
 void main() {
   runApp(new DrawRectWidget());
