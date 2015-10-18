@@ -67,6 +67,7 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
 
   @override
   void submit(SubmitAction action) {
+    print("submit ${action}");
     this.keyboardClientBase.submit(action);
     this.markNeedsPaint();
   }
