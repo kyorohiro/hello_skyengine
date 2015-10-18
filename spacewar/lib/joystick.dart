@@ -43,6 +43,7 @@ class Joystick extends DisplayObject {
   void onTouch(Stage stage, int id, String type, double x, double y, double dx, double dy) {
     if (isTouch == false) {
       if (distance(x, y, this.x, this.y) < minWidth) {
+        touchId = id;
         isTouch = true;
         this.minX = x;
         this.minY = y;

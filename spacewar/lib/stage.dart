@@ -11,18 +11,10 @@ class Stage extends RenderBox {
   DisplayObject get root => _root;
   bool startable = false;
   static const int kMaxOfTouch = 5;
-  List<TouchPoint> touchPoints = [];
+  Map<int, TouchPoint> touchPoints = {};
   bool isInit = false;
 
-  Stage(this._root) {
-    init();
-  }
-
-  void init() {
-    for (int i = 0; i < kMaxOfTouch; i++) {
-      touchPoints.add(new TouchPoint(-1.0, -1.0));
-    }
-  }
+  Stage(this._root) {}
 
   void start() {
     if (animeIsStart == true) {
@@ -66,29 +58,42 @@ class Stage extends RenderBox {
   }
 
   @override
-  void handleEvent(InputEvent event, BoxHitTestEntry entry) {
-    if (!(event is PointerInputEvent)) {
-      return;
-    }
-    PointerInputEvent e = event;
-    if (e.pointer >= kMaxOfTouch) {
+  void handleEvent(InputEvent event, HitTestEntry entry) {
+    if (!(event is PointerInputEvent || !(entry is BoxHitTestEntry))) {
       return;
     }
 
-    if (event.type == "pointerdown") {
-      touchPoints[e.pointer].x = entry.localPosition.x;
-      touchPoints[e.pointer].y = entry.localPosition.y;
-    } else {
-      // 2015/10/18 return null
-      touchPoints[e.pointer].x += (e.dx==null?0.0:e.dx);
-      touchPoints[e.pointer].y += (e.dy==null?0.0:e.dy);
+    PointerInputEvent e = event;
+    if (!touchPoints.containsKey(e.pointer)) {
+      BoxHitTestEntry en = entry;
+      touchPoints[e.pointer] =
+          new TouchPoint(en.localPosition.x, en.localPosition.y);
     }
-    _root.touch(this, e.pointer, event.type,
-      touchPoints[e.pointer].x,
-      touchPoints[e.pointer].y,
-      // 2015/10/18 return null
-      (e.dx==null?0.0:e.dx),
-      (e.dy==null?0.0:e.dy));
+    print("${event.type}");
+    switch (event.type) {
+      case "pointermove":
+        // 2015/10/18 return null
+        touchPoints[e.pointer].x += (e.dx == null ? 0.0 : e.dx);
+        touchPoints[e.pointer].y += (e.dy == null ? 0.0 : e.dy);
+        break;
+    }
+    _root.touch(
+        this,
+        e.pointer,
+        event.type,
+        touchPoints[e.pointer].x,
+        touchPoints[e.pointer].y,
+        // 2015/10/18 return null
+        (e.dx == null ? 0.0 : e.dx),
+        (e.dy == null ? 0.0 : e.dy));
+    switch (event.type) {
+      case "pointerup":
+        touchPoints.remove(e.pointer);
+        break;
+      case 'pointercancel':
+        touchPoints.clear();
+        break;
+    }
   }
 }
 
