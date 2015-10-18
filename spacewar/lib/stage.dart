@@ -66,11 +66,11 @@ class Stage extends RenderBox {
   }
 
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-    if (!(event is sky.PointerEvent)) {
+  void handleEvent(InputEvent event, BoxHitTestEntry entry) {
+    if (!(event is PointerInputEvent)) {
       return;
     }
-    sky.PointerEvent e = event;
+    PointerInputEvent e = event;
     if (e.pointer >= kMaxOfTouch) {
       return;
     }
@@ -79,11 +79,16 @@ class Stage extends RenderBox {
       touchPoints[e.pointer].x = entry.localPosition.x;
       touchPoints[e.pointer].y = entry.localPosition.y;
     } else {
-      touchPoints[e.pointer].x += e.dx;
-      touchPoints[e.pointer].y += e.dy;
+      // 2015/10/18 return null
+      touchPoints[e.pointer].x += (e.dx==null?0.0:e.dx);
+      touchPoints[e.pointer].y += (e.dy==null?0.0:e.dy);
     }
-    _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
-        touchPoints[e.pointer].y, e.dx, e.dy);
+    _root.touch(this, e.pointer, event.type,
+      touchPoints[e.pointer].x,
+      touchPoints[e.pointer].y,
+      // 2015/10/18 return null
+      (e.dx==null?0.0:e.dx),
+      (e.dy==null?0.0:e.dy));
   }
 }
 
