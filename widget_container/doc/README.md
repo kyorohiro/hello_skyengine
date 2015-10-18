@@ -1,6 +1,6 @@
 # Widget Container
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/widget_networkimage
+https://github.com/kyorohiro/hello_skyengine/tree/master/widget_container
 
 ![](screen.png)
 
