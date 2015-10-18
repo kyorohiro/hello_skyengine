@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/gestures.dart';
 import 'dart:ui' as sky;
 
 void main() {
@@ -43,9 +44,10 @@ class DrawRectObject extends RenderBox {
   }
 
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-    if (event is sky.PointerEvent) {
-      sky.PointerEvent e = event;
+  void handleEvent(InputEvent event, HitTestEntry entry) {
+    if (event is PointerInputEvent && entry is BoxHitTestEntry) {
+      PointerInputEvent e = event;
+      BoxHitTestEntry boxEntry = entry;
       switch (event.type) {
         case "pointerdown":
           touchInfos[e.pointer].x = entry.localPosition.x;
@@ -59,8 +61,9 @@ class DrawRectObject extends RenderBox {
           touchInfos[e.pointer].pressure = e.pressure/e.pressureMax;
           break;
         case "pointerup":
-          touchInfos[e.pointer].x += e.dx;
-          touchInfos[e.pointer].y += e.dy;
+          // 2015/10/18 return null
+          //touchInfos[e.pointer].x += e.dx;
+          //touchInfos[e.pointer].y += e.dy;
           touchInfos[e.pointer].isTouch = false;
           break;
         case 'pointercancel':
