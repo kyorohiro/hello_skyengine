@@ -16,13 +16,13 @@ double worldDz = 0.0;
 
 void intiSensor() {
   print("######====================####s##");
-SensorServiceProxy sensor = new SensorServiceProxy.unbound();
-shell.requestService("h", sensor);
+  SensorServiceProxy sensor = new SensorServiceProxy.unbound();
+  shell.requestService("h", sensor);
 
-SensorListenerStub stub = new SensorListenerStub.unbound();
-stub.impl = new MySensorListener();
-sensor.ptr.addListener(SensorType.GRAVITY, stub);
-print("######====================###s###");
+  SensorListenerStub stub = new SensorListenerStub.unbound();
+  stub.impl = new MySensorListener();
+  sensor.ptr.addListener(SensorType.GRAVITY, stub);
+  print("######====================###s###");
 }
 
 class MySensorListener extends SensorListener {
@@ -31,7 +31,7 @@ class MySensorListener extends SensorListener {
   }
 
   void onSensorChanged(SensorData data) {
-  //  print("data: ${data.accuracy} ${data.values}");
+    //  print("data: ${data.accuracy} ${data.values}");
     worldDx = data.values[0];
     worldDy = data.values[1];
     worldDz = data.values[2];
@@ -57,13 +57,13 @@ class PlanetWorld extends TinyDisplayObject {
   PlanetWorld() {
     // ball
     for (int i = 0; i < 40; i++) {
-      double size = rand.nextDouble()*12.0+5.0;
+      double size = rand.nextDouble() * 12.0 + 5.0;
       w.primitives.add(new CirclePrimitive()
         ..move(0.0, 250.0)
-        ..dxy.y = (0.5-rand.nextDouble())*5.0
-        ..dxy.x = (0.5-rand.nextDouble())*5.0
+        ..dxy.y = (0.5 - rand.nextDouble()) * 5.0
+        ..dxy.x = (0.5 - rand.nextDouble()) * 5.0
         ..radius = size
-        ..mass = size/10.0);
+        ..mass = size / 10.0);
     }
     w.primitives.add(new CirclePrimitive()
       ..move(-50.0, 200.0)
@@ -100,8 +100,8 @@ class PlanetWorld extends TinyDisplayObject {
     }
   }
   void onTick(TinyStage stage, int timeStamp) {
-    w.gravity.x = -1.0*worldDx/50.0;
-    w.gravity.y = -1.0*worldDy/50.0;
+    w.gravity.x = -1.0 * worldDx / 50.0;
+    w.gravity.y = -1.0 * worldDy / 50.0;
     for (int i = 0; i < 20; i++) {
       w.next(0.05);
     }

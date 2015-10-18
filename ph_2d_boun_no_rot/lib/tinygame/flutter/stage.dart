@@ -90,7 +90,6 @@ class TinyFlutterStage extends RenderBox with TinyStage{
     }
   }
 
-
 }
 
 class TinyFlutterCanvas extends TinyCanvas {
