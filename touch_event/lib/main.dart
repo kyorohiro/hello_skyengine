@@ -30,15 +30,16 @@ class DrawRectObject extends RenderBox {
   }
 
   @override
-  void handleEvent(sky.Event event, BoxHitTestEntry entry) {
-    if (event is sky.PointerEvent) {
-      sky.PointerEvent e = event;
+  void handleEvent(InputEvent event, HitTestEntry entry) {
+    if (event is PointerInputEvent && entry is BoxHitTestEntry) {
+      PointerInputEvent e = event;
       if (event.type == "pointerdown") {
         x = entry.localPosition.x;
         y = entry.localPosition.y;
       } else {
-        x += e.dx;
-        y += e.dy;
+        // 2015/10/18 return null
+        x += (e.dx==null?0:e.dx);
+        y += (e.dy==null?0:e.dy);
       }
       markNeedsPaint();
     }
