@@ -1,4 +1,4 @@
-# Widget ROW
+# Widget Column
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 
