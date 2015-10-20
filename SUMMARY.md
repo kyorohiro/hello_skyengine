@@ -24,6 +24,7 @@
   * [container](widget_container/doc/README.md)
   * [row](widget_row/doc/README.md)
   * [col](widget_col/doc/README.md)
+  * [flexible](widget_flexible/doc/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
 * [dart:io](doc/dartio/README.md)
   * [HttpClient Post & Get](dartio_test/doc/README.md)
