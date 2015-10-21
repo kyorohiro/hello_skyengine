@@ -13,16 +13,24 @@ class MyStatefulComponent extends StatefulComponent {
 class MyState extends State<MyStatefulComponent> {
   int colorId = 0;
   Color backgroundColor = new Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
+
+  MyState() {
+    print(">>>> new MyState");
+  }
+
   Widget build(BuildContext context) {
+    print(">>>> build");
     BoxDecoration decoration = new BoxDecoration(backgroundColor: backgroundColor);
     Container c = new Container(width: 500.0, height: 500.0, decoration: decoration);
     GestureDetector d = new GestureDetector(onTap: () {
+      print(">>>> onTap");
       setState(updateColor);
     }, child: c);
     return new Center(child: d);
   }
 
   updateColor() {
+    print(">>>> updateColor");
     colorId++;
     switch (colorId % 3) {
       case 0:
@@ -35,5 +43,17 @@ class MyState extends State<MyStatefulComponent> {
         backgroundColor = new Color.fromARGB(0xaa, 0xaa, 0xaa, 0xff);
         break;
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print(">>>> initState");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print(">>>> dispose");
   }
 }
