@@ -27,6 +27,7 @@
   * [flexible](widget_flexible/doc/README.md)
   * [navigator](widget_navigator/doc/README.md)
   * [stateful component](widget_stateful/doc/README.md)
+  * [scaffold](widget_scaffold/doc/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
 * [dart:io](doc/dartio/README.md)
   * [HttpClient Post & Get](dartio_test/doc/README.md)
