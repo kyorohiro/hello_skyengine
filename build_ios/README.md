@@ -1,1 +1,1 @@
-# Build ios app
+# Build ios as app
