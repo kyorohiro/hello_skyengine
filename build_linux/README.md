@@ -1,1 +1,1 @@
-# build as linux
+# build as linux app
