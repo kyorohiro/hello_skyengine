@@ -6,6 +6,7 @@
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
+  * [build mojo](mojo_na_install/README.md)
 * [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
