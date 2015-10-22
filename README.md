@@ -24,6 +24,7 @@ http://creativecommons.org/licenses/by/4.0/
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
+  * [build mojo](mojo_na_install/README.md)
 * [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
@@ -71,3 +72,5 @@ http://creativecommons.org/licenses/by/4.0/
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo for native](doc/mojo_native/README.md)
   * [build mojo](mojo_na_install/README.md)
+
+
