@@ -2,6 +2,7 @@
 * [hello](doc/hello/README.md)
   * [helloworld](hello/doc/README.md)
   * [build flutter](build_flutter/README.md)
+  * [build as android app](build_android/README.md)
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
 * [rendering](doc/rendering/README.md)
