@@ -28,8 +28,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
 ### [2-2] set path
-* 
-```export PATH=`pwd`/depot_tools:"$PATH"```
+* ```export PATH=`pwd`/depot_tools:"$PATH"```
 
 ## [3] Checkout code
 ### [3-1]
