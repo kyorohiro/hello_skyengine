@@ -50,7 +50,7 @@ class DrawVertexsObject extends RenderBox {
     sky.TileMode tmy = sky.TileMode.clamp;
     Float64List matrix4 = new Matrix4.identity().storage;
     sky.ImageShader imgShader = new sky.ImageShader(img, tmx, tmy, matrix4);
-    paint.setShader(imgShader);
+    paint.shader = imgShader;
     List<int> indicies = [0, 1, 2, 3];
     context.canvas.drawVertices(vertexMode, vertices, textureCoordinates,
         colors, transferMode, indicies, paint);
