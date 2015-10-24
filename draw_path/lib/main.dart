@@ -25,7 +25,7 @@ class DrawPathObject extends RenderBox {
   void paintWithStroke(PaintingContext context, Offset offset) {
     Paint p = new Paint();
     p.strokeWidth = 2.0;
-    p.setStyle(sky.PaintingStyle.stroke);
+    p.style = sky.PaintingStyle.stroke;
     Path path = new Path();
     path.moveTo(0.0, 0.0);
     path.lineTo(10.0, 50.0);
@@ -38,7 +38,7 @@ class DrawPathObject extends RenderBox {
 
   void paintWithLinearGradient(PaintingContext context, Offset offset) {
     Paint p = new Paint();
-    p.setStyle(sky.PaintingStyle.strokeAndFill);
+    p.style = sky.PaintingStyle.strokeAndFill;
 
     List<Color> colors = [
       const Color.fromARGB(0xaa, 0xff, 0x00, 0x00),
@@ -51,7 +51,7 @@ class DrawPathObject extends RenderBox {
         end: new Point(50.0, 60.0),
         colors: colors,
         stops: stops);
-    p.setShader(gg.createShader());
+    p.shader = gg.createShader();
 
     Path path = new Path();
     path.moveTo(0.0, 0.0);

@@ -21,11 +21,11 @@ class DrawTextObject extends RenderBox {
     StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
     TextPainter textPainter = new TextPainter(testStyledSpan);
 
-    textPainter.maxWidth = 200; //constraints.maxWidth;
-    textPainter.minWidth = 200; //constraints.minWidth;
+    textPainter.maxWidth = 200.0; //constraints.maxWidth;
+    textPainter.minWidth = 200.0; //constraints.minWidth;
     textPainter.minHeight = constraints.minHeight;
     textPainter.maxHeight = constraints.maxHeight;
     textPainter.layout();
-    textPainter.paint(context.canvas, new sky.Offset(100, 100));
+    textPainter.paint(context.canvas, new sky.Offset(100.0, 100.0));
   }
 }
