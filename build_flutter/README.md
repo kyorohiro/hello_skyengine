@@ -68,7 +68,7 @@ target_os = ["android"]
 * 
 
 ## [4] Build and Run mojo on Linux
-![](mono_na_sample.png)
+
 * ./build/install-build-deps.sh
 * ./sky/tools/gn
 * ninja -C out/Debug
