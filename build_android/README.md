@@ -23,4 +23,7 @@ group("examples") {
   ]
 }
 ```
-## (3) 
+## (3) create app project
+https://github.com/kyorohiro/hello_skyengine/blob/master/test_android/BUILD.gn
+
+## (4) 
