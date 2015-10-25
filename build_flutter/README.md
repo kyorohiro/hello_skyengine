@@ -98,7 +98,3 @@ target_os = ["android"]
 ### kill adb server
 * adb kill-server
 
-### dart path
-```
-source build/android/envsetup.sh
-```
