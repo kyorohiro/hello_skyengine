@@ -12,7 +12,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * ubuntu-ja-14.04-desktop-amd64.iso（ISOイメージ） (md5sum: f5edb84f00b9fcd1d059f04901eea7c5)
   * https://www.ubuntulinux.jp/download/ja-remix
 * date
-  * 2015/10/16
+  * 2015/10/25
 * vmware setting 
   * maybe, need storage 30GB
   * assign 2core and 4GB MEMORY
@@ -20,18 +20,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ## Result 
 * ok:
  can make flutter shell for android
-* error:
-execute Linux hello world sample ,but not display
-* mod:comment out deps to faild build.
-emacs ./examples/BUILD.gn 
-```
-  deps = [
- #   "//examples/fitness",
- #   "//examples/game",
- #   "//examples/mine_digger",
- #   "//examples/stocks",
-  ]
-```
+ and make example app apk.
 
 ## [1] Install Curl and git and JDK
 #### [1-1]
@@ -60,7 +49,6 @@ export PATH=`pwd`/depot_tools:"$PATH"
 
 ## [3] Checkout code
 ####[3-1]
-* git clone https://github.com/flutter/engine.git
 * emacs .gclien
 ```
 solutions = [
@@ -79,16 +67,15 @@ target_os = ["android"]
 * cd src
 * 
 
-## [4] Build and Run mojo on Linux
-![](mono_na_sample.png)
-* ./build/install-build-deps.sh
-* ./sky/tools/gn
-* ninja -C out/Debug
-*  ./out/Debug/sky_shell --package-root=./examples/hello_world/packages  ./examples/hello_world/lib/main.dart 
+~~[4] Build and Run mojo on Linux~~
+~~./build/install-build-deps.sh~~
+~~./sky/tools/gn~~
+~~ninja -C out/Debug~~
+~~./out/Debug/sky_shell --package-root=./examples/hello_world/packages  ./examples/hello_world/lib/main.dart~~ 
 
 
 
-## [5] Build and Run mojo on Android
+## [5] Build and Run on Android
 #### [5-1] set android path
 * source build/android/envsetup.sh
 * export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
