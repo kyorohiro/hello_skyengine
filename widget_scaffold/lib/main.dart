@@ -12,6 +12,7 @@ void main() {
       new Text("right3")],
     backgroundColor: new Color.fromARGB(0xff, 0xff, 0xaa, 0xaa)
   );
+  // .package/material_design_icons/lib/icons/content/drawable-hdpi/ic_add_black_24dp.png
   Widget floatingActionButton = new FloatingActionButton(
     child: new Icon(
       type: 'content/add',
