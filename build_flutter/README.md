@@ -75,7 +75,7 @@ target_os = ["android"]
 
 
 
-## [5] Build and Run mojo on Android
+## [5] Build and Run on Android
 #### [5-1] set android path
 * source build/android/envsetup.sh
 * export PATH="$PATH":$MOJO_DIR/src/third_party/android_tools/sdk/platform-tools
