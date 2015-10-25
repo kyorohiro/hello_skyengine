@@ -67,12 +67,11 @@ target_os = ["android"]
 * cd src
 * 
 
-## [4] Build and Run mojo on Linux
-
-* ./build/install-build-deps.sh
-* ./sky/tools/gn
-* ninja -C out/Debug
-*  ./out/Debug/sky_shell --package-root=./examples/hello_world/packages  ./examples/hello_world/lib/main.dart 
+~~[4] Build and Run mojo on Linux~~
+~~./build/install-build-deps.sh~~
+~~./sky/tools/gn~~
+~~ninja -C out/Debug~~
+~~./out/Debug/sky_shell --package-root=./examples/hello_world/packages  ./examples/hello_world/lib/main.dart~~ 
 
 
 
