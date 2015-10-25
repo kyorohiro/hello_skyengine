@@ -49,7 +49,6 @@ export PATH=`pwd`/depot_tools:"$PATH"
 
 ## [3] Checkout code
 ####[3-1]
-* git clone https://github.com/flutter/engine.git
 * emacs .gclien
 ```
 solutions = [
