@@ -100,5 +100,5 @@ target_os = ["android"]
 
 ### dart path
 ```
-export PATH=`pwd`/dart/sdk/bin:"$PATH"
+source build/android/envsetup.sh
 ```
