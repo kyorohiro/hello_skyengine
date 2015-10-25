@@ -3,7 +3,7 @@ Standalone apk create tool is in progress now.
 and, I try to create standalone flutter apk from flutter build envirnment.
 
 
-create "test" app
+ex : create "test" app
 
 ## (1) create flutter build env
   * [build flutter](build_flutter/README.md)
