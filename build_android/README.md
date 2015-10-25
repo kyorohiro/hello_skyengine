@@ -6,4 +6,4 @@ and, I try to create standalone flutter apk from flutter build envirnment.
 ## (1) create flutter build env
   * [build flutter](build_flutter/README.md)
 
-## (2) 
+## (2) modify BUILD.gn
