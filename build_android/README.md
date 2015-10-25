@@ -31,4 +31,8 @@ https://github.com/kyorohiro/hello_skyengine/blob/master/test_android/BUILD.gn
 ninja -C out/android_Debug
 ```
 
+## (5) install apk
+```
+adb install -r ./out/android_Debug/apks/test.apk 
 
+```
