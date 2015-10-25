@@ -98,3 +98,7 @@ target_os = ["android"]
 ### kill adb server
 * adb kill-server
 
+### dart path
+```
+export PATH=`pwd`/dart/sdk/bin:"$PATH"
+```
