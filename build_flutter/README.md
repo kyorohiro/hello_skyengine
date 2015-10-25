@@ -12,7 +12,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * ubuntu-ja-14.04-desktop-amd64.iso（ISOイメージ） (md5sum: f5edb84f00b9fcd1d059f04901eea7c5)
   * https://www.ubuntulinux.jp/download/ja-remix
 * date
-  * 2015/10/16
+  * 2015/10/25
 * vmware setting 
   * maybe, need storage 30GB
   * assign 2core and 4GB MEMORY
@@ -20,18 +20,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 ## Result 
 * ok:
  can make flutter shell for android
-* error:
-execute Linux hello world sample ,but not display
-* mod:comment out deps to faild build.
-emacs ./examples/BUILD.gn 
-```
-  deps = [
- #   "//examples/fitness",
- #   "//examples/game",
- #   "//examples/mine_digger",
- #   "//examples/stocks",
-  ]
-```
+ and make example app apk.
 
 ## [1] Install Curl and git and JDK
 #### [1-1]
