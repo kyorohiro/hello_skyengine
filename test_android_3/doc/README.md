@@ -18,3 +18,17 @@ sky_app("test") {
 
 * set icon resource  "//examples/test/apk:resources"
 
+#### ./example/test/apk/BUILD.gn
+
+```
+assert(is_android)
+
+import("//build/config/android/config.gni")
+import("//build/config/android/rules.gni")
+
+android_resources("resources") {
+  resource_dirs = [ "res" ]
+  android_manifest = "AndroidManifest.xml"
+}
+
+```
