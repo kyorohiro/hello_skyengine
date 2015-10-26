@@ -26,11 +26,13 @@ group("examples") {
 ```
 ## (3) create app project
 https://github.com/kyorohiro/hello_skyengine/blob/master/test_android/BUILD.gn
+
 ```
 ./examples/test/lib
 ./examples/test/apk
 ./examples/test/...
 ```
+
 ## (4) build on flutter/src
 ```
 ninja -C out/android_Debug
