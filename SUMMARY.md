@@ -13,6 +13,7 @@
   * [anime_rect(use animation.dart)](anime_rect_1/doc/README.md)
   * [draw_image](draw_image/doc/README.md)
   * [rotate_image](rotate_image/doc/README.md)
+  * [draw_image_from_assets](draw_image_from_assets/doc/README.md)
   * [sound_test(rendering & service)](sound_test/doc/README.md)
   * [touch_test](touch_event/doc/README.md)
   * [multitouch_test](multitouch_event/doc/README.md)
