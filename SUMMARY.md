@@ -3,7 +3,7 @@
   * [helloworld](hello/doc/README.md)
   * [build flutter](build_flutter/README.md)
   * [build as android app](build_android/README.md)
-    * [draw text]()
+    * [draw text]
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
