@@ -31,7 +31,7 @@ group("examples") {
   https://github.com/kyorohiro/hello_skyengine/tree/master/test_android
 * draw image
   https://github.com/kyorohiro/hello_skyengine/tree/master/test_android_2
-* draw image
+* draw image and icon
   https://github.com/kyorohiro/hello_skyengine/tree/master/test_android_3
 
 
