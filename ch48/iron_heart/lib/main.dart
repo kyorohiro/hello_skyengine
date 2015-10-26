@@ -15,10 +15,19 @@ class GameWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
     TinyStage stage = f.createStage(new TinyGameRoot(800.0, 600.0));
     stage.start();
-    stage.root.child.add(new TinyButton(600.0, 200.0)..mat=new Matrix4.translationValues(100.0,300.0,0.0));
+    stage.root.child.add(new StartScreen());
     return (stage as TinyFlutterStage);
   }
 }
 
+class StartScreen extends TinyDisplayObject {
+  StartScreen() {
+    child.add(new TinyButton(600.0, 200.0)..mat=new Matrix4.translationValues(100.0,300.0,0.0));
+  }
+}
 
-class StartScreen extends TinyDisplayObject {}
+class GameScree extends TinyDisplayObject {
+  GameScree() {
+    
+  }
+}

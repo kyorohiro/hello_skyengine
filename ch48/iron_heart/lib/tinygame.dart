@@ -12,4 +12,4 @@ part 'tinygame/flutter/stage.dart';
 part 'tinygame/displayobject.dart';
 part 'tinygame/env.dart';
 part 'tinygame/gameroot.dart';
-part 'tinygame/util.dart';
+part 'tinygame/button.dart';
