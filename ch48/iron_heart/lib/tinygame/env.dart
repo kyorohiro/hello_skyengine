@@ -2,45 +2,38 @@ part of tinygame;
 
 abstract class TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root);
-  TinyRect createRect(double x, double y, double w, double h);
-  TinyPaint createPaint();
-  TinyColor createColor(int a, int r, int g, int b);
-  TinyPoint createPoint(double x, double y);
+
 }
 
 class TinyGameBuilderForFlutter extends TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyFlutterStage(this, root);
   }
-
-  TinyRect createRect(double x, double y, double w, double h) {
-    return new TinyRectForFlutter(x, y, w, h);
-  }
-
-  TinyPaint createPaint() {
-    return new TinyPaintForFlutter();
-  }
-
-  TinyColor createColor(int a, int r, int g, int b) {
-    return new TinyColorForFlutter(a, r, g, b);
-  }
-  TinyPoint createPoint(double x, double y) {
-    return new TinyPointForFlutter(x, y);
-  }
 }
 
-class TinyRectForFlutter extends TinyRect {
+class TinyRect {
   double x;
   double y;
   double w;
   double h;
-  TinyRectForFlutter(this.x, this.y, this.w, this.h) {}
+  TinyRect(this.x, this.y, this.w, this.h){}
 }
 
-class TinyPaintForFlutter extends TinyPaint {}
+class TinyPoint {
+  double x;
+  double y;
+  TinyPoint(this.x, this.y){}
+}
 
-class TinyColorForFlutter extends TinyColor {
-  TinyColorForFlutter(int a, int r, int g, int b) {
+class TinyPaint {
+  TinyColor color;
+  TinyPaint({this.color}){;}
+}
+
+class TinyColor {
+  int value = 0;
+  TinyColor(this.value){}
+  TinyColor.argb(int a, int r, int g, int b) {
     value |= (a & 0xff) << 24;
     value |= (r & 0xff) << 16;
     value |= (g & 0xff) << 8;
@@ -48,37 +41,12 @@ class TinyColorForFlutter extends TinyColor {
     value &= 0xFFFFFFFF;
   }
 }
-class TinyPointForFlutter extends TinyPoint {
-  TinyPointForFlutter(double x, double y){
-    this.x = x;
-    this.y = y;
-  }
-}
-
-abstract class TinyRect {
-  double x;
-  double y;
-  double w;
-  double h;
-}
-
-abstract class TinyPoint {
-  double x;
-  double y;
-}
-
-abstract class TinyPaint {
-  TinyColor color;
-}
-
-abstract class TinyColor {
-  int value = 0;
-}
 
 abstract class TinyCanvas {
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint);
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint);
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint);
+  void clipRect(TinyStage stage, TinyRect rect);
 }
 
 abstract class TinyStage {

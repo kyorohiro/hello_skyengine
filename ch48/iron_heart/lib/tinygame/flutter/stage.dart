@@ -118,6 +118,10 @@ class TinyFlutterCanvas extends TinyCanvas {
     Paint p = new Paint()..color=new Color(paint.color.value);
     canvas.drawRect(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h), p);
   }
+
+  void clipRect(TinyStage stage, TinyRect rect) {
+    canvas.clipRect(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h));
+  }
 }
 
 class TouchPoint {

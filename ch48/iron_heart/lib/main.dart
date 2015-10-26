@@ -27,6 +27,13 @@ class GameRoot extends TinyDisplayObject {
   double radio = 1.0;
   double l = 0.0;
   double t = 0.0;
+  TinyColor bkcolor;
+  GameRoot({this.bkcolor}) {
+    if(bkcolor == null) {
+      bkcolor = new TinyColor.argb(0xff, 0xee, 0xee, 0xff);
+    }
+  }
+
   void onTick(TinyStage stage, int timeStamp) {
     ratioW = stage.w / w;
     ratioH = stage.h / h;
@@ -37,12 +44,17 @@ class GameRoot extends TinyDisplayObject {
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
-    TinyRect rect = stage.builder.createRect(l, t, w*radio, h*radio);
-    TinyPaint paint = stage.builder.createPaint();
-    paint.color = stage.builder.createColor(0xff, 0xff, 0xaa, 0xaa);
+    TinyRect rect = new TinyRect(l, t, w*radio, h*radio);
+    TinyPaint paint = new TinyPaint();
+    paint.color = bkcolor;
     int tmp = stage.coordinate;
     stage.coordinate = TinyStage.kScreenCoordinates;
+    canvas.clipRect(stage, rect);
     canvas.drawRect(stage, rect, paint);
     stage.coordinate = tmp;
   }
+}
+
+class StartScreen extends TinyDisplayObject {
+  
 }
