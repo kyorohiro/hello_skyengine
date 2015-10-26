@@ -10,8 +10,8 @@ version: 0.0.2
 ```
 
 * ./example/test/BUILD.gn
-`
-``
+
+```
 import("//sky/build/sky_app.gni")
 
 sky_app("test") {
