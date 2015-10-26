@@ -65,3 +65,7 @@ android_resources("resources") {
 ```
 
 * set application icon path "android:icon="@mipmap/ic_launcher"
+
+
+### put icon image
+https://github.com/kyorohiro/hello_skyengine/tree/master/test_android_3/apk/res
