@@ -53,3 +53,4 @@ set apk name
     </application>
  </manifest>
 ```
+set package name
