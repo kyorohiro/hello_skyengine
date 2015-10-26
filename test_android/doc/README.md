@@ -55,4 +55,4 @@ set apk name
 ```
 
 * set package name
- info.kyorohiro.flutter.hello
+ "info.kyorohiro.flutter.hello"
