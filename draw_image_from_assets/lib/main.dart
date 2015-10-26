@@ -4,10 +4,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'dart:ui' as sky;
 
-ImageResource resource = null;
 main() async {
-  AssetBundle bundle = getAssetBundle();
-  resource = bundle.loadImage("assets/icon.jpeg");
   runApp(new DrawImageWidget());
 }
 
@@ -21,6 +18,8 @@ AssetBundle getAssetBundle() {
 
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
+    AssetBundle bundle = getAssetBundle();
+    ImageResource resource = bundle.loadImage(url);
     return resource.first;
   }
 }
@@ -39,7 +38,7 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
       });
