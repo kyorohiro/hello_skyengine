@@ -73,7 +73,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
 
     BoxHitTestEntry entry = en;
     PointerInputEvent e = event;
-    if(touchPoints.containsKey(e.pointer)) {
+    if(!touchPoints.containsKey(e.pointer)) {
       touchPoints[e.pointer] = new TouchPoint(-1.0, -1.0);
     }
 

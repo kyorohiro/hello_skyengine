@@ -34,10 +34,10 @@ class GameRoot extends TinyDisplayObject {
     if (bkcolor == null) {
       bkcolor = new TinyColor.argb(0xff, 0xee, 0xee, 0xff);
     }
-    child.add(new TinyButton(100.0, 100.0));
+    child.add(new TinyButton(100.0, 100.0)..y=100.0..x=60.0);
   }
 
-  void onTick(TinyStage stage, int timeStamp) {
+  void updatePosition(TinyStage stage, int timeStamp) {
     ratioW = stage.w / w;
     ratioH = stage.h / h;
     radio = (ratioW < ratioH ? ratioW : ratioH);
@@ -47,13 +47,17 @@ class GameRoot extends TinyDisplayObject {
     mat.translate(l, t, 0.0);
   }
 
+  void onTick(TinyStage stage, int timeStamp) {
+    updatePosition(stage, timeStamp);
+  }
+
   void paint(TinyStage stage, TinyCanvas canvas) {
     canvas.pushMulMatrix(mat);
     super.paint(stage, canvas);
     canvas.popMatrix();
   }
+
   void onPaint(TinyStage stage, TinyCanvas canvas) {
-//    TinyRect rect = new TinyRect(l, t, w * radio, h * radio);
     TinyRect rect = new TinyRect(0.0, 0.0, w, h);
     TinyPaint paint = new TinyPaint();
     paint.color = bkcolor;
@@ -66,19 +70,29 @@ class GameRoot extends TinyDisplayObject {
 class TinyButton extends TinyDisplayObject {
   double w;
   double h;
+  bool isTouch = false;
   TinyColor bgcolor = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
 
   TinyButton(this.w, this.h) {
-    ;
   }
 
   void onTouch(TinyStage stage, int id, String type, double x, double y) {
-    ;
+    if((type=="pointerdown" || type =="pointermove") && x >0 && y>0 && y<h && x<w) {
+      isTouch = true;
+    } else {
+      isTouch = false;
+    }
   }
+
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     TinyPaint paint = new TinyPaint();
-    paint.color = bgcolor;
-    canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
+    if(isTouch) {
+      paint.color = new TinyColor(bgcolor.value & 0xffaabbaa );
+      canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
+    } else {
+      paint.color = bgcolor;
+      canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
+    }
   }
 }
 

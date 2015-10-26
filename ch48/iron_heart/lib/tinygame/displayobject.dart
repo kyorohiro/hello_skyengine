@@ -61,7 +61,9 @@ class TinyDisplayObject {
   void paint(TinyStage stage, TinyCanvas canvas) {
     onPaint(stage, canvas);
     for (TinyDisplayObject d in child) {
+      canvas.pushMulMatrix(new Matrix4.translationValues(d.x, d.y, 0.0));
       d.paint(stage, canvas);
+      canvas.popMatrix();
     }
   }
 
