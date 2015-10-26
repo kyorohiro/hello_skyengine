@@ -27,6 +27,7 @@ group("examples") {
 ## (3) create app project
 https://github.com/kyorohiro/hello_skyengine/blob/master/test_android/BUILD.gn
 
+project folder name is "test"
 ```
 ./examples/test/lib
 ./examples/test/apk
