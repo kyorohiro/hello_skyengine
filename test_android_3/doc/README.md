@@ -1,2 +1,2 @@
-## memo 003 set ap icon 
+## memo 003 set app icon 
 
