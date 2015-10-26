@@ -24,3 +24,7 @@ sky_app("test") {
 ```
 
 apk name
+
+
+#### ./example/test/apk/AndroidManifest.xml
+
