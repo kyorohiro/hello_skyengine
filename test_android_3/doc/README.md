@@ -32,3 +32,5 @@ android_resources("resources") {
 }
 
 ```
+
+* set res foder as resource folder
