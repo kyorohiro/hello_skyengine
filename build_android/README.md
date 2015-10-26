@@ -29,7 +29,7 @@ https://github.com/kyorohiro/hello_skyengine/blob/master/test_android/BUILD.gn
 ```
 ./examples/test/lib
 ./examples/test/apk
-./examples/test/
+./examples/test/...
 ```
 ## (4) build on flutter/src
 ```
