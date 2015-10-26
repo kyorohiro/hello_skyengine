@@ -34,3 +34,19 @@ android_resources("resources") {
 ```
 
 * set res foder as resource folder
+
+
+#### ./example/test/apk/BUILD.gn
+
+```
+assert(is_android)
+
+import("//build/config/android/config.gni")
+import("//build/config/android/rules.gni")
+
+android_resources("resources") {
+  resource_dirs = [ "res" ]
+  android_manifest = "AndroidManifest.xml"
+}
+
+```
