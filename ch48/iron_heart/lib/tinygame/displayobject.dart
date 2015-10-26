@@ -1,8 +1,6 @@
 part of tinygame;
 
 class TinyDisplayObject {
-  double x = 0.0;
-  double y = 0.0;
   String objectName = "none";
   List<TinyDisplayObject> child = [];
   Matrix4 mat = new Matrix4.identity();
@@ -62,7 +60,7 @@ class TinyDisplayObject {
   void paint(TinyStage stage, TinyCanvas canvas) {
     onPaint(stage, canvas);
     for (TinyDisplayObject d in child) {
-      canvas.pushMulMatrix(new Matrix4.translationValues(d.x, d.y, 0.0));
+      canvas.pushMulMatrix(d.mat);
       d.paint(stage, canvas);
       canvas.popMatrix();
     }
@@ -76,7 +74,7 @@ class TinyDisplayObject {
       onTouch(stage, id, type, a.x, a.y);
     }
     for (TinyDisplayObject d in child) {
-      stage.pushMulMatrix(new Matrix4.translationValues(d.x, d.y, 0.0));
+      stage.pushMulMatrix(d.mat);
       d.touch(stage, id, type, x, y);
       stage.popMatrix();
     }
