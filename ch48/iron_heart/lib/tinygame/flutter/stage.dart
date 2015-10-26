@@ -85,7 +85,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
       touchPoints[e.pointer].y += (e.dy == null?0:e.dy);
     }
     _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
-        touchPoints[e.pointer].y, (e.dx == null?0:e.dx), (e.dy == null?0:e.dy));
+        touchPoints[e.pointer].y);
 
     if (event.type == "pointerup") {
       touchPoints.remove(e.pointer);
@@ -94,8 +94,6 @@ class TinyFlutterStage extends RenderBox with TinyStage {
       touchPoints.clear();
     }
   }
-
-
 
 }
 
@@ -106,21 +104,25 @@ class TinyFlutterCanvas extends TinyCanvas {
 
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
     Paint p = new Paint()..color=new Color(paint.color.value);
-    canvas.drawOval(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h), p);
+    canvas.drawOval(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h), p);
   }
 
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
     Paint p = new Paint()..color=new Color(paint.color.value);
-    canvas.drawLine(new Point(stage.envX(p1.x), stage.envY(p1.y)), new Point(stage.envX(p2.x), stage.envY(p2.y)), p);
+    canvas.drawLine(new Point(p1.x, p1.y), new Point(p2.x, p2.y), p);
   }
 
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
     Paint p = new Paint()..color=new Color(paint.color.value);
-    canvas.drawRect(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h), p);
+    canvas.drawRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h), p);
   }
 
   void clipRect(TinyStage stage, TinyRect rect) {
-    canvas.clipRect(new Rect.fromLTWH(stage.envX(rect.x), stage.envY(rect.y), rect.w, rect.h));
+    canvas.clipRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h));
+  }
+
+  void updateMatrix() {
+    canvas.setMatrix(this.getMatrix().storage);
   }
 }
 

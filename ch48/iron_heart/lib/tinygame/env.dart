@@ -47,6 +47,23 @@ abstract class TinyCanvas {
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint);
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint);
   void clipRect(TinyStage stage, TinyRect rect);
+  List<Matrix4> mats = [new Matrix4.identity()];
+
+  pushMulMatrix(Matrix4 mat) {
+    mats.add(mats.last*mat);
+    updateMatrix();
+  }
+
+  popMatrix() {
+    mats.removeLast();
+    updateMatrix();
+  }
+
+  Matrix4 getMatrix() {
+    return mats.last;
+  }
+
+  void updateMatrix();
 }
 
 abstract class TinyStage {
@@ -56,31 +73,13 @@ abstract class TinyStage {
   double get h;
   bool animeIsStart = false;
   int animeId = 0;
-  static const int kScreenCoordinates = 1;
-  static const int kMathCoordinates = 0;
-  int coordinate = kMathCoordinates;
   TinyDisplayObject _root;
   TinyDisplayObject get root => _root;
   TinyGameBuilder get builder;
   bool startable = false;
   bool isInit = false;
+
   void start();
   void stop();
   void markNeedsPaint();
-
-  double envY(double y) {
-    if(coordinate == kMathCoordinates) {
-      return h / 2 - y;
-    } else {
-      return y;
-    }
-  }
-
-  double envX(double x) {
-    if(coordinate == kMathCoordinates) {
-      return x + w / 2;
-    } else {
-      return x;
-    }
-  }
 }

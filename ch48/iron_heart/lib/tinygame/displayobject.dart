@@ -65,16 +65,16 @@ class TinyDisplayObject {
     }
   }
 
-  void touch(TinyStage stage, int id, String type,
-    double x, double y, double dx, double dy) {
-    onTouch(stage, id, type, x, y, dx, dy);
+  void touch(TinyStage stage, int id,
+     String type, double x, double y) {
+    onTouch(stage, id, type, x, y);
     for (TinyDisplayObject d in child) {
-      d.touch(stage, id, type, x, y, dx, dy);
+      d.touch(stage, id, type, x-d.x, y-d.y);
     }
   }
 
-  void onTouch(TinyStage stage, int id, String type,
-    double x, double y, double dx, double dy) {}
+  void onTouch(TinyStage stage, int id,
+     String type, double x, double y) {}
 
   void onUnattach() {}
 
