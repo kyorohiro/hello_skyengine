@@ -5,7 +5,7 @@
   * [build as android app](build_android/README.md)
     * [draw text](test_android/doc/README.md)
     * [draw image](test_android_2/doc/README.md)
-    * [set icon]
+    * [set icon](test_android_3/doc/README.md)
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
