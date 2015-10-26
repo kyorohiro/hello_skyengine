@@ -65,10 +65,10 @@ class TinyButton extends TinyDisplayObject {
         y > 0 &&
         y < h &&
         x < w) {
-      print("touch: ${x} ${y}");
+      //print("touch: ${x} ${y}");
       isTouch = true;
     } else {
-      print("untouch: ${x} ${y}");
+      //print("untouch: ${x} ${y}");
       isTouch = false;
     }
   }
