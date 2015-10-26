@@ -63,3 +63,5 @@ android_resources("resources") {
     </application>
  </manifest>
 ```
+
+* set application icon path "android:icon="@mipmap/ic_launcher"
