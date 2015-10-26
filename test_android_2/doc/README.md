@@ -12,4 +12,4 @@ assets:
 * use image as set assets
 
 ##### read assets image
-![](draw_image_from_assets/doc/README.md)
+[](draw_image_from_assets/doc/README.md)
