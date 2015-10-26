@@ -1,6 +1,6 @@
 2015/10/26
 
-create standalone apk tool is in progress now.
+for creating standalone apk tool is in progress now.
 and, I try to create standalone flutter apk from flutter build envirnment.
 
 
