@@ -43,6 +43,7 @@ project folder name is "test"
 
 ## (4) build on flutter/src
 ```
+./sky/tools/gn --android
 ninja -C out/android_Debug
 ```
 
