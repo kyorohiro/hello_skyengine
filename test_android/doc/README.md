@@ -21,4 +21,4 @@ sky_app("test") {
   }
 }
 ```
-apk name
+set apk name
