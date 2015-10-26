@@ -53,4 +53,6 @@ set apk name
     </application>
  </manifest>
 ```
-set package name
+
+* set package name
+ info.kyorohiro.flutter.hello
