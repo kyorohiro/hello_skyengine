@@ -18,5 +18,3 @@ sky_app("test") {
 
 * set icon resource  "//examples/test/apk:resources"
 
-
-####
