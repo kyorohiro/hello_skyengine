@@ -1,0 +1,7 @@
+name: spacewar
+dependencies:
+  sky: any
+  flutter: any
+  sky_tools: any
+  vector_math: any
+  benchmark_harness: any
