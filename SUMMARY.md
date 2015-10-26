@@ -3,7 +3,7 @@
   * [helloworld](hello/doc/README.md)
   * [build flutter](build_flutter/README.md)
   * [build as android app](build_android/README.md)
-    * [draw text]
+    * [draw text](test_android/doc/README.md)
     * [draw image]
     * [set icon]
   * [build as ios app](build_ios/README.md)
