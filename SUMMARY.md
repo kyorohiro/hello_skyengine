@@ -6,7 +6,6 @@
     * [draw text]
     * [draw image]
     * [set icon]
-    * 
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
