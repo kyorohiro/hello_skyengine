@@ -27,8 +27,10 @@ group("examples") {
 
 ## (3) create app project
 
-* 
-* https://github.com/kyorohiro/hello_skyengine
+* draw test
+  https://github.com/kyorohiro/hello_skyengine/tree/master/test_android
+* draw image
+  https://github.com/kyorohiro/hello_skyengine/tree/master/test_android_2
 
 project folder name is "test"
 ```
