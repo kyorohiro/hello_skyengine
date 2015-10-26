@@ -9,4 +9,7 @@ assets:
   - assets/icon.jpeg
 ```
 
-use image as set assets
+* use image as set assets
+
+##### read assets image
+
