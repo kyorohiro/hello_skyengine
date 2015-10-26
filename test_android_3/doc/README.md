@@ -1,5 +1,5 @@
 ## memo 003 set app icon 
-https://github.com/kyorohiro/hello_skyengine/tree/master/
+https://github.com/kyorohiro/hello_skyengine/tree/master/test_android_3/
 
 #### ./example/test/BUILD.gn
 ```
