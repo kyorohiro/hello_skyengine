@@ -13,9 +13,9 @@ void main() {
 
 class GameWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    TinyStage stage = f.createStage(new TinyGameRoot());
+    TinyStage stage = f.createStage(new TinyGameRoot(800.0, 600.0));
     stage.start();
-    stage.root.child.add(new TinyButton(100.0, 100.0)..y=100.0..x=60.0);
+    stage.root.child.add(new TinyButton(600.0, 200.0)..y=300.0..x=100.0);
     return (stage as TinyFlutterStage);
   }
 }

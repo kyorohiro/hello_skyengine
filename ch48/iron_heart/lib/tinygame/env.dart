@@ -82,4 +82,20 @@ abstract class TinyStage {
   void start();
   void stop();
   void markNeedsPaint();
+
+  //
+  //
+  List<Matrix4> mats = [new Matrix4.identity()];
+
+  pushMulMatrix(Matrix4 mat) {
+    mats.add(mats.last*mat);
+  }
+
+  popMatrix() {
+    mats.removeLast();
+  }
+
+  Matrix4 getMatrix() {
+    return mats.last;
+  }
 }

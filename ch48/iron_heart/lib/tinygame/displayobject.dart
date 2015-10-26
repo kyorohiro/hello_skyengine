@@ -5,6 +5,7 @@ class TinyDisplayObject {
   double y = 0.0;
   String objectName = "none";
   List<TinyDisplayObject> child = [];
+  Matrix4 mat = new Matrix4.identity();
 
   TinyDisplayObject({this.child: null}) {
     if (child == null) {
@@ -67,16 +68,21 @@ class TinyDisplayObject {
     }
   }
 
-  void touch(TinyStage stage, int id,
-     String type, double x, double y) {
-    onTouch(stage, id, type, x, y);
+  void touch(TinyStage stage, int id, String type, double x, double y) {
+    {
+      Matrix4 tmp = stage.getMatrix().clone();
+      tmp.invert();
+      Vector3 a = tmp * new Vector3(x, y, 0.0);
+      onTouch(stage, id, type, a.x, a.y);
+    }
     for (TinyDisplayObject d in child) {
-      d.touch(stage, id, type, x-d.x, y-d.y);
+      stage.pushMulMatrix(new Matrix4.translationValues(d.x, d.y, 0.0));
+      d.touch(stage, id, type, x, y);
+      stage.popMatrix();
     }
   }
 
-  void onTouch(TinyStage stage, int id,
-     String type, double x, double y) {}
+  void onTouch(TinyStage stage, int id, String type, double x, double y) {}
 
   void onUnattach() {}
 
