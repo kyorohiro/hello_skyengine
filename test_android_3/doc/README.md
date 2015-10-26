@@ -36,7 +36,7 @@ android_resources("resources") {
 * set res foder as resource folder
 
 
-#### ./example/test/apk/BUILD.gn
+#### ./example/test/apk/AndroidManifest.xml
 
 ```
 assert(is_android)
