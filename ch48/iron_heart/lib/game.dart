@@ -62,6 +62,8 @@ class Program {
       setTip(w-1, i, new Tip.frame());
     }
     setTip(1, 0, new Tip.start());
+    setTip(1, 1, new Tip.advance());
+    setTip(1, 2, new Tip.nop(dx:-1,dy:0));
   }
 
   Tip getTip(int x, int y) {
@@ -78,6 +80,7 @@ class Tip {
   static const int id_frame = 0xffaa6666;
   static const int id_start = 0xffff0000;
   static const int id_advance = 0xff0000ff;
+  static const int id_nop = 0xffaaaaaa;
   int id = 0;
   List<Next> dxys = [];
 
@@ -94,8 +97,13 @@ class Tip {
     dxys.add(new Next(0,1));
   }
 
-  Tip.advance() {
+  Tip.advance({int dx:0,int dy:1}) {
     id = id_advance;
+    dxys.add(new Next(dx,dy));
+  }
+  Tip.nop({int dx:0,int dy:1}) {
+    id = id_nop;
+    dxys.add(new Next(dx,dy));
   }
 }
 
