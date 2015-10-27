@@ -35,6 +35,13 @@ class TinyDisplayObject {
     d.unattach();
   }
 
+  clearChild() async {
+    await new Future.value();
+    for(TinyDisplayObject d in child) {
+      rmChild(d);
+    }
+  }
+
   void onInit(TinyStage stage) {}
 
   void init(TinyStage stage) {

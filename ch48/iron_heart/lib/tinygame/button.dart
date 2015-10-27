@@ -43,7 +43,9 @@ class TinyButton extends TinyDisplayObject {
       break;
       case "pointerup":
       if(isTouch == true && onTouchCallback != null) {
-        onTouchCallback(buttonName);
+        new Future((){
+          onTouchCallback(buttonName);
+        });
       }
       isTouch = false;
       isFocus = false;

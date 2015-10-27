@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 TinyGameBuilderForFlutter f = new TinyGameBuilderForFlutter();
+TinyStage stage = null;
 
 void main() {
   runApp(new GameWidget());
@@ -13,7 +14,7 @@ void main() {
 
 class GameWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
-    TinyStage stage = f.createStage(new TinyGameRoot(800.0, 600.0));
+    stage = f.createStage(new TinyGameRoot(800.0, 600.0));
     stage.start();
     stage.root.child.add(new StartScreen());
     return (stage as TinyFlutterStage);
@@ -36,6 +37,8 @@ class StartScreen extends TinyDisplayObject {
   }
   void onPush(String id) {
     print("### ${id}");
+    stage.root.clearChild();
+    stage.root.addChild(new GameScree());
   }
 }
 
