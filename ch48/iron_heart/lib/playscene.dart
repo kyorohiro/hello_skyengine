@@ -22,7 +22,7 @@ class PlayScene extends TinyDisplayObject {
       TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
       button.mat = new Matrix4.translationValues(30.0, 480.0, 0.0);
       button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-      button.bgcolorOff = new TinyColor.argb(0x55, 0x00, 0x00, 0xff);
+      button.bgcolorOff = new TinyColor.argb(0x00, 0x00, 0x00, 0xff);
       button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
       child.add(button);
     }
@@ -31,7 +31,7 @@ class PlayScene extends TinyDisplayObject {
       TinyButton button = new TinyButton("prog_button", 200.0, 120.0, onPush);
       button.mat = new Matrix4.translationValues(600.0 - 30.0, 480.0, 0.0);
       button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-      button.bgcolorOff = new TinyColor.argb(0x55, 0x00, 0x00, 0xff);
+      button.bgcolorOff = new TinyColor.argb(0x00, 0x00, 0x00, 0xff);
       button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
       child.add(button);
     }

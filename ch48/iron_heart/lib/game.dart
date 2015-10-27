@@ -22,7 +22,7 @@ class Game {
     startScene = new StartScreen(this);
     progScene = new ProgramScree(this);
     stage = f.createStage(new TinyGameRoot(800.0, 600.0));
-    program = new Program(6, 6);
+    program = new Program(10, 7);
   }
 }
 
@@ -52,13 +52,46 @@ class Program {
   int w;
   int h;
   Program(this.w, this.h) {
-    raw = new List.filled((w+2)*(h+2), new Tip.empty());
+    raw = new List.filled(w*h, new Tip.empty());
+    for(int i=0;i<w;i++) {
+      setTip(i, 0, new Tip.frame());
+      setTip(i, h-1, new Tip.frame());
+    }
+    for(int i=0;i<h;i++) {
+      setTip(0, i, new Tip.frame());
+      setTip(w-1, i, new Tip.frame());
+    }
+    setTip(1, 0, new Tip.start());
+  }
+
+  Tip getTip(int x, int y) {
+    return raw[x+y*w];
+  }
+
+  void setTip(int x, int y, Tip v) {
+    raw[x+y*w] = v;
+  }
+}
+
+class Tip {
+  int id = 0;
+  List<Next> dxys = [];
+  Tip.empty(){
+    id = 0xffffffff;
+  }
+  Tip.frame(){
+    id = 0xffaa6666;
+  }
+  Tip.start(){
+    id = 0xffff0000;
   }
 
 }
 
-class Tip {
-  Tip.empty(){}
+class Next {
+  int dx = 1;
+  int dy = 1;
+  int color = 0xffff0000;
 }
 
 class MoveTip extends Tip {
