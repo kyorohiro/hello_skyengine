@@ -27,7 +27,6 @@ class ProgramScree extends TinyDisplayObject {
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     drawBG(stage, canvas);
-    drawBoard(stage, canvas);
     drawTip(stage, canvas);
   }
 
@@ -38,15 +37,6 @@ class ProgramScree extends TinyDisplayObject {
       TinyPaint p = new TinyPaint();
       canvas.drawImageRect(stage, img, src, dst, p);
     }
-  }
-
-  void drawBoard(TinyStage stage, TinyCanvas canvas) {
-    TinyPaint p = new TinyPaint();
-    p.color = new TinyColor.argb(0xaa, 0xff, 0xff, 0x00);
-    p.strokeWidth = 2.5;
-    p.style = TinyPaintStyle.stroke;
-    TinyRect rect = new TinyRect(50.0, 5.0, 700.0, 400.0);
-    canvas.drawRect(stage, rect, p);
   }
 
   void drawTip(TinyStage stage, TinyCanvas canvas) {
