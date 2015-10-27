@@ -5,22 +5,42 @@ class TinyButton extends TinyDisplayObject {
   double w;
   double h;
   bool isTouch = false;
+  bool isFocus = false;
   TinyColor bgcolorOff = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
   TinyColor bgcolorOn = new TinyColor.argb(0xaa, 0xcc, 0xaa, 0xff);
   TinyColor bgcolorFocus = new TinyColor.argb(0xaa, 0xcc, 0xff, 0xaa);
   TinyButton(this.w, this.h) {}
 
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {
-    if ((type == "pointerdown" || type == "pointermove") &&
-        x > 0 &&
+  bool checkFocus(double x, double y) {
+    if (x > 0 &&
         y > 0 &&
         y < h &&
         x < w) {
-      //print("touch: ${x} ${y}");
-      isTouch = true;
+        return true;
     } else {
-      //print("untouch: ${x} ${y}");
+      return false;
+    }
+  }
+
+  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+    switch(type) {
+      case "pointerdown":
+      if(checkFocus(x, y)) {
+         isTouch = true;
+         isFocus = true;
+      }
+      break;
+      case "pointermove":
+      if(checkFocus(x, y)) {
+        isFocus = true;
+      } else {
+        isTouch = false;
+        isFocus = false;
+      }
+      break;
+      default:
       isTouch = false;
+      isFocus = false;
     }
   }
 
@@ -28,6 +48,9 @@ class TinyButton extends TinyDisplayObject {
     TinyPaint paint = new TinyPaint();
     if (isTouch) {
       paint.color = bgcolorOn;
+      canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
+    } else if(isFocus) {
+      paint.color = bgcolorFocus;
       canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
     } else {
       paint.color = bgcolorOff;
