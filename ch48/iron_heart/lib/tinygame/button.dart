@@ -1,15 +1,18 @@
 part of tinygame;
 
+typedef void TinyButtonCallback(String id);
 
 class TinyButton extends TinyDisplayObject {
   double w;
   double h;
   bool isTouch = false;
   bool isFocus = false;
+  String buttonName;
   TinyColor bgcolorOff = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
   TinyColor bgcolorOn = new TinyColor.argb(0xaa, 0xcc, 0xaa, 0xff);
   TinyColor bgcolorFocus = new TinyColor.argb(0xaa, 0xcc, 0xff, 0xaa);
-  TinyButton(this.w, this.h) {}
+  TinyButtonCallback onTouchCallback;
+  TinyButton(this.buttonName, this.w, this.h, this.onTouchCallback) {}
 
   bool checkFocus(double x, double y) {
     if (x > 0 &&
@@ -37,6 +40,13 @@ class TinyButton extends TinyDisplayObject {
         isTouch = false;
         isFocus = false;
       }
+      break;
+      case "pointerup":
+      if(isTouch == true && onTouchCallback != null) {
+        onTouchCallback(buttonName);
+      }
+      isTouch = false;
+      isFocus = false;
       break;
       default:
       isTouch = false;

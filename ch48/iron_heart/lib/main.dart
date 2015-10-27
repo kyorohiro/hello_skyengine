@@ -23,7 +23,7 @@ class GameWidget extends OneChildRenderObjectWidget {
 class StartScreen extends TinyDisplayObject {
   TinyImage img = null;
   StartScreen() {
-    child.add(new TinyButton(600.0, 200.0)..mat=new Matrix4.translationValues(100.0,300.0,0.0));
+    child.add(new TinyButton("start_button", 600.0, 200.0, onPush)..mat=new Matrix4.translationValues(100.0,300.0,0.0));
     f.loadImage("assets/bg_start.png").then((TinyImage i){img=i;}) ;
   }
   void onPaint(TinyStage stage, TinyCanvas canvas) {
@@ -34,11 +34,13 @@ class StartScreen extends TinyDisplayObject {
       canvas.drawImageRect(stage, img, src, dst, p);
     }
   }
-
+  void onPush(String id) {
+    print("### ${id}");
+  }
 }
 
 class GameScree extends TinyDisplayObject {
   GameScree() {
-
+    ;
   }
 }
