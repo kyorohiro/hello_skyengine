@@ -37,10 +37,10 @@ class PlayScene extends TinyDisplayObject {
     }
   }
   void onPaint(TinyStage stage, TinyCanvas canvas) {
-    TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    TinyRect dst = new TinyRect(0.0, 0.0, 800.0, 600.0);
-    TinyPaint p = new TinyPaint();
     if (img != null) {
+      TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
+      TinyRect dst = new TinyRect(0.0, 0.0, 800.0, 600.0);
+      TinyPaint p = new TinyPaint();
       canvas.drawImageRect(stage, img, src, dst, p);
     }
   }

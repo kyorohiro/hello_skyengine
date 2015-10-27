@@ -4,6 +4,7 @@ class TinyGameBuilderForFlutter extends TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyFlutterStage(this, root);
   }
+
   Future<TinyImage> loadImage(String path) async {
     return new TinyFlutterImage(await ImageLoader.load(path));
   }
@@ -11,8 +12,7 @@ class TinyGameBuilderForFlutter extends TinyGameBuilder {
 
 class TinyFlutterImage implements TinyImage {
   sky.Image rawImage;
-  TinyFlutterImage(this.rawImage) {
-  }
+  TinyFlutterImage(this.rawImage) {}
   int get w => rawImage.width;
   int get h => rawImage.height;
 }
@@ -25,6 +25,7 @@ class ImageLoader {
       return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
     }
   }
+
   static Future<sky.Image> load(String url) async {
     AssetBundle bundle = getAssetBundle();
     ImageResource resource = bundle.loadImage(url);
@@ -59,8 +60,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
     init();
   }
 
-  void init() {
-  }
+  void init() {}
 
   void start() {
     if (animeIsStart == true) {
@@ -111,7 +111,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
 
     BoxHitTestEntry entry = en;
     PointerInputEvent e = event;
-    if(!touchPoints.containsKey(e.pointer)) {
+    if (!touchPoints.containsKey(e.pointer)) {
       touchPoints[e.pointer] = new TouchPoint(-1.0, -1.0);
     }
 
@@ -119,8 +119,8 @@ class TinyFlutterStage extends RenderBox with TinyStage {
       touchPoints[e.pointer].x = entry.localPosition.x;
       touchPoints[e.pointer].y = entry.localPosition.y;
     } else {
-      touchPoints[e.pointer].x += (e.dx == null?0:e.dx);
-      touchPoints[e.pointer].y += (e.dy == null?0:e.dy);
+      touchPoints[e.pointer].x += (e.dx == null ? 0 : e.dx);
+      touchPoints[e.pointer].y += (e.dy == null ? 0 : e.dy);
     }
     _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
         touchPoints[e.pointer].y);
@@ -128,45 +128,61 @@ class TinyFlutterStage extends RenderBox with TinyStage {
     if (event.type == "pointerup") {
       touchPoints.remove(e.pointer);
     }
-    if(event.type == "pointercancel") {
+    if (event.type == "pointercancel") {
       touchPoints.clear();
     }
   }
-
 }
 
 class TinyFlutterCanvas extends TinyCanvas {
   PaintingCanvas canvas;
-  TinyFlutterCanvas(this.canvas) {
-  }
+  TinyFlutterCanvas(this.canvas) {}
 
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
-    Paint p = new Paint()..color=new Color(paint.color.value);
+    Paint p = new Paint()..color = new Color(paint.color.value);
     canvas.drawOval(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h), p);
   }
 
+  Paint toPaint(TinyPaint p) {
+    Paint pp = new Paint();
+    pp.color = new Color(p.color.value);
+    pp.strokeWidth = p.strokeWidth;
+    switch (p.style) {
+      case TinyPaintStyle.fill:
+        pp.style = sky.PaintingStyle.fill;
+        break;
+      case TinyPaintStyle.stroke:
+        pp.style = sky.PaintingStyle.stroke;
+        break;
+    }
+    return pp;
+  }
+
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
-    Paint p = new Paint()..color=new Color(paint.color.value);
-    canvas.drawLine(new Point(p1.x, p1.y), new Point(p2.x, p2.y), p);
+    canvas.drawLine(
+        new Point(p1.x, p1.y), new Point(p2.x, p2.y),
+        toPaint(paint));
   }
 
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
-    Paint p = new Paint()..color=new Color(paint.color.value);
-    canvas.drawRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h), p);
+    canvas.drawRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h),
+    toPaint(paint));
   }
 
   void clipRect(TinyStage stage, TinyRect rect) {
     canvas.clipRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h));
   }
 
- void drawImageRect(TinyStage stage,
-   TinyImage image, TinyRect src, TinyRect dst, TinyPaint paint){
-   Paint p = new Paint();//..color=new Color(paint.color.value);
-   Rect s = new Rect.fromLTWH(src.x, src.y, src.w, src.h);
-   Rect d = new Rect.fromLTWH(dst.x, dst.y, dst.w, dst.h);
-   sky.Image i = (image as TinyFlutterImage).rawImage;
-   canvas.drawImageRect(i, s, d, p);
- }
+  void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
+      TinyRect dst, TinyPaint paint) {
+    Rect s = new Rect.fromLTWH(src.x, src.y, src.w, src.h);
+    Rect d = new Rect.fromLTWH(dst.x, dst.y, dst.w, dst.h);
+    sky.Image i = (image as TinyFlutterImage).rawImage;
+    canvas.drawImageRect(i, s, d,
+//      new Paint());
+    toPaint(paint));
+  }
+
   void updateMatrix() {
     canvas.setMatrix(this.getMatrix().storage);
   }
