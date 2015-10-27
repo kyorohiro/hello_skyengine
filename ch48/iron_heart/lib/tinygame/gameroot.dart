@@ -17,13 +17,14 @@ class TinyGameRoot extends TinyDisplayObject {
   }
 
   void updatePosition(TinyStage stage, int timeStamp) {
-    ratioW = stage.w / w;
-    ratioH = stage.h / h;
+    ratioW = (stage.w - (stage.paddingLeft+stage.paddingRight)) / w;
+    ratioH = (stage.h - (stage.paddingTop+stage.paddingBottom)) / h;
     radio = (ratioW < ratioH ? ratioW : ratioH);
-    l = (stage.w - (w * radio)) / 2;
+    t = stage.paddingTop;
+    l = (stage.w - (w * radio)) / 2 + stage.paddingLeft;
     mat = new Matrix4.identity();
-    mat.scale(radio, radio, 1.0);
     mat.translate(l, t, 0.0);
+    mat.scale(radio, radio, 1.0);
   }
 
   void touch(TinyStage stage, int id,

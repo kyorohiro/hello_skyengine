@@ -37,6 +37,12 @@ class TinyFlutterStage extends RenderBox with TinyStage {
   double get y => paintBounds.top;
   double get w => paintBounds.width;
   double get h => paintBounds.height;
+
+  double get paddingTop => sky.view.paddingTop;
+  double get paddingBottom => sky.view.paddingBottom;
+  double get paddingRight => sky.view.paddingRight;
+  double get paddingLeft => sky.view.paddingLeft;
+
   bool animeIsStart = false;
   int animeId = 0;
   TinyDisplayObject _root;

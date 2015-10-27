@@ -4,6 +4,11 @@ abstract class TinyStage {
   double get y;
   double get w;
   double get h;
+  double get paddingTop;
+  double get paddingBottom;
+  double get paddingRight;
+  double get paddingLeft;
+
   bool animeIsStart = false;
   int animeId = 0;
   TinyDisplayObject _root;

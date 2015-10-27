@@ -26,6 +26,7 @@ class GameWidget extends OneChildRenderObjectWidget {
 class StartScreen extends TinyDisplayObject {
   Game game;
   TinyImage img = null;
+
   StartScreen(this.game) {
     TinyButton button = new TinyButton("start_button", 600.0, 200.0, onPush);
     button.mat = new Matrix4.translationValues(100.0, 300.0, 0.0);
