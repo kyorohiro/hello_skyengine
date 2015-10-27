@@ -4,7 +4,7 @@ import 'tinygame.dart';
 import 'dart:math' as math;
 import 'dart:async';
 import 'package:flutter/services.dart';
-import './main.dart';
+import 'game.dart';
 
 class PlayScene extends TinyDisplayObject {
   Game game;
@@ -79,4 +79,24 @@ class Chara extends TinyDisplayObject {
     }
   }
 
+}
+
+class Program {
+  List<Tip> raw;
+  int w;
+  int h;
+  Program(this.w, this.h) {
+    raw = new List.filled((w+2)*(h+2), new Tip.empty());
+  }
+
+}
+
+class Tip {
+  Tip.empty(){}
+}
+
+class MoveTip extends Tip {
+  MoveTip():super.empty() {
+    ;
+  }
 }
