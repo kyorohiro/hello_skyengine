@@ -27,12 +27,24 @@ class ProgramScree extends TinyDisplayObject {
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
+    drawBG(stage, canvas);
+    drawBoard(stage, canvas);
+  }
+
+  void drawBG(TinyStage stage, TinyCanvas canvas) {
     TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
     TinyRect dst = new TinyRect(0.0, 0.0, 800.0, 600.0);
     TinyPaint p = new TinyPaint();
     if (img != null) {
       canvas.drawImageRect(stage, img, src, dst, p);
     }
+  }
+
+  void drawBoard(TinyStage stage, TinyCanvas canvas) {
+    TinyPaint p = new TinyPaint();
+    p.color = new TinyColor.argb(0xaa, 0xff, 0xff, 0x00);
+    TinyRect rect = new TinyRect(50.0, 5.0, 700.0, 400.0);
+    canvas.drawRect(stage, rect, p);
   }
 
   void onPush(String id) {
