@@ -74,24 +74,35 @@ class Program {
 }
 
 class Tip {
+  static const int id_empty = 0xffffffff;
+  static const int id_frame = 0xffaa6666;
+  static const int id_start = 0xffff0000;
+  static const int id_advance = 0xff0000ff;
   int id = 0;
-  List<Next> dxys = [];
+  List<Next> dxys = [new Next(0,1)];
+
   Tip.empty(){
-    id = 0xffffffff;
-  }
-  Tip.frame(){
-    id = 0xffaa6666;
-  }
-  Tip.start(){
-    id = 0xffff0000;
+    id = id_empty;
   }
 
+  Tip.frame(){
+    id = id_frame;
+  }
+
+  Tip.start(){
+    id = id_start;
+  }
+
+  Tip.advance() {
+    id = id_advance;
+  }
 }
 
 class Next {
   int dx = 1;
   int dy = 1;
   int color = 0xffff0000;
+  Next(this.dx, this.dy) {}
 }
 
 class MoveTip extends Tip {

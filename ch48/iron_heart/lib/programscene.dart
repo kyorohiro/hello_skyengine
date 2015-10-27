@@ -27,7 +27,7 @@ class ProgramScree extends TinyDisplayObject {
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     drawBG(stage, canvas);
-    drawTip(stage, canvas);
+    drawTips(stage, canvas);
   }
 
   void drawBG(TinyStage stage, TinyCanvas canvas) {
@@ -39,22 +39,43 @@ class ProgramScree extends TinyDisplayObject {
     }
   }
 
-  void drawTip(TinyStage stage, TinyCanvas canvas) {
-    TinyPaint p = new TinyPaint();
-    p.color = new TinyColor.argb(0xaa, 0xff, 0x00, 0x00);
-    p.strokeWidth = 2.5;
-    p.style = TinyPaintStyle.stroke;
-    TinyRect rect = new TinyRect(50.0, 5.0, 50.0, 50.0);
+  void drawTips(TinyStage stage, TinyCanvas canvas) {
     for (int y = 0; y < game.program.h; y++) {
       for (int x = 0; x < game.program.w; x++) {
-        p.color = new TinyColor(game.program.getTip(x, y).id);
-        canvas.drawRect(stage, rect, p);
-        rect.x += 50.0 + 20.0;
+        drawTip(stage, canvas, x, y);
       }
-      rect.x = 50.0;
-      rect.y += 50.0 + 20.0;
     }
   }
+
+  void drawTip(TinyStage stage, TinyCanvas canvas, int x, int y) {
+    TinyPaint p = new TinyPaint();
+    p.strokeWidth = 2.5;
+    p.style = TinyPaintStyle.stroke;
+    double xx = 50.0+x*(50+20);
+    double yy = 5.0+y*(50+20);
+    double ww = 50.0;
+    double hh = 50.0;
+    TinyRect rect = new TinyRect(xx, yy, ww, hh);
+    p.color = new TinyColor(game.program.getTip(x, y).id);
+    canvas.drawRect(stage, rect, p);
+
+    //
+    // allow
+    TinyPoint p1 = new TinyPoint(0.0, 0.0);
+    TinyPoint p2 = new TinyPoint(0.0, hh/2+20.0);
+    TinyPoint p3 = new TinyPoint(-ww*1/3, hh/2+(20.0*2/3));
+    TinyPoint p4 = new TinyPoint(ww*1/3, hh/2+(20.0*2/3));
+    Matrix4 mat = new Matrix4.identity();
+
+    mat.translate(xx+ww/2,yy+hh/2,0.0);
+    mat.rotateZ(math.PI/5);
+    canvas.pushMulMatrix(mat);
+    canvas.drawLine(stage, p1, p2, p);
+    canvas.drawLine(stage, p2, p3, p);
+    canvas.drawLine(stage, p3, p4, p);
+    canvas.popMatrix();
+  }
+
 
   void onPush(String id) {
     game.stage.root.clearChild();

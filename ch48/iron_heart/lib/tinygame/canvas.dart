@@ -11,6 +11,7 @@ abstract class TinyCanvas {
 
   pushMulMatrix(Matrix4 mat) {
     mats.add(mats.last*mat);
+  //  mats.add(mat*mats.last);
     updateMatrix();
   }
 
