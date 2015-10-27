@@ -1,6 +1,7 @@
 library tinygame;
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/animation.dart';
 import 'dart:math' as math;
@@ -13,3 +14,5 @@ part 'tinygame/displayobject.dart';
 part 'tinygame/env.dart';
 part 'tinygame/gameroot.dart';
 part 'tinygame/button.dart';
+part 'tinygame/canvas.dart';
+part 'tinygame/stage.dart';

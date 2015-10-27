@@ -5,7 +5,6 @@ import 'package:flutter/src/services/fetch.dart';
 import 'dart:ui' as sky;
 
 main() async {
-  
   runApp(new DrawImageWidget());
 }
 

@@ -1,5 +1,37 @@
 part of tinygame;
 
+class TinyGameBuilderForFlutter extends TinyGameBuilder {
+  TinyStage createStage(TinyDisplayObject root) {
+    return new TinyFlutterStage(this, root);
+  }
+  Future<TinyImage> loadImage(String path) async {
+    return new TinyFlutterImage(await ImageLoader.load(path));
+  }
+}
+
+class TinyFlutterImage implements TinyImage {
+  sky.Image rawImage;
+  TinyFlutterImage(this.rawImage) {
+  }
+  int get w => rawImage.width;
+  int get h => rawImage.height;
+}
+
+class ImageLoader {
+  static AssetBundle getAssetBundle() {
+    if (rootBundle != null) {
+      return rootBundle;
+    } else {
+      return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+    }
+  }
+  static Future<sky.Image> load(String url) async {
+    AssetBundle bundle = getAssetBundle();
+    ImageResource resource = bundle.loadImage(url);
+    return resource.first;
+  }
+}
+
 class TinyFlutterStage extends RenderBox with TinyStage {
   double get x => paintBounds.left;
   double get y => paintBounds.top;
@@ -121,6 +153,14 @@ class TinyFlutterCanvas extends TinyCanvas {
     canvas.clipRect(new Rect.fromLTWH(rect.x, rect.y, rect.w, rect.h));
   }
 
+ void drawImageRect(TinyStage stage,
+   TinyImage image, TinyRect src, TinyRect dst, TinyPaint paint){
+   Paint p = new Paint();//..color=new Color(paint.color.value);
+   Rect s = new Rect.fromLTWH(src.x, src.y, src.w, src.h);
+   Rect d = new Rect.fromLTWH(dst.x, dst.y, dst.w, dst.h);
+   sky.Image i = (image as TinyFlutterImage).rawImage;
+   canvas.drawImageRect(i, s, d, p);
+ }
   void updateMatrix() {
     canvas.setMatrix(this.getMatrix().storage);
   }

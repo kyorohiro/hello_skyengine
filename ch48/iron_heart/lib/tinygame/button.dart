@@ -5,8 +5,9 @@ class TinyButton extends TinyDisplayObject {
   double w;
   double h;
   bool isTouch = false;
-  TinyColor bgcolor = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
-
+  TinyColor bgcolorOff = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
+  TinyColor bgcolorOn = new TinyColor.argb(0xaa, 0xcc, 0xaa, 0xff);
+  TinyColor bgcolorFocus = new TinyColor.argb(0xaa, 0xcc, 0xff, 0xaa);
   TinyButton(this.w, this.h) {}
 
   void onTouch(TinyStage stage, int id, String type, double x, double y) {
@@ -26,10 +27,10 @@ class TinyButton extends TinyDisplayObject {
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     TinyPaint paint = new TinyPaint();
     if (isTouch) {
-      paint.color = new TinyColor(bgcolor.value & 0xffaabbaa);
+      paint.color = bgcolorOn;
       canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
     } else {
-      paint.color = bgcolor;
+      paint.color = bgcolorOff;
       canvas.drawRect(stage, new TinyRect(0.0, 0.0, w, h), paint);
     }
   }

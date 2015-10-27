@@ -2,13 +2,7 @@ part of tinygame;
 
 abstract class TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root);
-
-}
-
-class TinyGameBuilderForFlutter extends TinyGameBuilder {
-  TinyStage createStage(TinyDisplayObject root) {
-    return new TinyFlutterStage(this, root);
-  }
+  Future<TinyImage> loadImage(String path);
 }
 
 class TinyRect {
@@ -42,60 +36,7 @@ class TinyColor {
   }
 }
 
-abstract class TinyCanvas {
-  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint);
-  void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint);
-  void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint);
-  void clipRect(TinyStage stage, TinyRect rect);
-  List<Matrix4> mats = [new Matrix4.identity()];
-
-  pushMulMatrix(Matrix4 mat) {
-    mats.add(mats.last*mat);
-    updateMatrix();
-  }
-
-  popMatrix() {
-    mats.removeLast();
-    updateMatrix();
-  }
-
-  Matrix4 getMatrix() {
-    return mats.last;
-  }
-
-  void updateMatrix();
-}
-
-abstract class TinyStage {
-  double get x;
-  double get y;
-  double get w;
-  double get h;
-  bool animeIsStart = false;
-  int animeId = 0;
-  TinyDisplayObject _root;
-  TinyDisplayObject get root => _root;
-  TinyGameBuilder get builder;
-  bool startable = false;
-  bool isInit = false;
-
-  void start();
-  void stop();
-  void markNeedsPaint();
-
-  //
-  //
-  List<Matrix4> mats = [new Matrix4.identity()];
-
-  pushMulMatrix(Matrix4 mat) {
-    mats.add(mats.last*mat);
-  }
-
-  popMatrix() {
-    mats.removeLast();
-  }
-
-  Matrix4 getMatrix() {
-    return mats.last;
-  }
+abstract class TinyImage {
+  int get h;
+  int get w;
 }
