@@ -27,6 +27,7 @@ abstract class TinyStage {
 
   pushMulMatrix(Matrix4 mat) {
     mats.add(mats.last*mat);
+    //mats.add(mat*mats.last);
   }
 
   popMatrix() {

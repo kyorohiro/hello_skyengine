@@ -79,7 +79,7 @@ class Tip {
   static const int id_start = 0xffff0000;
   static const int id_advance = 0xff0000ff;
   int id = 0;
-  List<Next> dxys = [new Next(0,1)];
+  List<Next> dxys = [];
 
   Tip.empty(){
     id = id_empty;
@@ -91,6 +91,7 @@ class Tip {
 
   Tip.start(){
     id = id_start;
+    dxys.add(new Next(0,1));
   }
 
   Tip.advance() {
