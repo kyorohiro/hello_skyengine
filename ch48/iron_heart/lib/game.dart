@@ -40,8 +40,8 @@ class Chara extends TinyDisplayObject implements GameTarget {
     angle = 0.0;
     dx = 0.0;
     dy = 0.0;
-    x = 0.0;
-    y = 0.0;
+    x = 100.0;
+    y = 300.0;
   }
 
   Chara(this.game) {
@@ -63,20 +63,20 @@ class Chara extends TinyDisplayObject implements GameTarget {
     game.program.next(new GameEnvirone(), this);
     x +=dx;
     y +=dy;
-    angle+=0.1;
     mat = new Matrix4.identity();
     mat.translate(x,y,1.0);
     mat.rotateZ(angle);
   }
 
   void advance(double speed) {
-    dx = speed;
+    dx = speed*math.cos(angle);
+    dy = speed*math.sin(angle);
     ///dy = speed;
 //    mat.translate(0.0,1.0,0.0);
   }
 
-  void turn(double angle) {
-    angle += angle;
+  void turn(double a) {
+    angle += a;
   }
 }
 
@@ -110,8 +110,10 @@ class GameProgram {
     startTip = new GameTip.start();
     currentTip = startTip;
     setTip(1, 0, startTip);
-    setTip(1, 1, new GameTip.advance());
-    setTip(1, 2, new GameTip.nop(dx:-1,dy:0));
+    setTip(1, 1, new GameTip.advance(dx:0,dy:1));
+    setTip(1, 2, new GameTip.nop(dx:0,dy:1));
+    setTip(1, 3, new GameTip.nop(dx:0,dy:1));
+    setTip(1, 4, new GameTip.turning(dx:-1,dy:0));
   }
 
   void next(GameEnvirone e, GameTarget t) {
@@ -182,8 +184,8 @@ class GameTip {
     dxys.add(new Next(dx,dy));
   }
 
-  factory GameTip.turning() {
-    return new GameTipTurning();
+  factory GameTip.turning({int dx:0,int dy:1}) {
+    return new GameTipTurning(dx:dx, dy:dy);
   }
 
 }
@@ -194,8 +196,8 @@ enum GameTipTurningDirection {
 
 class GameTipTurning extends GameTip {
   GameTipTurningDirection direction = GameTipTurningDirection.right;
-  GameTipTurning() :super.custom(GameTip.id_turning) {
-    ;
+  GameTipTurning({int dx:0,int dy:1}) :super.custom(GameTip.id_turning) {
+    dxys.add(new Next(dx,dy));
   }
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
     t.turn(math.PI/10.0);
