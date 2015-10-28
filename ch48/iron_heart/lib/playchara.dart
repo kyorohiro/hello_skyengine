@@ -24,9 +24,9 @@ class PlayChara extends TinyDisplayObject {
     target.y = 300.0;
   }
 
-  PlayChara(this.game, this.program) {
+  PlayChara(this.game, this.program, {iconSrc:"assets/ch_iron.png"}) {
     target = new GameTargetSource(this.game, 50.0);
-    game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
+    game.f.loadImage(iconSrc).then((TinyImage i) {
       img = i;
     });
   }
