@@ -47,10 +47,21 @@ class Chara extends TinyDisplayObject {
 
 }
 
+
+class Environe {
+
+}
+
+class Target {
+
+}
+
 class Program {
+  Tip startTip;
   List<Tip> raw;
   int w;
   int h;
+
   Program(this.w, this.h) {
     raw = new List.filled(w*h, new Tip.empty());
     for(int i=0;i<w;i++) {
@@ -61,7 +72,8 @@ class Program {
       setTip(0, i, new Tip.frame());
       setTip(w-1, i, new Tip.frame());
     }
-    setTip(1, 0, new Tip.start());
+    startTip = new Tip.start();
+    setTip(1, 0, startTip);
     setTip(1, 1, new Tip.advance());
     setTip(1, 2, new Tip.nop(dx:-1,dy:0));
   }
@@ -83,6 +95,10 @@ class Tip {
   static const int id_nop = 0xffaaaaaa;
   int id = 0;
   List<Next> dxys = [];
+
+  Tip next(Program p, Environe e, Target t) {
+    ;
+  }
 
   Tip.empty(){
     id = id_empty;

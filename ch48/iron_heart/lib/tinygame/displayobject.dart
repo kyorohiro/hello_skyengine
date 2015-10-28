@@ -54,6 +54,7 @@ class TinyDisplayObject {
   void onTick(TinyStage stage, int timeStamp) {}
 
   void tick(TinyStage stage, int timeStamp) {
+    connectCheck();
     onTick(stage, timeStamp);
     for (TinyDisplayObject d in child) {
       d.tick(stage, timeStamp);
@@ -65,6 +66,7 @@ class TinyDisplayObject {
   }
 
   void paint(TinyStage stage, TinyCanvas canvas) {
+    connectCheck();
     onPaint(stage, canvas);
     for (TinyDisplayObject d in child) {
       canvas.pushMulMatrix(d.mat);
@@ -74,6 +76,7 @@ class TinyDisplayObject {
   }
 
   void touch(TinyStage stage, int id, String type, double x, double y) {
+    connectCheck();
     {
       Matrix4 tmp = stage.getMatrix().clone();
       tmp.invert();
@@ -96,5 +99,17 @@ class TinyDisplayObject {
     for (TinyDisplayObject d in child) {
       d.unattach();
     }
+    isConnect = false;
   }
+
+  void onConnect() {}
+
+  connectCheck() {
+    if(isConnect == false) {
+      isConnect = true;
+      onConnect();
+    }
+
+  }
+  bool isConnect = false;
 }
