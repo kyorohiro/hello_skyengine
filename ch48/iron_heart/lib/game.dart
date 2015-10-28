@@ -14,7 +14,7 @@ class Game {
   StartScreen startScene;
   ProgramScree progScene;
   TinyStage stage;
-  Program program;
+  GameProgram program;
 
   Game() {
     f = new TinyGameBuilderForFlutter();
@@ -22,13 +22,27 @@ class Game {
     startScene = new StartScreen(this);
     progScene = new ProgramScree(this);
     stage = f.createStage(new TinyGameRoot(800.0, 600.0));
-    program = new Program(10, 7);
+    program = new GameProgram(10, 7);
   }
 }
 
-class Chara extends TinyDisplayObject {
+class Chara extends TinyDisplayObject implements GameTarget {
   Game game;
   TinyImage img = null;
+
+  double angle = 0.0;
+  double dx = 0.0;
+  double dy = 0.0;
+  double x = 0.0;
+  double y = 0.0;
+
+  void onConnect() {
+    angle = 0.0;
+    dx = 0.0;
+    dy = 0.0;
+    x = 0.0;
+    y = 0.0;
+  }
 
   Chara(this.game) {
     game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
@@ -38,88 +52,160 @@ class Chara extends TinyDisplayObject {
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    TinyRect dst = new TinyRect(0.0, 0.0, 100.0, 100.0);
+    TinyRect dst = new TinyRect(-50.0, -50.0, 100.0, 100.0);
     TinyPaint p = new TinyPaint();
     if (img != null) {
       canvas.drawImageRect(stage, img, src, dst, p);
     }
   }
 
+  void onTick(TinyStage stage, int timeStamp) {
+    game.program.next(new GameEnvirone(), this);
+    x +=dx;
+    y +=dy;
+    angle+=0.1;
+    mat = new Matrix4.identity();
+    mat.translate(x,y,1.0);
+    mat.rotateZ(angle);
+  }
+
+  void advance(double speed) {
+    dx = speed;
+    ///dy = speed;
+//    mat.translate(0.0,1.0,0.0);
+  }
+
+  void turn(double angle) {
+    angle += angle;
+  }
 }
 
 
-class Environe {
+class GameEnvirone {
 
 }
 
-class Target {
-
+abstract class GameTarget {
+  void advance(double speed);
+  void turn(double angle);
 }
 
-class Program {
-  Tip startTip;
-  List<Tip> raw;
+class GameProgram {
+  GameTip startTip;
+  GameTip currentTip;
+  List<GameTip> raw;
   int w;
   int h;
 
-  Program(this.w, this.h) {
-    raw = new List.filled(w*h, new Tip.empty());
+  GameProgram(this.w, this.h) {
+    raw = new List.filled(w*h, new GameTip.empty());
     for(int i=0;i<w;i++) {
-      setTip(i, 0, new Tip.frame());
-      setTip(i, h-1, new Tip.frame());
+      setTip(i, 0, new GameTip.frame());
+      setTip(i, h-1, new GameTip.frame());
     }
     for(int i=0;i<h;i++) {
-      setTip(0, i, new Tip.frame());
-      setTip(w-1, i, new Tip.frame());
+      setTip(0, i, new GameTip.frame());
+      setTip(w-1, i, new GameTip.frame());
     }
-    startTip = new Tip.start();
+    startTip = new GameTip.start();
+    currentTip = startTip;
     setTip(1, 0, startTip);
-    setTip(1, 1, new Tip.advance());
-    setTip(1, 2, new Tip.nop(dx:-1,dy:0));
+    setTip(1, 1, new GameTip.advance());
+    setTip(1, 2, new GameTip.nop(dx:-1,dy:0));
   }
 
-  Tip getTip(int x, int y) {
+  void next(GameEnvirone e, GameTarget t) {
+     currentTip = currentTip.next(this, e, t);
+  }
+
+  GameTip getTip(int x, int y) {
     return raw[x+y*w];
   }
 
-  void setTip(int x, int y, Tip v) {
+  void setTip(int x, int y, GameTip v) {
     raw[x+y*w] = v;
+    v.curX = x;
+    v.curY = y;
   }
 }
 
-class Tip {
+class GameTip {
   static const int id_empty = 0xffffffff;
   static const int id_frame = 0xffaa6666;
   static const int id_start = 0xffff0000;
   static const int id_advance = 0xff0000ff;
   static const int id_nop = 0xffaaaaaa;
+  static const int id_turning = 0xffffffaa;
+
   int id = 0;
+  int curX;
+  int curY;
   List<Next> dxys = [];
 
-  Tip next(Program p, Environe e, Target t) {
-    ;
+  GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
+    if(id == id_empty || id == id_frame) {
+      return p.startTip;
+    }
+    if(id == id_nop|| id == id_start) {
+      return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+    }
+    if(id == id_advance) {
+      t.advance(1.0);
+      return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+    }
   }
 
-  Tip.empty(){
+  GameTip.custom(this.id) {
+
+  }
+
+  GameTip.empty(){
     id = id_empty;
   }
 
-  Tip.frame(){
+  GameTip.frame(){
     id = id_frame;
   }
 
-  Tip.start(){
+  GameTip.start(){
     id = id_start;
     dxys.add(new Next(0,1));
   }
 
-  Tip.advance({int dx:0,int dy:1}) {
+  GameTip.advance({int dx:0,int dy:1}) {
     id = id_advance;
     dxys.add(new Next(dx,dy));
   }
-  Tip.nop({int dx:0,int dy:1}) {
+
+  GameTip.nop({int dx:0,int dy:1}) {
     id = id_nop;
     dxys.add(new Next(dx,dy));
+  }
+
+  factory GameTip.turning() {
+    return new GameTipTurning();
+  }
+
+}
+
+enum GameTipTurningDirection {
+  right,left
+}
+
+class GameTipTurning extends GameTip {
+  GameTipTurningDirection direction = GameTipTurningDirection.right;
+  GameTipTurning() :super.custom(GameTip.id_turning) {
+    ;
+  }
+  GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
+    t.turn(math.PI/10.0);
+    return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+  }
+}
+
+class GameTipSleep extends GameTip {
+  GameTipSleep() :super.custom(GameTip.id_turning) {
+    ;
   }
 }
 
@@ -130,7 +216,7 @@ class Next {
   Next(this.dx, this.dy) {}
 }
 
-class MoveTip extends Tip {
+class MoveTip extends GameTip {
   MoveTip():super.empty() {
     ;
   }

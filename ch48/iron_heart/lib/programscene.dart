@@ -56,7 +56,7 @@ class ProgramScree extends TinyDisplayObject {
     double ww = 50.0;
     double hh = 50.0;
     TinyRect rect = new TinyRect(xx, yy, ww, hh);
-    Tip tip = game.program.getTip(x, y);
+    GameTip tip = game.program.getTip(x, y);
     p.color = new TinyColor(tip.id);
     canvas.drawRect(stage, rect, p);
     for(Next n in tip.dxys) {
