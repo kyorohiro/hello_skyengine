@@ -15,6 +15,8 @@ class Game {
   ProgramScree progScene;
   TinyStage stage;
   GameProgram program;
+  double fieldX = 50.0;
+  double fieldY = 50.0;
   double fieldWidth = 700.0;
   double fieldHeight = 500.0;
 

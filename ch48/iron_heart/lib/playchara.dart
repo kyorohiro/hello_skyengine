@@ -9,7 +9,7 @@ import 'programscene.dart';
 import 'main.dart';
 import 'game.dart';
 
-class Chara extends TinyDisplayObject {
+class PlayChara extends TinyDisplayObject {
   Game game;
   TinyImage img = null;
   GameTargetSource target = new GameTargetSource();
@@ -22,7 +22,7 @@ class Chara extends TinyDisplayObject {
     target.y = 300.0;
   }
 
-  Chara(this.game) {
+  PlayChara(this.game) {
     game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
       img = i;
     });
