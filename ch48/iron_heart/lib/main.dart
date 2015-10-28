@@ -4,7 +4,7 @@ import 'tinygame.dart';
 import 'dart:math' as math;
 import 'dart:async';
 import 'package:flutter/services.dart';
-import 'game.dart';
+import 'glogic/game.dart';
 import 'playscene.dart';
 import 'programscene.dart';
 

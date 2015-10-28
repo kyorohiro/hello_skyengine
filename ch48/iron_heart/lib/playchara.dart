@@ -7,12 +7,12 @@ import 'package:flutter/services.dart';
 import 'playscene.dart';
 import 'programscene.dart';
 import 'main.dart';
-import 'game.dart';
+import 'glogic/game.dart';
 
 class PlayChara extends TinyDisplayObject {
   Game game;
   TinyImage img = null;
-  GameTargetSource target = new GameTargetSource();
+  GameTargetSource target;
 
   void onConnect() {
     target.angle = 0.0;
@@ -23,6 +23,7 @@ class PlayChara extends TinyDisplayObject {
   }
 
   PlayChara(this.game) {
+    target = new GameTargetSource(this.game, 50.0);
     game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
       img = i;
     });
@@ -38,7 +39,7 @@ class PlayChara extends TinyDisplayObject {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
-    game.program.next(new GameEnvirone(), this.target);
+    game.programRed.next(new GameEnvirone(), this.target);
     this.target.next();
     mat = new Matrix4.identity();
     mat.translate(this.target.x, this.target.y,1.0);

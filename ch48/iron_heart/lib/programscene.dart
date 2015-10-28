@@ -5,7 +5,8 @@ import 'dart:math' as math;
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'playscene.dart';
-import 'game.dart';
+import 'glogic/game.dart';
+import 'glogic/tip.dart';
 
 class ProgramScree extends TinyDisplayObject {
   Game game;
@@ -40,8 +41,8 @@ class ProgramScree extends TinyDisplayObject {
   }
 
   void drawTips(TinyStage stage, TinyCanvas canvas) {
-    for (int y = 0; y < game.program.h; y++) {
-      for (int x = 0; x < game.program.w; x++) {
+    for (int y = 0; y < game.programRed.h; y++) {
+      for (int x = 0; x < game.programRed.w; x++) {
         drawTip(stage, canvas, x, y);
       }
     }
@@ -56,7 +57,7 @@ class ProgramScree extends TinyDisplayObject {
     double ww = 50.0;
     double hh = 50.0;
     TinyRect rect = new TinyRect(xx, yy, ww, hh);
-    GameTip tip = game.program.getTip(x, y);
+    GameTip tip = game.programRed.getTip(x, y);
     p.color = new TinyColor(tip.id);
     canvas.drawRect(stage, rect, p);
     for(Next n in tip.dxys) {
@@ -77,7 +78,7 @@ class ProgramScree extends TinyDisplayObject {
     TinyPaint p = new TinyPaint();
     p.strokeWidth = 2.5;
     p.style = TinyPaintStyle.stroke;
-    p.color = new TinyColor(game.program.getTip(x, y).id);
+    p.color = new TinyColor(game.programRed.getTip(x, y).id);
 
     double xx = 50.0+x*(50+20);
     double yy = 5.0+y*(50+20);
