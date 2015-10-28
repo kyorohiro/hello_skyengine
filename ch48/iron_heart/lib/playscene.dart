@@ -37,7 +37,7 @@ class PlayScene extends TinyDisplayObject {
     });
     {
       chara1 = new PlayChara(game, game.programBlue);
-      chara2 = new PlayChara(game, game.programBlue,
+      chara2 = new PlayChara(game, game.programRed,
         iconSrc:"assets/ch_iron2.png");
       child.add(chara1);
       child.add(chara2);
