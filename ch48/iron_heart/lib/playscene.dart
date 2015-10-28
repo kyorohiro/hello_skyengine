@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'game.dart';
+import 'playchara.dart';
 
 class PlayScene extends TinyDisplayObject {
   Game game;

@@ -15,6 +15,8 @@ class Game {
   ProgramScree progScene;
   TinyStage stage;
   GameProgram program;
+  double fieldWidth = 700.0;
+  double fieldHeight = 500.0;
 
   Game() {
     f = new TinyGameBuilderForFlutter();
@@ -26,53 +28,25 @@ class Game {
   }
 }
 
-class Chara extends TinyDisplayObject implements GameTarget {
-  Game game;
-  TinyImage img = null;
 
+class GameEnvirone {
+
+}
+
+class GameTargetSource extends GameTarget {
   double angle = 0.0;
   double dx = 0.0;
   double dy = 0.0;
   double x = 0.0;
   double y = 0.0;
 
-  void onConnect() {
-    angle = 0.0;
-    dx = 0.0;
-    dy = 0.0;
-    x = 100.0;
-    y = 300.0;
-  }
-
-  Chara(this.game) {
-    game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
-      img = i;
-    });
-  }
-
-  void onPaint(TinyStage stage, TinyCanvas canvas) {
-    TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    TinyRect dst = new TinyRect(-50.0, -50.0, 100.0, 100.0);
-    TinyPaint p = new TinyPaint();
-    if (img != null) {
-      canvas.drawImageRect(stage, img, src, dst, p);
-    }
-  }
-
-  void onTick(TinyStage stage, int timeStamp) {
-    game.program.next(new GameEnvirone(), this);
+  void next() {
     x +=dx;
     y +=dy;
-    mat = new Matrix4.identity();
-    mat.translate(x,y,1.0);
-    mat.rotateZ(angle);
   }
-
   void advance(double speed) {
     dx = speed*math.cos(angle);
     dy = speed*math.sin(angle);
-    ///dy = speed;
-//    mat.translate(0.0,1.0,0.0);
   }
 
   void turn(double a) {
@@ -80,14 +54,14 @@ class Chara extends TinyDisplayObject implements GameTarget {
   }
 }
 
-
-class GameEnvirone {
-
-}
-
 abstract class GameTarget {
+  double angle = 0.0;
+  double dx = 0.0;
+  double dy = 0.0;
+  double x = 0.0;
+  double y = 0.0;
   void advance(double speed);
-  void turn(double angle);
+  void turn(double a);
 }
 
 class GameProgram {
