@@ -16,14 +16,6 @@ class PlayChara extends TinyDisplayObject {
   TinyImage img = null;
   GameTargetSource target;
 
-  void onConnect() {
-    target.angle = 0.0;
-    target.dx = 0.0;
-    target.dy = 0.0;
-    target.x = 100.0;
-    target.y = 300.0;
-  }
-
   PlayChara(this.game, this.program, {iconSrc:"assets/ch_iron.png"}) {
     target = new GameTargetSource(this.game, 50.0);
     game.f.loadImage(iconSrc).then((TinyImage i) {
