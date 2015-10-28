@@ -8,9 +8,11 @@ import 'playscene.dart';
 import 'programscene.dart';
 import 'main.dart';
 import 'glogic/game.dart';
+import 'glogic/program.dart';
 
 class PlayChara extends TinyDisplayObject {
   Game game;
+  GameProgram program;
   TinyImage img = null;
   GameTargetSource target;
 
@@ -22,7 +24,7 @@ class PlayChara extends TinyDisplayObject {
     target.y = 300.0;
   }
 
-  PlayChara(this.game) {
+  PlayChara(this.game, this.program) {
     target = new GameTargetSource(this.game, 50.0);
     game.f.loadImage("assets/ch_iron.png").then((TinyImage i) {
       img = i;
@@ -39,7 +41,7 @@ class PlayChara extends TinyDisplayObject {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
-    game.programRed.next(new GameEnvirone(), this.target);
+    program.next(new GameEnvirone(), this.target);
     this.target.next();
     mat = new Matrix4.identity();
     mat.translate(this.target.x, this.target.y,1.0);

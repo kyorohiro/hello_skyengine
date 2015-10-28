@@ -24,13 +24,14 @@ class Game {
   double fieldHeight = 500.0;
 
   Game() {
+    programRed = new GameProgram(10, 7);
+    programBlue = new GameProgram(10, 7);
     f = new TinyGameBuilderForFlutter();
     playScene = new PlayScene(this);
     startScene = new StartScreen(this);
     progScene = new ProgramScree(this);
     stage = f.createStage(new TinyGameRoot(800.0, 600.0));
-    programRed = new GameProgram(10, 7);
-    programBlue = new GameProgram(10, 7);
+
   }
 }
 

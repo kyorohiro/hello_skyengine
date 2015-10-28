@@ -34,12 +34,13 @@ class PlayScene extends TinyDisplayObject {
       img = i;
     });
     {
-      PlayChara chara = new PlayChara(game);
+      PlayChara chara = new PlayChara(game, game.programBlue);
       child.add(chara);
     }
     child.add(createBackButton());
     child.add(createNextButton());
   }
+
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     if (img != null) {
       TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
