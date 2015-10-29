@@ -1,0 +1,5 @@
+name: draw_rect
+dependencies:
+  flutter: any
+dev_dependencies:
+  sky_tools: any
