@@ -9,6 +9,7 @@ import '../programscene.dart';
 import '../main.dart';
 import '../glogic/tip.dart';
 import '../glogic/game.dart';
+import '../glogic/target.dart';
 
 class GameProgram {
   GameTip startTip;
@@ -30,10 +31,6 @@ class GameProgram {
     startTip = new GameTip.start();
     currentTip = startTip;
     setTip(1, 0, startTip);
-    setTip(1, 1, new GameTip.advance(dx:0,dy:1));
-    setTip(1, 2, new GameTip.nop(dx:0,dy:1));
-    setTip(1, 3, new GameTip.nop(dx:0,dy:1));
-    setTip(1, 4, new GameTip.turning(dx:-1,dy:0));
   }
 
   void next(GameEnvirone e, GameTarget t) {

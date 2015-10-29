@@ -36,8 +36,8 @@ class PlayScene extends TinyDisplayObject {
       img = i;
     });
     {
-      chara1 = new PlayChara(game, game.programBlue, game.targetBlue);
-      chara2 = new PlayChara(game, game.programRed, game.targetRed,
+      chara1 = new PlayChara(game, game.environ.programBlue, game.environ.targetBlue);
+      chara2 = new PlayChara(game, game.environ.programRed, game.environ.targetRed,
         iconSrc:"assets/ch_iron2.png");
       child.add(chara1);
       child.add(chara2);
@@ -65,7 +65,7 @@ class PlayScene extends TinyDisplayObject {
       canvas.drawImageRect(stage, img, src, dst, p);
     }
     {
-      TinyRect rect = new TinyRect(50.0, 50.0, game.fieldWidth, game.fieldHeight);
+      TinyRect rect = new TinyRect(50.0, 50.0, game.environ.fieldWidth, game.environ.fieldHeight);
       TinyPaint p = new TinyPaint();
       p.color = new TinyColor.argb(0xaa, 0xff, 0xff, 0x00);
       p.style = TinyPaintStyle.stroke;
