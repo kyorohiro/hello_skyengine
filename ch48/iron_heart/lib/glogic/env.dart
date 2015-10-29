@@ -24,8 +24,8 @@ class GameEnvirone {
   GameEnvirone() {
     programRed = new GameProgram(10, 7);
     programBlue = new GameProgram(10, 7);
-    targetRed = new GameTargetSource(this, 50.0);
-    targetBlue = new GameTargetSource(this, 50.0);
+    targetRed = new GameTargetSource(this, 50.0, "red");
+    targetBlue = new GameTargetSource(this, 50.0, "blue");
   }
   void red() {
     //

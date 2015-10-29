@@ -13,6 +13,7 @@ import '../glogic/target.dart';
 import '../glogic/env.dart';
 
 class GameTargetSource extends GameTarget {
+  String groupName;
   double angle = 0.0;
   double dx = 0.0;
   double dy = 0.0;
@@ -22,7 +23,7 @@ class GameTargetSource extends GameTarget {
   double size;
   GameEnvirone game;
 
-  GameTargetSource(this.game, this.size) {
+  GameTargetSource(this.game, this.size, this.groupName) {
     ;
   }
 

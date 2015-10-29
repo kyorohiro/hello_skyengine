@@ -19,6 +19,7 @@ class GameTip {
   static const int id_advance = 0xff0000ff;
   static const int id_nop = 0xffaaaaaa;
   static const int id_turning = 0xffffffaa;
+  static const int id_search_enemy = 0xfffff100;
 
   int id = 0;
   int curX;
@@ -69,6 +70,10 @@ class GameTip {
     return new GameTipTurning(dx:dx, dy:dy);
   }
 
+  factory GameTip.searchEnemy({int yesDx:0,int yesDy:1, int noDx:1, int noDy:0}) {
+    return new GameTipSearchEnemy(yesDx:yesDx, yesDy:yesDy, noDx:noDx, noDy:noDy);
+  }
+
 }
 
 enum GameTipTurningDirection {
@@ -86,9 +91,28 @@ class GameTipTurning extends GameTip {
   }
 }
 
+class GameTipSearchEnemy extends GameTip {
+  GameTipSearchEnemy({int yesDx:0,int yesDy:1, int noDx:1, int noDy:0}) :super.custom(GameTip.id_search_enemy) {
+    dxys.add(new Next(yesDx,yesDy));
+    dxys.add(new Next(noDx,noDy));
+  }
+
+  GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
+    t.turn(math.PI/10.0);
+    return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+  }
+}
+
 class GameTipSleep extends GameTip {
   GameTipSleep() :super.custom(GameTip.id_turning) {
     ;
+  }
+
+  GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
+    //
+    //
+    //
+    return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
   }
 }
 
