@@ -29,33 +29,34 @@ class PlayScene extends TinyDisplayObject {
     return button;
   }
 
-  PlayChara chara1;
-  PlayChara chara2;
+  PlayChara charaBlue;
+  PlayChara charaRed;
   PlayScene(this.game) {
     game.f.loadImage("assets/bg_play.png").then((TinyImage i) {
       img = i;
     });
     {
-      chara1 = new PlayChara(game, game.environ.targetBlue);
-      chara2 = new PlayChara(game, game.environ.targetRed,
+      charaBlue = new PlayChara(game, game.environ.targetBlue);
+      charaRed = new PlayChara(game, game.environ.targetRed,
         iconSrc:"assets/ch_iron2.png");
-      child.add(chara1);
-      child.add(chara2);
+      child.add(charaBlue);
+      child.add(charaRed);
     }
     child.add(createBackButton());
     child.add(createNextButton());
   }
   void onConnect() {
-    chara1.target.angle = 0.0;
-    chara1.target.dx = 0.0;
-    chara1.target.dy = 0.0;
-    chara1.target.x = 100.0;
-    chara1.target.y = 300.0;
-    chara2.target.angle = math.PI;
-    chara2.target.dx = 0.0;
-    chara2.target.dy = 0.0;
-    chara2.target.x = 700.0;
-    chara2.target.y = 300.0;
+    charaRed.target.angle = 0.0;
+    charaRed.target.dx = 0.0;
+    charaRed.target.dy = 0.0;
+    charaRed.target.x = 100.0;
+    charaRed.target.y = 300.0;
+
+    charaBlue.target.angle = math.PI;
+    charaBlue.target.dx = 0.0;
+    charaBlue.target.dy = 0.0;
+    charaBlue.target.x = 700.0;
+    charaBlue.target.y = 300.0;
   }
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     if (img != null) {

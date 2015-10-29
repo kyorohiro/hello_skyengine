@@ -98,7 +98,7 @@ class GameTipSearchEnemy extends GameTip {
   }
 
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
-    t.turn(math.PI/10.0);
+    e.searchEnemy(t, t.angle-(math.PI/2), t.angle+(math.PI/2), 0.0, 500.0);
     return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
   }
 }

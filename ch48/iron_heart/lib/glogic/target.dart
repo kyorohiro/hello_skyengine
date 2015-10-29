@@ -13,7 +13,6 @@ import '../glogic/target.dart';
 import '../glogic/env.dart';
 
 class GameTargetSource extends GameTarget {
-  String groupName;
   double angle = 0.0;
   double dx = 0.0;
   double dy = 0.0;
@@ -23,8 +22,9 @@ class GameTargetSource extends GameTarget {
   double size;
   GameEnvirone game;
 
-  GameTargetSource(this.game, this.size, this.groupName) {
+  GameTargetSource(this.game, this.size, String groupName) {
     program = new GameProgram(10, 7);
+    this.groupName = groupName;
   }
 
   void next() {
@@ -62,6 +62,8 @@ abstract class GameTarget {
   double x = 0.0;
   double y = 0.0;
   GameProgram program;
+  String groupName;
+
   void advance(double speed);
   void turn(double a);
 }
