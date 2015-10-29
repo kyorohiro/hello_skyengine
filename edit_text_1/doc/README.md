@@ -7,8 +7,9 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/edit_text_1
 **[ERROR]**
  * https://github.com/flutter/engine/issues/1662
  * https://github.com/flutter/engine/issues/1663
- 
+
 ```
+// following code is checked in 2015/10/28
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -17,7 +18,7 @@ import 'package:flutter/services.dart';
 
 KeyboardServiceProxy pService = null;
 Keyboard keyboard = null;
-EditableString st = null;
+
 main() async {
   await setupKeyboard();
   runApp(new DrawRectWidget());
@@ -26,7 +27,6 @@ main() async {
 setupKeyboard() async {
   pService = new KeyboardServiceProxy.unbound();
   await shell.requestService(null, pService);
-  st = new EditableString(text: "test:", onUpdated: () {});
   keyboard = new Keyboard(pService.ptr);
 }
 
@@ -38,7 +38,9 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 
 class EditableRenderObject extends RenderBox implements KeyboardClient {
   EditableString keyboardClientBase =
-      new EditableString(text: "test:", onUpdated: () {});
+      new EditableString(text: "test:",
+      onUpdated: () {print("onUpdated()");},
+      onSubmitted:(){print("onSubmitted()");});
 
   KeyboardClientStub stub;
   EditableRenderObject() {
@@ -72,46 +74,54 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     textPainter.minHeight = constraints.minHeight;
     textPainter.maxHeight = constraints.maxHeight;
     textPainter.layout();
-    textPainter.paint(context.canvas, new sky.Offset(100, 100));
+    textPainter.paint(context.canvas, new sky.Offset(100.0, 100.0));
   }
 
   @override
   void submit(SubmitAction action) {
+    print("submit ${action}");
     this.keyboardClientBase.submit(action);
     this.markNeedsPaint();
   }
 
   void commitCompletion(CompletionData completion) {
+    print("commitCompletion");
     this.keyboardClientBase.commitCompletion(completion);
     this.markNeedsPaint();
   }
 
   void commitCorrection(CorrectionData correction) {
+    print("commitCorrection");
     this.keyboardClientBase.commitCorrection(correction);
     this.markNeedsPaint();
   }
 
   void commitText(String text, int newCursorPosition) {
+    print("commitText ${text} ${newCursorPosition}");
     this.keyboardClientBase.commitText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void deleteSurroundingText(int beforeLength, int afterLength) {
+    print("deleteSurroundingText ${beforeLength} ${afterLength}");
     this.keyboardClientBase.deleteSurroundingText(beforeLength, afterLength);
     this.markNeedsPaint();
   }
 
   void setComposingRegion(int start, int end) {
+    print("setComposingRegion ${start} ${end}");
     this.keyboardClientBase.setComposingRegion(start, end);
     this.markNeedsPaint();
   }
 
   void setComposingText(String text, int newCursorPosition) {
+    print("setComposingText ${text} ${newCursorPosition}");
     this.keyboardClientBase.setComposingText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void setSelection(int start, int end) {
+    print("setSelecdtion ${start} ${end}");
     this.keyboardClientBase.setSelection(start, end);
     this.markNeedsPaint();
   }

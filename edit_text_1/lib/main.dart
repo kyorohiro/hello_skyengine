@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 
 KeyboardServiceProxy pService = null;
 Keyboard keyboard = null;
-EditableString st = null;
 
 main() async {
   await setupKeyboard();
@@ -16,7 +15,6 @@ main() async {
 setupKeyboard() async {
   pService = new KeyboardServiceProxy.unbound();
   await shell.requestService(null, pService);
-  st = new EditableString(text: "test:", onUpdated: () {});
   keyboard = new Keyboard(pService.ptr);
 }
 
@@ -28,7 +26,9 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 
 class EditableRenderObject extends RenderBox implements KeyboardClient {
   EditableString keyboardClientBase =
-      new EditableString(text: "test:", onUpdated: () {});
+      new EditableString(text: "test:",
+      onUpdated: () {print("onUpdated()");},
+      onSubmitted:(){print("onSubmitted()");});
 
   KeyboardClientStub stub;
   EditableRenderObject() {
@@ -62,7 +62,7 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     textPainter.minHeight = constraints.minHeight;
     textPainter.maxHeight = constraints.maxHeight;
     textPainter.layout();
-    textPainter.paint(context.canvas, new sky.Offset(100, 100));
+    textPainter.paint(context.canvas, new sky.Offset(100.0, 100.0));
   }
 
   @override
