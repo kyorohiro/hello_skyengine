@@ -24,7 +24,7 @@ class GameTargetSource extends GameTarget {
   GameEnvirone game;
 
   GameTargetSource(this.game, this.size, this.groupName) {
-    ;
+    program = new GameProgram(10, 7);
   }
 
   void next() {
@@ -61,6 +61,7 @@ abstract class GameTarget {
   double dy = 0.0;
   double x = 0.0;
   double y = 0.0;
+  GameProgram program;
   void advance(double speed);
   void turn(double a);
 }

@@ -14,11 +14,10 @@ import './glogic/env.dart';
 
 class PlayChara extends TinyDisplayObject {
   Game game;
-  GameProgram program;
   TinyImage img = null;
   GameTargetSource target;
 
-  PlayChara(this.game, this.program, this.target, {iconSrc:"assets/ch_iron.png"}) {
+  PlayChara(this.game, this.target, {iconSrc:"assets/ch_iron.png"}) {
     game.f.loadImage(iconSrc).then((TinyImage i) {
       img = i;
     });
@@ -34,7 +33,7 @@ class PlayChara extends TinyDisplayObject {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
-    program.next(new GameEnvirone(), this.target);
+    this.target.program.next(new GameEnvirone(), this.target);
     this.target.next();
     mat = new Matrix4.identity();
     mat.translate(this.target.x, this.target.y,1.0);
