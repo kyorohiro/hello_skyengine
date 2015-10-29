@@ -10,6 +10,7 @@ import '../main.dart';
 import '../glogic/tip.dart';
 import '../glogic/program.dart';
 import '../glogic/target.dart';
+import '../glogic/env.dart';
 
 class Game {
   TinyGameBuilderForFlutter f;

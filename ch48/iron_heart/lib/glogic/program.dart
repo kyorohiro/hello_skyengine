@@ -10,6 +10,7 @@ import '../main.dart';
 import '../glogic/tip.dart';
 import '../glogic/game.dart';
 import '../glogic/target.dart';
+import '../glogic/env.dart';
 
 class GameProgram {
   GameTip startTip;

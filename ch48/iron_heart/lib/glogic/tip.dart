@@ -10,6 +10,7 @@ import '../main.dart';
 import '../glogic/game.dart';
 import '../glogic/program.dart';
 import '../glogic/target.dart';
+import '../glogic/env.dart';
 
 class GameTip {
   static const int id_empty = 0xffffffff;
