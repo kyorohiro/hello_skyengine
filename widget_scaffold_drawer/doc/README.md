@@ -16,21 +16,21 @@ import 'package:flutter/rendering.dart';
 void main() {
   // 2015/10/26 if use IconButton's icon option, need MatrialApp?
   runApp(new MaterialApp(
-      title: 'Cards',
+      title: "Drawer",
       routes: <String, RouteBuilder>{
         '/': (RouteArguments args) {
-          return new AAA();
+          return new DrawerTest();
         },
       }));
 }
 
-class AAA extends StatefulComponent {
+class DrawerTest extends StatefulComponent {
   State createState() {
-    return new AaaState();
+    return new DrawerTestState();
   }
 }
 
-class AaaState extends State<AAA> {
+class DrawerTestState extends State<DrawerTest> {
   Widget build(BuildContext context) {
     Widget body = new Center(child: new Text("body"));
     Widget toolBar = new ToolBar(
