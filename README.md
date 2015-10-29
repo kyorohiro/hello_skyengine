@@ -55,6 +55,7 @@ http://creativecommons.org/licenses/by/4.0/
   * [navigator](widget_navigator/doc/README.md)
   * [stateful component](widget_stateful/doc/README.md)
   * [scaffold](widget_scaffold/doc/README.md)
+  * [scaffold x drawer](widget_scaffold_drawer/doc/README.md)
   * [scrollable viewport](widget_scrollableviewport/doc/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
 * [dart:io](doc/dartio/README.md)
