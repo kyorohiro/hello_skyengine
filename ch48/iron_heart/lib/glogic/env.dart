@@ -22,7 +22,8 @@ class GameEnvirone {
   }
 
   void searchEnemy(GameTarget base, double starting, double ending) {
-
+    double s = base.angle+starting;
+    double e = base.angle+ending;
   }
 
   void red() {
