@@ -17,7 +17,9 @@ class Game {
   ProgramScree progScene;
   TinyStage stage;
   GameProgram programRed;
+  GameTarget targetRed;
   GameProgram programBlue;
+  GameTarget targetBlue;
   double fieldX = 50.0;
   double fieldY = 50.0;
   double fieldWidth = 700.0;
@@ -26,6 +28,9 @@ class Game {
   Game() {
     programRed = new GameProgram(10, 7);
     programBlue = new GameProgram(10, 7);
+    targetRed = new GameTargetSource(this, 50.0);
+    targetBlue = new GameTargetSource(this, 50.0);
+
     f = new TinyGameBuilderForFlutter();
     playScene = new PlayScene(this);
     startScene = new StartScreen(this);
