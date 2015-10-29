@@ -5,16 +5,18 @@ import '../glogic/program.dart';
 import '../glogic/target.dart';
 
 class GameEnvirone {
-  GameTarget targetRed;
-  GameTarget targetBlue;
+  GameTarget _targetRed;
+  GameTarget _targetBlue;
+  GameTarget get targetRed => _targetRed;
+  GameTarget get targetBlue => _targetBlue;
   double fieldX = 50.0;
   double fieldY = 50.0;
   double fieldWidth = 700.0;
   double fieldHeight = 500.0;
 
   GameEnvirone() {
-    targetRed = new GameTargetSource(this, 50.0, "red");
-    targetBlue = new GameTargetSource(this, 50.0, "blue");
+    _targetRed = new GameTargetSource(this, 50.0, "red");
+    _targetBlue = new GameTargetSource(this, 50.0, "blue");
   }
 
   List<GameTarget> getEnemy(GameTarget own) {
@@ -22,35 +24,46 @@ class GameEnvirone {
     if(own.groupName != targetRed.groupName) {
       l.add(targetRed);
     }
-    if(own.groupName != targetBlue.groupName) {
+    else if(own.groupName != targetBlue.groupName) {
       l.add(targetBlue);
     }
     return l;
   }
 
   bool searchEnemy(GameTarget base,
-    double starting, double ending,
+    double direction, double range,
     double startDist, double endDist) {
+
+    double s2 = normalizeAngle(direction);
+    double starting = s2-math.PI/1.5;
+    double ending = s2+math.PI/1.5;
     double s = base.angle+starting;
     double e = base.angle+ending;
     List<GameTarget> l = getEnemy(base);
     for(GameTarget t in l) {
       double d = distance(base, t);
-      double a = angle(base, t);
+      double a = angleFromP2(t, base);
       //print("## a=${a}   d=${d} n=${normalizeAngle(base.angle)}");
 
-      double ss = normalizeAngle(a-startDist);
-      double ee = normalizeAngle(a-ending);
+      double s1 = normalizeAngle(a-direction);
 
+      double ss = a-starting;
+      double ee = a-ending;
+
+      double xx = t.x-base.x;
+      double yy = t.y-base.y;
       if(ss>=0 && ee<=0) {
-      //  print("find!!");
+      //  print("find true!! tar=${s1}   dir=${s2} ## xx/yy=${xx}/${yy} ######${targetRed.groupName} ${targetBlue.y}## ${ss} ${ee}");
         return true;
+      } else {
+      //  print("find false!! tar=${s1}  dir=${s2} ## xx/yy=${xx}/${yy} ######${targetRed.groupName} ${targetBlue.y}## ${ss} ${ee}");
       }
     }
     return false;
   }
 
   static double normalizeAngle(double a) {
+    a+= math.PI*2*4;
     a = a%(2*math.PI);
     if(a<math.PI) {
       return a;
@@ -65,25 +78,43 @@ class GameEnvirone {
     return math.sqrt(x*x+y*y);
   }
 
-  static double angle(GameTarget p1, GameTarget p2) {
+  static double angleFromP2(GameTarget p1, GameTarget p2) {
     double x = p1.x-p2.x;
     double y = p1.y-p2.y;
-    return math.atan2(y, x);
+    return math.atan2(y, x);//+math.PI/2;
+  }
+
+  void init() {
+    targetRed.angle = 0.0;//-math.PI/1.4;
+    targetRed.dx = 0.0;
+    targetRed.dy = 0.0;
+    targetRed.x = 200.0;
+    targetRed.y = 300.0;
+
+    targetBlue.angle = math.PI;
+    targetBlue.dx = 0.0;
+    targetBlue.dy = 0.0;
+    targetBlue.x = 700.0;
+    targetBlue.y = 300.0;
   }
 
   void red() {
     //
-    targetBlue.program.setTip(1, 1, new GameTip.advance(dx: 0, dy: 1));
+    targetBlue.program.setTip(1, 1, new GameTip.nop(dx: 0, dy: 1));
     targetBlue.program.setTip(1, 2, new GameTip.nop(dx: 0, dy: 1));
     targetBlue.program.setTip(1, 3, new GameTip.nop(dx: 0, dy: 1));
     targetBlue.program.setTip(1, 4, new GameTip.turning(dx: -1, dy: 0));
 
     //
-    targetRed.program.setTip(1, 1, new GameTip.advance(dx: 0, dy: 1));
+    targetRed.program.setTip(1, 1, new GameTip.nop(dx: 0, dy: 1));
     targetRed.program.setTip(1, 2, new GameTip.nop(dx: 0, dy: 1));
     targetRed.program.setTip(1, 3, new GameTip.nop(dx: 0, dy: 1));
-    targetRed.program.setTip(1, 4, new GameTip.turning(dx: 0, dy: 1));
-    targetRed.program.setTip(1, 5, new GameTip.searchEnemy(yesDx:-1,yesDy:0));
+    targetRed.program.setTip(1, 4, new GameTip.nop(dx: 0, dy: 1));
+    targetRed.program.setTip(1, 5, new GameTip.searchEnemy(
+      yesDx:1,yesDy:0,noDx:-1,noDy:0));
+    targetRed.program.setTip(2, 5, new GameTip.advance(dx: 1, dy: 0));
+    targetRed.program.setTip(3, 5, new GameTip.advance(dx: 1, dy: 0));
+    targetRed.program.setTip(4, 5, new GameTip.advance(dx: 0, dy: 1));
 
   }
 }

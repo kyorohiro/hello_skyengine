@@ -36,7 +36,8 @@ class PlayScene extends TinyDisplayObject {
       img = i;
     });
     {
-      charaBlue = new PlayChara(game, game.environ.targetBlue);
+      charaBlue = new PlayChara(game, game.environ.targetBlue,
+        iconSrc:"assets/ch_iron.png");
       charaRed = new PlayChara(game, game.environ.targetRed,
         iconSrc:"assets/ch_iron2.png");
       child.add(charaBlue);
@@ -46,18 +47,10 @@ class PlayScene extends TinyDisplayObject {
     child.add(createNextButton());
   }
   void onConnect() {
-    charaRed.target.angle = 0.0;
-    charaRed.target.dx = 0.0;
-    charaRed.target.dy = 0.0;
-    charaRed.target.x = 100.0;
-    charaRed.target.y = 300.0;
-
-    charaBlue.target.angle = math.PI;
-    charaBlue.target.dx = 0.0;
-    charaBlue.target.dy = 0.0;
-    charaBlue.target.x = 700.0;
-    charaBlue.target.y = 300.0;
+    print("--------------------------init()");
+    game.environ.init();
   }
+
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     if (img != null) {
       TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());

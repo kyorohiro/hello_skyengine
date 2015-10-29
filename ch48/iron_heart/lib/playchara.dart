@@ -33,10 +33,10 @@ class PlayChara extends TinyDisplayObject {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
-    this.target.program.next(new GameEnvirone(), this.target);
+    this.target.program.next(game.environ, this.target);
     this.target.next();
     mat = new Matrix4.identity();
-    mat.translate(this.target.x, this.target.y,1.0);
+    mat.translate(this.target.x, this.target.y, 1.0);
     mat.rotateZ(this.target.angle);
   }
 

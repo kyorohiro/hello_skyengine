@@ -34,7 +34,7 @@ class GameTip {
       return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
     }
     if(id == id_advance) {
-      t.advance(1.0);
+      t.advance(3.0);
       return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
     }
   }
@@ -86,7 +86,7 @@ class GameTipTurning extends GameTip {
     dxys.add(new Next(dx,dy));
   }
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
-    t.turn(math.PI/10.0);
+    t.turn(math.PI/40.0);
     return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
   }
 }
@@ -98,8 +98,12 @@ class GameTipSearchEnemy extends GameTip {
   }
 
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
-    e.searchEnemy(t, t.angle-(math.PI/2), t.angle+(math.PI/2), 0.0, 500.0);
-    return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+    bool ret = e.searchEnemy(t, t.angle, math.PI/4, 0.0, 500.0);
+    if(ret == true) {
+      return p.getTip(curX+dxys[0].dx, curY+dxys[0].dy);
+    } else {
+      return p.getTip(curX+dxys[1].dx, curY+dxys[1].dy);
+    }
   }
 }
 

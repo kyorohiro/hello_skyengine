@@ -13,11 +13,7 @@ import '../glogic/target.dart';
 import '../glogic/env.dart';
 
 class GameTargetSource extends GameTarget {
-  double angle = 0.0;
-  double dx = 0.0;
-  double dy = 0.0;
-  double x = 0.0;
-  double y = 0.0;
+
   //radius
   double size;
   GameEnvirone game;
