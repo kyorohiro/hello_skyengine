@@ -5,6 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/sound_test
 ![](screen.png)
 
 ```
+// following code is checked in 2015/10/29
 import 'dart:async';
 import 'package:flutter/src/services/fetch.dart';
 import 'package:mojo/core.dart';
