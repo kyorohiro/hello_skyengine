@@ -1,12 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
 import 'dart:math' as math;
 import 'dart:async';
-import 'package:flutter/services.dart';
-import '../playscene.dart';
-import '../programscene.dart';
-import '../main.dart';
 import '../glogic/tip.dart';
 import '../glogic/program.dart';
 import '../glogic/target.dart';
@@ -27,6 +20,11 @@ class GameEnvirone {
     targetRed = new GameTargetSource(this, 50.0, "red");
     targetBlue = new GameTargetSource(this, 50.0, "blue");
   }
+
+  void searchEnemy(GameTarget base, double starting, double ending) {
+
+  }
+
   void red() {
     //
     programRed.setTip(1, 1, new GameTip.advance(dx: 0, dy: 1));
