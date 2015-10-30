@@ -82,7 +82,7 @@ void main() {
 ```
 ```
 pub global activate flutter
-flutter start --checked -t foo.dart
+flutter start --checked -t ./lib/main.dart
 ```
 
 これで完了です。
