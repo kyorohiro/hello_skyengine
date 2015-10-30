@@ -80,6 +80,10 @@ void main() {
 ```
 ./packages/flutter/sky_tool start --checked && ./packages/flutter/sky_tool logs
 ```
+```
+pub global activate flutter
+flutter start --checked -t foo.dart
+```
 
 これで完了です。
 
