@@ -11,21 +11,27 @@ import '../glogic/tip.dart';
 import '../glogic/program.dart';
 import '../glogic/target.dart';
 import '../glogic/env.dart';
+import '../tinyphysics2d.dart';
 
 class GameTargetSource extends GameTarget {
 
   //radius
-  double size;
+  void set size(double v) {radius = v;}
+  double get size => radius;
   GameEnvirone game;
 
-  GameTargetSource(this.game, this.size, String groupName) {
+  GameTargetSource(this.game,  double s, String groupName) {
     program = new GameProgram(10, 7);
+    radius = s;
     this.groupName = groupName;
   }
 
-  void next() {
-    x += dx;
-    y += dy;
+
+  void next(double t) {
+    super.next(t);
+
+    //x += dx;
+    //y += dy;
     if (game.fieldX > x - size) {
       x = game.fieldX + size;
     }
@@ -51,15 +57,20 @@ class GameTargetSource extends GameTarget {
   }
 }
 
-abstract class GameTarget {
+abstract class GameTarget extends CirclePrimitive{//Primitive {
   double angle = 0.0;
-  double dx = 0.0;
-  double dy = 0.0;
-  double x = 0.0;
-  double y = 0.0;
+  double get dx => dxy[0];//0.0;
+  double get dy => dxy[1];//0.0;
+  double get x => xy[0];//0.0;
+  double get y => xy[1];// 0.0;
+  void set x(double v) {xy[0] = v;}
+  void set y(double v) {xy[1] = v;}
+  void set dx(double v) {dxy[0] = v;}
+  void set dy(double v) {dxy[1] = v;}
   GameProgram program;
   String groupName;
 
+  void next(double t);
   void advance(double speed);
   void turn(double a);
 }

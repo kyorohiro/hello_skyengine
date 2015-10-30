@@ -68,6 +68,10 @@ class PlayScene extends TinyDisplayObject {
     }
   }
 
+  void onTick(TinyStage stage, int timeStamp) {
+    this.game.environ.next(timeStamp);
+  }
+
   void onPush(String id) {
     print("### ${id}");
     switch (id) {
