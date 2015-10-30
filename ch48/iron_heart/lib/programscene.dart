@@ -2,9 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'tinygame.dart';
 import 'dart:math' as math;
-import 'dart:async';
-import 'package:flutter/services.dart';
-import 'playscene.dart';
 import 'glogic/game.dart';
 import 'glogic/tip.dart';
 
