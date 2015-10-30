@@ -3,6 +3,8 @@ part of tinygame;
 
 class TinyScrollView extends TinyDisplayObject {
 
+  double dx = 0.0;
+  double dy = 0.0;
   double currentLeft = 0.0;
   double currentTop = 0.0;
   double viewWidth;
@@ -15,7 +17,26 @@ class TinyScrollView extends TinyDisplayObject {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
-
+    dx *=0.9;
+    dy *=0.9;
+    currentLeft += dx;
+    currentTop += dy;
+    if(currentLeft < -1*(contentWidth-viewWidth)) {
+      double left = -1*(contentWidth-viewWidth);
+      dx = (left-currentLeft)/10;
+    }
+    if(currentTop < -1*(contentHeight-viewHeight)) {
+       double top= -1*(contentHeight-viewHeight);
+       dy = (top-currentTop)/10;
+    }
+    if(currentTop > 0.0) {
+      double top = 0.0;
+      dy = (top-currentTop)/10;
+    }
+    if(currentLeft > 0.0) {
+      double left = 0.0;
+      dx = (left-currentLeft)/10;
+    }
   }
 
   double px = 0.0;
@@ -27,20 +48,10 @@ class TinyScrollView extends TinyDisplayObject {
         py = y;
       break;
       case "pointermove":
-        currentLeft += x-px;
-        currentTop += y-py;
-        if(currentLeft < -1*(contentWidth-viewWidth)) {
-          currentLeft = -1*(contentWidth-viewWidth);
-        }
-        if(currentTop < -1*(contentHeight-viewHeight)) {
-          currentTop = -1*(contentHeight-viewHeight);
-        }
-        if(currentTop > 0.0) {
-          currentTop = 0.0;
-        }
-        if(currentLeft > 0.0) {
-          currentLeft = 0.0;
-        }
+        dx = x-px;
+        dy = y-py;
+        currentLeft += dx;
+        currentTop += dy;
         px = x;
         py = y;
       break;
