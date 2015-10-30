@@ -15,7 +15,9 @@ Flutter is dartlang framework for mobile platform.
 
 ## LICENSES
 Thid document 's licenses is following
+
 http://creativecommons.org/licenses/by/4.0/
+
 
 ## CONTENT
 * [hello](doc/hello/README.md)
