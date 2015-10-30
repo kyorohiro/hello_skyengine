@@ -7,8 +7,11 @@ class TinyScrollView extends TinyDisplayObject {
   double currentTop = 0.0;
   double viewWidth;
   double viewHeight;
+  double contentWidth;
+  double contentHeight;
 
-  TinyScrollView(this.viewWidth, this.viewHeight) {
+  TinyScrollView(this.viewWidth, this.viewHeight,
+  this.contentWidth, this.contentHeight) {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
@@ -26,6 +29,18 @@ class TinyScrollView extends TinyDisplayObject {
       case "pointermove":
         currentLeft += x-px;
         currentTop += y-py;
+        if(currentLeft < -1*(contentWidth-viewWidth)) {
+          currentLeft = -1*(contentWidth-viewWidth);
+        }
+        if(currentTop < -1*(contentHeight-viewHeight)) {
+          currentTop = -1*(contentHeight-viewHeight);
+        }
+        if(currentTop > 0.0) {
+          currentTop = 0.0;
+        }
+        if(currentLeft > 0.0) {
+          currentLeft = 0.0;
+        }
         px = x;
         py = y;
       break;

@@ -17,7 +17,7 @@ class GameWidget extends OneChildRenderObjectWidget {
     root = new TinyGameRoot(800.0, 600.0);
     stage = builder.createStage(root);
     stage.start();
-    TinyScrollView scroll = new TinyScrollView(400.0, 400.0);
+    TinyScrollView scroll = new TinyScrollView(400.0, 400.0, 1050.0, 1050.0);
     scroll.addChild(new SScreen());
     stage.root.child.add(scroll);
     return (stage as TinyFlutterStage);
