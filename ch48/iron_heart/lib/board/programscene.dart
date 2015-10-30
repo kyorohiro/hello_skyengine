@@ -9,11 +9,12 @@ import './tipselect.dart';
 
 class ProgramScree extends TinyDisplayObject {
   Game game;
-  TinyImage img = null;
+  TinyImage bgImg = null;
   TipSelect tipSelect;
+
   ProgramScree(this.game) {
     game.f.loadImage("assets/bg_prog.png").then((TinyImage i) {
-      img = i;
+      bgImg = i;
     });
     {
       TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
@@ -32,17 +33,17 @@ class ProgramScree extends TinyDisplayObject {
   }
 
   void drawBG(TinyStage stage, TinyCanvas canvas) {
-    if (img != null) {
-      TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
+    if (bgImg != null) {
+      TinyRect src = new TinyRect(0.0, 0.0, bgImg.w.toDouble(), bgImg.h.toDouble());
       TinyRect dst = new TinyRect(0.0, 0.0, 800.0, 600.0);
       TinyPaint p = new TinyPaint();
-      canvas.drawImageRect(stage, img, src, dst, p);
+      canvas.drawImageRect(stage, bgImg, src, dst, p);
     }
   }
 
   int selectTipX = 0;
   int selectTipY = 0;
-  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
+  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
     //print("###### x=${x}   y=${y}");
     double x1 =x - 50.0;
     double y1 =y - 5.0;
@@ -52,8 +53,15 @@ class ProgramScree extends TinyDisplayObject {
     selectTipX = xx.toInt();
     selectTipY = yy.toInt();
     if(!child.contains(tipSelect)) {
-      child.add(tipSelect);
+      print(" #######-select-tip-##### ${selectTipX} ${selectTipY}");
+      if(0<selectTipX && selectTipX < game.environ.targetRed.program.w-1){
+        if(0<selectTipY && selectTipY < game.environ.targetRed.program.h-1){
+          child.add(tipSelect);
+        }
+      }
     }
+    //
+    return false;
   }
 
   void drawTips(TinyStage stage, TinyCanvas canvas) {

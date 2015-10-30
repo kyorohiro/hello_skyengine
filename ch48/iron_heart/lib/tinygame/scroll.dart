@@ -58,7 +58,7 @@ class TinyScrollView extends TinyDisplayObject {
     }
   }
 
-  void touch(TinyStage stage, int id, String type, double x, double y) {
+  bool touch(TinyStage stage, int id, String type, double x, double y) {
     {//todo
       Matrix4 tmp = stage.getMatrix().clone();
       tmp.invert();

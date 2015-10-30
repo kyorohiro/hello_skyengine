@@ -27,7 +27,7 @@ class TinyGameRoot extends TinyDisplayObject {
     mat.scale(radio, radio, 1.0);
   }
 
-  void touch(TinyStage stage, int id,
+  bool touch(TinyStage stage, int id,
     String type, double x, double y) {
       stage.pushMulMatrix(mat);
       super.touch(stage, id, type, x, y);

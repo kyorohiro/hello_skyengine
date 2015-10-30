@@ -30,7 +30,7 @@ class TinyButton extends TinyDisplayObject {
   double py = 0.0;
   double prevGX=0.0;
   double prevGY=0.0;
-  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
+  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
     switch(type) {
       case "pointerdown":
       if(checkFocus(x, y)) {
@@ -69,6 +69,8 @@ class TinyButton extends TinyDisplayObject {
       isTouch = false;
       isFocus = false;
     }
+
+    return false;
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {

@@ -75,22 +75,27 @@ class TinyDisplayObject {
     }
   }
 
-  void touch(TinyStage stage, int id, String type, double x, double y) {
+  bool touch(TinyStage stage, int id, String type, double x, double y) {
     connectCheck();
+    for(int i=0;i<child.length;i++) {
+      TinyDisplayObject d = child[child.length-(i+1)];
+    //for (TinyDisplayObject d in child.) {
+      stage.pushMulMatrix(d.mat);
+      bool r = d.touch(stage, id, type, x, y);
+      stage.popMatrix();
+      if(r == true) {
+        return r;
+      }
+    }
     {
       Matrix4 tmp = stage.getMatrix().clone();
       tmp.invert();
       Vector3 a = tmp * new Vector3(x, y, 0.0);
-      onTouch(stage, id, type, a.x, a.y, x, y);
-    }
-    for (TinyDisplayObject d in child) {
-      stage.pushMulMatrix(d.mat);
-      d.touch(stage, id, type, x, y);
-      stage.popMatrix();
+      return onTouch(stage, id, type, a.x, a.y, x, y);
     }
   }
 
-  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {}
+  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {}
 
   void onUnattach() {}
 

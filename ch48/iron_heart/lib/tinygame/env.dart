@@ -3,6 +3,7 @@ part of tinygame;
 abstract class TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root);
   Future<TinyImage> loadImage(String path);
+  Future clearCash();
 }
 
 class TinyRect {

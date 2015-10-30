@@ -33,7 +33,8 @@ class GameWidget extends OneChildRenderObjectWidget {
 class SScreen extends TinyDisplayObject {
   SScreen() {
   }
-  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY){
+  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY){
+    return false;
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {

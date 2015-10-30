@@ -4,8 +4,8 @@ import 'tinygame.dart';
 import 'glogic/game.dart';
 import 'test/test001.dart' as t001;
 
-//bool isTestMode = false;
-bool isTestMode = true;
+bool isTestMode = false;
+//bool isTestMode = true;
 void main() {
   if(isTestMode == false) {
     Game game = new Game();
