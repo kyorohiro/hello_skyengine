@@ -48,10 +48,10 @@ class TinyScrollView extends TinyDisplayObject {
         py = y;
       break;
       case "pointermove":
-        dx = x-px;
-        dy = y-py;
-        currentLeft += dx;
-        currentTop += dy;
+        dx = (x-px)*2.2;
+        dy = (y-py)*2.2;
+        //currentLeft += dx;
+        //currentTop += dy;
         px = x;
         py = y;
       break;
