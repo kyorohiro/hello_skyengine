@@ -1,14 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
-import 'dart:math' as math;
-import 'dart:async';
-import 'package:flutter/services.dart';
-import '../playscene.dart';
-import '../programscene.dart';
-import '../main.dart';
 import '../glogic/tip.dart';
-import '../glogic/game.dart';
 import '../glogic/target.dart';
 import '../glogic/env.dart';
 

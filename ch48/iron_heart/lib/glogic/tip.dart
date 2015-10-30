@@ -1,13 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
 import 'dart:math' as math;
-import 'dart:async';
-import 'package:flutter/services.dart';
-import '../playscene.dart';
-import '../programscene.dart';
-import '../main.dart';
-import '../glogic/game.dart';
 import '../glogic/program.dart';
 import '../glogic/target.dart';
 import '../glogic/env.dart';
@@ -37,6 +28,8 @@ class GameTip {
       t.advance(3.0);
       return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
     }
+
+    return null;
   }
 
   GameTip.custom(this.id) {

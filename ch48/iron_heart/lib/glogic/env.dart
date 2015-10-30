@@ -49,21 +49,19 @@ class GameEnvirone {
     double s2 = normalizeAngle(direction);
     double starting = s2 - math.PI / 1.5;
     double ending = s2 + math.PI / 1.5;
-    double s = base.angle + starting;
-    double e = base.angle + ending;
     List<GameTarget> l = getEnemy(base);
     for (GameTarget t in l) {
       double d = distance(base, t);
       double a = angleFromP2(t, base);
+      if(!(startDist<=d && d<=endDist)) {
+        continue;
+      }
       //print("## a=${a}   d=${d} n=${normalizeAngle(base.angle)}");
 
-      double s1 = normalizeAngle(a - direction);
 
       double ss = a - starting;
       double ee = a - ending;
 
-      double xx = t.x - base.x;
-      double yy = t.y - base.y;
       if (ss >= 0 && ee <= 0) {
         //  print("find true!! tar=${s1}   dir=${s2} ## xx/yy=${xx}/${yy} ######${targetRed.groupName} ${targetBlue.y}## ${ss} ${ee}");
         return true;
