@@ -37,6 +37,19 @@ class ProgramScree extends TinyDisplayObject {
     }
   }
 
+  int selectTipX = 0;
+  int selectTipY = 0;
+  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+    print("###### x=${x}   y=${y}");
+    double x1 =x - 50.0;
+    double y1 =y - 5.0;
+    double xx = x1/(50+20);
+    double yy = y1/(50+20);
+    print("###### x:y=${xx}:${yy}   x=${x}   y=${y}");
+    selectTipX = xx.toInt();
+    selectTipY = yy.toInt();
+  }
+
   void drawTips(TinyStage stage, TinyCanvas canvas) {
     for (int y = 0; y < game.environ.targetRed.program.h; y++) {
       for (int x = 0; x < game.environ.targetRed.program.w; x++) {
@@ -44,6 +57,7 @@ class ProgramScree extends TinyDisplayObject {
       }
     }
   }
+
 
   void drawTip(TinyStage stage, TinyCanvas canvas, int x, int y) {
     TinyPaint p = new TinyPaint();
@@ -56,6 +70,12 @@ class ProgramScree extends TinyDisplayObject {
     TinyRect rect = new TinyRect(xx, yy, ww, hh);
     GameTip tip = game.environ.targetRed.program.getTip(x, y);
     p.color = new TinyColor(tip.id);
+
+    if(x == selectTipX && y == selectTipY) {
+      p.style = TinyPaintStyle.fill;
+    } else {
+      p.style = TinyPaintStyle.stroke;
+    }
     canvas.drawRect(stage, rect, p);
     for(Next n in tip.dxys) {
       double angle = 0.0;

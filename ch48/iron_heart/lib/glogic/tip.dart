@@ -93,10 +93,8 @@ class GameTipSearchEnemy extends GameTip {
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
     bool ret = e.searchEnemy(t, t.angle, math.PI/4, 0.0, 500.0);
     if(ret == true) {
-      print("-----true");
       return p.getTip(curX+dxys[0].dx, curY+dxys[0].dy);
     } else {
-      print("-----false");
       return p.getTip(curX+dxys[1].dx, curY+dxys[1].dy);
     }
   }
