@@ -39,8 +39,11 @@ class TinyGameRoot extends TinyDisplayObject {
   }
 
   void paint(TinyStage stage, TinyCanvas canvas) {
+    TinyRect rect = new TinyRect(0.0, 0.0, w, h);
     canvas.pushMulMatrix(mat);
+    canvas.pushClipRect(stage, rect);
     super.paint(stage, canvas);
+    canvas.popClipRect(stage);
     canvas.popMatrix();
   }
 

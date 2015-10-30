@@ -15,3 +15,4 @@ part 'tinygame/gameroot.dart';
 part 'tinygame/button.dart';
 part 'tinygame/canvas.dart';
 part 'tinygame/stage.dart';
+part 'tinygame/scroll.dart';

@@ -1,6 +1,6 @@
 import '../tinygame.dart';
 import '../playscene.dart';
-import '../programscene.dart';
+import '../board/programscene.dart';
 import '../main.dart';
 import '../glogic/env.dart';
 

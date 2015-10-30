@@ -2,10 +2,17 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'tinygame.dart';
 import 'glogic/game.dart';
+import 'test/test001.dart' as t001;
 
+//bool isTestMode = false;
+bool isTestMode = true;
 void main() {
-  Game game = new Game();
-  runApp(new GameWidget(game));
+  if(isTestMode == false) {
+    Game game = new Game();
+    runApp(new GameWidget(game));
+  } else {
+    t001.main();
+  }
 }
 
 class GameWidget extends OneChildRenderObjectWidget {

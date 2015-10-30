@@ -1,14 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'tinygame.dart';
+import '../tinygame.dart';
 import 'dart:math' as math;
-import 'glogic/game.dart';
-import 'glogic/tip.dart';
+import '../glogic/game.dart';
+import '../glogic/tip.dart';
+
+import './tipselect.dart';
 
 class ProgramScree extends TinyDisplayObject {
   Game game;
   TinyImage img = null;
-
+  TipSelect tipSelect;
   ProgramScree(this.game) {
     game.f.loadImage("assets/bg_prog.png").then((TinyImage i) {
       img = i;
@@ -21,6 +23,7 @@ class ProgramScree extends TinyDisplayObject {
       button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
       child.add(button);
     }
+    tipSelect = new TipSelect(this, selectTipX, selectTipY);
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
@@ -40,14 +43,17 @@ class ProgramScree extends TinyDisplayObject {
   int selectTipX = 0;
   int selectTipY = 0;
   void onTouch(TinyStage stage, int id, String type, double x, double y) {
-    print("###### x=${x}   y=${y}");
+    //print("###### x=${x}   y=${y}");
     double x1 =x - 50.0;
     double y1 =y - 5.0;
     double xx = x1/(50+20);
     double yy = y1/(50+20);
-    print("###### x:y=${xx}:${yy}   x=${x}   y=${y}");
+    //print("###### x:y=${xx}:${yy}   x=${x}   y=${y}");
     selectTipX = xx.toInt();
     selectTipY = yy.toInt();
+    if(!child.contains(tipSelect)) {
+      child.add(tipSelect);
+    }
   }
 
   void drawTips(TinyStage stage, TinyCanvas canvas) {
