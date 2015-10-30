@@ -14,7 +14,7 @@ This is memo when I tried to install into ubuntu on vmware fusion.
 * date
   * 2015/10/25
 * vmware setting 
-  * maybe, need storage 30GB
+  * maybe, need storage 30GB, assign 60GB to use mojo build env too. 
   * assign 2core and 4GB MEMORY
 
 ## Result 
