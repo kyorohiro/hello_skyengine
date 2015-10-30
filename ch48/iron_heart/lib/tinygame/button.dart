@@ -7,6 +7,7 @@ class TinyButton extends TinyDisplayObject {
   double h;
   bool isTouch = false;
   bool isFocus = false;
+
   String buttonName;
   TinyColor bgcolorOff = new TinyColor.argb(0xaa, 0xff, 0xaa, 0xcc);
   TinyColor bgcolorOn = new TinyColor.argb(0xaa, 0xcc, 0xaa, 0xff);
@@ -25,17 +26,31 @@ class TinyButton extends TinyDisplayObject {
     }
   }
 
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+  double px = 0.0;
+  double py = 0.0;
+  double prevGX=0.0;
+  double prevGY=0.0;
+  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
     switch(type) {
       case "pointerdown":
       if(checkFocus(x, y)) {
          isTouch = true;
          isFocus = true;
+         prevGX = globalX;
+         prevGY = globalY;
+         px = 0.0;
+         py = 0.0;
       }
       break;
       case "pointermove":
       if(checkFocus(x, y)) {
         isFocus = true;
+        px += globalX-prevGX;
+        py += globalY-prevGY;
+        if(math.sqrt(px*px) > w || math.sqrt(py*py) > h) {
+          isTouch = false;
+          isFocus = false;
+        }
       } else {
         isTouch = false;
         isFocus = false;

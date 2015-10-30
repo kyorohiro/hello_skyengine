@@ -41,7 +41,7 @@ class TinyScrollView extends TinyDisplayObject {
 
   double px = 0.0;
   double py = 0.0;
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY){
     switch(type) {
       case "pointerdown":
         px = x;

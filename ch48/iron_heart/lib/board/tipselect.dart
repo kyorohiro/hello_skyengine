@@ -26,7 +26,7 @@ class TipSelect extends TinyDisplayObject {
     canvas.drawRect(stage, rect, p);
   }
 
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
     if(x<100.0 || 700<x) {
       parent.rmChild(this);
     }

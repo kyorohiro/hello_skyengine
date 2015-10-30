@@ -42,7 +42,7 @@ class ProgramScree extends TinyDisplayObject {
 
   int selectTipX = 0;
   int selectTipY = 0;
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {
+  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
     //print("###### x=${x}   y=${y}");
     double x1 =x - 50.0;
     double y1 =y - 5.0;

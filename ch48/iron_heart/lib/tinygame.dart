@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/animation.dart';
 import 'dart:ui' as sky;
 import 'dart:async';
+import 'dart:math'as math;
 import 'package:vector_math/vector_math_64.dart';
 
 part 'tinygame/flutter/stage.dart';

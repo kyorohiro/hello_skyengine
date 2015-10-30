@@ -81,7 +81,7 @@ class TinyDisplayObject {
       Matrix4 tmp = stage.getMatrix().clone();
       tmp.invert();
       Vector3 a = tmp * new Vector3(x, y, 0.0);
-      onTouch(stage, id, type, a.x, a.y);
+      onTouch(stage, id, type, a.x, a.y, x, y);
     }
     for (TinyDisplayObject d in child) {
       stage.pushMulMatrix(d.mat);
@@ -90,7 +90,7 @@ class TinyDisplayObject {
     }
   }
 
-  void onTouch(TinyStage stage, int id, String type, double x, double y) {}
+  void onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {}
 
   void onUnattach() {}
 
