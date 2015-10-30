@@ -78,9 +78,6 @@ void main() {
 "./" で、以下のコマンドを入力する。
 
 ```
-./packages/flutter/sky_tool start --checked && ./packages/flutter/sky_tool logs
-```
-```
 pub global activate flutter
 flutter start --checked -t ./lib/main.dart
 ```
