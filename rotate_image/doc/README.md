@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 
 
 ```
-// following code is checked in 2015/10/28
+// following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as sky;
@@ -23,9 +23,14 @@ class ImageLoader {
     if (response.statusCode >= 400) {
       throw "failed load ${url}";
     } else {
+      // normally use following
+      // import 'package:flutter/services.dart';
+      // Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
+      // Future<ui.Image> decodeImageFromList(Uint8List list) {
       Completer<sky.Image> completer = new Completer();
-      sky.ImageDecoder decoder = new sky.ImageDecoder.consume(
-          response.body.handle.h, completer.complete);
+      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
+        completer.complete(image);
+      });
       return completer.future;
     }
   }
@@ -82,4 +87,5 @@ class DrawImageObject extends RenderBox {
     }
   }
 }
+
 ```
