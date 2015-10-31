@@ -199,9 +199,23 @@ class ProgramScree extends TinyDisplayObject {
         game.stage.root.addChild(game.playScene);
         break;
       case "yes_button":
-      break;
+        GameTip t =
+            game.environ.targetRed.program.getTip(selectTipX, selectTipY);
+        if (t.dxys.length > 0) {
+          int tmp = t.dxys[0].dx;
+          t.dxys[0].dx = -1 * t.dxys[0].dy;
+          t.dxys[0].dy = tmp;
+        }
+        break;
       case "no_button":
-      break;
+        GameTip t =
+            game.environ.targetRed.program.getTip(selectTipX, selectTipY);
+        if (t.dxys.length > 1) {
+          int tmp = t.dxys[1].dx;
+          t.dxys[1].dx = -1 * t.dxys[1].dy;
+          t.dxys[1].dy = tmp;
+        }
+        break;
     }
   }
 }
