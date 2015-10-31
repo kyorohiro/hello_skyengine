@@ -11,14 +11,14 @@ ui.Rect stageSize = new ui.Rect.fromLTWH(0.0, 0.0, stageWidth, stageHeight);
 double widthPaddingless = 0.0;
 double heightPaddingless = 0.0;
 double stageRatio = 0.0;
-double stageTop = ui.view.paddingTop;
-double stageLeft = ui.view.paddingLeft + (widthPaddingless - stageWidth * stageRatio) / 2.0;
+double stageTop = ui.window.padding.top;
+double stageLeft = ui.window.padding.left + (widthPaddingless - stageWidth * stageRatio) / 2.0;
 
 //
 //
 Map<int, PointerInfo> pointerInfos = {};
 
-void onPaint(double timeStamp) {
+void onPaint(Duration timeStamp) {
   ui.PictureRecorder recorder = new ui.PictureRecorder();
   ui.Canvas canvas = new ui.Canvas(recorder, stageSize);
 
@@ -35,7 +35,7 @@ void onPaint(double timeStamp) {
     canvas.drawRect(drawRectSize, paint);
   }
   ui.Picture picture = recorder.endRecording();
-  ui.view.scene = createScene(picture);
+  ui.window.render(createScene(picture));
 }
 
 void onEvent(ui.Event event) {
@@ -48,7 +48,7 @@ void onEvent(ui.Event event) {
   if (event is ui.WheelEvent) {
     onWheelEvent(event);
   }
-  ui.view.scheduleFrame();
+  ui.window.scheduleFrame();
 }
 
 void onPointerEvent(ui.PointerEvent event) {
@@ -79,13 +79,13 @@ void onWheelEvent(ui.WheelEvent event) {}
 
 void main() {
   update();
-  ui.view.setFrameCallback(onPaint);
-  ui.view.setMetricsChangedCallback(() {
+  ui.window.onBeginFrame = onPaint;
+  ui.window.onMetricsChanged = () {
     update();
-    ui.view.scheduleFrame();
-  });
-  ui.view.setEventCallback(onEvent);
-  ui.view.scheduleFrame();
+    ui.window.scheduleFrame();
+  };
+  ui.window.onEvent = onEvent;
+  ui.window.scheduleFrame();
 }
 
 class PointerInfo {
@@ -97,26 +97,26 @@ class PointerInfo {
 
 
 void update() {
-  widthPaddingless = ui.view.width - ui.view.paddingLeft - ui.view.paddingRight;
-  heightPaddingless = ui.view.height - ui.view.paddingTop - ui.view.paddingBottom;
+  widthPaddingless = ui.window.size.width - ui.window.padding.left - ui.window.padding.right;
+  heightPaddingless = ui.window.size.height - ui.window.padding.top - ui.window.padding.bottom;
   double rw = widthPaddingless / stageWidth;
   double rh = heightPaddingless / stageHeight;
   stageRatio = (rw < rh ? rw : rh);
-  stageTop = ui.view.paddingTop;
-  stageLeft = ui.view.paddingLeft + (widthPaddingless - stageWidth * stageRatio) / 2.0;
+  stageTop = ui.window.padding.top;
+  stageLeft = ui.window.padding.left + (widthPaddingless - stageWidth * stageRatio) / 2.0;
 }
 
 ui.Scene createScene(ui.Picture picture) {
   ui.Rect sceneBounds = new ui.Rect.fromLTWH(
       0.0,
       0.0,
-      ui.view.width * ui.view.devicePixelRatio,
-      ui.view.height * ui.view.devicePixelRatio);
+      ui.window.size.width * ui.window.devicePixelRatio,
+      ui.window.size.height * ui.window.devicePixelRatio);
 
   Matrix4 mat = new Matrix4.identity();
-  mat.translate(stageLeft * ui.view.devicePixelRatio, stageTop * ui.view.devicePixelRatio);
-  mat.scale(stageRatio * ui.view.devicePixelRatio,
-      stageRatio * ui.view.devicePixelRatio, 1.0);
+  mat.translate(stageLeft * ui.window.devicePixelRatio, stageTop * ui.window.devicePixelRatio);
+  mat.scale(stageRatio * ui.window.devicePixelRatio,
+      stageRatio * ui.window.devicePixelRatio, 1.0);
 
   ui.SceneBuilder sceneBuilder = new ui.SceneBuilder(sceneBounds);
   sceneBuilder.pushTransform(mat.storage);
