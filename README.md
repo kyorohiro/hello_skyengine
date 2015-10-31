@@ -23,7 +23,7 @@ http://creativecommons.org/licenses/by/4.0/
 * [hello](doc/hello/README.md)
   * [helloworld](hello/doc/README.md)
   * [build flutter](build_flutter/README.md)
-  * [build as standalone android app](build_android/README.md)
+  * [build as android app](build_android/README.md)
     * [draw text](test_android/doc/README.md)
     * [draw image](test_android_2/doc/README.md)
     * [set icon](test_android_3/doc/README.md)
@@ -77,10 +77,11 @@ http://creativecommons.org/licenses/by/4.0/
   * [**[@]demo:gravity sensor**](mojo_sensor_demo/doc/README.md)
 * [2d physics for scratch](doc/physics2d/README.md)
   * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
-  * [collision without friction](ph_2d_boun_no_friction/doc/README.md)
+  * **[[@]democollision without friction](ph_2d_boun_no_friction/doc/README.md)**
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo for native](doc/mojo_native/README.md)
   * [build mojo](mojo_na_install/README.md)
-
+* [48 hour trial](doc/ch48/README.md)
+ * [create iron heart](ch48/iron_heart/doc/README.md)
 
