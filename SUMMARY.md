@@ -62,5 +62,5 @@
 * [mojo for native](doc/mojo_native/README.md)
   * [build mojo](mojo_na_install/README.md)
 * [48 hour trial](doc/ch48/README.md)
- * create iron heart
+ * [create iron heart](ch48/iron_heart/doc/README.md)
 
