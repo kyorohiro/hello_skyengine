@@ -14,7 +14,7 @@ main() async {
 
 setupKeyboard() async {
   pService = new KeyboardServiceProxy.unbound();
-  await shell.requestService(null, pService);
+  await shell.connectToService(null, pService);
   keyboard = new Keyboard(pService.ptr);
 }
 
