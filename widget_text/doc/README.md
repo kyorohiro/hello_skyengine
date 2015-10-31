@@ -5,6 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_text
 ![](screen.png)
 
 ```
+// following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
 import 'dart:ui' as ui;
 
@@ -37,5 +38,4 @@ void main() {
   Text text = new Text("This is Text", style: textStyle);
   runApp(text);
 }
-
 ```
