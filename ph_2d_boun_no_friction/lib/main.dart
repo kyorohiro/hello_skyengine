@@ -17,7 +17,7 @@ double worldDz = 0.0;
 void intiSensor() {
   print("######====================####s##");
   SensorServiceProxy sensor = new SensorServiceProxy.unbound();
-  shell.requestService("h", sensor);
+  shell.connectToService("h", sensor);
 
   SensorListenerStub stub = new SensorListenerStub.unbound();
   stub.impl = new MySensorListener();
