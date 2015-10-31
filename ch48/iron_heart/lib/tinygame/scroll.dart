@@ -13,7 +13,7 @@ class TinyScrollView extends TinyDisplayObject {
   double contentHeight;
 
   TinyScrollView(this.viewWidth, this.viewHeight,
-  this.contentWidth, this.contentHeight) {
+    this.contentWidth, this.contentHeight) {
   }
 
   void onTick(TinyStage stage, int timeStamp) {
