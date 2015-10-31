@@ -8,7 +8,7 @@ main() async {
   StringBuffer buffer = new StringBuffer();
 
   PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
-  shell.requestService("dummy", pathServiceProxy);
+  shell.connectToService("dummy", pathServiceProxy);
   PathServiceGetFilesDirResponseParams dirResponse = await pathServiceProxy.ptr.getFilesDir();
   Directory dir = new Directory(dirResponse.path);
 

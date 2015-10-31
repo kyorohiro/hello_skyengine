@@ -5,6 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_file
 ![](screen.png)
 
 ```
+// flutter: ">=0.0.15"
+// following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
@@ -15,7 +17,7 @@ main() async {
   StringBuffer buffer = new StringBuffer();
 
   PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
-  shell.requestService("dummy", pathServiceProxy);
+  shell.connectToService("dummy", pathServiceProxy);
   PathServiceGetFilesDirResponseParams dirResponse = await pathServiceProxy.ptr.getFilesDir();
   Directory dir = new Directory(dirResponse.path);
 
