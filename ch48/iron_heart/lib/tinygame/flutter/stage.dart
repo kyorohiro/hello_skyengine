@@ -70,7 +70,8 @@ class TinyFlutterStage extends RenderBox with TinyStage {
     init();
   }
 
-  void init() {}
+  void init() {
+  }
 
   void start() {
     if (animeIsStart == true) {

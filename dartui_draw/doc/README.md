@@ -5,6 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartui_draw
 ![](screen.png)
 
 ```
+//
+// following code is checked in 2015/10/31
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'package:vector_math/vector_math_64.dart';
@@ -15,23 +17,23 @@ double stageHeight = 600.0;
 ui.Rect stageSize = new ui.Rect.fromLTWH(0.0, 0.0, stageWidth, stageHeight);
 
 ui.Scene createScene(ui.Picture picture) {
-  double widthPaddingless  = ui.view.width-ui.view.paddingLeft-ui.view.paddingRight;
-  double heightPaddingless = ui.view.height-ui.view.paddingTop-ui.view.paddingBottom;
+  double widthPaddingless  = ui.window.size.width-ui.window.padding.left-ui.window.padding.right;
+  double heightPaddingless = ui.window.size.height-ui.window.padding.top-ui.window.padding.bottom;
   double rw = widthPaddingless/stageWidth;
   double rh = heightPaddingless/stageHeight;
   double stageRatio = (rw<rh?rw:rh);
-  double t = ui.view.paddingTop;
-  double l = ui.view.paddingLeft + (widthPaddingless-stageWidth*stageRatio)/2.0;
+  double t = ui.window.padding.top;
+  double l = ui.window.padding.left + (widthPaddingless-stageWidth*stageRatio)/2.0;
 
   ui.Rect sceneBounds = new ui.Rect.fromLTWH(
     0.0, 0.0,
-    ui.view.width * ui.view.devicePixelRatio,
-    ui.view.height * ui.view.devicePixelRatio
+    ui.window.size.width * ui.window.devicePixelRatio,
+    ui.window.size.height * ui.window.devicePixelRatio
   );
 
   Matrix4 mat = new Matrix4.identity();
-  mat.translate(l*ui.view.devicePixelRatio, t*ui.view.devicePixelRatio);
-  mat.scale(stageRatio*ui.view.devicePixelRatio, stageRatio*ui.view.devicePixelRatio, 1.0);
+  mat.translate(l*ui.window.devicePixelRatio, t*ui.window.devicePixelRatio);
+  mat.scale(stageRatio*ui.window.devicePixelRatio, stageRatio*ui.window.devicePixelRatio, 1.0);
 
   ui.SceneBuilder sceneBuilder = new ui.SceneBuilder(sceneBounds);
   sceneBuilder.pushTransform(mat.storage);
@@ -42,7 +44,7 @@ ui.Scene createScene(ui.Picture picture) {
   return sceneBuilder.build();
 }
 
-void onPaint(double timeStamp) {
+void onPaint(Duration timeStamp) {
   print("---onPaint ${timeStamp}");
   //
   ui.PictureRecorder recorder = new ui.PictureRecorder();
@@ -60,14 +62,14 @@ void onPaint(double timeStamp) {
   canvas.drawRect(drawRectSize, paint);
   ui.Picture picture = recorder.endRecording();
 
-  ui.view.scene = createScene(picture);
+  ui.window.render(createScene(picture));
 }
 
 void main() {
-  ui.view.setFrameCallback(onPaint);
-  ui.view.setMetricsChangedCallback((){
-      ui.view.scheduleFrame();
-  });
-  ui.view.scheduleFrame();
+  ui.window.onBeginFrame =  onPaint;
+  ui.window.onMetricsChanged = (){
+      ui.window.scheduleFrame();
+  };
+  ui.window.scheduleFrame();
 }
 ```
