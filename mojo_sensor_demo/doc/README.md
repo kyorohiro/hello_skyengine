@@ -6,6 +6,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
 
 ```
+// flutter: ">=0.0.15"
+// following code is checked in 2015/10/31
 import 'package:flutter/services.dart';
 import 'package:mojo_services/sensors/sensors.mojom.dart';
 import 'package:flutter/widgets.dart';
@@ -21,7 +23,7 @@ double worldDz = 0.0;
 main() async {
   print("######====================####s##");
   SensorServiceProxy sensor = new SensorServiceProxy.unbound();
-  shell.requestService("h", sensor);
+  shell.connectToService("h", sensor);
 
   SensorListenerStub stub = new SensorListenerStub.unbound();
   stub.impl = new MySensorListener();
@@ -68,7 +70,7 @@ class DrawRectObject extends RenderBox {
     p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
     Rect r = new Rect.fromLTWH(x - s/2.0, y - s/2.0, s, s);
     context.canvas.drawOval(r, p);
-    p.setStyle(sky.PaintingStyle.stroke);
+    p.style = sky.PaintingStyle.stroke;
     Rect w = new Rect.fromLTWH(s/2, s/2, this.paintBounds.width-s, this.paintBounds.height-s);
     context.canvas.drawRect(w, p);
   }
