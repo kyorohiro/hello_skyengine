@@ -20,9 +20,10 @@ class MyStatlessComponentRoot extends StatelessComponent {
   Widget build(BuildContext context) {
     Widget content = new Material(child: new Text("ROOT", style: new TextStyle(fontSize: 100.0)));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
-      args.navigator.pushNamed("/image");
+      // args.context == build'args context
+      Navigator.of(args.context).pushNamed("/image");
     }, onLongPress: () {
-      args.navigator.pushNamed("/text");
+      Navigator.of(args.context).pushNamed("/text");
     });
     return new Center(child: gesture);
   }
@@ -34,7 +35,7 @@ class MyStatlessComponentImage extends StatelessComponent {
   Widget build(BuildContext context) {
     Widget content = new Material(child: new NetworkImage(src: 'icon.jpeg', width: 500.0, height: 500.0));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
-      args.navigator.pop();
+      Navigator.of(args.context).pop();
     });
     return new Center(child: gesture);
   }
@@ -48,7 +49,7 @@ class MyStatlessComponentText extends StatelessComponent {
     Widget content = new Material(
         child: new Text("Hello", style: new TextStyle(fontSize: 100.0)));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
-      args.navigator.pop();
+      Navigator.of(context).pop();
     });
     return new Center(child: gesture);
   }
