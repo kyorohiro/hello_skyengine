@@ -94,11 +94,18 @@ class DrawVertexsObject extends RenderBox {
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
     UrlResponse response = await fetchUrl(url);
-    if (response.body == null) {
+    if (response.statusCode >= 400) {
       throw "failed load ${url}";
+    } else {
+      // normally use following
+      // import 'package:flutter/services.dart';
+      // Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
+      // Future<ui.Image> decodeImageFromList(Uint8List list) {
+      Completer<sky.Image> completer = new Completer();
+      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
+        completer.complete(image);
+      });
+      return completer.future;
     }
-    Completer<sky.Image> completer = new Completer();
-    new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
-    return completer.future;
   }
 }
