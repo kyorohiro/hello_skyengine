@@ -5,6 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 ![](screen.png)
 
 ```
+// following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
