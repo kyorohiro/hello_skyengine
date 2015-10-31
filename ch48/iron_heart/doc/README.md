@@ -2,7 +2,6 @@
 
 
 ### Start Screen
-* show title
 
 ![](aaa.png)
 ![](bbb.png)
