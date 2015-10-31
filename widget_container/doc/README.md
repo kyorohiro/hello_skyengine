@@ -5,6 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_container
 ![](screen.png)
 
 ```
+// following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -76,11 +77,10 @@ class ImageLoader {
       throw "failed load ${url}";
     } else {
       Completer<sky.Image> completer = new Completer();
-      sky.ImageDecoder decoder = new sky.ImageDecoder.consume(
+      sky.decodeImageFromDataPipe(
           response.body.handle.h, completer.complete);
       return completer.future;
     }
   }
 }
-
 ```

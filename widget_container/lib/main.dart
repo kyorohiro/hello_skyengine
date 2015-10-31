@@ -69,7 +69,7 @@ class ImageLoader {
       throw "failed load ${url}";
     } else {
       Completer<sky.Image> completer = new Completer();
-      sky.ImageDecoder decoder = new sky.ImageDecoder.consume(
+      sky.decodeImageFromDataPipe(
           response.body.handle.h, completer.complete);
       return completer.future;
     }
