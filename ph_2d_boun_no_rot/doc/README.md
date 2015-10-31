@@ -6,6 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/ph_2d_boun_no_rot
 ![](screen.png)
 
 ```
+// following code is checked in 2015/10/31
 part of tinyphysics2d;
 
 class Primitive {
@@ -107,10 +108,12 @@ class CirclePrimitive extends Primitive {
 
 
 ```
+// following code is checked in 2015/10/31
 class World {
   Vector3 gravity = new Vector3(0.0, -9.8 / 500.0, 0.0);
   List<Primitive> primitives = [];
   next(double time) {
+    primitives.shuffle();
     for (Primitive a in primitives) {
       for (Primitive b in primitives) {
         if (a != b && a.checkCollision(b)) {
@@ -125,5 +128,4 @@ class World {
     }
   }
 }
-
 ```
