@@ -14,9 +14,12 @@ class ImageLoader {
     if (response.statusCode >= 400) {
       throw "failed load ${url}";
     } else {
+      //Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
+      //Future<ui.Image> decodeImageFromList(Uint8List list) {
       Completer<sky.Image> completer = new Completer();
-      sky.ImageDecoder decoder = new sky.ImageDecoder.consume(
-          response.body.handle.h, completer.complete);
+      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
+        completer.complete(image);
+      });
       return completer.future;
     }
   }
@@ -46,7 +49,7 @@ class DrawImageObject extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     loadImage();
     Paint paint = new Paint()
-    ..color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
+      ..color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
     Point point = new Point(x, y);
     if (image == null) {
       Rect rect = new Rect.fromLTWH(x, y, 50.0, 50.0);
