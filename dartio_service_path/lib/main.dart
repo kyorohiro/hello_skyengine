@@ -6,7 +6,7 @@ import 'dart:async';
 
 main() async {
   PathServiceProxy pathServiceProxy = new PathServiceProxy.unbound();
-  shell.requestService("dummy", pathServiceProxy);
+  shell.connectToService("dummy", pathServiceProxy);
   StringBuffer buffer = new StringBuffer();
   buffer.write("Directory.current = ${Directory.current} \n");
   buffer.write("Directory.systemTemp = ${Directory.systemTemp} \n");

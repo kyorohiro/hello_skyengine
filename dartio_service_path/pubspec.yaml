@@ -1,5 +1,5 @@
 name: hello
 dependencies:
   sky: any
-  flutter: any
+  flutter: ">=0.0.15"
   sky_tools: any
