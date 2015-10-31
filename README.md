@@ -77,7 +77,7 @@ http://creativecommons.org/licenses/by/4.0/
   * [**[@]demo:gravity sensor**](mojo_sensor_demo/doc/README.md)
 * [2d physics for scratch](doc/physics2d/README.md)
   * [collision without rotation](ph_2d_boun_no_rot/doc/README.md)
-  * **[[@]democollision without friction](ph_2d_boun_no_friction/doc/README.md)**
+  * [**[@]democollision without friction**](ph_2d_boun_no_friction/doc/README.md)
   * [b]
 * [2d physics for newton](doc/physics2d_newton/README.md)
 * [mojo for native](doc/mojo_native/README.md)
