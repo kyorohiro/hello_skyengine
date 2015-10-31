@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/sound_test
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/29
+// following code is checked in 2015/10/31
 import 'dart:async';
 import 'package:flutter/src/services/fetch.dart';
 import 'package:mojo/core.dart';
@@ -41,7 +41,7 @@ class SoundTest {
   MediaPlayerProxy player = new MediaPlayerProxy.unbound();
 
   init() async {
-    shell.requestService(null, service);
+    shell.connectToService(null, service);
     service.ptr.createPlayer(player);
     await player.ptr.prepare(data);
   }
@@ -57,4 +57,5 @@ class SoundTest {
     player.ptr.pause();
   }
 }
+
 ```

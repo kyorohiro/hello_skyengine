@@ -33,7 +33,7 @@ class SoundTest {
   MediaPlayerProxy player = new MediaPlayerProxy.unbound();
 
   init() async {
-    shell.requestService(null, service);
+    shell.connectToService(null, service);
     service.ptr.createPlayer(player);
     await player.ptr.prepare(data);
   }
