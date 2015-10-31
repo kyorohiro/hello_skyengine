@@ -67,9 +67,8 @@ class DrawRectObject extends RenderBox {
           touchInfos[e.pointer].pressure = e.pressure/e.pressureMax;
           break;
         case "pointerup":
-          // 2015/10/18 return null
-          //touchInfos[e.pointer].x += e.dx;
-          //touchInfos[e.pointer].y += e.dy;
+          touchInfos[e.pointer].x += e.dx;
+          touchInfos[e.pointer].y += e.dy;
           touchInfos[e.pointer].isTouch = false;
           break;
         case 'pointercancel':
