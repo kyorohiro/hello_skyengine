@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartui_draw
 ![](screen.png)
 
 ```
-//
+// flutter: ">=0.0.15"
 // following code is checked in 2015/10/31
 import 'dart:ui' as ui;
 import 'dart:typed_data';

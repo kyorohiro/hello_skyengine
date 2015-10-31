@@ -1,6 +1,5 @@
 name: draw_rect
 dependencies:
   mojo_services: any
-  sky: any
-  flutter: any
+  flutter: ">=0.0.15"
   sky_tools: any
