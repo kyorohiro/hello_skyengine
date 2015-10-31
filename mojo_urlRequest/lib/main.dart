@@ -14,7 +14,7 @@ export 'package:mojo/mojo/url_response.mojom.dart' show UrlResponse;
 class MyGet {
   static Future<UrlResponse> load(String url, {method: "GET", redirect: true}) async {
     NetworkServiceProxy networkService = new NetworkServiceProxy.unbound();
-    shell.requestService("m", networkService);
+    shell.connectToService("m", networkService);
     UrlLoaderProxy loader = new UrlLoaderProxy.unbound();
     networkService.ptr.createUrlLoader(loader);
     UrlRequest request = new UrlRequest();
@@ -32,7 +32,7 @@ class MyGet {
     }
 
     Completer<sky.Image> completer = new Completer();
-    new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
+    sky.decodeImageFromDataPipe(response.body.handle.h, completer.complete);
     return completer.future;
   }
 
