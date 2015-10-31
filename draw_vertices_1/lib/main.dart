@@ -63,8 +63,14 @@ class ImageLoader {
     if (response.statusCode >= 400) {
       throw "failed load ${url}";
     } else {
+      // normally use following
+      // import 'package:flutter/services.dart';
+      // Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
+      // Future<ui.Image> decodeImageFromList(Uint8List list) {
       Completer<sky.Image> completer = new Completer();
-      new sky.ImageDecoder.consume(response.body.handle.h, completer.complete);
+      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
+        completer.complete(image);
+      });
       return completer.future;
     }
   }
