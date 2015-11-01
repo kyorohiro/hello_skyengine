@@ -5,16 +5,16 @@ import 'glogic/game.dart';
 import 'test/test001.dart' as t001;
 import 'test/test002.dart' as t002;
 import 'test/test003.dart' as t003;
-//bool isTestMode = false;
-bool isTestMode = true;
+bool isTestMode = false;
+//bool isTestMode = true;
 void main() {
   if(isTestMode == false) {
     Game game = new Game();
     runApp(new GameWidget(game));
   } else {
-//    t001.main();
+    t001.main();
 //    t002.main();
-    t003.main();
+//    t003.main();
   }
 }
 
