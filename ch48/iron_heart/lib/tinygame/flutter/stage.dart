@@ -1,23 +1,14 @@
 part of tinygame;
 
 class TinyGameBuilderForFlutter extends TinyGameBuilder {
-  Map<String, TinyImage> cach = {};
-
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyFlutterStage(this, root);
   }
 
-  Future<TinyImage> loadImage(String path) async {
-    if(cach.containsKey(path)) {
-      return cach[path];
-    }
-    cach[path] = new TinyFlutterImage(await ImageLoader.load(path));
-    return cach[path];
+  Future<TinyImage> loadImageBase(String path) async {
+    return new TinyFlutterImage(await ImageLoader.load(path));
   }
 
-  Future clearCash() {
-    cach.clear();
-  }
 }
 
 class TinyFlutterImage implements TinyImage {
