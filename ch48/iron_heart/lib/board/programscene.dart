@@ -17,6 +17,7 @@ class ProgramScree extends TinyDisplayObject {
       bgImg = i;
     });
     {
+      child.add(newChaButton());
       child.add(newBackButton());
       child.add(newSelectButton());
       child.add(newYesButton());
@@ -109,7 +110,15 @@ class ProgramScree extends TinyDisplayObject {
     button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
     return button;
   }
-
+  TinyDisplayObject newChaButton() {
+    TinyImageButton button = new TinyImageButton(game.f, "select_button", "assets/con_cha.png", 80.0, 80.0, onPush);
+//    TinyButton button = new TinyButton("select_button", 80.0, 80.0, onPush);
+    button.mat = new Matrix4.translationValues(400.0, 500.0, 0.0);
+    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
+    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
+    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
+    return button;
+  }
   TinyDisplayObject newYesButton() {
     TinyImageButton button = new TinyImageButton(game.f, "yes_button", "assets/con_yes_rot.png", 80.0, 80.0, onPush);
     //TinyButton button = new TinyButton("yes_button", 80.0, 80.0, onPush);
