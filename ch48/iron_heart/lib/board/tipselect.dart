@@ -6,30 +6,6 @@ import '../glogic/game.dart';
 import '../glogic/tip.dart';
 import 'programscene.dart';
 
-class TipDO extends TinyButton {
-  TinyImage img = null;
-  TipDO(TinyGameBuilder b, String buttonName, String resPath,
-      TinyButtonCallback onTouchCallback)
-      : super(buttonName, 100.0, 100.0, onTouchCallback) {
-    bgcolorOff = new TinyColor.argb(0xff, 0xaa, 0xaa, 0xaa);
-    b.loadImage(resPath).then((TinyImage i) {
-      img = i;
-    });
-  }
-
-  void onPaint(TinyStage stage, TinyCanvas canvas) {
-    super.onPaint(stage, canvas);
-    TinyPaint p = new TinyPaint();
-    p.color = new TinyColor.argb(0x66, 0xaa, 0xaa, 0xaa);
-    TinyRect rect = new TinyRect(100.0, 0.0, 600.0, 600.0);
-    canvas.drawRect(stage, rect, p);
-
-    TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    TinyRect dst = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    canvas.drawImageRect(stage, img, src, dst, p);
-  }
-}
-
 typedef void TipSelectCallback(String id);
 
 class TipSelect extends TinyScrollView {
@@ -48,12 +24,12 @@ class TipSelect extends TinyScrollView {
 
   TipSelect(this.builder, this.parent, this.tipX, this.tipY, this.callback)
       : super(600.0, 600.0, 600.0, 720.0) {
-    TinyButton button1 = new TipDO(builder, actFront, actFront, selectTip);
-    TinyButton button2 = new TipDO(builder, actRight, actRight, selectTip);
-    TinyButton button3 = new TipDO(builder, actLeft, actLeft, selectTip);
-    TinyButton button4 = new TipDO(builder, actBack, actBack, selectTip);
-    TinyButton button5 = new TipDO(builder, actRotateRight, actRotateRight, selectTip);
-    TinyButton button6 = new TipDO(builder, actRotateLeft, actRotateLeft, selectTip);
+    TinyImageButton button1 = new TinyImageButton(builder, actFront, actFront, 100.0,100.0,selectTip);
+    TinyImageButton button2 = new TinyImageButton(builder, actRight, actRight,  100.0,100.0,selectTip);
+    TinyImageButton button3 = new TinyImageButton(builder, actLeft, actLeft,  100.0,100.0,selectTip);
+    TinyImageButton button4 = new TinyImageButton(builder, actBack, actBack,  100.0,100.0,selectTip);
+    TinyImageButton button5 = new TinyImageButton(builder, actRotateRight, actRotateRight,  100.0,100.0,selectTip);
+    TinyImageButton button6 = new TinyImageButton(builder, actRotateLeft, actRotateLeft,  100.0,100.0,selectTip);
 
     this.mat.translate(100.0, 0.0, 0.0);
     button1.mat.translate(0.0, 0.0, 0.0);
