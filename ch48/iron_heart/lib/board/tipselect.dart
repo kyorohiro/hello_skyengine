@@ -30,37 +30,31 @@ class TipDO extends TinyButton {
   }
 }
 
+typedef void TipSelectCallback(String id);
+
 class TipSelect extends TinyScrollView {
   int tipX = 0;
   int tipY = 0;
-  ProgramScree parent;
+  static const String actFront = "assets/act_front.png";
+  static const String actRight = "assets/act_right.png";
+  static const String actLeft = "assets/act_left.png";
+  static const String actBack = "assets/act_back.png";
+  static const String actRotateRight ="assets/act_rotate_right.png";
+  static const String actRotateLeft ="assets/act_rotate_left.png";
+  //ProgramScree parent;
+  TinyDisplayObject parent;
+  TinyGameBuilder builder;
+  TipSelectCallback callback;
 
-  TipSelect(this.parent, this.tipX, this.tipY)
+  TipSelect(this.builder, this.parent, this.tipX, this.tipY, this.callback)
       : super(600.0, 600.0, 600.0, 720.0) {
-    TinyButton button1 =
-        new TipDO(parent.game.f, "click", "assets/act_front.png", (String id) {
-      parent.rmChild(this);
-    });
-    TinyButton button2 =
-        new TipDO(parent.game.f, "click", "assets/act_right.png", (String id) {
-      parent.rmChild(this);
-    });
-    TinyButton button3 =
-        new TipDO(parent.game.f, "click", "assets/act_left.png", (String id) {
-      parent.rmChild(this);
-    });
-    TinyButton button4 =
-        new TipDO(parent.game.f, "click", "assets/act_back.png", (String id) {
-      parent.rmChild(this);
-    });
-    TinyButton button5 = new TipDO(
-        parent.game.f, "click", "assets/act_rotate_right.png", (String id) {
-      parent.rmChild(this);
-    });
-    TinyButton button6 = new TipDO(
-        parent.game.f, "click", "assets/act_rotate_left.png", (String id) {
-      parent.rmChild(this);
-    });
+    TinyButton button1 = new TipDO(builder, actFront, actFront, selectTip);
+    TinyButton button2 = new TipDO(builder, actRight, actRight, selectTip);
+    TinyButton button3 = new TipDO(builder, actLeft, actLeft, selectTip);
+    TinyButton button4 = new TipDO(builder, actBack, actBack, selectTip);
+    TinyButton button5 = new TipDO(builder, actRotateRight, actRotateRight, selectTip);
+    TinyButton button6 = new TipDO(builder, actRotateLeft, actRotateLeft, selectTip);
+
     this.mat.translate(100.0, 0.0, 0.0);
     button1.mat.translate(0.0, 0.0, 0.0);
     button2.mat.translate(0.0, 120.0, 0.0);
@@ -89,5 +83,11 @@ class TipSelect extends TinyScrollView {
       parent.rmChild(this);
     }
     return true;
+  }
+
+  void selectTip(String id) {
+    print("## selectTip ########## ${id}");
+    callback(id);
+    parent.rmChild(this);
   }
 }

@@ -22,9 +22,32 @@ class ProgramScree extends TinyDisplayObject {
       child.add(newYesButton());
       child.add(newNoButton());
     }
-    tipSelect = new TipSelect(this, selectTipX, selectTipY);
+    tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
   }
-
+  void selectTip(String id) {
+    print("-------------${id}");
+    GameTip tip = null;
+    switch(id) {
+    case TipSelect.actFront:
+    tip = new GameTip.front();
+      break;
+    case TipSelect.actRight:
+      break;
+    case TipSelect.actLeft:
+      break;
+    case TipSelect.actBack:
+      break;
+    case TipSelect.actRotateRight:
+      tip = new GameTip.turningRight();
+      break;
+    case TipSelect.actRotateLeft:
+      tip = new GameTip.turningLeft();
+      break;
+    }
+    if(tip != null) {
+      game.environ.targetRed.program.setTip(selectTipX, selectTipY, tip);
+    }
+  }
   TinyDisplayObject newBackButton() {
     TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
     button.mat = new Matrix4.translationValues(30.0, 480.0, 0.0);

@@ -113,7 +113,7 @@ class GameEnvirone {
     targetBlue.program.setTip(1, 1, new GameTip.nop(dx: 0, dy: 1));
     targetBlue.program.setTip(1, 2, new GameTip.nop(dx: 0, dy: 1));
     targetBlue.program.setTip(1, 3, new GameTip.nop(dx: 0, dy: 1));
-    targetBlue.program.setTip(1, 4, new GameTip.turning(dx: -1, dy: 0));
+    targetBlue.program.setTip(1, 4, new GameTip.turningRight(dx: -1, dy: 0));
 
     //
     targetRed.program.setTip(1, 1, new GameTip.nop(dx: 0, dy: 1));
@@ -122,8 +122,8 @@ class GameEnvirone {
     targetRed.program.setTip(1, 4, new GameTip.nop(dx: 0, dy: 1));
     targetRed.program.setTip(
         1, 5, new GameTip.searchEnemy(yesDx: 1, yesDy: 0, noDx: -1, noDy: 0));
-    targetRed.program.setTip(2, 5, new GameTip.advance(dx: 1, dy: 0));
-    targetRed.program.setTip(3, 5, new GameTip.advance(dx: 1, dy: 0));
-    targetRed.program.setTip(4, 5, new GameTip.advance(dx: 0, dy: 1));
+    targetRed.program.setTip(2, 5, new GameTip.front(dx: 1, dy: 0));
+    targetRed.program.setTip(3, 5, new GameTip.front(dx: 1, dy: 0));
+    targetRed.program.setTip(4, 5, new GameTip.front(dx: 0, dy: 1));
   }
 }
