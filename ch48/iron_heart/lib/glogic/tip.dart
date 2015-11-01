@@ -17,7 +17,7 @@ class GameTip {
   static const int id_turning_right = 0xffffffaa;
   static const int id_turning_left = 0xffffffab;
   static const int id_search_enemy = 0xfffff100;
-
+  static const int id_shoot = 0xfffff201;
   int id = 0;
   int curX;
   int curY;
@@ -102,6 +102,10 @@ class GameTip {
     return new GameTipSearchEnemy(yesDx:yesDx, yesDy:yesDy, noDx:noDx, noDy:noDy);
   }
 
+  factory GameTip.shoot({int dx:0,int dy:1}) {
+    return new GameTipShoot(dx:dx, dy:dy);
+  }
+
 }
 
 enum GameTipTurningDirection {
@@ -146,6 +150,16 @@ class GameTipSearchEnemy extends GameTip {
   }
 }
 
+
+class GameTipShoot extends GameTip {
+  GameTipShoot({int dx:0,int dy:1}) :super.custom(GameTip.id_shoot) {
+    dxys.add(new Next(dx,dy));
+  }
+  GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
+    //t.turn(math.PI/40.0);
+    return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
+  }
+}
 
 class Next {
   int dx = 1;

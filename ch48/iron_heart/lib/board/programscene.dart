@@ -53,6 +53,9 @@ class ProgramScree extends TinyDisplayObject {
     case TipSelect.actRotateLeft:
       tip = new GameTip.turningLeft();
       break;
+      case TipSelect.actShoot:
+        tip = new GameTip.shoot();
+        break;
     }
     return tip;
   }
@@ -82,6 +85,8 @@ class ProgramScree extends TinyDisplayObject {
         return TipSelect.actRotateRight;
       case GameTip.id_turning_left:
         return TipSelect.actRotateLeft;
+      case GameTip.id_shoot:id:
+        return TipSelect.actShoot;
       }
     return null;
   }

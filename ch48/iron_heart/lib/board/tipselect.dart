@@ -17,19 +17,22 @@ class TipSelect extends TinyScrollView {
   static const String actBack = "assets/act_back.png";
   static const String actRotateRight ="assets/act_rotate_right.png";
   static const String actRotateLeft ="assets/act_rotate_left.png";
+  static const String actShoot ="assets/act_shoot.png";
+
   //ProgramScree parent;
   TinyDisplayObject parent;
   TinyGameBuilder builder;
   TipSelectCallback callback;
 
   TipSelect(this.builder, this.parent, this.tipX, this.tipY, this.callback)
-      : super(600.0, 600.0, 600.0, 720.0) {
+      : super(600.0, 600.0, 600.0, 840.0) {
     TinyImageButton button1 = new TinyImageButton(builder, actFront, actFront, 100.0,100.0,selectTip);
     TinyImageButton button2 = new TinyImageButton(builder, actRight, actRight,  100.0,100.0,selectTip);
     TinyImageButton button3 = new TinyImageButton(builder, actLeft, actLeft,  100.0,100.0,selectTip);
     TinyImageButton button4 = new TinyImageButton(builder, actBack, actBack,  100.0,100.0,selectTip);
     TinyImageButton button5 = new TinyImageButton(builder, actRotateRight, actRotateRight,  100.0,100.0,selectTip);
     TinyImageButton button6 = new TinyImageButton(builder, actRotateLeft, actRotateLeft,  100.0,100.0,selectTip);
+    TinyImageButton button7 = new TinyImageButton(builder, actShoot, actShoot,  100.0,100.0,selectTip);
 
     this.mat.translate(100.0, 0.0, 0.0);
     button1.mat.translate(0.0, 0.0, 0.0);
@@ -38,12 +41,14 @@ class TipSelect extends TinyScrollView {
     button4.mat.translate(0.0, 360.0, 0.0);
     button5.mat.translate(0.0, 480.0, 0.0);
     button6.mat.translate(0.0, 600.0, 0.0);
+    button7.mat.translate(0.0, 720.0, 0.0);
     child.add(button1);
     child.add(button2);
     child.add(button3);
     child.add(button4);
     child.add(button5);
     child.add(button6);
+    child.add(button7);
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
