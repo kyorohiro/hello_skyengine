@@ -82,8 +82,10 @@ class TinyDisplayObject {
     //for (TinyDisplayObject d in child.) {
       stage.pushMulMatrix(d.mat);
       bool r = d.touch(stage, id, type, x, y);
+      //print("#################### touch ${r}");
       stage.popMatrix();
       if(r == true) {
+        //print("#################### touch true");
         return r;
       }
     }
@@ -95,7 +97,9 @@ class TinyDisplayObject {
     }
   }
 
-  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {}
+  bool onTouch(TinyStage stage, int id, String type, double x, double y, double globalX, globalY) {
+    return false;
+  }
 
   void onUnattach() {}
 

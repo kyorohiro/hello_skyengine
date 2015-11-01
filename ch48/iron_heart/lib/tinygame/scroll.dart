@@ -68,8 +68,9 @@ class TinyScrollView extends TinyDisplayObject {
     Matrix4 mat = new Matrix4.identity();
     mat.translate(currentLeft, currentTop, 0.0);
     stage.pushMulMatrix(mat);
-    super.touch(stage, id, type, x, y);
+    bool ret = super.touch(stage, id, type, x, y);
     stage.popMatrix();
+    return ret;
   }
 
   void paint(TinyStage stage, TinyCanvas canvas) {

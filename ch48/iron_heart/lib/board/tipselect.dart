@@ -58,6 +58,7 @@ class TipSelect extends TinyScrollView {
     if (type == "pointerup" && (x < 0.0 || 600 < x)) {
       parent.rmChild(this);
     }
+    //print("------------touch ####+++++++++");
     return true;
   }
 
