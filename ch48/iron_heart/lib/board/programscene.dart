@@ -25,6 +25,13 @@ class ProgramScree extends TinyDisplayObject {
     tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
   }
   void selectTip(String id) {
+    GameTip tip = id2Tip(id);
+    if(tip != null) {
+      game.environ.targetRed.program.setTip(selectTipX, selectTipY, tip);
+    }
+  }
+
+  GameTip id2Tip(String id) {
     print("-------------${id}");
     GameTip tip = null;
     switch(id) {
@@ -47,9 +54,36 @@ class ProgramScree extends TinyDisplayObject {
       tip = new GameTip.turningLeft();
       break;
     }
-    if(tip != null) {
-      game.environ.targetRed.program.setTip(selectTipX, selectTipY, tip);
-    }
+    return tip;
+  }
+
+  String id2Path(String id) {
+    print("-------------${id}");
+    return id;
+  }
+
+  String tipID2Path(int id) {
+    switch(id) {
+      case GameTip.id_empty:
+      case GameTip.id_frame:
+      case GameTip.id_start:
+      case GameTip.id_nop:
+      case GameTip.id_search_enemy:
+      return null;
+      case GameTip.id_front:
+        return TipSelect.actFront;
+      case GameTip.id_right:
+        return  TipSelect.actRight;
+      case GameTip.id_left:
+        return  TipSelect.actLeft;
+      case GameTip.id_back:
+        return TipSelect.actBack;
+      case GameTip.id_turning_right:
+        return TipSelect.actRotateRight;
+      case GameTip.id_turning_left:
+        return TipSelect.actRotateLeft;
+      }
+    return null;
   }
 
   TinyDisplayObject newBackButton() {
@@ -153,7 +187,20 @@ class ProgramScree extends TinyDisplayObject {
     } else {
       p.style = TinyPaintStyle.stroke;
     }
-    canvas.drawRect(stage, rect, p);
+    {
+      canvas.drawRect(stage, rect, p);
+    }
+    {
+      String path = tipID2Path(tip.id);
+      TinyImage img = null;
+      if(path != null) {
+        img = game.f.getImage(path);
+      }
+      if(img != null) {
+        TinyRect src = new TinyRect(0.0,0.0, img.w.toDouble(), img.h.toDouble());
+        canvas.drawImageRect(stage, img, src, rect, p);
+      }
+    }
     for (Next n in tip.dxys) {
       double angle = 0.0;
       if (n.dx == 1 && n.dy == 0) {
