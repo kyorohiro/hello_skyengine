@@ -191,9 +191,11 @@ class ProgramScree extends TinyDisplayObject {
     p.color = new TinyColor(tip.id);
 
     if (x == selectTipX && y == selectTipY) {
-      p.style = TinyPaintStyle.fill;
+      p.style = TinyPaintStyle.stroke;
+      p.strokeWidth = 10.5;
     } else {
       p.style = TinyPaintStyle.stroke;
+      p.strokeWidth = 2.5;
     }
     {
       canvas.drawRect(stage, rect, p);
