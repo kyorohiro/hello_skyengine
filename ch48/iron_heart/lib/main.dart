@@ -3,15 +3,17 @@ import 'package:flutter/rendering.dart';
 import 'tinygame.dart';
 import 'glogic/game.dart';
 import 'test/test001.dart' as t001;
+import 'test/test002.dart' as t002;
 
-bool isTestMode = false;
-//bool isTestMode = true;
+//bool isTestMode = false;
+bool isTestMode = true;
 void main() {
   if(isTestMode == false) {
     Game game = new Game();
     runApp(new GameWidget(game));
   } else {
-    t001.main();
+//    t001.main();
+    t002.main();
   }
 }
 
