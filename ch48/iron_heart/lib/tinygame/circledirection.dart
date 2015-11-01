@@ -1,13 +1,13 @@
 part of tinygame;
 
 class TinyCircleDirection extends TinyDisplayObject {
-  double viewWidth;
+  double circleSize;
   double rangeWidth;
   double angle = 0.0;
   double range = 0.3;
   TinyColor fgColor = new TinyColor.argb(0xaa, 0xaa, 0xaa, 0xff);
 
-  TinyCircleDirection(this.viewWidth, this.rangeWidth) {}
+  TinyCircleDirection(this.circleSize, this.rangeWidth) {}
 
   bool onTouch(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
@@ -17,20 +17,20 @@ class TinyCircleDirection extends TinyDisplayObject {
 
   bool onTouchCircle(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
-    double cx = viewWidth / 2.0;
-    double cy = viewWidth / 2.0;
+    double cx = circleSize / 2.0;
+    double cy = circleSize / 2.0;
     if (math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy)) <
-        viewWidth / 2.0) {
+        circleSize / 2.0) {
         angle = math.atan2(y - cy, x - cx) + math.PI / 2;
     }
   }
   bool onTouchRange(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
-    double cx = viewWidth+ rangeWidth/2;
+    double cx = circleSize+ rangeWidth/2;
     double cy = 0.0;
-    if(viewWidth<x && x<(viewWidth+rangeWidth)) {
-      if(0<y && y<viewWidth) {
-         range = (y/viewWidth)*math.PI;
+    if(circleSize<x && x<(circleSize+rangeWidth)) {
+      if(0<y && y<circleSize) {
+         range = (y/circleSize)*math.PI;
       }
     }
   }
@@ -44,17 +44,17 @@ class TinyCircleDirection extends TinyDisplayObject {
     p.style = TinyPaintStyle.stroke;
     p.strokeWidth = rangeWidth/3;
     p.color = fgColor;
-    double cx = viewWidth+ rangeWidth/2;
+    double cx = circleSize+ rangeWidth/2;
     double cy = 0.0;
     canvas.drawLine(
         stage,
         new TinyPoint(cx, cy),
-        new TinyPoint(cx, cy+viewWidth),
+        new TinyPoint(cx, cy+circleSize),
         p);
     canvas.drawLine(
             stage,
-            new TinyPoint(cx, cy+viewWidth*(range/math.PI)-10.0),
-            new TinyPoint(cx, cy+viewWidth*(range/math.PI)+10.0),
+            new TinyPoint(cx, cy+circleSize*(range/math.PI)-10.0),
+            new TinyPoint(cx, cy+circleSize*(range/math.PI)+10.0),
             p);
   }
 
@@ -62,12 +62,12 @@ class TinyCircleDirection extends TinyDisplayObject {
     TinyPaint p = new TinyPaint();
     p.style = TinyPaintStyle.stroke;
 
-    TinyRect rect = new TinyRect(0.0, 0.0, viewWidth, viewWidth);
+    TinyRect rect = new TinyRect(0.0, 0.0, circleSize, circleSize);
     canvas.drawOval(stage, rect, p);
 
     p.color = fgColor;
-    double cx = viewWidth / 2.0;
-    double cy = viewWidth / 2.0;
+    double cx = circleSize / 2.0;
+    double cy = circleSize / 2.0;
 
     p.strokeWidth = 15.0;
     canvas.drawLine(
