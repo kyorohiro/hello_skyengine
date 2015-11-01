@@ -106,7 +106,7 @@ class TinyImageButton extends TinyButton {
     canvas.drawRect(stage, rect, p);
 
     TinyRect src = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
-    TinyRect dst = new TinyRect(0.0, 0.0, img.w.toDouble(), img.h.toDouble());
+    TinyRect dst = new TinyRect(0.0, 0.0, w, h);
     canvas.drawImageRect(stage, img, src, dst, p);
   }
 }

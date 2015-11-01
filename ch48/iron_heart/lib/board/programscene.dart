@@ -101,28 +101,31 @@ class ProgramScree extends TinyDisplayObject {
   }
 
   TinyDisplayObject newSelectButton() {
-    TinyButton button = new TinyButton("select_button", 80.0, 80.0, onPush);
+    TinyImageButton button = new TinyImageButton(game.f, "select_button", "assets/con_sel.png", 80.0, 80.0, onPush);
+//    TinyButton button = new TinyButton("select_button", 80.0, 80.0, onPush);
     button.mat = new Matrix4.translationValues(500.0, 500.0, 0.0);
     button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0x55, 0x55, 0xff);
+    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
     button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
     return button;
   }
 
   TinyDisplayObject newYesButton() {
-    TinyButton button = new TinyButton("yes_button", 80.0, 80.0, onPush);
+    TinyImageButton button = new TinyImageButton(game.f, "yes_button", "assets/con_yes_rot.png", 80.0, 80.0, onPush);
+    //TinyButton button = new TinyButton("yes_button", 80.0, 80.0, onPush);
     button.mat = new Matrix4.translationValues(600.0, 500.0, 0.0);
     button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0x55, 0xff, 0xff);
+    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
     button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
     return button;
   }
 
   TinyDisplayObject newNoButton() {
-    TinyButton button = new TinyButton("no_button", 80.0, 80.0, onPush);
+    TinyImageButton button = new TinyImageButton(game.f, "no_button", "assets/con_no_rot.png", 80.0, 80.0, onPush);
+  //  TinyButton button = new TinyButton("no_button", 80.0, 80.0, onPush);
     button.mat = new Matrix4.translationValues(700.0, 500.0, 0.0);
     button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0x55);
+    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
     button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
     return button;
   }
