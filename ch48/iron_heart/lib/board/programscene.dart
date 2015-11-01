@@ -51,6 +51,7 @@ class ProgramScree extends TinyDisplayObject {
       game.environ.targetRed.program.setTip(selectTipX, selectTipY, tip);
     }
   }
+
   TinyDisplayObject newBackButton() {
     TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
     button.mat = new Matrix4.translationValues(30.0, 480.0, 0.0);
