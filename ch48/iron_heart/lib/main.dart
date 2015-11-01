@@ -4,7 +4,7 @@ import 'tinygame.dart';
 import 'glogic/game.dart';
 import 'test/test001.dart' as t001;
 import 'test/test002.dart' as t002;
-
+import 'test/test003.dart' as t003;
 //bool isTestMode = false;
 bool isTestMode = true;
 void main() {
@@ -13,7 +13,8 @@ void main() {
     runApp(new GameWidget(game));
   } else {
 //    t001.main();
-    t002.main();
+//    t002.main();
+    t003.main();
   }
 }
 
@@ -53,7 +54,6 @@ class StartScreen extends TinyDisplayObject {
   }
 
   void onPush(String id) {
-    print("### ${id}");
     game.stage.root.clearChild();
     game.stage.root.addChild(game.playScene);
   }

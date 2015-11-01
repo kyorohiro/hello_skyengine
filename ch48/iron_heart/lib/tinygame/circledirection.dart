@@ -95,20 +95,4 @@ class TinyCircleDirection extends TinyDisplayObject {
           cy + cy * math.sin(angle +range- math.PI / 2)),
         p);
   }
-/*
-  paintRange(TinyStage stage, TinyCanvas canvas) {
-    TinyPaint p = new TinyPaint();
-    p.style = TinyPaintStyle.stroke;
-    p.strokeWidth = 5.0;
-    TinyRect rect = new TinyRect(0.0, 0.0, viewWidth, viewWidth);
-    canvas.drawOval(stage, rect, p);
-
-    p.color = fgColor;
-    double cx = viewWidth/2.0;
-    double cy = viewWidth/2.0;
-    canvas.drawLine(stage,
-      new TinyPoint(cx, cy),
-      new TinyPoint(cx+cx*math.cos(angle-math.PI/2), cy+cy*math.sin(angle-math.PI/2)),
-      p);
-  }*/
 }
