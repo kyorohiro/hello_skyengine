@@ -42,6 +42,19 @@ class GameTargetSource extends GameTarget {
     dy = speed * math.sin(angle);
   }
 
+  void right(double speed) {
+    dx = -1*speed * math.sin(angle);
+    dy = speed * math.cos(angle);
+  }
+
+  void left(double speed) {
+    dx = speed * math.sin(angle);
+    dy = -1*speed * math.cos(angle);
+  }
+  void back(double speed) {
+    dx = -1*speed * math.cos(angle);
+    dy = -1*speed * math.sin(angle);
+  }
   void turn(double a) {
     angle += a;
   }
@@ -62,5 +75,8 @@ abstract class GameTarget extends CirclePrimitive{//Primitive {
 
   void next(double t);
   void advance(double speed);
+  void right(double speed);
+  void left(double speed);
+  void back(double speed);
   void turn(double a);
 }

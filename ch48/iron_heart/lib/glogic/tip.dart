@@ -35,13 +35,13 @@ class GameTip {
         t.advance(3.0);
         return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
       case id_right:
-        t.advance(1.0);
+        t.right(1.0);
         return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
       case id_left:
-        t.advance(1.0);
+        t.left(1.0);
         return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
       case id_back:
-        t.advance(1.5);
+        t.back(1.5);
         return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
     }
 

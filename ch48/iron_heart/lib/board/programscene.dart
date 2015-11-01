@@ -29,13 +29,16 @@ class ProgramScree extends TinyDisplayObject {
     GameTip tip = null;
     switch(id) {
     case TipSelect.actFront:
-    tip = new GameTip.front();
+      tip = new GameTip.front();
       break;
     case TipSelect.actRight:
+      tip = new GameTip.right();
       break;
     case TipSelect.actLeft:
+      tip = new GameTip.left();
       break;
     case TipSelect.actBack:
+      tip = new GameTip.back();
       break;
     case TipSelect.actRotateRight:
       tip = new GameTip.turningRight();
