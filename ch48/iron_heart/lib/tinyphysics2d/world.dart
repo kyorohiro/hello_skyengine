@@ -18,7 +18,9 @@ class World {
     }
   }
 
-  List<Primitive> searchPrimitive(Primitive base, double direction, double range, double startDist, double endDist) {
+  List<Primitive> searchPrimitive(
+    Primitive base, double direction, double range, double startDist, double endDist,
+   {String kind:null}) {
     double s2 = normalizeAngle(direction);
     double starting = s2 - range;
     double ending = s2 + range;
@@ -26,6 +28,9 @@ class World {
     List<Primitive> ret = [];
     for (Primitive t in primitives) {
       if(t == base) {
+        continue;
+      }
+      if(kind != null && kind != t.kind) {
         continue;
       }
       double d = World.distance(base, t);

@@ -1,6 +1,7 @@
 part of tinyphysics2d;
 
 class Primitive {
+  String kind = "none";
   Vector3 xy = new Vector3.zero();
   Vector3 dxy = new Vector3(0.0, 0.0, 0.0);
   double mass = 1.0;
