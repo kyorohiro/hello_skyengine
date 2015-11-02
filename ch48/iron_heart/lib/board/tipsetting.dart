@@ -21,7 +21,7 @@ class ShootTipSetting extends TinyScrollView {
       : super(600.0, 600.0, 600.0, 840.0) {
 
     this.mat.translate(100.0, 0.0, 0.0);
-    TinyCircleDirection cd = new TinyCircleDirection(400.0, 100.0);
+    TinyCircleDirection cd = new TinyCircleDirection(400.0, 100.0, 100.0);
     this.child.add(cd);
   }
 

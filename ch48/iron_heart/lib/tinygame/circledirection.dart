@@ -3,18 +3,21 @@ part of tinygame;
 class TinyCircleDirection extends TinyDisplayObject {
   double circleSize;
   double rangeWidth;
+  double distanceWidth;
   double angle = 0.0;
   double range = 0.3;
+  double distance = 0.3;
   TinyColor fgColor = new TinyColor.argb(0xaa, 0xaa, 0xaa, 0xff);
 
-  TinyCircleDirection(this.circleSize, this.rangeWidth) {}
+  TinyCircleDirection(this.circleSize, this.rangeWidth, this.distanceWidth) {}
 
   bool onTouch(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
     bool ret1 = onTouchCircle(stage, id, type, x, y, globalX, globalY);
     bool ret2 = onTouchRange(stage, id, type, x, y, globalX, globalY);
+    bool ret3 = onTouchDistance(stage, id, type, x, y, globalX, globalY);
     print("${ret1} ${ret2} ${(ret1 || ret2)}");
-    return (ret1 || ret2);
+    return (ret1 || ret2 || ret3);
   }
 
   bool onTouchCircle(TinyStage stage, int id, String type, double x, double y,
@@ -40,9 +43,22 @@ class TinyCircleDirection extends TinyDisplayObject {
     }
     return false;
   }
+  bool onTouchDistance(TinyStage stage, int id, String type, double x, double y,
+      double globalX, globalY) {
+    double cx = circleSize+ rangeWidth+rangeWidth/2;
+    double cy = 0.0;
+    if(circleSize<x && x<(circleSize+rangeWidth)) {
+      if(0<y && y<circleSize) {
+         distance = (y/circleSize)*math.PI;
+         return true;
+      }
+    }
+    return false;
+  }
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     paintCircle(stage, canvas);
     paintRange(stage, canvas);
+    paintDistance(stage, canvas);
   }
 
   paintRange(TinyStage stage, TinyCanvas canvas) {
@@ -63,7 +79,24 @@ class TinyCircleDirection extends TinyDisplayObject {
             new TinyPoint(cx, cy+circleSize*(range/math.PI)+10.0),
             p);
   }
-
+  paintDistance(TinyStage stage, TinyCanvas canvas) {
+    TinyPaint p = new TinyPaint();
+    p.style = TinyPaintStyle.stroke;
+    p.strokeWidth = rangeWidth/3;
+    p.color = fgColor;
+    double cx = circleSize+rangeWidth+ rangeWidth/2;
+    double cy = 0.0;
+    canvas.drawLine(
+        stage,
+        new TinyPoint(cx, cy),
+        new TinyPoint(cx, cy+circleSize),
+        p);
+    canvas.drawLine(
+            stage,
+            new TinyPoint(cx, cy+circleSize*(distance/math.PI)-10.0),
+            new TinyPoint(cx, cy+circleSize*(distance/math.PI)+10.0),
+            p);
+  }
   paintCircle(TinyStage stage, TinyCanvas canvas) {
     TinyPaint p = new TinyPaint();
     p.style = TinyPaintStyle.stroke;
