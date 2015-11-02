@@ -53,8 +53,8 @@ class GameEnvirone {
   bool searchEnemy(GameTarget base, double direction, double range,
       double startDist, double endDist) {
     double s2 = normalizeAngle(direction);
-    double starting = s2 - math.PI / 1.5;
-    double ending = s2 + math.PI / 1.5;
+    double starting = s2 - range;
+    double ending = s2 + range;
     List<GameTarget> l = getEnemy(base);
     for (GameTarget t in l) {
       double d = World.distance(base, t);
