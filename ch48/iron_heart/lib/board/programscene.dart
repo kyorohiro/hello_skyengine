@@ -6,6 +6,7 @@ import '../glogic/game.dart';
 import '../glogic/tip.dart';
 
 import './tipselect.dart';
+import './setting.dart';
 
 class ProgramScree extends TinyDisplayObject {
   Game game;
@@ -26,71 +27,12 @@ class ProgramScree extends TinyDisplayObject {
     tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
   }
   void selectTip(String id) {
-    GameTip tip = id2Tip(id);
+    GameTip tip = ProgramScreeSetting.id2Tip(id);
     if(tip != null) {
       game.environ.targetRed.program.setTip(selectTipX, selectTipY, tip);
     }
   }
 
-  GameTip id2Tip(String id) {
-    print("-------------${id}");
-    GameTip tip = null;
-    switch(id) {
-    case TipSelect.actFront:
-      tip = new GameTip.front();
-      break;
-    case TipSelect.actRight:
-      tip = new GameTip.right();
-      break;
-    case TipSelect.actLeft:
-      tip = new GameTip.left();
-      break;
-    case TipSelect.actBack:
-      tip = new GameTip.back();
-      break;
-    case TipSelect.actRotateRight:
-      tip = new GameTip.turningRight();
-      break;
-    case TipSelect.actRotateLeft:
-      tip = new GameTip.turningLeft();
-      break;
-      case TipSelect.actShoot:
-        tip = new GameTip.shoot();
-        break;
-    }
-    return tip;
-  }
-
-  String id2Path(String id) {
-    print("-------------${id}");
-    return id;
-  }
-
-  String tipID2Path(int id) {
-    switch(id) {
-      case GameTip.id_empty:
-      case GameTip.id_frame:
-      case GameTip.id_start:
-      case GameTip.id_nop:
-      case GameTip.id_search_enemy:
-      return null;
-      case GameTip.id_front:
-        return TipSelect.actFront;
-      case GameTip.id_right:
-        return  TipSelect.actRight;
-      case GameTip.id_left:
-        return  TipSelect.actLeft;
-      case GameTip.id_back:
-        return TipSelect.actBack;
-      case GameTip.id_turning_right:
-        return TipSelect.actRotateRight;
-      case GameTip.id_turning_left:
-        return TipSelect.actRotateLeft;
-      case GameTip.id_shoot:id:
-        return TipSelect.actShoot;
-      }
-    return null;
-  }
 
   TinyDisplayObject newBackButton() {
     TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
@@ -210,7 +152,7 @@ class ProgramScree extends TinyDisplayObject {
       canvas.drawRect(stage, rect, p);
     }
     {
-      String path = tipID2Path(tip.id);
+      String path = ProgramScreeSetting.tipID2Path(tip.id);
       TinyImage img = null;
       if(path != null) {
         img = game.f.getImage(path);
