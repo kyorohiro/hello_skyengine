@@ -58,6 +58,10 @@ class GameTargetSource extends GameTarget {
   void turn(double a) {
     angle += a;
   }
+  void bullet(double angle, double range,
+    double distance, double bullet) {
+      
+    }
 }
 
 abstract class GameTarget extends CirclePrimitive{//Primitive {
@@ -79,4 +83,6 @@ abstract class GameTarget extends CirclePrimitive{//Primitive {
   void left(double speed);
   void back(double speed);
   void turn(double a);
+  void bullet(double angle, double range,
+    double distance, double bullet);
 }
