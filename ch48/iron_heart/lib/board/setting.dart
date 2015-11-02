@@ -99,7 +99,7 @@ class ProgramScreeSetting extends TinyDisplayObject {
     return button;
   }
 
-  TinyDisplayObject newNoButton(TinyGameBuilder builder, TinyButtonCallback onTouchCallback) {
+  static TinyDisplayObject newNoButton(TinyGameBuilder builder, TinyButtonCallback onTouchCallback) {
     TinyImageButton button = new TinyImageButton(builder, "no_button", "assets/con_no_rot.png", 80.0, 80.0, onTouchCallback);
   //  TinyButton button = new TinyButton("no_button", 80.0, 80.0, onPush);
     button.mat = new Matrix4.translationValues(700.0, 500.0, 0.0);
@@ -108,4 +108,13 @@ class ProgramScreeSetting extends TinyDisplayObject {
     button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
     return button;
   }
+  static TinyDisplayObject newBackButton(TinyGameBuilder builder, TinyButtonCallback onTouchCallback){
+    TinyButton button = new TinyButton("back_button", 200.0, 120.0, onTouchCallback);
+    button.mat = new Matrix4.translationValues(30.0, 480.0, 0.0);
+    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
+    button.bgcolorOff = new TinyColor.argb(0x00, 0x00, 0x00, 0xff);
+    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
+    return button;
+  }
+
 }

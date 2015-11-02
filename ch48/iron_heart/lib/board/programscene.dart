@@ -17,13 +17,11 @@ class ProgramScree extends TinyDisplayObject {
     game.f.loadImage("assets/bg_prog.png").then((TinyImage i) {
       bgImg = i;
     });
-    {
-      child.add(newChaButton());
-      child.add(newBackButton());
-      child.add(newSelectButton());
-      child.add(newYesButton());
-      child.add(newNoButton());
-    }
+    child.add(ProgramScreeSetting.newChaButton(game.f, onPush));
+    child.add(ProgramScreeSetting.newBackButton(game.f, onPush));
+    child.add(ProgramScreeSetting.newSelectButton(game.f, onPush));
+    child.add(ProgramScreeSetting.newYesButton(game.f, onPush));
+    child.add(ProgramScreeSetting.newNoButton(game.f, onPush));
     tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
   }
   void selectTip(String id) {
@@ -33,53 +31,6 @@ class ProgramScree extends TinyDisplayObject {
     }
   }
 
-
-  TinyDisplayObject newBackButton() {
-    TinyButton button = new TinyButton("back_button", 200.0, 120.0, onPush);
-    button.mat = new Matrix4.translationValues(30.0, 480.0, 0.0);
-    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0x00, 0x00, 0x00, 0xff);
-    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
-    return button;
-  }
-
-  TinyDisplayObject newSelectButton() {
-    TinyImageButton button = new TinyImageButton(game.f, "select_button", "assets/con_sel.png", 80.0, 80.0, onPush);
-//    TinyButton button = new TinyButton("select_button", 80.0, 80.0, onPush);
-    button.mat = new Matrix4.translationValues(500.0, 500.0, 0.0);
-    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
-    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
-    return button;
-  }
-  TinyDisplayObject newChaButton() {
-    TinyImageButton button = new TinyImageButton(game.f, "select_button", "assets/con_cha.png", 80.0, 80.0, onPush);
-//    TinyButton button = new TinyButton("select_button", 80.0, 80.0, onPush);
-    button.mat = new Matrix4.translationValues(400.0, 500.0, 0.0);
-    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
-    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
-    return button;
-  }
-  TinyDisplayObject newYesButton() {
-    TinyImageButton button = new TinyImageButton(game.f, "yes_button", "assets/con_yes_rot.png", 80.0, 80.0, onPush);
-    //TinyButton button = new TinyButton("yes_button", 80.0, 80.0, onPush);
-    button.mat = new Matrix4.translationValues(600.0, 500.0, 0.0);
-    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
-    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
-    return button;
-  }
-
-  TinyDisplayObject newNoButton() {
-    TinyImageButton button = new TinyImageButton(game.f, "no_button", "assets/con_no_rot.png", 80.0, 80.0, onPush);
-  //  TinyButton button = new TinyButton("no_button", 80.0, 80.0, onPush);
-    button.mat = new Matrix4.translationValues(700.0, 500.0, 0.0);
-    button.bgcolorOn = new TinyColor.argb(0x22, 0xFF, 0x00, 0x00);
-    button.bgcolorOff = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
-    button.bgcolorFocus = new TinyColor.argb(0x11, 0x00, 0xff, 0x00);
-    return button;
-  }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     drawBG(stage, canvas);
@@ -229,6 +180,8 @@ class ProgramScree extends TinyDisplayObject {
           child.add(tipSelect);
         }
         break;
+      case "tipsetting_button":
+      //  ;
       case "back_button":
         game.stage.root.clearChild();
         game.stage.root.addChild(game.playScene);
