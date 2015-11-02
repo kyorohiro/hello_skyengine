@@ -33,14 +33,12 @@ class GameEnvirone {
       ..radius = 3.5);
   }
 
-  List<GameTarget> getEnemy(GameTarget own) {
-    List<GameTarget> l = [];
+  String getEnemy(GameTarget own) {
     if (own.groupName != targetRed.groupName) {
-      l.add(targetRed);
+      return targetRed.groupName;
     } else if (own.groupName != targetBlue.groupName) {
-      l.add(targetBlue);
+      return targetBlue.groupName;
     }
-    return l;
   }
 
   void next(int timeStamp) {
@@ -55,7 +53,9 @@ class GameEnvirone {
   bool searchEnemy(GameTarget base, double direction, double range,
       double startDist, double endDist) {
     List<Primitive> p =
-        world.searchPrimitive(base, direction, range, startDist, endDist);
+        world.searchPrimitive(base, direction, range,
+          startDist, endDist,
+          kind:getEnemy(base));
     if (0 < p.length) {
       return true;
     } else {

@@ -161,6 +161,7 @@ class GameTipShoot extends GameTip {
   }
   GameTip next(GameProgram p, GameEnvirone e, GameTarget t) {
     //t.turn(math.PI/40.0);
+    t.bullet(angle, range, distance, bullet);
     return p.getTip(curX+dxys.first.dx, curY+dxys.first.dy);
   }
 }
