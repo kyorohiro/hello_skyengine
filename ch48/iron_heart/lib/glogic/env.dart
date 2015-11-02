@@ -27,8 +27,10 @@ class GameEnvirone {
 
     //
     //
-    bullets.add(new GameBullet()..xy.x=100.0..xy.y=100.0..radius=3.5);
-
+    bullets.add(new GameBullet()
+      ..xy.x = 100.0
+      ..xy.y = 100.0
+      ..radius = 3.5);
   }
 
   List<GameTarget> getEnemy(GameTarget own) {
@@ -45,37 +47,20 @@ class GameEnvirone {
     List<GameTarget> l = [targetRed, targetBlue];
     for (GameTarget t in l) {
       t.program.next(this, t);
-    //  t.next(1.0);
+      //  t.next(1.0);
     }
     world.next(1.0);
   }
 
   bool searchEnemy(GameTarget base, double direction, double range,
       double startDist, double endDist) {
-    double s2 = normalizeAngle(direction);
-    double starting = s2 - range;
-    double ending = s2 + range;
-    List<GameTarget> l = getEnemy(base);
-    for (GameTarget t in l) {
-      double d = World.distance(base, t);
-      double a = World.angleFromP2(t, base);
-      if(!(startDist<=d && d<=endDist)) {
-        continue;
-      }
-      //print("## a=${a}   d=${d} n=${normalizeAngle(base.angle)}");
-
-
-      double ss = a - starting;
-      double ee = a - ending;
-
-      if (ss >= 0 && ee <= 0) {
-        //  print("find true!! tar=${s1}   dir=${s2} ## xx/yy=${xx}/${yy} ######${targetRed.groupName} ${targetBlue.y}## ${ss} ${ee}");
-        return true;
-      } else {
-        //  print("find false!! tar=${s1}  dir=${s2} ## xx/yy=${xx}/${yy} ######${targetRed.groupName} ${targetBlue.y}## ${ss} ${ee}");
-      }
+    List<Primitive> p =
+        world.searchPrimitive(base, direction, range, startDist, endDist);
+    if (0 < p.length) {
+      return true;
+    } else {
+      return false;
     }
-    return false;
   }
 
   static double normalizeAngle(double a) {
@@ -87,7 +72,6 @@ class GameEnvirone {
       return -math.PI + (a - math.PI);
     }
   }
-
 
   void init() {
     targetRed.angle = 0.0; //-math.PI/1.4;

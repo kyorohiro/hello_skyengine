@@ -25,6 +25,9 @@ class World {
 
     List<Primitive> ret = [];
     for (Primitive t in primitives) {
+      if(t == base) {
+        continue;
+      }
       double d = World.distance(base, t);
       double a = World.angleFromP2(t, base);
       if(!(startDist<=d && d<=endDist)) {
