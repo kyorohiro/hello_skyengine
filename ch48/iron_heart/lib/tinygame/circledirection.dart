@@ -47,9 +47,9 @@ class TinyCircleDirection extends TinyDisplayObject {
       double globalX, globalY) {
     double cx = circleSize+ rangeWidth+rangeWidth/2;
     double cy = 0.0;
-    if(circleSize<x && x<(circleSize+rangeWidth)) {
+    if(circleSize+rangeWidth<x && x<(circleSize+rangeWidth+rangeWidth)) {
       if(0<y && y<circleSize) {
-         distance = (y/circleSize)*math.PI;
+         distance = (y/circleSize);
          return true;
       }
     }
@@ -93,8 +93,8 @@ class TinyCircleDirection extends TinyDisplayObject {
         p);
     canvas.drawLine(
             stage,
-            new TinyPoint(cx, cy+circleSize*(distance/math.PI)-10.0),
-            new TinyPoint(cx, cy+circleSize*(distance/math.PI)+10.0),
+            new TinyPoint(cx, cy+circleSize*(distance)-10.0),
+            new TinyPoint(cx, cy+circleSize*(distance)+10.0),
             p);
   }
   paintCircle(TinyStage stage, TinyCanvas canvas) {
@@ -113,8 +113,8 @@ class TinyCircleDirection extends TinyDisplayObject {
         stage,
         new TinyPoint(cx, cy),
         new TinyPoint(
-          cx + cx * math.cos(angle - math.PI / 2),
-          cy + cy * math.sin(angle - math.PI / 2)),
+          cx + distance*cx * math.cos(angle - math.PI / 2),
+          cy + distance*cy * math.sin(angle - math.PI / 2)),
         p);
 
     p.strokeWidth = 2.5;
@@ -122,16 +122,16 @@ class TinyCircleDirection extends TinyDisplayObject {
         stage,
         new TinyPoint(cx, cy),
         new TinyPoint(
-          cx + cx * math.cos(angle -range- math.PI / 2),
-          cy + cy * math.sin(angle -range- math.PI / 2)),
+          cx + distance * cx * math.cos(angle -range- math.PI / 2),
+          cy + distance * cy * math.sin(angle -range- math.PI / 2)),
         p);
     p.strokeWidth = 2.5;
     canvas.drawLine(
         stage,
         new TinyPoint(cx, cy),
         new TinyPoint(
-          cx + cx * math.cos(angle +range- math.PI / 2),
-          cy + cy * math.sin(angle +range- math.PI / 2)),
+          cx + distance * cx * math.cos(angle +range- math.PI / 2),
+          cy + distance * cy * math.sin(angle +range- math.PI / 2)),
         p);
   }
 }
