@@ -11,8 +11,10 @@ class TinyCircleDirection extends TinyDisplayObject {
 
   bool onTouch(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
-    onTouchCircle(stage, id, type, x, y, globalX, globalY);
-    onTouchRange(stage, id, type, x, y, globalX, globalY);
+    bool ret1 = onTouchCircle(stage, id, type, x, y, globalX, globalY);
+    bool ret2 = onTouchRange(stage, id, type, x, y, globalX, globalY);
+    print("${ret1} ${ret2} ${(ret1 || ret2)}");
+    return (ret1 || ret2);
   }
 
   bool onTouchCircle(TinyStage stage, int id, String type, double x, double y,
@@ -22,7 +24,9 @@ class TinyCircleDirection extends TinyDisplayObject {
     if (math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy)) <
         circleSize / 2.0) {
         angle = math.atan2(y - cy, x - cx) + math.PI / 2;
+        return true;
     }
+    return false;
   }
   bool onTouchRange(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
@@ -31,8 +35,10 @@ class TinyCircleDirection extends TinyDisplayObject {
     if(circleSize<x && x<(circleSize+rangeWidth)) {
       if(0<y && y<circleSize) {
          range = (y/circleSize)*math.PI;
+         return true;
       }
     }
+    return false;
   }
   void onPaint(TinyStage stage, TinyCanvas canvas) {
     paintCircle(stage, canvas);

@@ -21,6 +21,8 @@ class ShootTipSetting extends TinyScrollView {
       : super(600.0, 600.0, 600.0, 840.0) {
 
     this.mat.translate(100.0, 0.0, 0.0);
+    TinyCircleDirection cd = new TinyCircleDirection(400.0, 100.0);
+    this.child.add(cd);
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
@@ -36,6 +38,6 @@ class ShootTipSetting extends TinyScrollView {
       parent.rmChild(this);
     }
     //print("------------touch ####+++++++++");
-    return true;
+    return false;
   }
 }
