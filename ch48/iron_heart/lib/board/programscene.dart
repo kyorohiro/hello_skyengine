@@ -7,11 +7,14 @@ import '../glogic/tip.dart';
 
 import './tipselect.dart';
 import './setting.dart';
+import './tipsetting.dart';
 
 class ProgramScree extends TinyDisplayObject {
   Game game;
   TinyImage bgImg = null;
   TipSelect tipSelect;
+  ShootTipSetting shootTipSetting;
+
 
   ProgramScree(this.game) {
     game.f.loadImage("assets/bg_prog.png").then((TinyImage i) {
@@ -23,6 +26,7 @@ class ProgramScree extends TinyDisplayObject {
     child.add(ProgramScreeSetting.newYesButton(game.f, onPush));
     child.add(ProgramScreeSetting.newNoButton(game.f, onPush));
     tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
+    shootTipSetting = new ShootTipSetting(game.f, this, selectTipX, selectTipY, selectTip);
   }
   void selectTip(String id) {
     GameTip tip = ProgramScreeSetting.id2Tip(id);
@@ -180,8 +184,11 @@ class ProgramScree extends TinyDisplayObject {
           child.add(tipSelect);
         }
         break;
-      case "tipsetting_button":
-      //  ;
+      case "cha_button":
+        if (!child.contains(shootTipSetting )) {
+          child.add(shootTipSetting );
+        }
+        break;
       case "back_button":
         game.stage.root.clearChild();
         game.stage.root.addChild(game.playScene);
