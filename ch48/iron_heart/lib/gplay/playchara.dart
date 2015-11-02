@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'tinygame.dart';
-import 'glogic/game.dart';
-import './glogic/target.dart';
+import '../tinygame.dart';
+import '../glogic/game.dart';
+import '../glogic/target.dart';
 
 class PlayChara extends TinyDisplayObject {
   Game game;

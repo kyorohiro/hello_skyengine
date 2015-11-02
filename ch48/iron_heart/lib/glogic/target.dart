@@ -60,7 +60,7 @@ class GameTargetSource extends GameTarget {
   }
   void bullet(double angle, double range,
     double distance, double bullet) {
-      
+
     }
 }
 

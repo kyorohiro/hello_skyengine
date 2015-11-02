@@ -36,6 +36,7 @@ class TinyCircleDirection extends TinyDisplayObject {
     if (math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy)) <
         circleSize / 2.0) {
       angle = math.atan2(y - cy, x - cx) + math.PI / 2;
+      callback(this.id, angle, range, distance);
       return true;
     }
     return false;
@@ -48,6 +49,7 @@ class TinyCircleDirection extends TinyDisplayObject {
     if (circleSize < x && x < (circleSize + rangeWidth)) {
       if (0 < y && y < circleSize) {
         range = (y / circleSize) * math.PI;
+        callback(this.id, angle, range, distance);
         return true;
       }
     }
@@ -62,6 +64,7 @@ class TinyCircleDirection extends TinyDisplayObject {
         x < (circleSize + rangeWidth + rangeWidth)) {
       if (0 < y && y < circleSize) {
         distance = (y / circleSize);
+        callback(this.id, angle, range, distance);
         return true;
       }
     }
