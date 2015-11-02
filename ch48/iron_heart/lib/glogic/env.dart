@@ -13,6 +13,7 @@ class GameEnvirone {
   GameTarget _targetBlue;
   GameTarget get targetRed => _targetRed;
   GameTarget get targetBlue => _targetBlue;
+  List<GameBullet> bullets = [];
   double fieldX = 50.0;
   double fieldY = 50.0;
   double fieldWidth = 700.0;
@@ -23,6 +24,11 @@ class GameEnvirone {
     _targetBlue = new GameTargetSource(this, 50.0, "blue");
     world.primitives.add(_targetRed);
     world.primitives.add(_targetBlue);
+
+    //
+    //
+    bullets.add(new GameBullet()..xy.x=100.0..xy.y=100.0..radius=3.5);
+
   }
 
   List<GameTarget> getEnemy(GameTarget own) {

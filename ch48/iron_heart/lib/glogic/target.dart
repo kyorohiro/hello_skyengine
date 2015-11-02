@@ -64,7 +64,11 @@ class GameTargetSource extends GameTarget {
     }
 }
 
-abstract class GameTarget extends CirclePrimitive{//Primitive {
+class GameBullet extends CirclePrimitive {
+
+}
+
+abstract class GameTarget extends CirclePrimitive {//Primitive {
   double angle = 0.0;
   double get dx => dxy[0];//0.0;
   double get dy => dxy[1];//0.0;

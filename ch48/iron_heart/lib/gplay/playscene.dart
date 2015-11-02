@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import '../tinygame.dart';
 import '../glogic/game.dart';
 import 'playchara.dart';
+import 'playbullet.dart';
 
 class PlayScene extends TinyDisplayObject {
   Game game;
@@ -33,15 +34,21 @@ class PlayScene extends TinyDisplayObject {
       img = i;
     });
     {
-      charaBlue = new PlayChara(game, game.environ.targetBlue,
-        iconSrc:"assets/ch_iron.png");
-      charaRed = new PlayChara(game, game.environ.targetRed,
-        iconSrc:"assets/ch_iron2.png");
+      // chara
+      charaBlue = new PlayChara(game, game.environ.targetBlue, iconSrc:"assets/ch_iron.png");
+      charaRed = new PlayChara(game, game.environ.targetRed, iconSrc:"assets/ch_iron2.png");
       child.add(charaBlue);
       child.add(charaRed);
     }
-    child.add(createBackButton());
-    child.add(createNextButton());
+    {
+      //bullets
+      child.add(new PlayBullets(game));
+    }
+    {
+      //button
+      child.add(createBackButton());
+      child.add(createNextButton());
+    }
   }
   void onConnect() {
     print("--------------------------init()");
