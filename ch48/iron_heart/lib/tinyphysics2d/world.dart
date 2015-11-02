@@ -17,4 +17,16 @@ class World {
       a.next(time);
     }
   }
+
+  static double distance(Primitive p1, Primitive p2) {
+    double x = p1.xy.x - p2.xy.x;
+    double y = p1.xy.y - p2.xy.y;
+    return math.sqrt(x * x + y * y);
+  }
+
+  static double angleFromP2(Primitive p1, Primitive p2) {
+    double x = p1.xy.x - p2.xy.x;
+    double y = p1.xy.y - p2.xy.y;
+    return math.atan2(y, x);
+  }
 }

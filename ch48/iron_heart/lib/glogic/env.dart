@@ -57,8 +57,8 @@ class GameEnvirone {
     double ending = s2 + math.PI / 1.5;
     List<GameTarget> l = getEnemy(base);
     for (GameTarget t in l) {
-      double d = distance(base, t);
-      double a = angleFromP2(t, base);
+      double d = World.distance(base, t);
+      double a = World.angleFromP2(t, base);
       if(!(startDist<=d && d<=endDist)) {
         continue;
       }
@@ -88,17 +88,6 @@ class GameEnvirone {
     }
   }
 
-  static double distance(GameTarget p1, GameTarget p2) {
-    double x = p1.x - p2.x;
-    double y = p1.y - p2.y;
-    return math.sqrt(x * x + y * y);
-  }
-
-  static double angleFromP2(GameTarget p1, GameTarget p2) {
-    double x = p1.x - p2.x;
-    double y = p1.y - p2.y;
-    return math.atan2(y, x); //+math.PI/2;
-  }
 
   void init() {
     targetRed.angle = 0.0; //-math.PI/1.4;

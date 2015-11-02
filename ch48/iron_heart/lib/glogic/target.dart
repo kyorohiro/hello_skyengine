@@ -58,10 +58,9 @@ class GameTargetSource extends GameTarget {
   void turn(double a) {
     angle += a;
   }
-  void bullet(double angle, double range,
-    double distance, double bullet) {
-
-    }
+  void bullet(double angle, double range, double distance, double bullet) {
+    //game.searchEnemy(base, direction, range, startDist, endDist)
+  }
 }
 
 class GameBullet extends CirclePrimitive {
