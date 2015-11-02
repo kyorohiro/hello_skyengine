@@ -16,13 +16,30 @@ class ShootTipSetting extends TinyScrollView {
   TinyDisplayObject parent;
   TinyGameBuilder builder;
   ShootTipSettingCallback callback;
+  GameTipShoot _shootTip;
+  GameTipShoot get shootTip => _shootTip;
+  TinyCircleDirection cd;
+  void set shootTip(GameTipShoot v) {
+    if(v != null) {
+    _shootTip = v;
+    cd.distance = v.distance;
+    cd.angle = v.angle;
+    cd.range = v.range;
+  }
+  }
 
-  ShootTipSetting(this.builder, this.parent, this.tipX, this.tipY, this.callback)
+  ShootTipSetting(this._shootTip, this.builder, this.parent, this.tipX, this.tipY, this.callback)
       : super(600.0, 600.0, 600.0, 840.0) {
 
     this.mat.translate(100.0, 0.0, 0.0);
-    TinyCircleDirection cd = new TinyCircleDirection(400.0, 100.0, 100.0);
+    cd = new TinyCircleDirection("shoot",400.0, 100.0, 100.0, onTinyCircleDirectionCallback);
     this.child.add(cd);
+
+    TinySeekbar sb = new TinySeekbar(400.0, 100.0);
+    sb.mat.translate(0.0, 450.0, 0.0);
+    this.child.add(sb);
+
+    shootTip = _shootTip;
   }
 
   void onPaint(TinyStage stage, TinyCanvas canvas) {
@@ -38,6 +55,19 @@ class ShootTipSetting extends TinyScrollView {
       parent.rmChild(this);
     }
     //print("------------touch ####+++++++++");
-    return false;
+    return true;
   }
+
+  void onTinyCircleDirectionCallback (
+    String id,
+    double angle,
+    double range,
+    double distance) {
+      if(shootTip == null) {
+        return;
+      }
+      shootTip.angle = angle;
+      shootTip.range = range;
+      shootTip.distance = distance;
+    }
 }

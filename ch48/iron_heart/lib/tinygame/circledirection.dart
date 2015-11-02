@@ -1,6 +1,13 @@
 part of tinygame;
 
+typedef void TinyCircleDirectionCallback (
+  String id,
+  double angle,
+  double range,
+  double distance);
+
 class TinyCircleDirection extends TinyDisplayObject {
+  String id;
   double circleSize;
   double rangeWidth;
   double distanceWidth;
@@ -8,8 +15,10 @@ class TinyCircleDirection extends TinyDisplayObject {
   double range = 0.3;
   double distance = 0.3;
   TinyColor fgColor = new TinyColor.argb(0xaa, 0xaa, 0xaa, 0xff);
+  TinyCircleDirectionCallback callback;
 
-  TinyCircleDirection(this.circleSize, this.rangeWidth, this.distanceWidth) {}
+  TinyCircleDirection(this.id, this.circleSize,
+    this.rangeWidth, this.distanceWidth, this.callback) {}
 
   bool onTouch(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {

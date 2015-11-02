@@ -152,6 +152,10 @@ class GameTipSearchEnemy extends GameTip {
 
 
 class GameTipShoot extends GameTip {
+  double angle = 0.0;
+  double range = math.PI/4;
+  double distance = 0.8;
+  double bullet = 1.0;
   GameTipShoot({int dx:0,int dy:1}) :super.custom(GameTip.id_shoot) {
     dxys.add(new Next(dx,dy));
   }

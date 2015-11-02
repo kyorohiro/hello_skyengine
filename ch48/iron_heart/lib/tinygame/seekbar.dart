@@ -12,9 +12,9 @@ class TinySeekbar extends TinyDisplayObject {
   bool onTouch(TinyStage stage, int id, String type, double x, double y,
       double globalX, globalY) {
     if (isVertical) {
-      onTouchVertical(stage, id, type, x, y, globalX, globalY);
+      return onTouchVertical(stage, id, type, x, y, globalX, globalY);
     } else {
-      onTouchHorizontal(stage, id, type, x, y, globalX, globalY);
+      return onTouchHorizontal(stage, id, type, x, y, globalX, globalY);
     }
   }
 
@@ -31,8 +31,10 @@ class TinySeekbar extends TinyDisplayObject {
     if (0 <= x && x <= viewWidth) {
       if (0 <= y && y <= viewHeight) {
         range = x / viewWidth;
+        return true;
       }
     }
+    return false;
   }
 
   bool onTouchVertical(TinyStage stage, int id, String type, double x, double y,
@@ -40,8 +42,10 @@ class TinySeekbar extends TinyDisplayObject {
     if (0 <= x && x <= viewWidth) {
       if (0 <= y && y <= viewHeight) {
         range = y / viewHeight;
+        return true;
       }
     }
+    return false;
   }
 
   paintHorizontal(TinyStage stage, TinyCanvas canvas) {

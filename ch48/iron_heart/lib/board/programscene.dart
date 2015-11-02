@@ -26,7 +26,7 @@ class ProgramScree extends TinyDisplayObject {
     child.add(ProgramScreeSetting.newYesButton(game.f, onPush));
     child.add(ProgramScreeSetting.newNoButton(game.f, onPush));
     tipSelect = new TipSelect(game.f, this, selectTipX, selectTipY, selectTip);
-    shootTipSetting = new ShootTipSetting(game.f, this, selectTipX, selectTipY, selectTip);
+    shootTipSetting = new ShootTipSetting(null, game.f, this, selectTipX, selectTipY, selectTip);
   }
   void selectTip(String id) {
     GameTip tip = ProgramScreeSetting.id2Tip(id);
@@ -186,7 +186,11 @@ class ProgramScree extends TinyDisplayObject {
         break;
       case "cha_button":
         if (!child.contains(shootTipSetting )) {
-          child.add(shootTipSetting );
+          GameTip tip = game.environ.targetRed.program.getTip(selectTipX, selectTipY);
+          if(tip.id == GameTip.id_shoot) {
+            shootTipSetting.shootTip = tip;
+            child.add(shootTipSetting );
+          }
         }
         break;
       case "back_button":
