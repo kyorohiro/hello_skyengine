@@ -1,9 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
-import '../glogic/game.dart';
-import 'playchara.dart';
-import 'playbullet.dart';
+part of gplay;
 
 class PlayScene extends TinyDisplayObject {
   Game game;

@@ -1,10 +1,4 @@
-import 'dart:math' as math;
-import 'dart:async';
-import '../glogic/tip.dart';
-import '../glogic/program.dart';
-import '../glogic/target.dart';
-
-import '../tinyphysics2d.dart';
+part of glogic;
 
 class GameEnvirone {
   World world = new World();
@@ -39,6 +33,7 @@ class GameEnvirone {
     } else if (own.groupName != targetBlue.groupName) {
       return targetBlue.groupName;
     }
+    return null;
   }
 
   void next(int timeStamp) {

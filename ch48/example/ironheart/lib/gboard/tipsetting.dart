@@ -1,10 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
-import 'dart:math' as math;
-import '../glogic/game.dart';
-import '../glogic/tip.dart';
-import 'programscene.dart';
+part of gboard;
 
 typedef void ShootTipSettingCallback(String id);
 

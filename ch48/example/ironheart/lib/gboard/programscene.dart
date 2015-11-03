@@ -1,13 +1,6 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
-import 'dart:math' as math;
-import '../glogic/game.dart';
-import '../glogic/tip.dart';
+part of gboard;
 
-import './tipselect.dart';
-import './setting.dart';
-import './tipsetting.dart';
+
 
 class ProgramScree extends TinyDisplayObject {
   Game game;

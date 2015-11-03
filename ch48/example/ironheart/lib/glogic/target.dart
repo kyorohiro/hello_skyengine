@@ -1,7 +1,4 @@
-import 'dart:math' as math;
-import '../glogic/program.dart';
-import '../glogic/env.dart';
-import '../tinyphysics2d.dart';
+part of glogic;
 
 class GameTargetSource extends GameTarget {
 

@@ -1,8 +1,4 @@
-import '../tinygame.dart';
-import '../gplay/playscene.dart';
-import '../gboard/programscene.dart';
-import '../main.dart';
-import '../glogic/env.dart';
+part of glogic;
 
 class Game {
   TinyGameBuilderForFlutter f;

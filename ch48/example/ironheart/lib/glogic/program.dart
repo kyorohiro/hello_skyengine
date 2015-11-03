@@ -1,6 +1,4 @@
-import '../glogic/tip.dart';
-import '../glogic/target.dart';
-import '../glogic/env.dart';
+part of glogic;
 
 class GameProgram {
   GameTip startTip;

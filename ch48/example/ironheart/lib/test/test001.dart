@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import '../tinygame.dart';
-import '../glogic/game.dart';
+import 'package:ch48/tinygame.dart';
+import '../glogic/glogic.dart';
 
 TinyGameRoot root;
 TinyGameBuilderForFlutter builder;

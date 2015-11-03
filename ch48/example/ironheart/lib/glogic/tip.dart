@@ -1,7 +1,4 @@
-import 'dart:math' as math;
-import '../glogic/program.dart';
-import '../glogic/target.dart';
-import '../glogic/env.dart';
+part of glogic;
 
 class GameTip {
   static const int id_empty = 0xffffffff;
