@@ -1,4 +1,4 @@
-part of tinygame;
+part of tinygame_flutter;
 
 class TinyGameBuilderForFlutter extends TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root) {

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ch48/tinygame.dart';
+import 'package:ch48/tinygame_flutter.dart';
 import 'glogic/glogic.dart';
 //import 'test/test001.dart' as t001;
 //import 'test/test002.dart' as t002;
