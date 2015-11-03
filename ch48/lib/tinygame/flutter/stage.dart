@@ -47,17 +47,16 @@ class TinyFlutterStage extends RenderBox with TinyStage {
 
   bool animeIsStart = false;
   int animeId = 0;
-  TinyDisplayObject _root;
-  TinyDisplayObject get root => _root;
+
   bool startable = false;
   static const int kMaxOfTouch = 5;
   Map<int, TouchPoint> touchPoints = {};
-  bool isInit = false;
 
   TinyGameBuilder _builder;
   TinyGameBuilder get builder => _builder;
 
-  TinyFlutterStage(this._builder, this._root) {
+  TinyFlutterStage(this._builder, TinyDisplayObject root) {
+    this.root = root;
     init();
   }
 
@@ -75,12 +74,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
 
   void _innerTick(Duration timeStamp) {
     if (startable) {
-      if (isInit == false) {
-        _root.init(this);
-        isInit = true;
-      }
-      _root.tick(this, timeStamp.inMilliseconds);
-      this.markNeedsPaint();
+      kick(timeStamp.inMilliseconds);
     }
     if (animeIsStart == true) {
       animeId = scheduler.requestAnimationFrame(_innerTick);
@@ -124,7 +118,7 @@ class TinyFlutterStage extends RenderBox with TinyStage {
       touchPoints[e.pointer].x += (e.dx == null ? 0 : e.dx);
       touchPoints[e.pointer].y += (e.dy == null ? 0 : e.dy);
     }
-    _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
+    root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
         touchPoints[e.pointer].y);
 
     if (event.type == "pointerup") {

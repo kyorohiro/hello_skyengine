@@ -1,8 +1,8 @@
 part of tinygame_webgl;
 
 class TinyGameBuilderForWebgl extends TinyGameBuilder {
-  int width = 600.0 + 100.0;
-  int height = 400.0 + 100.0;
+  int width = 600 + 100;
+  int height = 400 + 100;
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyWebglStage(this, root);
   }
@@ -52,7 +52,9 @@ class TinyWebglStage extends Object with TinyStage {
     GL.clear(RenderingContext.COLOR_BUFFER_BIT);
 
   }
-
+  void markNeedsPaint() {
+    
+  }
   void init()  {
   }
 
@@ -61,7 +63,6 @@ class TinyWebglStage extends Object with TinyStage {
 
   void stop() {
     if (animeIsStart == true) {
-      scheduler.cancelAnimationFrame(animeId);
     }
     animeIsStart = false;
   }
