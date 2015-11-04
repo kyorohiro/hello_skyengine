@@ -198,12 +198,11 @@ class TinyWebglCanvas extends TinyCanvas {
 
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
+    TinyWebglImage img = image;
     print("---drawRect");
-
-    GL.useProgram(programShape);
     //
     //
-
+    GL.useProgram(programImage);
     double sx = -1.0 + 2.0 * dst.x / glContext.widht;
     double sy = 1.0 - 2.0 * dst.y / glContext.height;
     double ex = sx + 2.0 * dst.w / glContext.widht;
