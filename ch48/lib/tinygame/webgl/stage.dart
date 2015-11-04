@@ -203,6 +203,34 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     //
     GL.useProgram(programImage);
+    int texLocation = GL.getAttribLocation(programImage, "a_tex");
+    Buffer texBuffer = GL.createBuffer();
+    GL.bindBuffer(RenderingContext.ARRAY_BUFFER, texBuffer);
+    GL.bufferData(RenderingContext.ARRAY_BUFFER, 
+        new Float32List.fromList([
+         -1.0, 1.0, 
+         -1.0, -1.0, 
+          1.0, 1.0, 
+          1.0, -1.0]), 
+        RenderingContext.STATIC_DRAW);
+    GL.enableVertexAttribArray(texLocation);
+    GL.vertexAttribPointer(texLocation, 2, RenderingContext.FLOAT, false, 0,0);
+    //
+    Texture tex = GL.createTexture();    
+    GL.bindTexture(RenderingContext.TEXTURE_2D, tex);
+    //
+    GL.texParameteri(RenderingContext.TEXTURE_2D, 
+        RenderingContext.TEXTURE_WRAP_S, RenderingContext.CLAMP_TO_EDGE);
+    GL.texParameteri(RenderingContext.TEXTURE_2D, 
+        RenderingContext.TEXTURE_WRAP_T, RenderingContext.CLAMP_TO_EDGE);
+    GL.texParameteri(RenderingContext.TEXTURE_2D,
+        RenderingContext.TEXTURE_MIN_FILTER, RenderingContext.NEAREST);
+    GL.texParameteri(RenderingContext.TEXTURE_2D, 
+        RenderingContext.TEXTURE_MAG_FILTER, RenderingContext.NEAREST);
+    //
+    GL.texImage2D(RenderingContext.TEXTURE_2D, 0, 
+        RenderingContext.RGBA, 
+        RenderingContext.RGBA, RenderingContext.UNSIGNED_BYTE, img.elm);
     double sx = -1.0 + 2.0 * dst.x / glContext.widht;
     double sy = 1.0 - 2.0 * dst.y / glContext.height;
     double ex = sx + 2.0 * dst.w / glContext.widht;
@@ -224,10 +252,10 @@ class TinyWebglCanvas extends TinyCanvas {
     // draw
 
     {
-      int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
+      int locationVertexPosition = GL.getAttribLocation(programImage, "vp");
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
-      var colorLocation = GL.getUniformLocation(programShape, "color");
+      var colorLocation = GL.getUniformLocation(programImage, "color");
       GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
           paint.color.bf, paint.color.af);
       GL.enableVertexAttribArray(locationVertexPosition);
