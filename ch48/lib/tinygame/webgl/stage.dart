@@ -208,10 +208,14 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, texBuffer);
     GL.bufferData(RenderingContext.ARRAY_BUFFER, 
         new Float32List.fromList([
-         -1.0, 1.0, 
-         -1.0, -1.0, 
-          1.0, 1.0, 
-          1.0, -1.0]), 
+//         -1.0, 1.0, 
+//         -1.0, -1.0, 
+//          1.0, 1.0, 
+//          1.0, -1.0]), 
+          0.0, 1.0, 
+          0.0, 0.0, 
+           1.0, 1.0, 
+           1.0, 0.0]),         
         RenderingContext.STATIC_DRAW);
     GL.enableVertexAttribArray(texLocation);
     GL.vertexAttribPointer(texLocation, 2, RenderingContext.FLOAT, false, 0,0);
