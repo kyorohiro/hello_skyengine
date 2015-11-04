@@ -61,7 +61,7 @@ class TinyWebglStage extends Object with TinyStage {
       kick(currentTime-startTime);
       markNeedsPaint();
       if(isPaint) {
-        root.paint(this, new TinyWebglCanvas(glContext.GL));
+        root.paint(this, new TinyWebglCanvas(glContext));
       }
       isPaint = false;
     }
@@ -85,20 +85,27 @@ class TinyWebglContext {
     new CanvasElement(width: widht.toInt(), height: height.toInt());
     document.body.append(_canvasElement);
     GL = _canvasElement.getContext3d();
+  }
+}
+
+class TinyWebglCanvas extends TinyCanvas {
+  RenderingContext GL;
+  TinyWebglContext glContext;
+  TinyWebglCanvas(TinyWebglContext c) {
+    GL = c.GL;
+    glContext = c;
+    clear();
+  }
+
+  void clear() {
     double r = 0.0;
     double g = 0.0;
     double b = 0.0;
     double a = 1.0;
     GL.clearColor(r, g, b, a);
     GL.clear(RenderingContext.COLOR_BUFFER_BIT);
-  }
-}
 
-class TinyWebglCanvas extends TinyCanvas {
-  RenderingContext GL;
-  TinyWebglCanvas(this.GL) {
   }
-
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
   }
 
@@ -117,14 +124,23 @@ class TinyWebglCanvas extends TinyCanvas {
     String fs = [
       "precision mediump float;",
       "void main() {",
-      " gl_FragColor = vec4(0.0,1.0,0.0,1.0);",
+      " gl_FragColor = vec4(0.0,1.0,0.0,0.2);",
       "}"
     ].join("\n");
     Program p = TinyWebglProgram.compile(GL, vs, fs);
     GL.useProgram(p);
+    //
+    //
 
+    double sx = -1.0+2.0*rect.x/glContext.widht;
+    double sy = 1.0-2.0*rect.y/glContext.height;
+    double ex = sx+2.0*rect.w/glContext.widht;
+    double ey = sy-2.0*rect.h/glContext.height;
     TypedData rectData = new Float32List.fromList(
-        [-0.8, 0.8, 0.0, -0.8, -0.8, 0.0, 0.8, 0.8, 0.0, 0.8, -0.8, 0.0]);
+        [ sx, sy, 0.0,
+          sx, ey, 0.0,
+          ex, sy, 0.0,
+          ex, ey, 0.0]);
     TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
 
     Buffer rectBuffer = GL.createBuffer();
@@ -138,12 +154,17 @@ class TinyWebglCanvas extends TinyCanvas {
 
     //
     // draw
-    int locationVertexPosition = GL.getAttribLocation(p, "vp");
-    GL.vertexAttribPointer(
-        locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
-    GL.enableVertexAttribArray(locationVertexPosition);
-    GL.drawElements(
-        RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
+
+     {
+      int locationVertexPosition = GL.getAttribLocation(p, "vp");
+      GL.vertexAttribPointer(
+          locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
+      GL.enableVertexAttribArray(locationVertexPosition);
+      GL.drawElements(
+          RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
+    }
+
+
   }
 
   void clipRect(TinyStage stage, TinyRect rect) {
