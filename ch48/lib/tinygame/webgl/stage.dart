@@ -162,10 +162,6 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     //
     GL.useProgram(programShape);
-    /*double sx = -1.0 + 2.0 * rect.x / glContext.widht;
-    double sy = 1.0 - 2.0 * rect.y / glContext.height;
-    double ex = sx + 2.0 * rect.w / glContext.widht;
-    double ey = sy - 2.0 * rect.h / glContext.height;*/
     double sx = rect.x;
     double sy = rect.y;
     double ex = rect.x+rect.w;
@@ -193,7 +189,6 @@ class TinyWebglCanvas extends TinyCanvas {
       m = m.translate(-1.0, 1.0, 0.0);
       m = m.scale(2.0/glContext.widht, -2.0/glContext.height,1.0);
       m = m* getMatrix();
-      //m = m.rotateZ(math.PI/4.0);
 
       GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(m.storage));
       GL.vertexAttribPointer(
