@@ -125,10 +125,11 @@ class TinyWebglCanvas extends TinyCanvas {
     {
       String vs = [
         "attribute vec3 vp;",
+        "uniform mat4 u_mat;",
         "attribute vec2 a_tex;",
         "varying vec2 v_tex;",
         "void main() {",
-        "  gl_Position = vec4(vp, 1.0);",
+        "  gl_Position = u_mat*vec4(vp.x,vp.y,vp.z,1.0);",
         "  v_tex = a_tex;",
         "}"
       ].join("\n");
@@ -212,7 +213,7 @@ class TinyWebglCanvas extends TinyCanvas {
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
     TinyWebglImage img = image;
-    print("---drawRect");
+    print("---drawImageRect");
     //
     //
     GL.useProgram(programImage);
@@ -244,28 +245,27 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.texImage2D(RenderingContext.TEXTURE_2D, 0, 
         RenderingContext.RGBA, 
         RenderingContext.RGBA, RenderingContext.UNSIGNED_BYTE, img.elm);
-    double sx = -1.0 + 2.0 * dst.x / glContext.widht;
-    double sy = 1.0 - 2.0 * dst.y / glContext.height;
-    double ex = sx + 2.0 * dst.w / glContext.widht;
-    double ey = sy - 2.0 * dst.h / glContext.height;
-    TypedData rectData = new Float32List.fromList(
-        [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
-    TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
-
-    Buffer rectBuffer = GL.createBuffer();
+    //
+    //
+    double sx = dst.x;
+    double sy = dst.y;
+    double ex = dst.x+dst.w;
+    double ey = dst.y+dst.h;
+    Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(
+        GL, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
-    GL.bufferData(ARRAY_BUFFER, rectData, RenderingContext.STATIC_DRAW);
 
-    Buffer rectIndexBuffer = GL.createBuffer();
-    GL.bindBuffer(ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
-    GL.bufferDataTyped(RenderingContext.ELEMENT_ARRAY_BUFFER, rectDataIndex,
-        RenderingContext.STATIC_DRAW);
+    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, [0, 1, 2, 1, 3, 2]);
+    GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
+
 
     //
     // draw
-
     {
       int locationVertexPosition = GL.getAttribLocation(programImage, "vp");
+      UniformLocation locationMat = GL.getUniformLocation(programImage, "u_mat");
+      GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(calcMat().storage));
+
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       var colorLocation = GL.getUniformLocation(programImage, "color");
