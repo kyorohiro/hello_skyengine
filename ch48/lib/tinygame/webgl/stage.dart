@@ -179,8 +179,6 @@ class TinyWebglCanvas extends TinyCanvas {
     double sy = rect.y;
     double ex = rect.x+rect.w;
     double ey = rect.y+rect.h;
-    TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
-
     Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
 
@@ -204,9 +202,12 @@ class TinyWebglCanvas extends TinyCanvas {
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
     }
+    GL.useProgram(null);
   }
 
-  void clipRect(TinyStage stage, TinyRect rect) {}
+  void clipRect(TinyStage stage, TinyRect rect) {
+    
+  }
 
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
