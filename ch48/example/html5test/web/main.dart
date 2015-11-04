@@ -23,5 +23,6 @@ void main() {
   print("--------1-dart hello ( 1 )");
   TinyGameBuilderForWebgl gl = new TinyGameBuilderForWebgl();
   TinyStage stage = gl.createStage(new TinyGameRoot(400.0, 400.0));
+  stage.start();
   print("--------1-dart hello ( 2 ) ");
 }
