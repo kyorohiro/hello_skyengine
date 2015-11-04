@@ -162,7 +162,7 @@ class TinyWebglCanvas extends TinyCanvas {
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       var colorLocation = GL.getUniformLocation(p, "u_color");
-      GL.uniform4f(colorLocation, 1.0, 1.0, 0.0, 0.5);  
+      GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf, paint.color.bf, paint.color.af);  
       GL.enableVertexAttribArray(locationVertexPosition);
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);

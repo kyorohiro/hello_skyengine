@@ -16,5 +16,9 @@ void test() {
   TinyWebglContext c = new TinyWebglContext();
   RenderingContext gl = c.GL;
   TinyWebglCanvas canvas = new TinyWebglCanvas(c);
-  canvas.drawRect(null, new TinyRect(50.50,0.0,100.0,100.0), null);
+  TinyPaint p = new TinyPaint();
+  p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
+  canvas.drawRect(null, new TinyRect(50.50,0.0,100.0,100.0), p);
+  p.color = new TinyColor.argb(0xff, 0x00, 0xff, 0xff);
+  canvas.drawRect(null, new TinyRect(150.150,0.0,100.0,100.0), p);
 }

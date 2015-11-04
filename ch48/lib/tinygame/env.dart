@@ -56,6 +56,15 @@ class TinyPaint {
 class TinyColor {
   int value = 0;
   TinyColor(this.value) {}
+  int get a => (value>>24) & 0xff;
+  int get r => (value>>16) & 0xff;
+  int get g => (value>>8)  & 0xff;
+  int get b => (value>>0)  & 0xff;
+  double get af => a/255.0;
+  double get rf => r/255.0;
+  double get gf => g/255.0;
+  double get bf => b/255.0;
+
   TinyColor.argb(int a, int r, int g, int b) {
     value |= (a & 0xff) << 24;
     value |= (r & 0xff) << 16;
