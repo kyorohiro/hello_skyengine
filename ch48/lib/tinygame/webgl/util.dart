@@ -16,6 +16,7 @@ class TinyWebglLoader {
 
 }
 
+
 class TinyWebglProgram {
 
   static compile(RenderingContext GL, String vs, String fs) {

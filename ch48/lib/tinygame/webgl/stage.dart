@@ -8,12 +8,18 @@ class TinyGameBuilderForWebgl extends TinyGameBuilder {
   }
 
   Future<TinyImage> loadImageBase(String path) async {
-    return null;
+    ImageElement elm = await TinyWebglLoader.loadImage(path);
+    return new TinyWebglImage(elm);
   }
 }
-
+class TinyWebglImage extends TinyImage {
+  int get w=> elm.width;
+  int get h=> elm.height;
+  ImageElement elm;
+  TinyWebglImage(this.elm){;}
+  
+}
 class TinyWebglStage extends Object with TinyStage {
-
   TinyWebglContext glContext;
   double get x => 0.0;
   double get y => 0.0;
@@ -31,11 +37,10 @@ class TinyWebglStage extends Object with TinyStage {
   TinyGameBuilder _builder;
   TinyGameBuilder get builder => _builder;
 
-
-
-  TinyWebglStage(this._builder, TinyDisplayObject root,{width:600.0,height:400.0}) {
+  TinyWebglStage(this._builder, TinyDisplayObject root,
+      {width: 600.0, height: 400.0}) {
     print("--------new stage");
-    glContext = new TinyWebglContext(width:width, height:height);
+    glContext = new TinyWebglContext(width: width, height: height);
     this.root = root;
   }
 
@@ -43,11 +48,11 @@ class TinyWebglStage extends Object with TinyStage {
   void markNeedsPaint() {
     isPaint = true;
   }
-  void init()  {
-  }
+
+  void init() {}
 
   void start() {
-    if(animeIsStart == false) {
+    if (animeIsStart == false) {
       animeIsStart = true;
       _anime();
     }
@@ -58,9 +63,9 @@ class TinyWebglStage extends Object with TinyStage {
     while (animeIsStart) {
       await new Future.delayed(new Duration(milliseconds: 20));
       num currentTime = new DateTime.now().millisecond;
-      kick(currentTime-startTime);
+      kick(currentTime - startTime);
       markNeedsPaint();
-      if(isPaint) {
+      if (isPaint) {
         root.paint(this, new TinyWebglCanvas(glContext));
       }
       isPaint = false;
@@ -70,7 +75,6 @@ class TinyWebglStage extends Object with TinyStage {
   void stop() {
     animeIsStart = false;
   }
-
 }
 
 class TinyWebglContext {
@@ -78,11 +82,11 @@ class TinyWebglContext {
   CanvasElement _canvasElement;
   double widht;
   double height;
-  TinyWebglContext({width:600.0,height:400.0}) {
+  TinyWebglContext({width: 600.0, height: 400.0}) {
     this.widht = width;
     this.height = height;
     _canvasElement = //new CanvasElement(width: 500, height: 500);//
-    new CanvasElement(width: widht.toInt(), height: height.toInt());
+        new CanvasElement(width: widht.toInt(), height: height.toInt());
     document.body.append(_canvasElement);
     GL = _canvasElement.getContext3d();
   }
@@ -94,7 +98,49 @@ class TinyWebglCanvas extends TinyCanvas {
   TinyWebglCanvas(TinyWebglContext c) {
     GL = c.GL;
     glContext = c;
+    init();
     clear();
+  }
+  Program programShape;
+  Program programImage;
+  void init() {
+    {
+      String vs = [
+        "attribute vec3 vp;",
+        "void main() {",
+        "  gl_Position = vec4(vp, 1.0);",
+        "}"
+      ].join("\n");
+      String fs = [
+        "precision mediump float;",
+        "uniform vec4 color;",
+        "void main() {",
+        " gl_FragColor = color;",
+        "}"
+      ].join("\n");
+      programShape = TinyWebglProgram.compile(GL, vs, fs);
+    }
+    {
+      String vs = [
+        "attribute vec3 vp;",
+        "attribute vec2 a_tex;",
+        "varying vec2 v_tex;",
+        "void main() {",
+        "  gl_Position = vec4(vp, 1.0);",
+        "  v_tex = a_tex;",
+        "}"
+      ].join("\n");
+      String fs = [
+        "precision mediump float;",
+        "varying vec2 v_tex;",
+        "uniform sampler2D u_image;",
+        "uniform vec4 color;",
+        "void main() {",
+        " gl_FragColor = texture2D(u_image, v_tex);",
+        "}"
+      ].join("\n");
+      programImage = TinyWebglProgram.compile(GL, vs, fs);
+    }
   }
 
   void clear() {
@@ -105,44 +151,22 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clearColor(r, g, b, a);
     GL.clear(RenderingContext.COLOR_BUFFER_BIT);
   }
-  
-  
-  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
-  }
 
-  void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
+  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {}
 
-  }
+  void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {}
 
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
     print("---drawRect");
-    String vs = [
-      "attribute vec3 vp;",
-      "void main() {",
-      "  gl_Position = vec4(vp, 1.0);",
-      "}"
-    ].join("\n");
-    String fs = [
-      "precision mediump float;",
-      "uniform vec4 u_color;",
-      "void main() {",
-      " gl_FragColor = u_color;",
-      "}"
-    ].join("\n");
-    Program p = TinyWebglProgram.compile(GL, vs, fs);
-    GL.useProgram(p);
     //
     //
-
-    double sx = -1.0+2.0*rect.x/glContext.widht;
-    double sy = 1.0-2.0*rect.y/glContext.height;
-    double ex = sx+2.0*rect.w/glContext.widht;
-    double ey = sy-2.0*rect.h/glContext.height;
+    GL.useProgram(programShape);
+    double sx = -1.0 + 2.0 * rect.x / glContext.widht;
+    double sy = 1.0 - 2.0 * rect.y / glContext.height;
+    double ex = sx + 2.0 * rect.w / glContext.widht;
+    double ey = sy - 2.0 * rect.h / glContext.height;
     TypedData rectData = new Float32List.fromList(
-        [ sx, sy, 0.0,
-          sx, ey, 0.0,
-          ex, sy, 0.0,
-          ex, ey, 0.0]);
+        [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
 
     Buffer rectBuffer = GL.createBuffer();
@@ -157,28 +181,61 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     // draw
 
-     {
-      int locationVertexPosition = GL.getAttribLocation(p, "vp");
+    {
+      int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
-      var colorLocation = GL.getUniformLocation(p, "u_color");
-      GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf, paint.color.bf, paint.color.af);  
+      var colorLocation = GL.getUniformLocation(programShape, "color");
+      GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
+          paint.color.bf, paint.color.af);
       GL.enableVertexAttribArray(locationVertexPosition);
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
     }
-
-
   }
 
-  void clipRect(TinyStage stage, TinyRect rect) {
-  }
+  void clipRect(TinyStage stage, TinyRect rect) {}
 
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
+    print("---drawRect");
 
+    GL.useProgram(programShape);
+    //
+    //
+
+    double sx = -1.0 + 2.0 * dst.x / glContext.widht;
+    double sy = 1.0 - 2.0 * dst.y / glContext.height;
+    double ex = sx + 2.0 * dst.w / glContext.widht;
+    double ey = sy - 2.0 * dst.h / glContext.height;
+    TypedData rectData = new Float32List.fromList(
+        [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
+    TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
+
+    Buffer rectBuffer = GL.createBuffer();
+    GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
+    GL.bufferData(ARRAY_BUFFER, rectData, RenderingContext.STATIC_DRAW);
+
+    Buffer rectIndexBuffer = GL.createBuffer();
+    GL.bindBuffer(ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
+    GL.bufferDataTyped(RenderingContext.ELEMENT_ARRAY_BUFFER, rectDataIndex,
+        RenderingContext.STATIC_DRAW);
+
+    //
+    // draw
+
+    {
+      int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
+      GL.vertexAttribPointer(
+          locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
+      var colorLocation = GL.getUniformLocation(programShape, "color");
+      GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
+          paint.color.bf, paint.color.af);
+      GL.enableVertexAttribArray(locationVertexPosition);
+      GL.drawElements(
+          RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
+    }
   }
 
-  void updateMatrix() {
-  }
+  void updateMatrix() {}
 }
