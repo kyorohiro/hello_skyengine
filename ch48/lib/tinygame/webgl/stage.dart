@@ -116,6 +116,7 @@ class TinyWebglCanvas extends TinyCanvas {
         "precision mediump float;",
         "uniform vec4 color;",
         "void main() {",
+        "",
         " gl_FragColor = color;",
         "}"
       ].join("\n");
@@ -170,26 +171,25 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     //
     GL.useProgram(programShape);
+    
+    //
+    // vertex
+    // 
     double sx = rect.x;
     double sy = rect.y;
     double ex = rect.x+rect.w;
     double ey = rect.y+rect.h;
-    TypedData rectData = new Float32List.fromList(
-        [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
 
-    Buffer rectBuffer = GL.createBuffer();
+    Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
-    GL.bufferData(ARRAY_BUFFER, rectData, RenderingContext.STATIC_DRAW);
 
-    Buffer rectIndexBuffer = GL.createBuffer();
-    GL.bindBuffer(ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
-    GL.bufferDataTyped(RenderingContext.ELEMENT_ARRAY_BUFFER, rectDataIndex,
-        RenderingContext.STATIC_DRAW);
+    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, [0, 1, 2, 1, 3, 2]);
+    GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
+
 
     //
     // draw
-
     {
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
       UniformLocation locationMat = GL.getUniformLocation(programShape, "u_mat");

@@ -19,7 +19,7 @@ class TinyWebglLoader {
 
 class TinyWebglProgram {
 
-  static compile(RenderingContext GL, String vs, String fs) {
+  static Program compile(RenderingContext GL, String vs, String fs) {
     // setup shader
     Shader vertexShader = loadShader(
         GL, RenderingContext.VERTEX_SHADER, vs);
@@ -46,5 +46,23 @@ class TinyWebglProgram {
       throw "${message}\n";
     }
     return shader;
+  }
+
+  static Buffer createArrayBuffer(RenderingContext context, List data) {
+    Buffer ret = context.createBuffer();
+    context.bindBuffer(RenderingContext.ARRAY_BUFFER, ret);
+    context.bufferData(RenderingContext.ARRAY_BUFFER, 
+        new Float32List.fromList(data), RenderingContext.STATIC_DRAW);
+    context.bindBuffer(RenderingContext.ARRAY_BUFFER, null);
+    return ret;
+  }
+  
+  static Buffer createElementArrayBuffer(RenderingContext context, List data) {
+    Buffer ret = context.createBuffer();
+    context.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, ret);
+    context.bufferDataTyped(RenderingContext.ELEMENT_ARRAY_BUFFER, new Uint16List.fromList(data),
+        RenderingContext.STATIC_DRAW);
+    context.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, null);
+    return ret;
   }
 }
