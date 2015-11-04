@@ -107,8 +107,9 @@ class TinyWebglCanvas extends TinyCanvas {
     {
       String vs = [
         "attribute vec3 vp;",
+        "uniform mat4 u_mat;",
         "void main() {",
-        "  gl_Position = vec4(vp, 1.0);",
+        "  gl_Position = u_mat*vec4(vp.x,vp.y,vp.z,1.0);",
         "}"
       ].join("\n");
       String fs = [
@@ -161,10 +162,14 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     //
     GL.useProgram(programShape);
-    double sx = -1.0 + 2.0 * rect.x / glContext.widht;
+    /*double sx = -1.0 + 2.0 * rect.x / glContext.widht;
     double sy = 1.0 - 2.0 * rect.y / glContext.height;
     double ex = sx + 2.0 * rect.w / glContext.widht;
-    double ey = sy - 2.0 * rect.h / glContext.height;
+    double ey = sy - 2.0 * rect.h / glContext.height;*/
+    double sx = rect.x;
+    double sy = rect.y;
+    double ex = rect.x+rect.w;
+    double ey = rect.y+rect.h;
     TypedData rectData = new Float32List.fromList(
         [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     TypedData rectDataIndex = new Uint16List.fromList([0, 1, 2, 1, 3, 2]);
@@ -183,6 +188,14 @@ class TinyWebglCanvas extends TinyCanvas {
 
     {
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
+      UniformLocation locationMat = GL.getUniformLocation(programShape, "u_mat");
+      Matrix4 m = new Matrix4.identity();
+      m = m.translate(-1.0, 1.0, 0.0);
+      m = m.scale(2.0/glContext.widht, -2.0/glContext.height,1.0);
+
+     // m = m.rotateZ(math.PI/2.0);
+
+      GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(m.storage));
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       var colorLocation = GL.getUniformLocation(programShape, "color");
@@ -208,14 +221,10 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, texBuffer);
     GL.bufferData(RenderingContext.ARRAY_BUFFER, 
         new Float32List.fromList([
-//         -1.0, 1.0, 
-//         -1.0, -1.0, 
-//          1.0, 1.0, 
-//          1.0, -1.0]), 
-          0.0, 1.0, 
           0.0, 0.0, 
-           1.0, 1.0, 
-           1.0, 0.0]),         
+          0.0, 1.0, 
+          1.0, 0.0, 
+          1.0, 1.0]),         
         RenderingContext.STATIC_DRAW);
     GL.enableVertexAttribArray(texLocation);
     GL.vertexAttribPointer(texLocation, 2, RenderingContext.FLOAT, false, 0,0);
