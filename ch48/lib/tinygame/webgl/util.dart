@@ -65,4 +65,19 @@ class TinyWebglProgram {
     context.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, null);
     return ret;
   }
+  
+  static setUniformF(RenderingContext context, Program program, String name, double v) {
+    var location = context.getUniformLocation(program, name);
+    context.uniform1f(location, v);
+  }
+  static setUniformVec4(RenderingContext context, Program program, String name, List v) {
+    var location = context.getUniformLocation(program, name);
+    context.uniform4fv(location, new Float32List.fromList(v));
+  }
+  
+  static setUniformMat4(RenderingContext context, Program program, String name, Matrix4 v) {
+    var location = context.getUniformLocation(program, name);
+    context.uniformMatrix4fv(location, false, new Float32List.fromList(v.storage));
+  }
+  
 }
