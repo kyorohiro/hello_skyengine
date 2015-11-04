@@ -22,12 +22,13 @@ test() async {
   TinyWebglCanvas canvas = new TinyWebglCanvas(c);
   {
     TinyPaint p = new TinyPaint();
-   // p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
-   // canvas.drawRect(null, new TinyRect(50.0, 50.0, 100.0, 100.0), p);
-    canvas.pushMulMatrix(new Matrix4.identity().rotateZ(math.PI/2.0));
+    p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
+    canvas.pushMulMatrix(new Matrix4.identity().rotateZ(math.PI/8.0));//math.PI/100.0));
+    canvas.drawRect(null, new TinyRect(50.0, 50.0, 100.0, 100.0), p);
+
     p.color = new TinyColor.argb(0xff, 0x00, 0xff, 0xff);
-    canvas.drawRect(null, new TinyRect(0.0, 0.0, 100.0, 100.0), p);
-//    canvas.drawRect(null, new TinyRect(150.0, 150.0, 100.0, 100.0), p);
+//    canvas.drawRect(null, new TinyRect(0.0, 0.0, 100.0, 100.0), p);
+   canvas.drawRect(null, new TinyRect(150.0, 150.0, 100.0, 100.0), p);
   }
   /*
   {

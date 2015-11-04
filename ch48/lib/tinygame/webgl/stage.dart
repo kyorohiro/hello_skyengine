@@ -192,8 +192,8 @@ class TinyWebglCanvas extends TinyCanvas {
       Matrix4 m = new Matrix4.identity();
       m = m.translate(-1.0, 1.0, 0.0);
       m = m.scale(2.0/glContext.widht, -2.0/glContext.height,1.0);
-
-     // m = m.rotateZ(math.PI/2.0);
+      m = m* getMatrix();
+      //m = m.rotateZ(math.PI/4.0);
 
       GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(m.storage));
       GL.vertexAttribPointer(
