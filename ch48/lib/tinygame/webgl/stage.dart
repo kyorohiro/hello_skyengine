@@ -108,10 +108,10 @@ class TinyWebglCanvas extends TinyCanvas {
       String vs = [
         "attribute vec3 vp;",
         "uniform mat4 u_mat;",
-        "uniform float point_size;",
+        "uniform float u_point_size;",
         "void main() {",
         "  gl_Position = u_mat*vec4(vp.x,vp.y,vp.z,1.0);",
-        "  gl_PointSize = 0.1;",
+        "  gl_PointSize = 1.0;//u_point_size;",
         "}"
       ].join("\n");
       String fs = [
@@ -193,6 +193,7 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     // draw
     {
+      print("${GL.getParameter(RenderingContext.ALIASED_POINT_SIZE_RANGE)}");
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
       UniformLocation locationMat = GL.getUniformLocation(programShape, "u_mat");
 
@@ -202,12 +203,16 @@ class TinyWebglCanvas extends TinyCanvas {
       var colorLocation = GL.getUniformLocation(programShape, "color");
       GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
           paint.color.bf, paint.color.af);
+      var pointSizeLocation = GL.getUniformLocation(programShape, "u_point_size");
+      GL.uniform1f(pointSizeLocation, paint.strokeWidth);
+
       GL.enableVertexAttribArray(locationVertexPosition);
       if(paint.style == TinyPaintStyle.fill) {
         GL.drawElements(
             RenderingContext.TRIANGLE_FAN, 
             4, RenderingContext.UNSIGNED_SHORT, 0);        
       } else {
+        GL.lineWidth(paint.strokeWidth);
         GL.drawElements(
             RenderingContext.LINE_LOOP,
             4, RenderingContext.UNSIGNED_SHORT, 0);       
