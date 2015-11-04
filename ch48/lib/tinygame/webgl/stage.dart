@@ -104,8 +104,9 @@ class TinyWebglCanvas extends TinyCanvas {
     double a = 1.0;
     GL.clearColor(r, g, b, a);
     GL.clear(RenderingContext.COLOR_BUFFER_BIT);
-
   }
+  
+  
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
   }
 
@@ -123,8 +124,9 @@ class TinyWebglCanvas extends TinyCanvas {
     ].join("\n");
     String fs = [
       "precision mediump float;",
+      "uniform vec4 u_color;",
       "void main() {",
-      " gl_FragColor = vec4(0.0,1.0,0.0,0.2);",
+      " gl_FragColor = u_color;",
       "}"
     ].join("\n");
     Program p = TinyWebglProgram.compile(GL, vs, fs);
@@ -159,6 +161,8 @@ class TinyWebglCanvas extends TinyCanvas {
       int locationVertexPosition = GL.getAttribLocation(p, "vp");
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
+      var colorLocation = GL.getUniformLocation(p, "u_color");
+      GL.uniform4f(colorLocation, 1.0, 1.0, 0.0, 0.5);  
       GL.enableVertexAttribArray(locationVertexPosition);
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
