@@ -157,7 +157,15 @@ class TinyWebglCanvas extends TinyCanvas {
 
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {}
 
-  void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
+ Matrix4 calcMat() {
+   Matrix4 m = new Matrix4.identity();
+   m = m.translate(-1.0, 1.0, 0.0);
+   m = m.scale(2.0/glContext.widht, -2.0/glContext.height,1.0);
+   m = m* getMatrix();
+   return m;
+ }
+
+ void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
     print("---drawRect");
     //
     //
@@ -185,12 +193,8 @@ class TinyWebglCanvas extends TinyCanvas {
     {
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
       UniformLocation locationMat = GL.getUniformLocation(programShape, "u_mat");
-      Matrix4 m = new Matrix4.identity();
-      m = m.translate(-1.0, 1.0, 0.0);
-      m = m.scale(2.0/glContext.widht, -2.0/glContext.height,1.0);
-      m = m* getMatrix();
 
-      GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(m.storage));
+      GL.uniformMatrix4fv(locationMat, false, new Float32List.fromList(calcMat().storage));
       GL.vertexAttribPointer(
           locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       var colorLocation = GL.getUniformLocation(programShape, "color");
