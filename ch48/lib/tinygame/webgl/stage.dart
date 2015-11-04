@@ -108,16 +108,19 @@ class TinyWebglCanvas extends TinyCanvas {
       String vs = [
         "attribute vec3 vp;",
         "uniform mat4 u_mat;",
+        "uniform float point_size;",
         "void main() {",
         "  gl_Position = u_mat*vec4(vp.x,vp.y,vp.z,1.0);",
+        "  gl_PointSize = 0.1;",
         "}"
       ].join("\n");
       String fs = [
         "precision mediump float;",
         "uniform vec4 color;",
         "void main() {",
-        "",
         " gl_FragColor = color;",
+//        "float a = gl_FragCoord.x /152.0;",
+//        "gl_FragColor = vec4(vec3(a), 1.0);",
         "}"
       ].join("\n");
       programShape = TinyWebglProgram.compile(GL, vs, fs);
@@ -183,7 +186,7 @@ class TinyWebglCanvas extends TinyCanvas {
     Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
 
-    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, [0, 1, 2, 1, 3, 2]);
+    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, [0, 1, 3, 2]);
     GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
 
 
@@ -200,8 +203,15 @@ class TinyWebglCanvas extends TinyCanvas {
       GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
           paint.color.bf, paint.color.af);
       GL.enableVertexAttribArray(locationVertexPosition);
-      GL.drawElements(
-          RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
+      if(paint.style == TinyPaintStyle.fill) {
+        GL.drawElements(
+            RenderingContext.TRIANGLE_FAN, 
+            4, RenderingContext.UNSIGNED_SHORT, 0);        
+      } else {
+        GL.drawElements(
+            RenderingContext.LINE_LOOP,
+            4, RenderingContext.UNSIGNED_SHORT, 0);       
+      }
     }
     GL.useProgram(null);
   }
