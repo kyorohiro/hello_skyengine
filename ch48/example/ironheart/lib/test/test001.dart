@@ -8,7 +8,7 @@ TinyGameRoot root;
 TinyGameBuilderForFlutter builder;
 TinyStage stage;
 void main() {
-  builder = new TinyGameBuilderForFlutter();
+  builder = new TinyGameBuilderForFlutter("web/");
   runApp(new GameWidget());
 }
 

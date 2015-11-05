@@ -1,17 +1,16 @@
 part of glogic;
 
 class Game {
-  TinyGameBuilderForFlutter f;
+  TinyGameBuilder f;
   PlayScene playScene;
   StartScreen startScene;
   ProgramScree progScene;
   TinyStage stage;
   GameEnvirone environ;
 
-  Game() {
+  Game(this.f) {
 
     environ = new GameEnvirone();
-    f = new TinyGameBuilderForFlutter();
     playScene = new PlayScene(this);
     startScene = new StartScreen(this);
     progScene = new ProgramScree(this);

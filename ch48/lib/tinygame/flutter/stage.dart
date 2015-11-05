@@ -1,12 +1,16 @@
 part of tinygame_flutter;
 
 class TinyGameBuilderForFlutter extends TinyGameBuilder {
+  String resourceRoot;
+  TinyGameBuilderForFlutter(this.resourceRoot) {
+
+  }
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyFlutterStage(this, root);
   }
 
   Future<TinyImage> loadImageBase(String path) async {
-    return new TinyFlutterImage(await ImageLoader.load(path));
+    return new TinyFlutterImage(await ImageLoader.load("${resourceRoot}${path}"));
   }
 
 }

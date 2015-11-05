@@ -10,7 +10,7 @@ bool isTestMode = false;
 //bool isTestMode = true;
 void main() {
   if(isTestMode == false) {
-    Game game = new Game();
+    Game game = new Game(new TinyGameBuilderForFlutter("web/"));
     runApp(new GameWidget(game));
   } else {
 //    t001.main();

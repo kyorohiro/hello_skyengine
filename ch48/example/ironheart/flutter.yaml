@@ -1,0 +1,17 @@
+assets:
+  - web/assets/act_back.png
+  - web/assets/act_shoot.png
+  - web/assets/con_cha.png
+  - web/assets/act_front.png
+  - web/assets/bg_play.png
+  - web/assets/con_no_rot.png
+  - web/assets/act_left.png
+  - web/assets/bg_prog.png
+  - web/assets/con_sel.png
+  - web/assets/act_right.png
+  - web/assets/bg_start.png
+  - web/assets/con_yes_rot.png
+  - web/assets/act_rotate_left.png
+  - web/assets/ch_iron.png
+  - web/assets/act_rotate_right.png
+  - web/assets/ch_iron2.png

@@ -38,7 +38,7 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("web/assets/icon.jpeg").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
       });
