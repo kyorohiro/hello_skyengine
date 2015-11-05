@@ -86,33 +86,33 @@ class TinyWebglStage extends Object with TinyStage {
  // "pointermove"
   void ttest() {
     glContext.canvasElement.onMouseDown.listen((MouseEvent e) {
-       print("down offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // print("down offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
        root.touch(this, 0, "pointerdown", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     glContext.canvasElement.onMouseUp.listen((MouseEvent e) {
-      print("up offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      //print("up offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
       root.touch(this, 0, "pointerup", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     glContext.canvasElement.onMouseEnter.listen((MouseEvent e) {
-       print("enter offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // print("enter offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
        root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     glContext.canvasElement.onMouseLeave.listen((MouseEvent e) {
-       print("leave offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // print("leave offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
        root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     glContext.canvasElement.onMouseMove.listen((MouseEvent e) {
-       print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       //print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
        root.touch(this, 0, "pointermove", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     
     glContext.canvasElement.onMouseOut.listen((MouseEvent e) {
-       print("out offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // print("out offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
        root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
 
     glContext.canvasElement.onMouseOver.listen((MouseEvent e) {
-       print("over offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // print("over offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
       // root.touch(this, 0, event.type, e.offsetX.toDouble(), e.offsetY.toDouble());
     });
   }
@@ -247,12 +247,12 @@ class TinyWebglCanvas extends TinyCanvas {
       ver.add(cy+math.sin(2*math.PI*(i/num))*b);
       ver.add(0.0);
     }
-    print("${a} ${b} ${ind} ${ver}");
+    //print("${a} ${b} ${ind} ${ver}");
     drawVertex(stage, ver, ind, paint.color, paint.style, paint.strokeWidth);
   }
 
   void drawVertex(TinyStage stage, List<double> svertex, List<int> index, TinyColor color, TinyPaintStyle style, double strokeWidth) {
-    print("---drawRect");
+    //print("---drawRect");
     //
     //
     GL.useProgram(programShape);
@@ -270,7 +270,7 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     // draw
     {
-      print("${GL.getParameter(RenderingContext.ALIASED_POINT_SIZE_RANGE)}");
+      //print("${GL.getParameter(RenderingContext.ALIASED_POINT_SIZE_RANGE)}");
 
       TinyWebglProgram.setUniformMat4(GL, programShape, "u_mat", calcMat());
       TinyWebglProgram.setUniformVec4(GL, programShape, "color", [color.rf, color.gf, color.bf, color.af]);
@@ -326,7 +326,7 @@ class TinyWebglCanvas extends TinyCanvas {
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
     TinyWebglImage img = image;
-    print("---drawImageRect");
+    //print("---drawImageRect");
     //
     //
     GL.useProgram(programImage);
