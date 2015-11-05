@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 
 #### check following code
-[draw_image_from_assets](../draw_image_from_assets/doc/README.md)
+[draw_image_from_assets](../content/draw_image_from_assets/doc/README.md)
 
 ```
 //
