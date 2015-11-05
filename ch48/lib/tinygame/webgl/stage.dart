@@ -85,35 +85,52 @@ class TinyWebglStage extends Object with TinyStage {
  // "pointerdown"
  // "pointermove"
   void ttest() {
+    bool isTap = false;
     glContext.canvasElement.onMouseDown.listen((MouseEvent e) {
       // print("down offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      isTap = true;
        root.touch(this, 0, "pointerdown", e.offsetX.toDouble(), e.offsetY.toDouble());
     });
     glContext.canvasElement.onMouseUp.listen((MouseEvent e) {
       //print("up offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if(isTap == true) {
       root.touch(this, 0, "pointerup", e.offsetX.toDouble(), e.offsetY.toDouble());
+      isTap = false;
+      }
     });
     glContext.canvasElement.onMouseEnter.listen((MouseEvent e) {
       // print("enter offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-       root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+      if(isTap == true) {
+       //root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+      }
     });
     glContext.canvasElement.onMouseLeave.listen((MouseEvent e) {
       // print("leave offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if(isTap == true) {
        root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+       isTap = false;
+      }
     });
     glContext.canvasElement.onMouseMove.listen((MouseEvent e) {
        //print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if(isTap == true) {
        root.touch(this, 0, "pointermove", e.offsetX.toDouble(), e.offsetY.toDouble());
+      }
     });
     
     glContext.canvasElement.onMouseOut.listen((MouseEvent e) {
       // print("out offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if(isTap == true) {
        root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+       isTap = false;
+      }
     });
 
     glContext.canvasElement.onMouseOver.listen((MouseEvent e) {
       // print("over offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if(isTap == true) {
       // root.touch(this, 0, event.type, e.offsetX.toDouble(), e.offsetY.toDouble());
+      }
     });
   }
 }
