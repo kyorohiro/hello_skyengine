@@ -159,9 +159,6 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clear(RenderingContext.COLOR_BUFFER_BIT);
   }
 
-  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {}
-
-
 
   Matrix4 calcMat() {
     Matrix4 m = new Matrix4.identity();
@@ -181,6 +178,24 @@ class TinyWebglCanvas extends TinyCanvas {
 
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
     drawVertex(stage, [p1.x, p1.y, 0.0, p2.x, p2.y, 0.0], [0, 1], paint.color, TinyPaintStyle.stroke, paint.strokeWidth);
+  }
+
+  void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
+    double cx = rect.x + rect.w/2.0;
+    double cy = rect.y + rect.h/2.0;
+    double a = rect.w/2;
+    double b = rect.h/2;
+    List<double> ver = [];
+    List<int> ind = [];
+    int num = 50;
+    for(int i=0;i<num;i++) {
+      ind.add(i);
+      ver.add(cx+math.cos(2*math.PI*(i/num))*a);
+      ver.add(cy+math.sin(2*math.PI*(i/num))*b);
+      ver.add(0.0);
+    }
+    print("${a} ${b} ${ind} ${ver}");
+    drawVertex(stage, ver, ind, paint.color, paint.style, paint.strokeWidth);
   }
 
   void drawVertex(TinyStage stage, List<double> svertex, List<int> index, TinyColor color, TinyPaintStyle style, double strokeWidth) {

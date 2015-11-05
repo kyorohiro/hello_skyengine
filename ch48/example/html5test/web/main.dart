@@ -31,6 +31,9 @@ test() async {
     p.strokeWidth = 2.5;
 //    canvas.drawRect(null, new TinyRect(0.0, 0.0, 100.0, 100.0), p);
    canvas.drawRect(null, new TinyRect(150.0, 150.0, 100.0, 100.0), p);
+   
+   p.style = TinyPaintStyle.fill;
+   canvas.drawOval(null, new TinyRect(150.0, 150.0, 100.0, 100.0), p);
   }
   
   {
