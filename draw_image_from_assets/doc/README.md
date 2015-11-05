@@ -70,3 +70,10 @@ class DrawImageObject extends RenderBox {
   }
 }
 ```
+
+```
+# flutter.yaml
+assets:
+  - assets/icon.jpeg
+
+```

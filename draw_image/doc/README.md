@@ -4,15 +4,13 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 ![](screen.png)
 
-
+This code is checked in 2015/11/05. but, failed to draw image!!
 
 #### check following code
+
 [draw_image_from_assets](../../draw_image_from_assets/doc/README.md)
 
 ```
-//
-// following code is checked in 2015/11/05
-//  - failed to draw image now!!
 //
 // following code is checked in 2015/10/31
 import 'package:flutter/widgets.dart';
@@ -83,12 +81,4 @@ class DrawImageObject extends RenderBox {
     }
   }
 }
-```
-
-
-```
-# flutter.yaml
-assets:
-  - assets/icon.jpeg
-
 ```

@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/sound_test
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/05
 import 'dart:async';
 import 'package:flutter/src/services/fetch.dart';
 import 'package:mojo/core.dart';
@@ -16,7 +16,7 @@ import 'package:flutter/widgets.dart';
 main() async {
   runApp(new Center(child: new Text("Sound Test")));
   MojoDataPipeConsumer data =
-      await ResouceLoader.load("bgm_maoudamashii_acoustic09.mp3");
+      await ResouceLoader.load("assets/bgm_maoudamashii_acoustic09.mp3");
   SoundTest test = new SoundTest(data);
   await test.init();
   await test.play();
@@ -26,10 +26,19 @@ main() async {
   await test.play();
 }
 
+AssetBundle getAssetBundle() {
+  if (rootBundle != null) {
+    return rootBundle;
+  } else {
+    return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+  }
+}
+
+
 class ResouceLoader {
   static Future<MojoDataPipeConsumer> load(String url) async {
-    UrlResponse response = await fetchUrl(url);
-    return response.body;
+    AssetBundle bundle = getAssetBundle();
+    return await bundle.load(url);
   }
 }
 
@@ -58,4 +67,10 @@ class SoundTest {
   }
 }
 
+```
+
+```
+# flutter.yaml
+assets:
+  - assets/bgm_maoudamashii_acoustic09.mp3
 ```
