@@ -122,8 +122,6 @@ class TinyWebglCanvas extends TinyCanvas {
         "uniform vec4 color;",
         "void main() {",
         " gl_FragColor = color;",
-//        "float a = gl_FragCoord.x /152.0;",
-//        "gl_FragColor = vec4(vec3(a), 1.0);",
         "}"
       ].join("\n");
       programShape = TinyWebglProgram.compile(GL, vs, fs);
@@ -163,7 +161,7 @@ class TinyWebglCanvas extends TinyCanvas {
 
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {}
 
-  void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {}
+
 
   Matrix4 calcMat() {
     Matrix4 m = new Matrix4.identity();
@@ -174,6 +172,18 @@ class TinyWebglCanvas extends TinyCanvas {
   }
 
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
+    double sx = rect.x;
+    double sy = rect.y;
+    double ex = rect.x + rect.w;
+    double ey = rect.y + rect.h;
+    drawVertex(stage, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0], [0, 1, 3, 2], paint.color, paint.style, paint.strokeWidth);
+  }
+
+  void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
+    drawVertex(stage, [p1.x, p1.y, 0.0, p2.x, p2.y, 0.0], [0, 1], paint.color, TinyPaintStyle.stroke, paint.strokeWidth);
+  }
+
+  void drawVertex(TinyStage stage, List<double> svertex, List<int> index, TinyColor color, TinyPaintStyle style, double strokeWidth) {
     print("---drawRect");
     //
     //
@@ -182,16 +192,12 @@ class TinyWebglCanvas extends TinyCanvas {
     //
     // vertex
     //
-    double sx = rect.x;
-    double sy = rect.y;
-    double ex = rect.x + rect.w;
-    double ey = rect.y + rect.h;
-    Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(
-        GL, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0]);
+
+    Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, svertex);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
 
     Buffer rectIndexBuffer =
-        TinyWebglProgram.createElementArrayBuffer(GL, [0, 1, 3, 2]);
+        TinyWebglProgram.createElementArrayBuffer(GL, index);
     GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
 
     //
@@ -200,23 +206,21 @@ class TinyWebglCanvas extends TinyCanvas {
       print("${GL.getParameter(RenderingContext.ALIASED_POINT_SIZE_RANGE)}");
 
       TinyWebglProgram.setUniformMat4(GL, programShape, "u_mat", calcMat());
-      TinyWebglProgram.setUniformVec4(GL, programShape, "color",
-          [paint.color.rf, paint.color.gf, paint.color.bf, paint.color.af]);
-      TinyWebglProgram.setUniformF(
-          GL, programShape, "u_point_size", paint.strokeWidth);
+      TinyWebglProgram.setUniformVec4(GL, programShape, "color", [color.rf, color.gf, color.bf, color.af]);
+      TinyWebglProgram.setUniformF(GL, programShape, "u_point_size", strokeWidth);
 
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
-      GL.vertexAttribPointer(
-          locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
+      GL.vertexAttribPointer(locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       GL.enableVertexAttribArray(locationVertexPosition);
+
       int mode = RenderingContext.TRIANGLE_FAN;
-      if (paint.style == TinyPaintStyle.fill) {
+      if (style == TinyPaintStyle.fill) {
         mode = RenderingContext.TRIANGLE_FAN;
       } else {
-        GL.lineWidth(paint.strokeWidth);
+        GL.lineWidth(strokeWidth);
         mode = RenderingContext.LINE_LOOP;
       }
-      GL.drawElements(mode, 4, RenderingContext.UNSIGNED_SHORT, 0);
+      GL.drawElements(mode, svertex.length~/3, RenderingContext.UNSIGNED_SHORT, 0);
     }
     GL.useProgram(null);
   }

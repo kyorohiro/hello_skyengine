@@ -37,16 +37,25 @@ test() async {
     TinyPaint p = new TinyPaint();
     p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
     //
-    TinyRect src =
-        new TinyRect(0.0, 0.0, image.w.toDouble(), image.h.toDouble());
-    //canvas.drawRect(null, new TinyRect(250.0, 250.0, 100.0,100.0), p);
-
+    TinyRect src = new TinyRect(0.0, 0.0, image.w.toDouble(), image.h.toDouble());
     canvas.drawImageRect(
         null,
         image,
         src,
         new TinyRect(
             250.0, 250.0, image.w.toDouble() / 2, image.h.toDouble() / 2),
+        p);
+  }
+  
+  {
+    TinyPaint p = new TinyPaint();
+    p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
+    //p.style = TinyPaintStyle.stroke;
+    //
+    TinyRect src = new TinyRect(0.0, 0.0, image.w.toDouble(), image.h.toDouble());
+    canvas.drawLine(null,
+        new TinyPoint(200.0, 200.0),
+        new TinyPoint(500.0, 200.0),
         p);
   }
 }

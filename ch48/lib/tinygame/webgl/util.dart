@@ -70,6 +70,7 @@ class TinyWebglProgram {
     var location = context.getUniformLocation(program, name);
     context.uniform1f(location, v);
   }
+
   static setUniformVec4(RenderingContext context, Program program, String name, List v) {
     var location = context.getUniformLocation(program, name);
     context.uniform4fv(location, new Float32List.fromList(v));
