@@ -5,8 +5,9 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 ![](screen.png)
 
 
-[assets sample](draw_image_from_assets/doc/README.md)
 
+#### check following code
+[assets sample](draw_image_from_assets/doc/README.md)
 ```
 //
 // following code is checked in 2015/11/05
