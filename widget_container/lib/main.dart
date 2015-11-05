@@ -47,7 +47,7 @@ BoxDecoration createDecoration() {
 }
 
 BackgroundImage createBackgroundImage() {
-  ImageResource image =  new ImageResource(ImageLoader.load("icon.jpeg"));
+  ImageResource image =  new ImageResource(ImageLoader.load("assets/icon.jpeg"));
   ImageFit fit = ImageFit.none;
   //ImageRepeat repeat = ImageRepeat.repeat;
   Rect centerSlice = new Rect.fromLTWH(10.0, 10.0, 100.0, 100.0);
@@ -63,15 +63,16 @@ BackgroundImage createBackgroundImage() {
 }
 
 class ImageLoader {
-  static Future<sky.Image> load(String url) async {
-    UrlResponse response = await fetchUrl(url);
-      if(response.body == null) {
-      throw "failed load ${url}";
+  static AssetBundle getAssetBundle() {
+    if (rootBundle != null) {
+      return rootBundle;
     } else {
-      Completer<sky.Image> completer = new Completer();
-      sky.decodeImageFromDataPipe(
-          response.body.handle.h, completer.complete);
-      return completer.future;
+      return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
     }
+  }
+  static Future<sky.Image> load(String url) async {
+    AssetBundle bundle = getAssetBundle();
+    ImageResource resource = bundle.loadImage(url);
+    return resource.first;
   }
 }
