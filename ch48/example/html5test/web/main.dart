@@ -22,6 +22,13 @@ test() async {
   TinyWebglCanvas canvas = new TinyWebglCanvas(c);
   {
     TinyPaint p = new TinyPaint();
+    canvas.clear();
+    canvas.clipRect(null, new TinyRect(50.0,100.0,150.0,280.0));
+    canvas.drawRect(null, new TinyRect(50.0, 50.0, 100.0, 100.0), p);
+  }
+
+  {
+    TinyPaint p = new TinyPaint();
     p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);
     canvas.pushMulMatrix(new Matrix4.identity().rotateZ(math.PI/8.0));//math.PI/100.0));
     canvas.drawRect(null, new TinyRect(50.0, 50.0, 100.0, 100.0), p);
@@ -35,7 +42,6 @@ test() async {
    p.style = TinyPaintStyle.fill;
    canvas.drawOval(null, new TinyRect(150.0, 150.0, 100.0, 100.0), p);
   }
-  
   {
     TinyPaint p = new TinyPaint();
     p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0x00);

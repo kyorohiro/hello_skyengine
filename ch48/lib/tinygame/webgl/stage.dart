@@ -91,7 +91,7 @@ class TinyWebglContext {
     _canvasElement = //new CanvasElement(width: 500, height: 500);//
         new CanvasElement(width: widht.toInt(), height: height.toInt());
     document.body.append(_canvasElement);
-    GL = _canvasElement.getContext3d();
+    GL = _canvasElement.getContext3d(stencil: true);
   }
 }
 
@@ -155,8 +155,18 @@ class TinyWebglCanvas extends TinyCanvas {
     double g = 0.0;
     double b = 0.0;
     double a = 1.0;
+   // GL.enable(RenderingContext.DEPTH_TEST);
+    GL.enable(RenderingContext.STENCIL_TEST);
+    GL.depthFunc(RenderingContext.LEQUAL);
     GL.clearColor(r, g, b, a);
-    GL.clear(RenderingContext.COLOR_BUFFER_BIT);
+    GL.clearDepth(1.0);
+    GL.clearStencil(0);
+    //GL.stencilMask(0xffffff);
+    GL.clear(
+        RenderingContext.COLOR_BUFFER_BIT |
+        RenderingContext.STENCIL_BUFFER_BIT |
+        RenderingContext.DEPTH_BUFFER_BIT);
+
   }
 
 
@@ -211,8 +221,7 @@ class TinyWebglCanvas extends TinyCanvas {
     Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, svertex);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
 
-    Buffer rectIndexBuffer =
-        TinyWebglProgram.createElementArrayBuffer(GL, index);
+    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, index);
     GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
 
     //
@@ -240,7 +249,36 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.useProgram(null);
   }
 
-  void clipRect(TinyStage stage, TinyRect rect) {}
+  void clipRect(TinyStage stage, TinyRect rect) {
+
+    GL.colorMask(false, false, false,  false);
+    GL.depthMask(false);
+    GL.stencilOp(
+        RenderingContext.KEEP,
+        RenderingContext.REPLACE,
+            RenderingContext.REPLACE);
+    GL.stencilFunc(RenderingContext.ALWAYS, 1, 0xff);
+
+    //
+    
+    TinyPaint p = new TinyPaint();
+    p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
+    drawRect(null, rect, p);
+    //
+    
+    
+   // GL.disable(RenderingContext.STENCIL_TEST);
+    //
+    GL.colorMask(true, true, true, true);
+    GL.depthMask(true);
+    GL.stencilOp(
+        RenderingContext.KEEP,
+        RenderingContext.KEEP,
+        RenderingContext.KEEP);
+    GL.stencilFunc(RenderingContext.EQUAL, 1, 0xff);
+
+
+  }
 
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
@@ -302,6 +340,8 @@ class TinyWebglCanvas extends TinyCanvas {
       GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
           paint.color.bf, paint.color.af);
       GL.enableVertexAttribArray(locationVertexPosition);
+      
+
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
     }
