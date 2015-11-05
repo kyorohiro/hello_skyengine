@@ -8,6 +8,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 #### check following code
 [assets sample](draw_image_from_assets/doc/README.md)
+
 ```
 //
 // following code is checked in 2015/11/05
