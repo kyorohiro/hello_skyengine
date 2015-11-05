@@ -45,6 +45,7 @@ class TinyWebglStage extends Object with TinyStage {
     print("--------new stage");
     glContext = new TinyWebglContext(width: width, height: height);
     this.root = root;
+    ttest();
   }
 
   bool isPaint = false;
@@ -78,11 +79,49 @@ class TinyWebglStage extends Object with TinyStage {
   void stop() {
     animeIsStart = false;
   }
+  
+ // “pointercancel"
+ // "pointerup"
+ // "pointerdown"
+ // "pointermove"
+  void ttest() {
+    glContext.canvasElement.onMouseDown.listen((MouseEvent e) {
+       print("down offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       root.touch(this, 0, "pointerdown", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+    glContext.canvasElement.onMouseUp.listen((MouseEvent e) {
+      print("up offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      root.touch(this, 0, "pointerup", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+    glContext.canvasElement.onMouseEnter.listen((MouseEvent e) {
+       print("enter offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+    glContext.canvasElement.onMouseLeave.listen((MouseEvent e) {
+       print("leave offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+    glContext.canvasElement.onMouseMove.listen((MouseEvent e) {
+       print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       root.touch(this, 0, "pointermove", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+    
+    glContext.canvasElement.onMouseOut.listen((MouseEvent e) {
+       print("out offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+       root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+
+    glContext.canvasElement.onMouseOver.listen((MouseEvent e) {
+       print("over offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      // root.touch(this, 0, event.type, e.offsetX.toDouble(), e.offsetY.toDouble());
+    });
+  }
 }
 
 class TinyWebglContext {
   RenderingContext GL;
   CanvasElement _canvasElement;
+  CanvasElement get canvasElement => _canvasElement;
   double widht;
   double height;
   TinyWebglContext({width: 600.0, height: 400.0}) {
@@ -93,6 +132,7 @@ class TinyWebglContext {
     document.body.append(_canvasElement);
     GL = _canvasElement.getContext3d(stencil: true);
   }
+
 }
 
 class TinyWebglCanvas extends TinyCanvas {
