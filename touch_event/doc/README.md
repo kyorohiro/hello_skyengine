@@ -5,9 +5,10 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/05
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
+
 
 void main() {
   runApp(new DrawRectWidget());
