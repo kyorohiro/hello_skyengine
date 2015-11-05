@@ -3,3 +3,4 @@ dependencies:
   sky: any
   flutter: any
   sky_tools: any
+  material_design_icons: any
