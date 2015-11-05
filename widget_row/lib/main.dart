@@ -15,7 +15,7 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
+  NetworkImage i = new NetworkImage(src: "icon.jpeg");
 
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
   FlexAlignItems alignItems = FlexAlignItems.center;
