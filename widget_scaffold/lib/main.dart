@@ -15,7 +15,7 @@ void main() {
   // .package/material_design_icons/lib/icons/content/drawable-hdpi/ic_add_black_24dp.png
   Widget floatingActionButton = new FloatingActionButton(
     child: new Icon(
-      type: 'content/add',
+      icon: 'content/add',
       size: IconSize.s24
     ),
     backgroundColor: new Color.fromARGB(0xff, 0xaa, 0xff, 0xaa),
@@ -29,7 +29,7 @@ void main() {
     toolBar:toolBar,
     body:body,
     floatingActionButton:floatingActionButton,
-    statusBar:statusBar
+    bottomSheet:statusBar
   );
 
   // 2015/10/26 if use IconButton's icon option, need MatrialApp?
