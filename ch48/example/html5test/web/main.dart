@@ -16,7 +16,7 @@ void main() {
 
 test() async {
   TinyGameBuilderForWebgl builder = new TinyGameBuilderForWebgl();
-  TinyImage image = await builder.loadImage("./test.jpg");
+  TinyImage image = await builder.loadImage("./assets/test.jpg");
 
   TinyWebglContext c = new TinyWebglContext();
   TinyWebglCanvas canvas = new TinyWebglCanvas(c);

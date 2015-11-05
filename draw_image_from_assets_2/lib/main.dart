@@ -1,14 +1,3 @@
-# Draw Image from assets
-
-https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image_from_assets
-
-![](screen.png)
-
-```
-// following code is checked in 2015/11/05
-//
-// need flutter.yaml from 2015/11/05
-//
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:async';
@@ -49,7 +38,7 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("./assets/icon.jpeg").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
       });
@@ -69,4 +58,3 @@ class DrawImageObject extends RenderBox {
     }
   }
 }
-```
