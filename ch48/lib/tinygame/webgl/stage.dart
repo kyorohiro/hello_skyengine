@@ -161,6 +161,9 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clearColor(r, g, b, a);
     GL.clearDepth(1.0);
     GL.clearStencil(0);
+    GL.enable(RenderingContext.BLEND);
+    GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
+  //  GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
     //GL.stencilMask(0xffffff);
     GL.clear(
         RenderingContext.COLOR_BUFFER_BIT |
