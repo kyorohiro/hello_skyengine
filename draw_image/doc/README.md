@@ -4,7 +4,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 ![](screen.png)
 
-[](draw_image_from_assets/doc/README.md)
+[assets sample](draw_image_from_assets/doc/README.md)
 
 ```
 // following code is checked in 2015/10/31
