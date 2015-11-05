@@ -64,10 +64,16 @@ class TinyWebglStage extends Object with TinyStage {
 
   Future _anime() async {
     num startTime = new DateTime.now().millisecond;
+    num prevTime = new DateTime.now().millisecond;
     while (animeIsStart) {
-      await new Future.delayed(new Duration(milliseconds: 20));
+      await new Future.delayed(new Duration(milliseconds: 40));
       num currentTime = new DateTime.now().millisecond;
-      kick(currentTime - startTime);
+      
+      num s = (currentTime - prevTime)/2;
+      kick((prevTime-startTime+ s).toInt());
+      
+      kick((prevTime-startTime+ s*2).toInt());
+      prevTime = currentTime;
       markNeedsPaint();
       if (isPaint) {
         root.paint(this, new TinyWebglCanvas(glContext));
