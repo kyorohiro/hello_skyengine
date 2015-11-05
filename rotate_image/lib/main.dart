@@ -3,27 +3,25 @@ import 'package:flutter/rendering.dart';
 import 'dart:ui' as sky;
 import 'dart:async';
 import 'package:flutter/src/services/fetch.dart';
+import 'package:flutter/services.dart';
 
 main() async {
   runApp(new DrawImageWidget());
 }
 
+AssetBundle getAssetBundle() {
+  if (rootBundle != null) {
+    return rootBundle;
+  } else {
+    return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+  }
+}
+
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
-    UrlResponse response = await fetchUrl(url);
-    if (response.statusCode >= 400) {
-      throw "failed load ${url}";
-    } else {
-      // normally use following
-      // import 'package:flutter/services.dart';
-      // Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
-      // Future<ui.Image> decodeImageFromList(Uint8List list) {
-      Completer<sky.Image> completer = new Completer();
-      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
-        completer.complete(image);
-      });
-      return completer.future;
-    }
+    AssetBundle bundle = getAssetBundle();
+    ImageResource resource = bundle.loadImage(url);
+    return resource.first;
   }
 }
 
@@ -44,7 +42,7 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
       });

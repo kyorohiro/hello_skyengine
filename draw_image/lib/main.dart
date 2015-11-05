@@ -10,7 +10,7 @@ main() async {
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
     UrlResponse response = await fetchUrl(url);
-    if (response.statusCode >= 400) {
+    if (response.body == null) {
       throw "failed load ${url}";
     } else {
       // normally use following
@@ -40,11 +40,17 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("icon.jpeg").then((sky.Image img) {
+      print("${Uri.base}");/*
+      ImageLoader.load("${Uri.base.origin}assets/icon.jpeg").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
-      });
+      });*/
     }
+  }
+
+  @override
+  void performLayout() {
+    size = constraints.biggest;
   }
 
   void paint(PaintingContext context, Offset offset) {
