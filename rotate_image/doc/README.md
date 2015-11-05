@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/05
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as sky;
