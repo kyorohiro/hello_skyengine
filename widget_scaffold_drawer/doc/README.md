@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scaffold_drawer
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/05
 
 import 'dart:ui' as ui;
 
@@ -63,4 +63,21 @@ class DrawerTestState extends State<DrawerTest> {
     }, child: new Text("${message}"));
   }
 }
+```
+
+
+```
+# flutter.yaml
+material-design-icons:
+  - name: action/account_balance
+  - name: action/assessment
+  - name: action/help
+  - name: action/search
+  - name: action/settings
+  - name: action/thumb_down
+  - name: action/thumb_up
+  - name: content/add
+  - name: navigation/arrow_back
+  - name: navigation/menu
+  - name: navigation/more_vert
 ```
