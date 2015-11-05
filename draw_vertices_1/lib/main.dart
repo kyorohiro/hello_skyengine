@@ -4,10 +4,11 @@ import 'dart:ui' as sky;
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/src/services/fetch.dart';
+import 'package:flutter/services.dart';
 
 sky.Image img = null;
 main() async {
-  img = await ImageLoader.load("icon.jpeg");
+  img = await ImageLoader.load("assets/icon.jpeg");
   runApp(new DrawVertexsWidget());
 }
 
@@ -57,21 +58,18 @@ class DrawVertexsObject extends RenderBox {
   }
 }
 
+AssetBundle getAssetBundle() {
+  if (rootBundle != null) {
+    return rootBundle;
+  } else {
+    return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+  }
+}
+
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
-    UrlResponse response = await fetchUrl(url);
-    if (response.statusCode >= 400) {
-      throw "failed load ${url}";
-    } else {
-      // normally use following
-      // import 'package:flutter/services.dart';
-      // Future<ui.Image> decodeImageFromDataPipe(MojoDataPipeConsumer consumerHandle)
-      // Future<ui.Image> decodeImageFromList(Uint8List list) {
-      Completer<sky.Image> completer = new Completer();
-      sky.decodeImageFromDataPipe(response.body.handle.h, (sky.Image image) {
-        completer.complete(image);
-      });
-      return completer.future;
-    }
+    AssetBundle bundle = getAssetBundle();
+    ImageResource resource = bundle.loadImage(url);
+    return resource.first;
   }
 }
