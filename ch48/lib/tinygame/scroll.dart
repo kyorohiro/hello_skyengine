@@ -67,7 +67,7 @@ class TinyScrollView extends TinyDisplayObject {
     stage.pushMulMatrix(mat);
     bool ret = super.touch(stage, id, type, x, y);
     stage.popMatrix();
-    print("---${ret}");
+    //print("---${ret}");
     return ret;
   }
 

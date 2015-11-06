@@ -6,6 +6,7 @@ class TinyGameBuilderForWebgl extends TinyGameBuilder {
   TinyStage createStage(TinyDisplayObject root) {
     return new TinyWebglStage(this, root);
   }
+
   Future<TinyImage> loadImageBase(String path) async {
     ImageElement elm = await TinyWebglLoader.loadImage(path);
     return new TinyWebglImage(elm);
@@ -16,6 +17,18 @@ class TinyWebglImage extends TinyImage {
   int get w => elm.width;
   int get h => elm.height;
   ImageElement elm;
+  Texture _tex = null;
+  Texture getTex(RenderingContext GL) {
+    if (_tex == null) {
+      _tex = GL.createTexture();
+      GL.bindTexture(RenderingContext.TEXTURE_2D, _tex);
+      GL.texImage2D(RenderingContext.TEXTURE_2D, 0, RenderingContext.RGBA,
+          RenderingContext.RGBA, RenderingContext.UNSIGNED_BYTE, elm);
+      GL.bindTexture(RenderingContext.TEXTURE_2D, null);
+    }
+    return _tex;
+  }
+
   TinyWebglImage(this.elm) {
     ;
   }
@@ -63,19 +76,18 @@ class TinyWebglStage extends Object with TinyStage {
   Future _anime() async {
     double sum = 0.0;
     int count = 0;
- 
+
     num prevTime = new DateTime.now().millisecond;
     TinyWebglCanvas c = new TinyWebglCanvas(glContext);
     while (animeIsStart) {
-      await new Future.delayed(new Duration(milliseconds: 15));
+      await new Future.delayed(new Duration(milliseconds: 30));
       num currentTime = new DateTime.now().millisecondsSinceEpoch;
-      
-      num s = (currentTime - prevTime);
-      kick((prevTime+ s).toInt());
-      sum += s;
-      if(s< 0) {
 
-      }
+      num s = (currentTime - prevTime);
+      kick((prevTime + s).toInt());
+      kick((prevTime + s).toInt());
+      sum += s;
+      if (s < 0) {}
       count++;
       prevTime = currentTime;
       markNeedsPaint();
@@ -85,7 +97,7 @@ class TinyWebglStage extends Object with TinyStage {
         isPaint = false;
       }
 
-      if(count > 40) {
+      if (count > 60) {
         print("###fps  ${sum~/count}");
         sum = 0.0;
         count = 0;
@@ -96,57 +108,58 @@ class TinyWebglStage extends Object with TinyStage {
   void stop() {
     animeIsStart = false;
   }
-  
- // “pointercancel"
- // "pointerup"
- // "pointerdown"
- // "pointermove"
+
   void ttest() {
     bool isTap = false;
     glContext.canvasElement.onMouseDown.listen((MouseEvent e) {
       // print("down offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
       isTap = true;
-       root.touch(this, 0, "pointerdown", e.offset.x.toDouble(), e.offset.y.toDouble());
+      root.touch(
+          this, 0, "pointerdown", e.offset.x.toDouble(), e.offset.y.toDouble());
     });
     glContext.canvasElement.onMouseUp.listen((MouseEvent e) {
       //print("up offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-      root.touch(this, 0, "pointerup", e.offset.x.toDouble(), e.offset.y.toDouble());
-      isTap = false;
+      if (isTap == true) {
+        root.touch(
+            this, 0, "pointerup", e.offset.x.toDouble(), e.offset.y.toDouble());
+        isTap = false;
       }
     });
     glContext.canvasElement.onMouseEnter.listen((MouseEvent e) {
       // print("enter offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-       //root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
+      if (isTap == true) {
+        //root.touch(this, 0, "pointercancel", e.offsetX.toDouble(), e.offsetY.toDouble());
       }
     });
     glContext.canvasElement.onMouseLeave.listen((MouseEvent e) {
       // print("leave offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-       root.touch(this, 0, "pointercancel", e.offset.x.toDouble(), e.offset.y.toDouble());
-       isTap = false;
+      if (isTap == true) {
+        root.touch(this, 0, "pointercancel", e.offset.x.toDouble(),
+            e.offset.y.toDouble());
+        isTap = false;
       }
     });
     glContext.canvasElement.onMouseMove.listen((MouseEvent e) {
-       //print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-       root.touch(this, 0, "pointermove", e.offset.x.toDouble(), e.offset.y.toDouble());
+      //print("move offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
+      if (isTap == true) {
+        root.touch(this, 0, "pointermove", e.offset.x.toDouble(),
+            e.offset.y.toDouble());
       }
     });
-    
+
     glContext.canvasElement.onMouseOut.listen((MouseEvent e) {
       // print("out offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-       root.touch(this, 0, "pointercancel", e.offset.x.toDouble(), e.offset.y.toDouble());
-       isTap = false;
+      if (isTap == true) {
+        root.touch(this, 0, "pointercancel", e.offset.x.toDouble(),
+            e.offset.y.toDouble());
+        isTap = false;
       }
     });
 
     glContext.canvasElement.onMouseOver.listen((MouseEvent e) {
       // print("over offset=${e.offsetX}:${e.offsetY}  client=${e.clientX}:${e.clientY} screen=${e.screenX}:${e.screenY}");
-      if(isTap == true) {
-      // root.touch(this, 0, event.type, e.offsetX.toDouble(), e.offsetY.toDouble());
+      if (isTap == true) {
+        // root.touch(this, 0, event.type, e.offsetX.toDouble(), e.offsetY.toDouble());
       }
     });
   }
@@ -166,7 +179,6 @@ class TinyWebglContext {
     document.body.append(_canvasElement);
     GL = _canvasElement.getContext3d(stencil: true);
   }
-
 }
 
 class TinyWebglCanvas extends TinyCanvas {
@@ -186,6 +198,7 @@ class TinyWebglCanvas extends TinyCanvas {
         "attribute vec3 vp;",
         "uniform mat4 u_mat;",
         "uniform float u_point_size;",
+        "varying float v_mode;",
         "void main() {",
         "  gl_Position = u_mat*vec4(vp.x,vp.y,vp.z,1.0);",
         "  gl_PointSize = 1.0;//u_point_size;",
@@ -194,6 +207,7 @@ class TinyWebglCanvas extends TinyCanvas {
       String fs = [
         "precision mediump float;",
         "uniform vec4 color;",
+        //"varying vec4 v_mode;",
         "void main() {",
         " gl_FragColor = color;",
         "}"
@@ -229,7 +243,7 @@ class TinyWebglCanvas extends TinyCanvas {
     double g = 0.0;
     double b = 0.0;
     double a = 1.0;
-   // GL.enable(RenderingContext.DEPTH_TEST);
+    // GL.enable(RenderingContext.DEPTH_TEST);
     GL.enable(RenderingContext.STENCIL_TEST);
     GL.depthFunc(RenderingContext.LEQUAL);
     GL.clearColor(r, g, b, a);
@@ -237,45 +251,47 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clearStencil(0);
     GL.enable(RenderingContext.BLEND);
     blendMode(-1);
-    GL.clear(
-        RenderingContext.COLOR_BUFFER_BIT |
+    GL.clear(RenderingContext.COLOR_BUFFER_BIT |
         RenderingContext.STENCIL_BUFFER_BIT |
         RenderingContext.DEPTH_BUFFER_BIT);
-
   }
+
   blendMode(int type) {
     // http://masuqat.net/programming/csharp/OpenTK01-09.php
-    switch(type) {
+    switch (type) {
       case -1:
         GL.blendEquation(RenderingContext.FUNC_ADD);
         GL.blendFuncSeparate(
-            RenderingContext.SRC_ALPHA, 
+            RenderingContext.SRC_ALPHA,
             RenderingContext.ONE_MINUS_SRC_ALPHA,
-            RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_CONSTANT_ALPHA);
+            RenderingContext.SRC_ALPHA,
+            RenderingContext.ONE_MINUS_CONSTANT_ALPHA);
         break;
       case 0: //none
         GL.blendEquation(RenderingContext.FUNC_ADD);
         GL.blendFunc(RenderingContext.ONE, RenderingContext.ZERO);
         break;
-      case 1:// semi transparent
+      case 1: // semi transparent
         GL.blendEquation(RenderingContext.FUNC_ADD);
-        GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
+        GL.blendFunc(
+            RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
         break;
-      case 2://add
+      case 2: //add
         GL.blendEquation(RenderingContext.FUNC_ADD);
         GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
         break;
-      case 3://sub
+      case 3: //sub
         GL.blendEquation(RenderingContext.FUNC_REVERSE_SUBTRACT);
         GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
         break;
-      case 4://product
+      case 4: //product
         GL.blendEquation(RenderingContext.FUNC_ADD);
         GL.blendFunc(RenderingContext.ZERO, RenderingContext.SRC_COLOR);
         break;
-      case 5://reverse
+      case 5: //reverse
         GL.blendEquation(RenderingContext.FUNC_ADD);
-        GL.blendFunc(RenderingContext.ONE_MINUS_DST_COLOR, RenderingContext.ZERO);
+        GL.blendFunc(
+            RenderingContext.ONE_MINUS_DST_COLOR, RenderingContext.ZERO);
         break;
     }
   }
@@ -284,7 +300,8 @@ class TinyWebglCanvas extends TinyCanvas {
   Matrix4 calcMat() {
     cacheMatrix.setIdentity();
     cacheMatrix = cacheMatrix.translate(-1.0, 1.0, 0.0);
-    cacheMatrix = cacheMatrix.scale(2.0 / glContext.widht, -2.0 / glContext.height, 1.0);
+    cacheMatrix =
+        cacheMatrix.scale(2.0 / glContext.widht, -2.0 / glContext.height, 1.0);
     cacheMatrix = cacheMatrix * getMatrix();
     return cacheMatrix;
   }
@@ -294,32 +311,35 @@ class TinyWebglCanvas extends TinyCanvas {
     double sy = rect.y;
     double ex = rect.x + rect.w;
     double ey = rect.y + rect.h;
-    drawVertex(stage, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0], [0, 1, 3, 2], paint.color, paint.style, paint.strokeWidth);
+    drawVertex(stage, [sx, sy, 0.0, sx, ey, 0.0, ex, sy, 0.0, ex, ey, 0.0],
+        [0, 1, 3, 2], paint.color, paint.style, paint.strokeWidth);
   }
 
   void drawLine(TinyStage stage, TinyPoint p1, TinyPoint p2, TinyPaint paint) {
-    drawVertex(stage, [p1.x, p1.y, 0.0, p2.x, p2.y, 0.0], [0, 1], paint.color, TinyPaintStyle.stroke, paint.strokeWidth);
+    drawVertex(stage, [p1.x, p1.y, 0.0, p2.x, p2.y, 0.0], [0, 1], paint.color,
+        TinyPaintStyle.stroke, paint.strokeWidth);
   }
 
   void drawOval(TinyStage stage, TinyRect rect, TinyPaint paint) {
-    double cx = rect.x + rect.w/2.0;
-    double cy = rect.y + rect.h/2.0;
-    double a = rect.w/2;
-    double b = rect.h/2;
+    double cx = rect.x + rect.w / 2.0;
+    double cy = rect.y + rect.h / 2.0;
+    double a = rect.w / 2;
+    double b = rect.h / 2;
     List<double> ver = [];
     List<int> ind = [];
     int num = 50;
-    for(int i=0;i<num;i++) {
+    for (int i = 0; i < num; i++) {
       ind.add(i);
-      ver.add(cx+math.cos(2*math.PI*(i/num))*a);
-      ver.add(cy+math.sin(2*math.PI*(i/num))*b);
+      ver.add(cx + math.cos(2 * math.PI * (i / num)) * a);
+      ver.add(cy + math.sin(2 * math.PI * (i / num)) * b);
       ver.add(0.0);
     }
     //print("${a} ${b} ${ind} ${ver}");
     drawVertex(stage, ver, ind, paint.color, paint.style, paint.strokeWidth);
   }
 
-  void drawVertex(TinyStage stage, List<double> svertex, List<int> index, TinyColor color, TinyPaintStyle style, double strokeWidth) {
+  void drawVertex(TinyStage stage, List<double> svertex, List<int> index,
+      TinyColor color, TinyPaintStyle style, double strokeWidth) {
     //print("---drawRect");
     //
     //
@@ -332,7 +352,8 @@ class TinyWebglCanvas extends TinyCanvas {
     Buffer rectBuffer = TinyWebglProgram.createArrayBuffer(GL, svertex);
     GL.bindBuffer(RenderingContext.ARRAY_BUFFER, rectBuffer);
 
-    Buffer rectIndexBuffer = TinyWebglProgram.createElementArrayBuffer(GL, index);
+    Buffer rectIndexBuffer =
+        TinyWebglProgram.createElementArrayBuffer(GL, index);
     GL.bindBuffer(RenderingContext.ELEMENT_ARRAY_BUFFER, rectIndexBuffer);
 
     //
@@ -341,11 +362,14 @@ class TinyWebglCanvas extends TinyCanvas {
       //print("${GL.getParameter(RenderingContext.ALIASED_POINT_SIZE_RANGE)}");
 
       TinyWebglProgram.setUniformMat4(GL, programShape, "u_mat", calcMat());
-      TinyWebglProgram.setUniformVec4(GL, programShape, "color", [color.rf, color.gf, color.bf, color.af]);
-      TinyWebglProgram.setUniformF(GL, programShape, "u_point_size", strokeWidth);
+      TinyWebglProgram.setUniformVec4(
+          GL, programShape, "color", [color.rf, color.gf, color.bf, color.af]);
+      TinyWebglProgram.setUniformF(
+          GL, programShape, "u_point_size", strokeWidth);
 
       int locationVertexPosition = GL.getAttribLocation(programShape, "vp");
-      GL.vertexAttribPointer(locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
+      GL.vertexAttribPointer(
+          locationVertexPosition, 3, RenderingContext.FLOAT, false, 0, 0);
       GL.enableVertexAttribArray(locationVertexPosition);
 
       int mode = RenderingContext.TRIANGLE_FAN;
@@ -355,42 +379,36 @@ class TinyWebglCanvas extends TinyCanvas {
         GL.lineWidth(strokeWidth);
         mode = RenderingContext.LINE_LOOP;
       }
-      GL.drawElements(mode, svertex.length~/3, RenderingContext.UNSIGNED_SHORT, 0);
+      GL.drawElements(
+          mode, svertex.length ~/ 3, RenderingContext.UNSIGNED_SHORT, 0);
     }
     GL.useProgram(null);
   }
 
   void clipRect(TinyStage stage, TinyRect rect) {
-
-    GL.colorMask(false, false, false,  false);
+    GL.colorMask(false, false, false, false);
     GL.depthMask(false);
-    GL.stencilOp(
-        RenderingContext.KEEP,
-        RenderingContext.REPLACE,
-            RenderingContext.REPLACE);
+    GL.stencilOp(RenderingContext.KEEP, RenderingContext.REPLACE,
+        RenderingContext.REPLACE);
     GL.stencilFunc(RenderingContext.ALWAYS, 1, 0xff);
 
     //
-    
+
     TinyPaint p = new TinyPaint();
     p.color = new TinyColor.argb(0xff, 0xff, 0xff, 0xff);
     drawRect(null, rect, p);
     //
-    
-    
-   // GL.disable(RenderingContext.STENCIL_TEST);
+
+    // GL.disable(RenderingContext.STENCIL_TEST);
     //
     GL.colorMask(true, true, true, true);
     GL.depthMask(true);
     GL.stencilOp(
-        RenderingContext.KEEP,
-        RenderingContext.KEEP,
-        RenderingContext.KEEP);
+        RenderingContext.KEEP, RenderingContext.KEEP, RenderingContext.KEEP);
     GL.stencilFunc(RenderingContext.EQUAL, 1, 0xff);
-
-
   }
 
+  //bool a = false;
   void drawImageRect(TinyStage stage, TinyImage image, TinyRect src,
       TinyRect dst, TinyPaint paint) {
     TinyWebglImage img = image;
@@ -408,9 +426,14 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.enableVertexAttribArray(texLocation);
     GL.vertexAttribPointer(texLocation, 2, RenderingContext.FLOAT, false, 0, 0);
     //
-    Texture tex = GL.createTexture();
+    //if(a == false) {
+    Texture tex = img.getTex(GL);
     GL.bindTexture(RenderingContext.TEXTURE_2D, tex);
-    //
+    /*GL.createTexture();
+    
+    GL.texImage2D(RenderingContext.TEXTURE_2D, 0, RenderingContext.RGBA,
+        RenderingContext.RGBA, RenderingContext.UNSIGNED_BYTE, img.elm);
+    */
     GL.texParameteri(RenderingContext.TEXTURE_2D,
         RenderingContext.TEXTURE_WRAP_S, RenderingContext.CLAMP_TO_EDGE);
     GL.texParameteri(RenderingContext.TEXTURE_2D,
@@ -419,9 +442,10 @@ class TinyWebglCanvas extends TinyCanvas {
         RenderingContext.TEXTURE_MIN_FILTER, RenderingContext.NEAREST);
     GL.texParameteri(RenderingContext.TEXTURE_2D,
         RenderingContext.TEXTURE_MAG_FILTER, RenderingContext.NEAREST);
-    //
-    GL.texImage2D(RenderingContext.TEXTURE_2D, 0, RenderingContext.RGBA,
-        RenderingContext.RGBA, RenderingContext.UNSIGNED_BYTE, img.elm);
+    
+
+    //0 a = true;
+    //}
     //
     //
     double sx = dst.x;
@@ -451,7 +475,6 @@ class TinyWebglCanvas extends TinyCanvas {
       GL.uniform4f(colorLocation, paint.color.rf, paint.color.gf,
           paint.color.bf, paint.color.af);
       GL.enableVertexAttribArray(locationVertexPosition);
-      
 
       GL.drawElements(
           RenderingContext.TRIANGLES, 6, RenderingContext.UNSIGNED_SHORT, 0);
