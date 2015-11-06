@@ -280,12 +280,13 @@ class TinyWebglCanvas extends TinyCanvas {
     }
   }
 
+  Matrix4 cacheMatrix = new Matrix4.identity();
   Matrix4 calcMat() {
-    Matrix4 m = new Matrix4.identity();
-    m = m.translate(-1.0, 1.0, 0.0);
-    m = m.scale(2.0 / glContext.widht, -2.0 / glContext.height, 1.0);
-    m = m * getMatrix();
-    return m;
+    cacheMatrix.setIdentity();
+    cacheMatrix = cacheMatrix.translate(-1.0, 1.0, 0.0);
+    cacheMatrix = cacheMatrix.scale(2.0 / glContext.widht, -2.0 / glContext.height, 1.0);
+    cacheMatrix = cacheMatrix * getMatrix();
+    return cacheMatrix;
   }
 
   void drawRect(TinyStage stage, TinyRect rect, TinyPaint paint) {
