@@ -86,6 +86,7 @@ class TinyCircleDirection extends TinyDisplayObject {
     double cy = 0.0;
     canvas.drawLine(
         stage, new TinyPoint(cx, cy), new TinyPoint(cx, cy + circleSize), p);
+    p.color = new TinyColor.argb(0xff, 0x00, 0x00, 0x00);
     canvas.drawLine(
         stage,
         new TinyPoint(cx, cy + circleSize * (range / math.PI) - 10.0),
@@ -102,6 +103,7 @@ class TinyCircleDirection extends TinyDisplayObject {
     double cy = 0.0;
     canvas.drawLine(
         stage, new TinyPoint(cx, cy), new TinyPoint(cx, cy + circleSize), p);
+    p.color = new TinyColor.argb(0xff, 0x00, 0x00, 0x00);
     canvas.drawLine(
         stage,
         new TinyPoint(cx, cy + circleSize * (distance) - 10.0),

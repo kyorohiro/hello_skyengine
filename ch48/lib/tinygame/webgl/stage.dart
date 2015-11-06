@@ -224,16 +224,50 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clearDepth(1.0);
     GL.clearStencil(0);
     GL.enable(RenderingContext.BLEND);
-    GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
-  //  GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
+    GL.blendFuncSeparate(
+        RenderingContext.SRC_ALPHA, 
+        RenderingContext.ONE_MINUS_SRC_ALPHA,
+        RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_CONSTANT_ALPHA);
+    //GL.blendEquation(RenderingContext.FUNC_SUBTRACT);
+    //GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
+   // GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.SRC_ALPHA);
     //GL.stencilMask(0xffffff);
+    //blendMode(2);
     GL.clear(
         RenderingContext.COLOR_BUFFER_BIT |
         RenderingContext.STENCIL_BUFFER_BIT |
         RenderingContext.DEPTH_BUFFER_BIT);
 
   }
-
+  blendMode(int type) {
+    // http://masuqat.net/programming/csharp/OpenTK01-09.php
+    switch(type) {
+      case 0: //none
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFunc(RenderingContext.ONE, RenderingContext.ZERO);
+        break;
+      case 1:// semi transparent
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
+        break;
+      case 2://add
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
+        break;
+      case 3://sub
+        GL.blendEquation(RenderingContext.FUNC_REVERSE_SUBTRACT);
+        GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE);
+        break;
+      case 4://product
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFunc(RenderingContext.ZERO, RenderingContext.SRC_COLOR);
+        break;
+      case 5://reverse
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFunc(RenderingContext.ONE_MINUS_DST_COLOR, RenderingContext.ZERO);
+        break;
+    }
+  }
 
   Matrix4 calcMat() {
     Matrix4 m = new Matrix4.identity();

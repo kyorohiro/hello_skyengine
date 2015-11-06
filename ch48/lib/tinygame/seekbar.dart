@@ -57,6 +57,7 @@ class TinySeekbar extends TinyDisplayObject {
     double cy = this.viewHeight / 2.0;
     canvas.drawLine(
         stage, new TinyPoint(cx, cy), new TinyPoint(cx + viewWidth, cy), p);
+    p.color = new TinyColor.argb(0xff, 0x00, 0x00, 0x00);
     canvas.drawLine(stage, new TinyPoint(cx + (viewWidth) * range - 10.0, cy),
         new TinyPoint(cx + (viewWidth) * range + 10.0, cy), p);
   }
@@ -72,6 +73,7 @@ class TinySeekbar extends TinyDisplayObject {
 
     canvas.drawLine(
         stage, new TinyPoint(cx, cy), new TinyPoint(cx, cy + viewHeight), p);
+    p.color = new TinyColor.argb(0xff, 0x00, 0x00, 0x00);
     canvas.drawLine(stage, new TinyPoint(cx, cy + (viewHeight) * range - 10.0),
         new TinyPoint(cx, cy + (viewHeight) * range + 10.0), p);
   }
