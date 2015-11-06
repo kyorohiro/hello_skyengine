@@ -41,7 +41,6 @@ class TinyWebglStage extends Object with TinyStage {
 
   TinyWebglStage(this._builder, TinyDisplayObject root,
       {width: 600.0, height: 400.0}) {
-    print("--------new stage");
     glContext = new TinyWebglContext(width: width, height: height);
     this.root = root;
     ttest();
@@ -62,22 +61,35 @@ class TinyWebglStage extends Object with TinyStage {
   }
 
   Future _anime() async {
-    num startTime = new DateTime.now().millisecond;
+    double sum = 0.0;
+    int count = 0;
+ 
     num prevTime = new DateTime.now().millisecond;
+    TinyWebglCanvas c = new TinyWebglCanvas(glContext);
     while (animeIsStart) {
-      await new Future.delayed(new Duration(milliseconds: 40));
-      num currentTime = new DateTime.now().millisecond;
+      await new Future.delayed(new Duration(milliseconds: 15));
+      num currentTime = new DateTime.now().millisecondsSinceEpoch;
       
-      num s = (currentTime - prevTime)/2;
-      kick((prevTime-startTime+ s).toInt());
-      
-      kick((prevTime-startTime+ s*2).toInt());
+      num s = (currentTime - prevTime);
+      kick((prevTime+ s).toInt());
+      sum += s;
+      if(s< 0) {
+
+      }
+      count++;
       prevTime = currentTime;
       markNeedsPaint();
-      if (isPaint) {
-        root.paint(this, new TinyWebglCanvas(glContext));
+      if (isPaint && sum > 40.0) {
+        c.clear();
+        root.paint(this, c);
+        isPaint = false;
       }
-      isPaint = false;
+
+      if(count > 40) {
+        print("###fps  ${sum~/count}");
+        sum = 0.0;
+        count = 0;
+      }
     }
   }
 
@@ -224,15 +236,7 @@ class TinyWebglCanvas extends TinyCanvas {
     GL.clearDepth(1.0);
     GL.clearStencil(0);
     GL.enable(RenderingContext.BLEND);
-    GL.blendFuncSeparate(
-        RenderingContext.SRC_ALPHA, 
-        RenderingContext.ONE_MINUS_SRC_ALPHA,
-        RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_CONSTANT_ALPHA);
-    //GL.blendEquation(RenderingContext.FUNC_SUBTRACT);
-    //GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_SRC_ALPHA);
-   // GL.blendFunc(RenderingContext.SRC_ALPHA, RenderingContext.SRC_ALPHA);
-    //GL.stencilMask(0xffffff);
-    //blendMode(2);
+    blendMode(-1);
     GL.clear(
         RenderingContext.COLOR_BUFFER_BIT |
         RenderingContext.STENCIL_BUFFER_BIT |
@@ -242,6 +246,13 @@ class TinyWebglCanvas extends TinyCanvas {
   blendMode(int type) {
     // http://masuqat.net/programming/csharp/OpenTK01-09.php
     switch(type) {
+      case -1:
+        GL.blendEquation(RenderingContext.FUNC_ADD);
+        GL.blendFuncSeparate(
+            RenderingContext.SRC_ALPHA, 
+            RenderingContext.ONE_MINUS_SRC_ALPHA,
+            RenderingContext.SRC_ALPHA, RenderingContext.ONE_MINUS_CONSTANT_ALPHA);
+        break;
       case 0: //none
         GL.blendEquation(RenderingContext.FUNC_ADD);
         GL.blendFunc(RenderingContext.ONE, RenderingContext.ZERO);
