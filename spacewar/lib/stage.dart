@@ -56,7 +56,11 @@ class Stage extends RenderBox {
   void paint(PaintingContext context, Offset offset) {
     root.paint(this, context.canvas);
   }
-
+  @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
   @override
   void handleEvent(InputEvent event, HitTestEntry entry) {
     if (!(event is PointerInputEvent || !(entry is BoxHitTestEntry))) {
