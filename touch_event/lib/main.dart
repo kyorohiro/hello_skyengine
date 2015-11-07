@@ -17,6 +17,12 @@ class DrawRectObject extends RenderBox {
   double y = 100.0;
 
   @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
+
+  @override
   void performLayout() {
     size = constraints.biggest;
   }

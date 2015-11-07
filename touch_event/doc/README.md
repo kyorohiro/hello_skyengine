@@ -5,7 +5,11 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/05
+//
+// following code is checked in 2015/11/07
+//  from  2015/11/07 need override
+//    need bool hitTest(HitTestResult result, {Point position})
+//
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 
@@ -23,6 +27,12 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 class DrawRectObject extends RenderBox {
   double x = 100.0;
   double y = 100.0;
+
+  @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
 
   @override
   void performLayout() {
