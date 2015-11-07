@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 
 
 ```
-// following code is checked in 2015/11/05
+// following code is checked in 2015/11/07
 //
 // need flutter.yaml from 2015/11/05
 //
@@ -21,19 +21,19 @@ main() async {
   runApp(new DrawImageWidget());
 }
 
-AssetBundle getAssetBundle() {
-  if (rootBundle != null) {
-    return rootBundle;
-  } else {
-    return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
-  }
-}
-
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
     AssetBundle bundle = getAssetBundle();
     ImageResource resource = bundle.loadImage(url);
     return resource.first;
+  }
+
+  static AssetBundle getAssetBundle() {
+    if (rootBundle != null) {
+      return rootBundle;
+    } else {
+      return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+    }
   }
 }
 

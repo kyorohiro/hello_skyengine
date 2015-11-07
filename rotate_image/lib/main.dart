@@ -9,19 +9,19 @@ main() async {
   runApp(new DrawImageWidget());
 }
 
-AssetBundle getAssetBundle() {
-  if (rootBundle != null) {
-    return rootBundle;
-  } else {
-    return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
-  }
-}
-
 class ImageLoader {
   static Future<sky.Image> load(String url) async {
     AssetBundle bundle = getAssetBundle();
     ImageResource resource = bundle.loadImage(url);
     return resource.first;
+  }
+
+  static AssetBundle getAssetBundle() {
+    if (rootBundle != null) {
+      return rootBundle;
+    } else {
+      return new NetworkAssetBundle(new Uri.directory(Uri.base.origin));
+    }
   }
 }
 
