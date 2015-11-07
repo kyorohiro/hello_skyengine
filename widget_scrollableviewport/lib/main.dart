@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 void main() {
   // ScrollDirection.vertical.both is developping now. 2015/10/20
   //https://github.com/flutter/engine/issues/888
-  Widget b1 = new NetworkImage(src: "icon.jpeg", width: 300.0, height: 300.0);
-  Widget b2 = new NetworkImage(src: "icon2.jpeg", width: 300.0, height: 300.0);
+  Widget b1 = new AssetImage(name: "assets/icon.jpeg", width: 300.0, height: 300.0, bundle:rootBundle);
+  Widget b2 = new AssetImage(name: "assets/icon2.jpeg", width: 300.0, height: 300.0, bundle:rootBundle);
   Row r1 = new Row([b1, b2, b1, b2, b1, b2, b1, b2, b1]);
   Row r2 = new Row([b2, b1, b2, b1, b2, b1, b2, b1, b2]);
   Column g = new Column([r1, r2, r1, r2, r1, r2, r1, r2, r1]);
