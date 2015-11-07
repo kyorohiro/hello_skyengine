@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
 ```
 // flutter: ">=0.0.15"
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/07
 import 'package:flutter/services.dart';
 import 'package:mojo_services/sensors/sensors.mojom.dart';
 import 'package:flutter/widgets.dart';
