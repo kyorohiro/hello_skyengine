@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_path
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/05
+// following code is checked in 2015/11/07
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
