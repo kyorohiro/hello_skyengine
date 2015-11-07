@@ -1,9 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as sky;
-import 'dart:math' as math;
-import 'dart:async';
+import 'package:flutter/services.dart';
 
 main() async {
   double width = 100.0;
@@ -15,8 +12,8 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  NetworkImage i = new NetworkImage(src: "icon.jpeg");
-
+  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+  //NetworkImage i = new NetworkImage(src: "./icon.jpeg");
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
   FlexAlignItems alignItems = FlexAlignItems.center;
   TextBaseline textBaseline = TextBaseline.ideographic;
