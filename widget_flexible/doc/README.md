@@ -5,8 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_flexible
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/05
-// but failed to draw image
+//
+// following code is checked in 2015/11/07
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -22,9 +22,11 @@ void main() {
       decoration: new BoxDecoration(
           backgroundColor: new Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa)),
       child: new Row([
-        new NetworkImage(src: 'icon.jpeg', width: 25.0, height: 25.0),
+        new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle, width: 25.0, height: 25.0),
+        //new NetworkImage(src: 'icon.jpeg', width: 25.0, height: 25.0),
         new Flexible(child: new Text('flexible')),
-        new NetworkImage(src: 'icon.jpeg', width: 25.0, height: 25.0),
+        new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle, width: 25.0, height: 25.0)
+        //new NetworkImage(src: 'icon.jpeg', width: 25.0, height: 25.0),
       ]));
   runApp(new Column([
     felexibleTest,felexibleTest,felexibleTest,
@@ -34,4 +36,10 @@ void main() {
   ]));
 }
 
+```
+
+```
+#flutter.yaml
+assets:
+ - assets/icon.jpeg
 ```
