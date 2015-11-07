@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_service_path
 
 ```
 // flutter: ">=0.0.15"
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/07
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
