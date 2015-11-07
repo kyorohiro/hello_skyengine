@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/blob/master/anime_rect_1
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/07
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/animation.dart';
