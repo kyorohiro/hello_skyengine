@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(new DrawRectWidget());
@@ -10,6 +11,10 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
   RenderObject createRenderObject() {
     return new DrawRectObject();
   }
+
+  @override
+  void updateRenderObject(
+      RenderObject renderObject, RenderObjectWidget oldWidget) {}
 }
 
 class TouchInfo {
@@ -27,13 +32,19 @@ class DrawRectObject extends RenderBox {
   }
 
   @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
+
+  @override
   void paint(PaintingContext context, Offset offset) {
     Paint p = new Paint();
     for (TouchInfo t in touchInfos.values) {
       if (t.isTouch) {
         p.color = new Color.fromARGB(0xff, 0xff, 0xff, 0xff);
-        double size = 100*t.pressure;
-        Rect r = new Rect.fromLTWH(t.x - size/2, t.y - size/2, size, size);
+        double size = 100 * t.pressure;
+        Rect r = new Rect.fromLTWH(t.x - size / 2, t.y - size / 2, size, size);
         context.canvas.drawRect(r, p);
       }
     }
@@ -41,6 +52,9 @@ class DrawRectObject extends RenderBox {
 
   @override
   void handleEvent(InputEvent event, HitTestEntry entry) {
+    if (!attached) {
+      return;
+    }
     if (event is PointerInputEvent && entry is BoxHitTestEntry) {
       PointerInputEvent e = event;
       BoxHitTestEntry boxEntry = entry;
@@ -49,13 +63,13 @@ class DrawRectObject extends RenderBox {
           touchInfos[e.pointer] = new TouchInfo();
           touchInfos[e.pointer].x = entry.localPosition.x;
           touchInfos[e.pointer].y = entry.localPosition.y;
-          touchInfos[e.pointer].pressure = e.pressure/e.pressureMax;
+          touchInfos[e.pointer].pressure = e.pressure / e.pressureMax;
           touchInfos[e.pointer].isTouch = true;
           break;
         case "pointermove":
           touchInfos[e.pointer].x += e.dx;
           touchInfos[e.pointer].y += e.dy;
-          touchInfos[e.pointer].pressure = e.pressure/e.pressureMax;
+          touchInfos[e.pointer].pressure = e.pressure / e.pressureMax;
           break;
         case "pointerup":
           touchInfos[e.pointer].x += e.dx;
