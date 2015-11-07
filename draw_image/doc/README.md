@@ -6,13 +6,14 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 This code is checked in 2015/11/05. but, failed to draw image!!
 
-#### check following code
-
+* check following code is drawable image.
 [draw_image_from_assets](../../draw_image_from_assets/doc/README.md)
+
 
 ```
 //
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/05. but, failed to draw image!!
+//
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:async';
