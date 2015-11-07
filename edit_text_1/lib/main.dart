@@ -36,9 +36,16 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
   }
 
   @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
+
+  @override
   void performLayout() {
     size = constraints.biggest;
   }
+
   @override
   void handleEvent(InputEvent event, HitTestEntry entry) {
     if (event is PointerInputEvent) {
