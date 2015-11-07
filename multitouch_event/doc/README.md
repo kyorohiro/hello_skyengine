@@ -7,6 +7,10 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/multitouch_event
 
 ```
 // following code is checked in 2015/11/05
+//  ok
+// following code is checked in 2015/11/07
+//  failed
+//
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/gestures.dart';
