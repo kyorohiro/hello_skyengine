@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scaffold_drawer
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/05
+// following code is checked in 2015/11/07
 
 import 'dart:ui' as ui;
 
