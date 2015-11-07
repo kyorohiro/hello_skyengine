@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 
 void main() {
   print("=========");
@@ -34,7 +34,7 @@ class MyStatlessComponentImage extends StatelessComponent {
   RouteArguments args;
   MyStatlessComponentImage(this.args) {}
   Widget build(BuildContext context) {
-    Widget content = new Material(child: new NetworkImage(src: 'icon.jpeg', width: 500.0, height: 500.0));
+    Widget content = new Material(child: new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle, width: 500.0, height: 500.0));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
       Navigator.of(args.context).pop();
     });

@@ -5,10 +5,10 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_navigator
 ![](root.png)![](text.png)![](image.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/07
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 
 void main() {
   print("=========");
@@ -42,7 +42,7 @@ class MyStatlessComponentImage extends StatelessComponent {
   RouteArguments args;
   MyStatlessComponentImage(this.args) {}
   Widget build(BuildContext context) {
-    Widget content = new Material(child: new NetworkImage(src: 'icon.jpeg', width: 500.0, height: 500.0));
+    Widget content = new Material(child: new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle, width: 500.0, height: 500.0));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
       Navigator.of(args.context).pop();
     });
@@ -64,4 +64,11 @@ class MyStatlessComponentText extends StatelessComponent {
   }
 }
 
+```
+
+
+```
+#flutter.yaml
+assets:
+ - assets/icon.jpeg
 ```
