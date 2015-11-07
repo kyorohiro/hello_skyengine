@@ -15,7 +15,8 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
+  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+//  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
 
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
   FlexAlignItems alignItems = FlexAlignItems.center;

@@ -5,8 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/05
-// but faield to draw image!!
+//
+// following code is checked in 2015/11/07
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +25,8 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
+  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+//  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
 
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
   FlexAlignItems alignItems = FlexAlignItems.center;
@@ -39,4 +40,10 @@ main() async {
       alignItems: alignItems,
       textBaseline: textBaseline));
 }
+```
+
+```
+#flutter.yaml
+assets:
+ - assets/icon.jpeg
 ```
