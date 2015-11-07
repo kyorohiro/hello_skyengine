@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/ph_2d_boun_no_rot
 ![](screen.png)
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2015/11/07
 part of tinyphysics2d;
 
 class Primitive {
