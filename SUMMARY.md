@@ -39,6 +39,7 @@
   * [scaffold](widget_scaffold/doc/README.md)
   * [scaffold x drawer](widget_scaffold_drawer/doc/README.md)
   * [scrollable viewport](widget_scrollableviewport/doc/README.md)
+  * [scrollable list](widget_scrollablelist/doc/README.md)
   * [input text from ime(EditableText)](edit_text/doc/README.md)
 * [dart:io](doc/dartio/README.md)
   * [HttpClient Post & Get](dartio_test/doc/README.md)
