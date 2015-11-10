@@ -1,4 +1,11 @@
 # Iron Heart
+move into
+* https://github.com/kyorohiro/doc_2dgame
+* https://www.gitbook.com/book/kyorohiro/doc_2dgame/details
+
+
+
+---------------------- 
 
 https://github.com/kyorohiro/hello_skyengine/tree/master/ch48/iron_heart
 
