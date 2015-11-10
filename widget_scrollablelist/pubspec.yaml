@@ -1,0 +1,5 @@
+name: widget_scrollablelist
+dependencies:
+  sky: any
+  flutter: any
+  sky_tools: any
