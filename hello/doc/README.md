@@ -77,6 +77,7 @@ void main() {
 #### アプリを起動する
 "./" で、以下のコマンドを入力する。
 
+
 ```
 pub global activate flutter
 flutter start --checked -t ./lib/main.dart
