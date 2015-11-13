@@ -64,4 +64,5 @@
   * [build mojo](mojo_na_install/README.md)
 * [48 hour trial](doc/ch48/README.md)
  * [create iron heart](ch48/example/ironheart/doc/README.md)
+ * [tiny tetris](ch48/example/ironheart/doc/README.md)
 
