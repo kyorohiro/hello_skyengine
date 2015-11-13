@@ -4,3 +4,6 @@ dependencies:
   flutter: any
   sky_tools: any
   vector_math: any
+dependency_overrides:
+  flutter:
+    path: ../../tools/git/flutter/packages/flutter

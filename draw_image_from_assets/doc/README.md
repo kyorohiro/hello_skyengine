@@ -5,9 +5,9 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image_from_assets
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/11/14
 //
-// need flutter.yaml from 2015/11/13
+// need flutter.yaml from 2015/11/05
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';

@@ -12,7 +12,7 @@ class ScrollableListState extends State<ScrollableComponent> {
     ScrollableList list = new ScrollableList<String>(
         items: itemContents, itemExtent: 50.0,
         scrollableListPainter: new ScrollbarPainter(),
-        itemBuilder: (BuildContext context, String content) {
+        itemBuilder: (BuildContext context, String content, int index){
       return new Text(content, key: new ValueKey<String>(content));
     });
 

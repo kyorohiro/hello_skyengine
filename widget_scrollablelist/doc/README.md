@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scrollablelist
 
 ```
 //
-// following code is checked in 2015/11/13
+// following code is checked in 2015/11/14 0.0.20
 //
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class ScrollableListState extends State<ScrollableComponent> {
     ScrollableList list = new ScrollableList<String>(
         items: itemContents, itemExtent: 50.0,
         scrollableListPainter: new ScrollbarPainter(),
-        itemBuilder: (BuildContext context, String content) {
+        itemBuilder: (BuildContext context, String content, int index){
       return new Text(content, key: new ValueKey<String>(content));
     });
 
@@ -39,4 +39,5 @@ class ScrollableListState extends State<ScrollableComponent> {
 void main() {
   runApp(new ScrollableComponent());
 }
+
 ```

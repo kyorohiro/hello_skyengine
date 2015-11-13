@@ -3,3 +3,6 @@ dependencies:
   flutter: any
 dev_dependencies:
   sky_tools: any
+dependency_overrides:
+  flutter:
+    path: ../../tools/git/flutter/packages/flutter
