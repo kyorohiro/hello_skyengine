@@ -7,7 +7,7 @@ move into
 
 ---------------------- 
 
-https://github.com/kyorohiro/hello_skyengine/tree/master/ch48/iron_heart
+https://github.com/kyorohiro/doc_2dgame/tree/master/demo/ironheart
 
 ### Start Screen
 
