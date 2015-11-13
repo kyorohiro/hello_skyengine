@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scrollablelist
 
 ```
 //
-// following code is checked in 2015/11/10
+// following code is checked in 2015/11/13
 //
 import 'package:flutter/material.dart';
 

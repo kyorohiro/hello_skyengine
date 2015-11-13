@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/11/13
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/animation.dart';
