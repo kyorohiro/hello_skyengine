@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image_from_assets
 ```
 // following code is checked in 2015/11/07
 //
-// need flutter.yaml from 2015/11/05
+// need flutter.yaml from 2015/11/13
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
