@@ -42,6 +42,9 @@ git clone https://github.com/flutter/flutter.git -b alpha
 
 export PATH=`pwd`/flutter/bin:$PATH
 ```
+
+~~pub global activate flutter~~
+
 ## アプリを作成する。
 #### pubspec.yamlを作成する
 ```
