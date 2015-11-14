@@ -34,6 +34,14 @@ adbコマンドが使えるようにしましょう。
 TODO
 * [Android SDK](https://developer.android.com/sdk/installing/index.html?pkg=tools)
 
+
+### Flutter のインストール
+
+```
+git clone https://github.com/flutter/flutter.git -b alpha
+
+export PATH=`pwd`/flutter/bin:$PATH
+```
 ## アプリを作成する。
 #### pubspec.yamlを作成する
 ```
@@ -42,6 +50,9 @@ dependencies:
   sky: any
   flutter: any
   sky_tools: any
+dependency_overrides:
+  flutter:
+    path: <cloneしたパス>/packages/flutter
 ```
 
 #### libフォルダを作成する
@@ -79,7 +90,6 @@ void main() {
 
 
 ```
-pub global activate flutter
 flutter start --checked -t ./lib/main.dart
 ```
 
