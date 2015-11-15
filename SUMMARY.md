@@ -31,6 +31,7 @@
   * [text](widget_text/doc/README.md)
   * [network image](widget_networkimage/doc/README.md)
   * [assets image](widget_asset_image/doc/README.md)
+  * [raw image](widget_rawimage/doc/README.md)
   * [container](widget_container/doc/README.md)
   * [row](widget_row/doc/README.md)
   * [col](widget_col/doc/README.md)

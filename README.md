@@ -51,6 +51,8 @@ http://creativecommons.org/licenses/by/4.0/
 * [widget](doc/widgets/README.md)
   * [text](widget_text/doc/README.md)
   * [network image](widget_networkimage/doc/README.md)
+  * [assets image](widget_asset_image/doc/README.md)
+  * [raw image](widget_rawimage/doc/README.md)
   * [container](widget_container/doc/README.md)
   * [row](widget_row/doc/README.md)
   * [col](widget_col/doc/README.md)
@@ -85,3 +87,5 @@ http://creativecommons.org/licenses/by/4.0/
   * [build mojo](mojo_na_install/README.md)
 * [48 hour trial](doc/ch48/README.md)
  * [create iron heart](ch48/example/ironheart/doc/README.md)
+ * [tiny tetris](ch48/example/mino/doc/README.md)
+
