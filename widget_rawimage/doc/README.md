@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_rawimage
 
 ```
 //
-// following code is checked in 2015/11/14
+// following code is checked in 2015/11/15
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
