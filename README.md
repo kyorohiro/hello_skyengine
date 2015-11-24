@@ -87,7 +87,7 @@ http://creativecommons.org/licenses/by/4.0/
   * [build mojo](mojo_na_install/README.md)
 * [48 hour trial](doc/ch48/README.md)
 * 
-![](mino_sample.png)
+![](ch48/mino_sample.png)
  * [create iron heart](ch48/example/ironheart/doc/README.md)
  * [tiny tetris](ch48/example/mino/doc/README.md)
 
