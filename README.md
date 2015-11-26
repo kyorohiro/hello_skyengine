@@ -42,11 +42,13 @@ http://creativecommons.org/licenses/by/4.0/
   * [touch_test](touch_event/doc/README.md)
   * [multitouch_test](multitouch_event/doc/README.md)
   * [**[@]demo::mini game(spacewar!)**](spacewar/doc/README.md)
+  * ![](spacewar/doc/screen.png)
   * [draw_text](draw_text/doc/README.md)
   * [draw_path](draw_path/doc/README.md)
   * [draw_vertexs](draw_vertices/doc/README.md)
   * [draw_vertexs_with_image](draw_vertices_1/doc/README.md)
   * [**[@]demo:3d anime**](draw_vertices_demo/doc/README.md)
+  * ![](draw_vertices_demo/doc/screen.png)
   * [input text from ime(RenderObject)](edit_text_1/doc/README.md)
 * [widget](doc/widgets/README.md)
   * [text](widget_text/doc/README.md)
@@ -86,6 +88,8 @@ http://creativecommons.org/licenses/by/4.0/
 * [mojo for native](doc/mojo_native/README.md)
   * [build mojo](mojo_na_install/README.md)
 * [48 hour trial](doc/ch48/README.md)
+* 
+![](ch48/mino_sample.png)
  * [create iron heart](ch48/example/ironheart/doc/README.md)
  * [tiny tetris](ch48/example/mino/doc/README.md)
 
