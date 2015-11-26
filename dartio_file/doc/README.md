@@ -7,9 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_file
 ```
 //
 // following code is checked in 2015/11/27
-//  throw error, when write file
-//    FileSystemException: writeFrom failed, path =
-//        '/data/data/org.domokit.sky.shell/files/dummy2.txt' (OS Error: Bad file number, errno = 9)
+//
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
@@ -32,7 +30,7 @@ main() async {
   File f = new File("${dir.path}/dummy.txt");
   try {
     await f.create(recursive: true);
-    RandomAccessFile rfile = await f.open();
+    RandomAccessFile rfile = await f.open(mode:FileMode.WRITE);
     await rfile.writeString("hello!!");
     rfile.close();
   } catch(e) {

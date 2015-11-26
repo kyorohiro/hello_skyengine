@@ -19,7 +19,7 @@ main() async {
   File f = new File("${dir.path}/dummy.txt");
   try {
     await f.create(recursive: true);
-    RandomAccessFile rfile = await f.open();
+    RandomAccessFile rfile = await f.open(mode:FileMode.WRITE);
     await rfile.writeString("hello!!");
     rfile.close();
   } catch(e) {
