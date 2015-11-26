@@ -5,8 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_file
 ![](screen.png)
 
 ```
-// flutter: ">=0.0.15"
-// following code is checked in 2015/10/31
+//
+// following code is checked in 2015/11/27
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';

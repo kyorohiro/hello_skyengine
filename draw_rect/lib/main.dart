@@ -7,9 +7,9 @@ void main() {
 }
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
-    RenderObject createRenderObject() {
-      return new DrawRectObject();
-    }
+  RenderObject createRenderObject() {
+    return new DrawRectObject();
+  }
 }
 
 class DrawRectObject extends RenderBox {
