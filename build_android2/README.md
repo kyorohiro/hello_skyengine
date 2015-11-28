@@ -88,7 +88,7 @@ cd w
 unzip app.apk 
 rm app.apk 
 rm -rf META-INF/
-zip ../aa.apk -r .
+zip ../app_t.apk -r .
 
 ```
 
