@@ -24,6 +24,7 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 ```
 mkdir apk
 ```
+
 ### 2 create AndroidManifest.xml in apk folder
 ```
 <?xml version="1.0" encoding="utf-8"?>
