@@ -63,7 +63,8 @@ mkdir apk
 ```
 
 
-## D\etail: For Release
+## Detail: For Release
 
 ### 1. create certification
+
 
