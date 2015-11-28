@@ -1,5 +1,4 @@
 # build standalone android app
 
-
-on FLutter command
+input command
 > flutter apk 
