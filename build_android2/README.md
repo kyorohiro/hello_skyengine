@@ -83,7 +83,7 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.
 ```
 cd build
 mkdir w
-cp ap.apk ./w
+cp apo.apk ./w
 cd w
 unzip ap.apk 
 rm ap.apk 
