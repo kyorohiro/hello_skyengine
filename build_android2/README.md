@@ -1,6 +1,5 @@
 # build standalone android app
 2015/11/29
-
 input command
 > flutter apk 
 
