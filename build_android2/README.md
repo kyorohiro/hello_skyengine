@@ -78,7 +78,8 @@ keytool -genkey -v -keystore my-release-key.keystore -alias umiuni2d -keyalg RSA
 ```
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore my_application.apk umiuni2d
 ```
-
+<br>
+<br>
 ## Detail: remove debug certification
 ```
 cd build
