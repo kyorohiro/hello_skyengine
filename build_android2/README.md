@@ -86,7 +86,7 @@ mkdir w
 cp app.apk ./w
 cd w
 unzip app.apk 
-rm ap.apk 
+rm app.apk 
 rm -rf META-INF/
 zip ../aa.apk -r .
 
