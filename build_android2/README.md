@@ -7,4 +7,6 @@ input command
 ## ex: mino
 https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 
-git clone https://github.com/kyorohiro/doc_2dgame.git
+```
+> git clone https://github.com/kyorohiro/doc_2dgame.git
+```
