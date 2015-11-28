@@ -1,0 +1,1 @@
+# build standalone android app
