@@ -75,7 +75,9 @@ keytool -genkey -v -keystore my-release-key.keystore -alias umiuni2d -keyalg RSA
 ```
 
 ##### 1-2 
-
+```
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore my_application.apk alias_name
+```
 
 
 
