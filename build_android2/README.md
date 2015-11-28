@@ -20,6 +20,9 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 > flutter apk
 ```
 
+<br>
+<br>
+
 ## Detail: Create APK
 ### 1 create apk folder
 ```
