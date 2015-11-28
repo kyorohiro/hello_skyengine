@@ -28,6 +28,7 @@ http://creativecommons.org/licenses/by/4.0/
     * [draw text](test_android/doc/README.md)
     * [draw image](test_android_2/doc/README.md)
     * [set icon](test_android_3/doc/README.md)
+  * [build as standalone apk(now)](build_android2/README.md)
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
   * [build as mac app](build_linux/README.md)
