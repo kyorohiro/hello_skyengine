@@ -18,3 +18,5 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 > pub upgrade
 > flutter apk
 ```
+
+## detail
