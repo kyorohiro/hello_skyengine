@@ -66,6 +66,7 @@ mkdir apk
 ## Detail: For Release
 
 ### 1. create certification
+http://developer.android.com/intl/ja/tools/publishing/app-signing.html
 ```
 
 ```
