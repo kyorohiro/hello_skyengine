@@ -74,7 +74,7 @@ http://developer.android.com/intl/ja/tools/publishing/app-signing.html
 keytool -genkey -v -keystore my-release-key.keystore -alias umiuni2d -keyalg RSA -keysize 2048 -validity 10000
 ```
 
-##### 1-2 
+##### 1-2 sign
 ```
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore my_application.apk umiuni2d
 ```
