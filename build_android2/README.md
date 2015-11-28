@@ -52,5 +52,8 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 ```
 "info.kyorohiro.umiuni2d.demo.mino"
 ```
-##### 2-2 mod 
+##### 2-2 mod your app label
+```
+android:label
+```
 
