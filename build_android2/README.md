@@ -21,7 +21,10 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 
 ## detail
 ### 1 create apk folder
-### 2 create AndroidManifest.xml
+```
+mkdir aok
+```
+### 2 create AndroidManifest.xml in apk folder
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2015 The Chromium Authors. All rights reserved.
