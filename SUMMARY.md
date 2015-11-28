@@ -5,7 +5,7 @@
   * [build as standalone android app(old)](build_android/README.md)
     * [draw text](test_android/doc/README.md)
     * [draw image](test_android_2/doc/README.md)
-    * [set icon](test_android_3/doc/README.md)]
+    * [set icon](test_android_3/doc/README.md)
   * [build as standalone apk](build_android2/README.md)
   * [build as ios app](build_ios/README.md)
   * [build as linux app](build_linux/README.md)
