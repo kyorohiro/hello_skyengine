@@ -62,3 +62,8 @@ mkdir apk
 "Wonder Minon"
 ```
 
+
+## D\etail: For Release
+
+### 1. create certification
+
