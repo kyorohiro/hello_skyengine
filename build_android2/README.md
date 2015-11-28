@@ -11,5 +11,6 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 > brew install android-sdk
 > emacs ~/.bash_profile
 > export ANDROID_HOME=/usr/local/opt/android-sdk
+> s
 > git clone https://github.com/kyorohiro/doc_2dgame.git
 ```
