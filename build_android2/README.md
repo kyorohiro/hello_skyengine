@@ -85,7 +85,7 @@ cd build
 mkdir w
 cp app.apk ./w
 cd w
-unzip ap.apk 
+unzip app.apk 
 rm ap.apk 
 rm -rf META-INF/
 zip ../aa.apk -r .
