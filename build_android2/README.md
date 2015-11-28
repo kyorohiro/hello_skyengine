@@ -5,6 +5,5 @@ input command
 
 
 ## ex: mino
-
 https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 
