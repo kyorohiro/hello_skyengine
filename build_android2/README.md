@@ -48,3 +48,9 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
     </application>
  </manifest>
 ```
+##### 2-1 mod your package name
+```
+"info.kyorohiro.umiuni2d.demo.mino"
+```
+##### 2-2 mod 
+
