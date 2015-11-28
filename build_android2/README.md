@@ -53,11 +53,11 @@ mkdir apk
     </application>
  </manifest>
 ```
-##### 2-1 mod your package name
+##### 2-1 mod into your package name
 ```
 "info.kyorohiro.umiuni2d.demo.mino"
 ```
-##### 2-2 mod your app label
+##### 2-2 mod into your app label
 ```
 "Wonder Minon"
 ```
