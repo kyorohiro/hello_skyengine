@@ -3,7 +3,8 @@
 input command
 > flutter apk 
 
-ex:
+
+## ex:
 
 https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 
