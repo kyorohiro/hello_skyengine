@@ -79,6 +79,17 @@ keytool -genkey -v -keystore my-release-key.keystore -alias umiuni2d -keyalg RSA
 jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore my_application.apk umiuni2d
 ```
 
+## Detail: remove debug certification
+```
+  mkdir w
+  cp ap.apk ./w
+  cd w
+  unzip ap.apk 
+  rm ap.apk 
+  rm -rf META-INF/
+  zip ../aa.apk -r .
+```
+
 
 
 
