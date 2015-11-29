@@ -108,7 +108,7 @@ zip ../app_unsigned.apk -r .
 > emacs AndroidManifest.xml
 ```
 
-#### (2) mod icon
+#### (2) add "android:icon="@mipmap/ic_launcher""
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest android:versionCode="1" android:versionName="0.0.1" package="info.kyorohiro.umiuni2d.demo.mino" platformBuildVersionCode="22" platformBuildVersionName="5.1.1-1819727"
