@@ -125,7 +125,18 @@ zip ../app_unsigned.apk -r .
 </manifest>
 ```
 #### (3) add resource
-
+```
+./AndroidManifest.xml
+...
+...
+./res/mipmap-hdpi
+./res/mipmap-hdpi/ic_launcher.png
+./res/mipmap-mdpi/.DS_Store
+./res/mipmap-mdpi/ic_launcher.png
+./res/mipmap-xhdpi/ic_launcher.png
+./res/mipmap-xxhdpi/ic_launcher.png
+./res/mipmap-xxxhdpi/ic_launcher.png
+```
 
 
 
