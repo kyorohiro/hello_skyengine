@@ -104,7 +104,7 @@ zip ../app_unsigned.apk -r .
 #### (1)
 ```
 > flutter apk
-> cd apk
+> cd build
 > java -jar apktool_2.0.2.jar d app.apk
 > cd app
 > emacs AndroidManifest.xml
