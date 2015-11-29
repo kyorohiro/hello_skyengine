@@ -97,6 +97,8 @@ rm -rf META-INF/
 zip ../app_unsigned.apk -r .
 
 ```
+<br>
+<br>
 
 ## Ex: add my icon
 #### (1)
