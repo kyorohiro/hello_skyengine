@@ -144,7 +144,8 @@ zip ../app_unsigned.apk -r .
 
 #### (4) build
 ```
-java -jar apktool_2.0.2.jar b ap
+cd ../
+java -jar apktool_2.0.2.jar b app
 ```
 
 #### (5) cert
