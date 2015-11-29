@@ -142,5 +142,16 @@ zip ../app_unsigned.apk -r .
 ```
 
 
+#### (4) build
+```
+java -jar apktool_2.0.2.jar b ap
+```
+
+#### (5) cert
+```
+> cd dist
+> jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore my_application.apk umiuni2d
+```
+
 
 
