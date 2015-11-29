@@ -24,7 +24,7 @@ https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 <br>
 <br>
 
-## Detail: Create APK
+## Detail: Prepare to create APK
 ### 1 create apk folder
 ```
 mkdir apk
