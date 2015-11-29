@@ -68,7 +68,7 @@ mkdir apk
 
 <br>
 <br>
-## Detail: For Release
+# Ex: For Release
 
 ### 1. sign cert
 
