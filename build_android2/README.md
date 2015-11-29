@@ -100,7 +100,7 @@ zip ../app_unsigned.apk -r .
 <br>
 <br>
 
-# Ex: When Add Icon
+# Ex: If Add Icon
 #### (1)
 ```
 > flutter apk
