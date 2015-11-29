@@ -1,7 +1,7 @@
 # build standalone android app
 2015/11/29
 
-input command
+input command ,then create apk in build folder.
 > flutter apk 
 
 <br>
