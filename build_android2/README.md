@@ -99,6 +99,7 @@ zip ../app_unsigned.apk -r .
 ```
 
 ## Detail add my icon
+#### (1)
 ```
 > flutter apk
 > cd app
@@ -107,6 +108,22 @@ zip ../app_unsigned.apk -r .
 > emacs AndroidManifest.xml
 ```
 
+#### (2) mod icon
+```
+<?xml version="1.0" encoding="utf-8"?>
+<manifest android:versionCode="1" android:versionName="0.0.1" package="info.kyorohiro.umiuni2d.demo.mino" platformBuildVersionCode="22" platformBuildVersionName="5.1.1-1819727"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application android:icon="@mipmap/ic_launcher"  android:label="Wonder Minon" android:name="org.domokit.sky.shell.SkyApplication">
+        <activity android:theme="@android:style/Theme.Black.NoTitleBar" android:name="org.domokit.sky.shell.SkyActivity" android:launchMode="singleTask" android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
 
 
 
