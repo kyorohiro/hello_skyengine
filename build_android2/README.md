@@ -124,6 +124,8 @@ zip ../app_unsigned.apk -r .
     </application>
 </manifest>
 ```
+#### (3) add resource
+
 
 
 
