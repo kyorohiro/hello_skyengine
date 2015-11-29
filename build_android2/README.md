@@ -129,6 +129,7 @@ zip ../app_unsigned.apk -r .
 ./AndroidManifest.xml
 ...
 ...
+..
 ./res/mipmap-hdpi
 ./res/mipmap-hdpi/ic_launcher.png
 ./res/mipmap-mdpi/.DS_Store
