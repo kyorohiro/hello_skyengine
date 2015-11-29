@@ -98,6 +98,13 @@ zip ../app_unsigned.apk -r .
 
 ```
 
+## Detail add my icon
+```
+> flutter apk
+> cd app
+> java -jar apktool_2.0.0.jar d app.apk
+```
+
 
 
 
