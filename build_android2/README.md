@@ -127,7 +127,7 @@ zip ../app_unsigned.apk -r .
 </manifest>
 ```
 
-#### (3) add resource
+#### (3) add resource file
 ```
 ./AndroidManifest.xml
 ...
