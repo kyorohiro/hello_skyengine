@@ -155,6 +155,7 @@ java -jar apktool_2.0.2.jar b app
 > cd app
 > cd dist
 > jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.keystore app.apk umiuni2d
+> zipalign -v 4 app.apk app.zip.apk
 ```
 
 
