@@ -8,6 +8,8 @@ input command ,then create apk in build folder.
 <br>
 
 ## ex: release Google play result
+![](mino_sample.png)
+
 https://play.google.com/store/apps/details?id=info.kyorohiro.umiuni2d.demo.mino&hl=ja
 
 <br>
