@@ -6,6 +6,9 @@ input command ,then create apk in build folder.
 
 <br>
 <br>
+## ex: release Google play
+https://play.google.com/store/apps/details?id=info.kyorohiro.umiuni2d.demo.mino&hl=ja
+
 ## ex: mino
 https://github.com/kyorohiro/doc_2dgame/tree/master/demo/mino
 
