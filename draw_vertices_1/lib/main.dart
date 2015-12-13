@@ -8,7 +8,8 @@ import 'package:flutter/services.dart';
 
 sky.Image img = null;
 main() async {
-  img = await ImageLoader.load("assets/icon.jpeg");
+  // "assets/icon.jpeg" is error 2015/12/13 's flutter, when draw image
+  img = await ImageLoader.load("assets/a.png");
   runApp(new DrawVertexsWidget());
 }
 

@@ -5,21 +5,21 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/19
+// following code is checked in 2015/12/13
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui' as sky;
 import 'dart:async';
 import 'dart:typed_data';
-import 'package:flutter/src/services/fetch.dart';
 import 'package:vector_math/vector_math_64.dart';
+import 'package:flutter/scheduler.dart';
 import 'dart:math' as math;
 
 sky.Image img = null;
 main() async {
-  img = await ImageLoader.load("assets/icon.jpeg");
+  // "assets/icon.jpeg" is error 2015/12/13 's flutter, when draw image
+  img = await ImageLoader.load("assets/a.png");
   runApp(new DrawVertexsWidget());
 }
 
@@ -32,7 +32,7 @@ class DrawVertexsWidget extends OneChildRenderObjectWidget {
 class DrawVertexsObject extends RenderBox {
   double angle = 0.0;
   void anime() {
-    scheduler.requestAnimationFrame((Duration timeStamp) {
+    scheduler.addFrameCallback((Duration timeStamp) {
       angle += math.PI / 90.0;
       this.markNeedsPaint();
       anime();
@@ -114,11 +114,11 @@ class ImageLoader {
   }
 }
 
-
 ```
 
 ```
 # flutter.yaml
 assets:
   - assets/icon.jpeg
+  - assets/a.png
 ```
