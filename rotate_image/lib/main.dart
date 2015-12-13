@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as sky;
 import 'dart:async';
-import 'package:flutter/src/services/fetch.dart';
 import 'package:flutter/services.dart';
 
 main() async {
@@ -40,10 +39,23 @@ class DrawImageObject extends RenderBox {
   double radians = 0.0;
   sky.Image image = null;
 
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+  }
+
+  @override
+  bool hitTest(HitTestResult result, {Point position}) {
+    result.add(new BoxHitTestEntry(this, position));
+    return true;
+  }
+
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
+
+      ImageLoader.load("assets/a.png").then((sky.Image img) {
         image = img;
+        // "assets/icon.jpeg" is error 2015/12/13 's flutter
         this.markNeedsPaint();
       });
     }
