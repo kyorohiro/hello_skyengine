@@ -5,3 +5,6 @@ dependencies:
   sky_tools: any
   vector_math: any
   benchmark_harness: any
+dependency_overrides:
+  flutter:
+    path: /Users/kiyohiro/tools/git/flutter/packages/flutter
