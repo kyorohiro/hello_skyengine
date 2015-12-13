@@ -38,8 +38,9 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      ImageLoader.load("assets/icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("assets/a.png").then((sky.Image img) {
         image = img;
+        // "assets/icon.jpeg" is error 2015/12/13 's flutter
         this.markNeedsPaint();
       });
     }
