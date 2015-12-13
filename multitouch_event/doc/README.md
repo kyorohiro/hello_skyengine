@@ -7,7 +7,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/multitouch_event
 
 ```
 //
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 //  from  2015/11/07 need override
 //    need bool hitTest(HitTestResult result, {Point position})
 //
@@ -64,34 +64,27 @@ class DrawRectObject extends RenderBox {
   }
 
   @override
-  void handleEvent(InputEvent event, HitTestEntry entry) {
+  void handleEvent(PointerEvent event, HitTestEntry entry) {
     if (!attached) {
       return;
     }
-    if (event is PointerInputEvent && entry is BoxHitTestEntry) {
-      PointerInputEvent e = event;
-      BoxHitTestEntry boxEntry = entry;
-      switch (event.type) {
-        case "pointerdown":
-          touchInfos[e.pointer] = new TouchInfo();
-          touchInfos[e.pointer].x = entry.localPosition.x;
-          touchInfos[e.pointer].y = entry.localPosition.y;
-          touchInfos[e.pointer].pressure = e.pressure / e.pressureMax;
-          touchInfos[e.pointer].isTouch = true;
-          break;
-        case "pointermove":
-          touchInfos[e.pointer].x += e.dx;
-          touchInfos[e.pointer].y += e.dy;
-          touchInfos[e.pointer].pressure = e.pressure / e.pressureMax;
-          break;
-        case "pointerup":
-          touchInfos[e.pointer].x += e.dx;
-          touchInfos[e.pointer].y += e.dy;
-          touchInfos[e.pointer].isTouch = false;
-          break;
-        case 'pointercancel':
+    if (entry is BoxHitTestEntry) {
+      if(event is PointerDownEvent) {
+          touchInfos[event.pointer] = new TouchInfo();
+          touchInfos[event.pointer].x = entry.localPosition.x;
+          touchInfos[event.pointer].y = entry.localPosition.y;
+          touchInfos[event.pointer].pressure = event.pressure / event.pressureMax;
+          touchInfos[event.pointer].isTouch = true;
+      } else if(event is PointerMoveEvent) {
+          touchInfos[event.pointer].x = event.position.x;
+          touchInfos[event.pointer].y = event.position.y;
+          touchInfos[event.pointer].pressure = event.pressure / event.pressureMax;
+      } else if(event is PointerUpEvent) {
+          touchInfos[event.pointer].x = event.position.x;
+          touchInfos[event.pointer].y = event.position.y;
+          touchInfos[event.pointer].isTouch = false;
+      } else if(event is PointerCancelEvent) {
           print("pointer cancel");
-          break;
       }
       markNeedsPaint();
     }
