@@ -9,7 +9,7 @@ class Enemy extends GravityDisplayObject {
   double size = 50.0;
   int prevTime = 0;
   int numOfBullet = 0;
-  Rect enemySize = new Rect();
+  Rect enemySize = new Rect.fromLTWH(0.0, 0.0, 0.0, 0.0);
   Paint enemyPaint = new Paint();
 
   @override
@@ -25,7 +25,7 @@ class Enemy extends GravityDisplayObject {
   }
 
   @override
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(Stage stage, Canvas canvas) {
     double colorDepth = abs(255.0 * life / maxlife);
     enemyPaint.color = new Color.fromARGB(0xaa, 0x00, 0x00, colorDepth.floor());
     enemySize = new Rect.fromLTWH(x - size / 2, y - size / 2, size, size);

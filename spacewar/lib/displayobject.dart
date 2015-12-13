@@ -54,11 +54,11 @@ class DisplayObject {
     }
   }
 
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(Stage stage, Canvas canvas) {
     ;
   }
 
-  void paint(Stage stage, PaintingCanvas canvas) {
+  void paint(Stage stage, Canvas canvas) {
     onPaint(stage, canvas);
     for (DisplayObject d in child) {
       d.paint(stage, canvas);

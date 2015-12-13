@@ -25,7 +25,7 @@ class Joystick extends DisplayObject {
   }
 
   @override
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(Stage stage, Canvas canvas) {
     Paint paint = new Paint();
     if (isTouch) {
       paint.color = const Color.fromARGB(0xaa, 0xaa, 0xaa, 0xff);

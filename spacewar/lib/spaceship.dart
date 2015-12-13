@@ -22,7 +22,7 @@ class SpaceShip extends GravityDisplayObject {
   }
 
   @override
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(Stage stage, Canvas canvas) {
     Paint paint = new Paint();
     double colorDepth = (255.0*life/maxlife);
     if(colorDepth > 255.0) {

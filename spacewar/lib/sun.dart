@@ -6,7 +6,7 @@ class Sun extends DisplayObject {
 
   Paint p = new Paint();
   Color c = new Color.fromARGB(0xaa, 0xff, 0xaa, 0xaa);
-  Rect r = new Rect();
+  Rect r = new Rect.fromLTWH(0.0, 0.0, 0.0, 0.0);
 
   Sun() {
     p.color = c;
@@ -20,7 +20,7 @@ class Sun extends DisplayObject {
   }
 
   @override
-  void onPaint(Stage stage, PaintingCanvas canvas) {
+  void onPaint(Stage stage, Canvas canvas) {
     canvas.drawOval(r, p);
   }
 }
