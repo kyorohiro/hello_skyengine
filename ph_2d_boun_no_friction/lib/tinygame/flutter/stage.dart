@@ -27,7 +27,7 @@ class TinyFlutterStage extends RenderBox with TinyStage{
     }
     animeIsStart = true;
     isInit = false;
-    animeId = scheduler.requestAnimationFrame(_innerTick);
+    animeId = scheduler.addFrameCallback(_innerTick);
   }
 
   void _innerTick(Duration timeStamp) {
@@ -40,13 +40,13 @@ class TinyFlutterStage extends RenderBox with TinyStage{
       this.markNeedsPaint();
     }
     if (animeIsStart == true) {
-      animeId = scheduler.requestAnimationFrame(_innerTick);
+      animeId = scheduler.addFrameCallback(_innerTick);
     }
   }
 
   void stop() {
     if (animeIsStart == true) {
-      scheduler.cancelAnimationFrame(animeId);
+      scheduler.cancelFrameCallbackWithId(animeId);
     }
     animeIsStart = false;
   }
@@ -63,41 +63,12 @@ class TinyFlutterStage extends RenderBox with TinyStage{
   }
 
   @override
-  void handleEvent(InputEvent event, HitTestEntry en) {
-    if (!(event is PointerInputEvent || !(en is BoxHitTestEntry))) {
-      return;
-    }
-
-    BoxHitTestEntry entry = en;
-    PointerInputEvent e = event;
-    if(touchPoints.containsKey(e.pointer)) {
-      touchPoints[e.pointer] = new TouchPoint(-1.0, -1.0);
-    }
-
-    if (event.type == "pointerdown") {
-      touchPoints[e.pointer].x = entry.localPosition.x;
-      touchPoints[e.pointer].y = entry.localPosition.y;
-    } else {
-      touchPoints[e.pointer].x += (e.dx == null?0:e.dx);
-      touchPoints[e.pointer].y += (e.dy == null?0:e.dy);
-    }
-    _root.touch(this, e.pointer, event.type, touchPoints[e.pointer].x,
-        touchPoints[e.pointer].y, (e.dx == null?0:e.dx), (e.dy == null?0:e.dy));
-
-    if (event.type == "pointerup") {
-      touchPoints.remove(e.pointer);
-    }
-    if(event.type == "pointercancel") {
-      touchPoints.clear();
-    }
+  void handleEvent(PointerEventevent, HitTestEntry en) {
   }
-
-
-
 }
 
 class TinyFlutterCanvas extends TinyCanvas {
-  PaintingCanvas canvas;
+  Canvas canvas;
   TinyFlutterCanvas(this.canvas) {
   }
 
