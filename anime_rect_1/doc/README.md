@@ -5,10 +5,11 @@ https://github.com/kyorohiro/hello_skyengine/blob/master/anime_rect_1
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter/scheduler.dart';
 import 'dart:math';
 
 void main() {
@@ -24,7 +25,7 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 
   int prevTimeStamp = 0;
   void anime() {
-    scheduler.requestAnimationFrame((Duration timeStamp) {
+    scheduler.addFrameCallback((Duration timeStamp) {
       print("${timeStamp.inMilliseconds-prevTimeStamp}");
       prevTimeStamp = timeStamp.inMilliseconds;
       o.x = 100 * cos(PI * angle / 180.0) + 100.0;
