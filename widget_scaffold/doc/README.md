@@ -5,12 +5,12 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scaffold
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 import 'package:flutter/material.dart';
 
 void main() {
   MyBody body = new MyBody();
-  Widget statusBar = new Text("--status bar--",style:new TextStyle(fontSize:10.0));
+  //Widget statusBar = new Text("--status bar--",style:new TextStyle(fontSize:10.0));
   Widget toolBar = new ToolBar(
     center: new Text("center"),
     left: new Text("left"),
@@ -36,8 +36,8 @@ void main() {
   Scaffold s = new Scaffold(
     toolBar:toolBar,
     body:body,
-    floatingActionButton:floatingActionButton,
-    bottomSheet:statusBar
+    floatingActionButton:floatingActionButton//,
+    //bottomSheet:statusBar
   );
 
   // 2015/10/26 if use IconButton's icon option, need MatrialApp?
