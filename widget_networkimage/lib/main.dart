@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as sky;
 
 main() async {
-  String src = "https://avatars0.githubusercontent.com/u/1310669?v=3&s=40";
+  // 2015 12/13
+  // https://avatars0.githubusercontent.com/u/1310669?v=3&s=40" is error!!
+  //
+  String src = "https://raw.githubusercontent.com/kyorohiro/hello_skyengine/master/doc/screen.png";
+//  String src = "https://avatars0.githubusercontent.com/u/1310669?v=3&s=40";
   //double width = 10.0;
   //double height = 10.0;
   sky.ColorFilter colorFilter = new sky.ColorFilter.mode(
