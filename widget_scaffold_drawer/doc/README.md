@@ -5,8 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scaffold_drawer
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/21
-
+// following code is checked in 2015/12/13
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -31,16 +30,9 @@ class DrawerTest extends StatefulComponent {
 }
 
 class DrawerTestState extends State<DrawerTest> {
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     Widget body = new Center(child: new Text("body"));
-    Widget toolBar = new ToolBar(
-        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
-        center: new Text("center"));
-    Scaffold s = new Scaffold(toolBar: toolBar, body: body);
-    return s;
-  }
-
-  void showMyDrawer() {
     Block block = new Block(<Widget>[
       createMyHeader("Start"),
       createMyItem("---s 0001"),
@@ -49,8 +41,21 @@ class DrawerTestState extends State<DrawerTest> {
       createMyItem("---n 0001"),
       createMyItem("---n 0002")
     ]);
+    Widget toolBar = new ToolBar(
+        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
+        center: new Text("center"));
+    Scaffold s = new Scaffold(
+      key: scaffoldKey,toolBar: toolBar, body: body, drawer:  new Drawer(child:block)
+    ,        floatingActionButton: new Text("AB"));
 
-    showDrawer(context: this.context, child: block, level: 3);
+    return s;
+  }
+
+  void showMyDrawer() {
+   scaffoldKey.currentState.openDrawer();
+  //  showDatePicker();
+    //showMenu();
+    //showDrawer(context: this.context, child: block, level: 3);
   }
 
   DrawerHeader createMyHeader(String message) {

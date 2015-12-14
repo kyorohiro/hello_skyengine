@@ -36,14 +36,15 @@ class DrawerTestState extends State<DrawerTest> {
     Widget toolBar = new ToolBar(
         left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
         center: new Text("center"));
-    Scaffold s = new Scaffold(key: scaffoldKey,toolBar: toolBar, body: body, drawer:  block
-    ,        floatingActionButton: new Text(""));
+    Scaffold s = new Scaffold(
+      key: scaffoldKey,toolBar: toolBar, body: body, drawer:  new Drawer(child:block)
+    ,        floatingActionButton: new Text("AB"));
 
     return s;
   }
 
   void showMyDrawer() {
-  //  scaffoldKey.currentState.openDrawer();
+   scaffoldKey.currentState.openDrawer();
   //  showDatePicker();
     //showMenu();
     //showDrawer(context: this.context, child: block, level: 3);
