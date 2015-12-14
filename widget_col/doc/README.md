@@ -6,14 +6,11 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 
 ```
 //
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as sky;
-import 'dart:math' as math;
-import 'dart:async';
 
 main() async {
   double width = 100.0;
@@ -25,7 +22,10 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+  //
+  // 2015 12/13 icon.jpeg is error
+//  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+  AssetImage i = new AssetImage(name:"assets/a.png",bundle:rootBundle);
 //  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
 
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
@@ -46,4 +46,5 @@ main() async {
 #flutter.yaml
 assets:
  - assets/icon.jpeg
+ - assets/a.png
 ```

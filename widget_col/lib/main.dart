@@ -1,9 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as sky;
-import 'dart:math' as math;
-import 'dart:async';
 
 main() async {
   double width = 100.0;
