@@ -22,16 +22,9 @@ class DrawerTest extends StatefulComponent {
 }
 
 class DrawerTestState extends State<DrawerTest> {
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   Widget build(BuildContext context) {
     Widget body = new Center(child: new Text("body"));
-    Widget toolBar = new ToolBar(
-        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
-        center: new Text("center"));
-    Scaffold s = new Scaffold(toolBar: toolBar, body: body);
-    return s;
-  }
-
-  void showMyDrawer() {
     Block block = new Block(<Widget>[
       createMyHeader("Start"),
       createMyItem("---s 0001"),
@@ -40,8 +33,20 @@ class DrawerTestState extends State<DrawerTest> {
       createMyItem("---n 0001"),
       createMyItem("---n 0002")
     ]);
+    Widget toolBar = new ToolBar(
+        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
+        center: new Text("center"));
+    Scaffold s = new Scaffold(key: scaffoldKey,toolBar: toolBar, body: body, drawer:  block
+    ,        floatingActionButton: new Text(""));
 
-    showDrawer(context: this.context, child: block, level: 3);
+    return s;
+  }
+
+  void showMyDrawer() {
+  //  scaffoldKey.currentState.openDrawer();
+  //  showDatePicker();
+    //showMenu();
+    //showDrawer(context: this.context, child: block, level: 3);
   }
 
   DrawerHeader createMyHeader(String message) {
