@@ -44,9 +44,9 @@ BoxDecoration createDecoration() {
   BackgroundImage backgroundImage = createBackgroundImage();
   Border border = new Border.all(color:new Color.fromARGB(0xff, 0xff, 0x00, 0x00));
   double borderRadius = 10.0;
-  List<BoxShadow> boxShadow;
-  Gradient gradient;
-  Shape shape;
+//  List<BoxShadow> boxShadow;
+//  Gradient gradient;
+  //Shape shape;
   return new BoxDecoration(
     backgroundColor:backgroundColor,
     backgroundImage:backgroundImage,
@@ -55,7 +55,10 @@ BoxDecoration createDecoration() {
 }
 
 BackgroundImage createBackgroundImage() {
-  ImageResource image =  new ImageResource(ImageLoader.load("assets/icon.jpeg"));
+  //
+  // 2015 12/03 icon.image is error
+  //ImageResource image =  new ImageResource(ImageLoader.load("assets/icon.jpeg"));
+  ImageResource image =  new ImageResource(ImageLoader.load("assets/a.png"));
   ImageFit fit = ImageFit.none;
   //ImageRepeat repeat = ImageRepeat.repeat;
   Rect centerSlice = new Rect.fromLTWH(10.0, 10.0, 100.0, 100.0);
@@ -92,4 +95,5 @@ class ImageLoader {
 # flutter.yaml
 assets:
   - assets/icon.jpeg
+  - assets/a.png
 ```
