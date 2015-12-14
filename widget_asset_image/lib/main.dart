@@ -11,8 +11,13 @@ main() async {
   //final ImageFit fit = ImageFit.fill;
   //final ImageRepeat repeat = ImageRepeat.repeat;
   //final Rect centerSlice = new Rect.fromLTWH(0.0, 0.0, 20.0, 20.0);
+
+  //
+  //
+  // 2015 12/13 icon.jpeg is error
   AssetImage i = new AssetImage(
-    name:"assets/icon.jpeg",
+//    name:"assets/icon.jpeg",
+    name:"assets/a.png",
     bundle:rootBundle,
     colorFilter:colorFilter,
     width:width,height:height
