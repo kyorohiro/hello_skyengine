@@ -6,12 +6,12 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_rawimage
 
 ```
 //
-// following code is checked in 2015/11/19
+// following code is checked in 2015/12/13
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-//import 'dart:ui' as sky;
+import 'dart:ui' as sky;
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:mojo/core.dart' as core;
@@ -24,10 +24,16 @@ main() async {
   //final ImageFit fit = ImageFit.fill;
   //final ImageRepeat repeat = ImageRepeat.repeat;
   //final Rect centerSlice = new Rect.fromLTWH(0.0, 0.0, 20.0, 20.0);
-  ByteData data = await ResourceLoader.load("assets/icon.jpeg");
+
+  //
+  // icom.jpeg is error 2015 12/03
+  //ByteData data = await ResourceLoader.load("assets/icon.jpeg");
+  ByteData data = await ResourceLoader.load("assets/a.png");
+
 
   RawImage i = new RawImage(
-    bytes:data.buffer.asUint8List(),
+    image:await decodeImageFromList(data.buffer.asUint8List()),
+    //bytes:data.buffer.asUint8List(),
     width:width,height:height,
     colorFilter:colorFilter);
   runApp(new Center(child:i));
@@ -50,10 +56,12 @@ class ResourceLoader {
   }
 }
 
+
 ```
 
 ```
 #flutter.yaml
 assets:
  - assets/icon.jpeg
+ - assets/a.png
 ```
