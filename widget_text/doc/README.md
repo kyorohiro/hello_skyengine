@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_text
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 import 'package:flutter/widgets.dart';
 import 'dart:ui' as ui;
 
@@ -18,7 +18,7 @@ void main() {
   ui.TextAlign textAlign = ui.TextAlign.right;
   ui.TextBaseline textBaseline = ui.TextBaseline.ideographic;
 
-  List<ui.TextDecoration> decoration = [ui.TextDecoration.underline];
+  ui.TextDecoration decoration = ui.TextDecoration.underline;
   Color decorationColor  = new Color.fromARGB(0xff, 0xff, 0xaa, 0xaa);
   ui.TextDecorationStyle decorationStyle = ui.TextDecorationStyle.double;
 
@@ -38,4 +38,5 @@ void main() {
   Text text = new Text("This is Text", style: textStyle);
   runApp(text);
 }
+
 ```

@@ -10,7 +10,7 @@ void main() {
   ui.TextAlign textAlign = ui.TextAlign.right;
   ui.TextBaseline textBaseline = ui.TextBaseline.ideographic;
 
-  List<ui.TextDecoration> decoration = [ui.TextDecoration.underline];
+  ui.TextDecoration decoration = ui.TextDecoration.underline;
   Color decorationColor  = new Color.fromARGB(0xff, 0xff, 0xaa, 0xaa);
   ui.TextDecorationStyle decorationStyle = ui.TextDecorationStyle.double;
 
