@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 ![](screen.png)
 
 ```
-// following code is checked in 2015/11/07
+// following code is checked in 2015/12/13
 //   from 2015/11/06 can not NetworkImage when to show local image?
 //
 import 'package:flutter/widgets.dart';
@@ -22,7 +22,12 @@ main() async {
       width: width,
       height: height);
   Text t = new Text("Text");
-  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+  //
+  // 2015 12/03 icon.jpeg is error.
+  //  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
+  //
+  //
+  AssetImage i = new AssetImage(name:"assets/a.png",bundle:rootBundle);
   //NetworkImage i = new NetworkImage(src: "./icon.jpeg");
   FlexJustifyContent justifyContent = FlexJustifyContent.spaceBetween;
   FlexAlignItems alignItems = FlexAlignItems.center;
@@ -39,4 +44,5 @@ main() async {
 #flutter.yaml
 assets:
  - assets/icon.jpeg
+ - assets/a.png
 ```
