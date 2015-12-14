@@ -22,9 +22,9 @@ class MyStatlessComponentRoot extends StatelessComponent {
     Widget content = new Material(child: new Text("ROOT", style: new TextStyle(fontSize: 100.0)));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
       // args.context == build'args context
-      Navigator.of(args.context).pushNamed("/image");
+      Navigator.pushNamed(context, "/image");
     }, onLongPress: () {
-      Navigator.of(args.context).pushNamed("/text");
+      Navigator.pushNamed(context,"/text");
     });
     return new Center(child: gesture);
   }
@@ -34,9 +34,9 @@ class MyStatlessComponentImage extends StatelessComponent {
   RouteArguments args;
   MyStatlessComponentImage(this.args) {}
   Widget build(BuildContext context) {
-    Widget content = new Material(child: new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle, width: 500.0, height: 500.0));
+    Widget content = new Material(child: new AssetImage(name:"assets/a.png",bundle:rootBundle, width: 500.0, height: 500.0));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
-      Navigator.of(args.context).pop();
+      Navigator.pop(context);
     });
     return new Center(child: gesture);
   }
@@ -50,7 +50,7 @@ class MyStatlessComponentText extends StatelessComponent {
     Widget content = new Material(
         child: new Text("Hello", style: new TextStyle(fontSize: 100.0)));
     GestureDetector gesture = new GestureDetector(child: content, onTap: () {
-      Navigator.of(context).pop();
+      Navigator.pop(context);
     });
     return new Center(child: gesture);
   }
