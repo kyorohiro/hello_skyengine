@@ -8,3 +8,4 @@ flutter build
 cp build/app.flx ./ios/
 
 ```
+than make xcode project.
