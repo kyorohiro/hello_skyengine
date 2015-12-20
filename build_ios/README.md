@@ -9,4 +9,4 @@ cp build/app.flx ./ios/
 
 ```
 than make xcode project.
-and builded app is exeutable on simulator and real device.
+and this project's builded app is exeutable on simulator and real device.
