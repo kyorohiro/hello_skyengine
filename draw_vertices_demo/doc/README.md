@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
 ![](screen.png)
 
 ```
-// following code is checked in 2015/12/13
+// following code is checked in 2015/12/21 master branch
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +14,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:vector_math/vector_math_64.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'dart:math' as math;
 
 sky.Image img = null;
@@ -32,7 +33,7 @@ class DrawVertexsWidget extends OneChildRenderObjectWidget {
 class DrawVertexsObject extends RenderBox {
   double angle = 0.0;
   void anime() {
-    scheduler.addFrameCallback((Duration timeStamp) {
+    Scheduler.instance.addFrameCallback((Duration timeStamp) {
       angle += math.PI / 90.0;
       this.markNeedsPaint();
       anime();

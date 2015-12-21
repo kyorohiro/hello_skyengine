@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:vector_math/vector_math_64.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'dart:math' as math;
 
 sky.Image img = null;
@@ -24,7 +25,7 @@ class DrawVertexsWidget extends OneChildRenderObjectWidget {
 class DrawVertexsObject extends RenderBox {
   double angle = 0.0;
   void anime() {
-    scheduler.addFrameCallback((Duration timeStamp) {
+    Scheduler.instance.addFrameCallback((Duration timeStamp) {
       angle += math.PI / 90.0;
       this.markNeedsPaint();
       anime();
