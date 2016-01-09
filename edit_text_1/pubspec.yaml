@@ -3,3 +3,6 @@ dependencies:
   sky: any
   flutter: any
   sky_tools: any
+dependency_overrides:
+  flutter:
+    path: /Users/kiyohiro/tools/git/flutter_master/packages/flutter

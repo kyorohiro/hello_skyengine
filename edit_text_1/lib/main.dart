@@ -1,11 +1,16 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/material.dart';
 import 'dart:ui' as sky;
 import 'package:flutter/services.dart';
+import 'package:mojo_services/mojo/input_events.mojom.dart';
 
 KeyboardServiceProxy pService = null;
-Keyboard keyboard = null;
+String inputText = "";
+String composingText = "";
+int sCursol = 0;
+int eCursol = 1;
 
 main() async {
   await setupKeyboard();
@@ -13,9 +18,9 @@ main() async {
 }
 
 setupKeyboard() async {
-  pService = new KeyboardServiceProxy.unbound();
-  await shell.connectToService(null, pService);
-  keyboard = new Keyboard(pService.ptr);
+  //pService = new KeyboardServiceProxy.unbound();
+  //await shell.connectToService(null, pService);
+  //keyboard = new Keyboard(pService.ptr);
 }
 
 class DrawRectWidget extends OneChildRenderObjectWidget {
@@ -25,10 +30,10 @@ class DrawRectWidget extends OneChildRenderObjectWidget {
 }
 
 class EditableRenderObject extends RenderBox implements KeyboardClient {
-  EditableString keyboardClientBase =
+  /*EditableString keyboardClientBase =
       new EditableString(text: "test:",
       onUpdated: () {print("onUpdated()");},
-      onSubmitted:(){print("onSubmitted()");});
+      onSubmitted:(){print("onSubmitted()");});*/
 
   KeyboardClientStub stub;
   EditableRenderObject() {
@@ -47,19 +52,21 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
   }
 
   @override
-  void handleEvent(InputEvent event, HitTestEntry entry) {
-    if (event is PointerInputEvent) {
-      if (event.type == "pointerdown") {
+  void handleEvent(PointerEvent event, HitTestEntry entry) {
+    print("##e");
+    if (event is PointerDownEvent) {
+//      keyboard.service.showByRequest();
         keyboard.show(this.stub, KeyboardType.TEXT);
-        pService.ptr.showByRequest();
+        keyboard.service.setText("");
+        keyboard.service.setSelection(0, 0);
+        //pService.ptr.showByRequest();
       }
       markNeedsPaint();
-    }
   }
 
   void paint(PaintingContext context, Offset offset) {
     Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
-    PlainTextSpan textSpan = new PlainTextSpan(this.keyboardClientBase.text);
+    PlainTextSpan textSpan = new PlainTextSpan(inputText);
     TextStyle textStyle = new TextStyle(fontSize: 50.0, color: textColor);
     StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
     TextPainter textPainter = new TextPainter(testStyledSpan);
@@ -74,50 +81,81 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
 
   @override
   void submit(SubmitAction action) {
+    try {
     print("submit ${action}");
-    this.keyboardClientBase.submit(action);
+  } catch(e) {
+
+  }
+  //  this.keyboardClientBase.submit(action);
     this.markNeedsPaint();
   }
 
   void commitCompletion(CompletionData completion) {
     print("commitCompletion");
-    this.keyboardClientBase.commitCompletion(completion);
+    //this.keyboardClientBase.commitCompletion(completion);
     this.markNeedsPaint();
   }
 
   void commitCorrection(CorrectionData correction) {
+    try {
     print("commitCorrection");
-    this.keyboardClientBase.commitCorrection(correction);
+  } catch(e) {
+
+  }
+    //this.keyboardClientBase.commitCorrection(correction);
     this.markNeedsPaint();
   }
 
   void commitText(String text, int newCursorPosition) {
-    print("commitText ${text} ${newCursorPosition}");
-    this.keyboardClientBase.commitText(text, newCursorPosition);
+    try {
+    print("##commitText ${text.length} ${text.codeUnits} ${newCursorPosition}");
+    print("##commitText ${text} ${text == null} ${text.length} ${newCursorPosition}");
+    inputText += text;
+  } catch(e) {
+    print("DDD ${e}");
+  }
+    //this.keyboardClientBase.commitText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void deleteSurroundingText(int beforeLength, int afterLength) {
+    try {
     print("deleteSurroundingText ${beforeLength} ${afterLength}");
-    this.keyboardClientBase.deleteSurroundingText(beforeLength, afterLength);
+  } catch(e) {
+
+  }
+    //this.keyboardClientBase.deleteSurroundingText(beforeLength, afterLength);
     this.markNeedsPaint();
   }
 
   void setComposingRegion(int start, int end) {
+    try {
     print("setComposingRegion ${start} ${end}");
-    this.keyboardClientBase.setComposingRegion(start, end);
+  } catch(e) {
+
+  }
+    //this.keyboardClientBase.setComposingRegion(start, end);
     this.markNeedsPaint();
   }
 
   void setComposingText(String text, int newCursorPosition) {
+    try {
+
     print("setComposingText ${text} ${newCursorPosition}");
-    this.keyboardClientBase.setComposingText(text, newCursorPosition);
+  } catch(e) {
+
+  }
+    //this.keyboardClientBase.setComposingText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void setSelection(int start, int end) {
+    try {
     print("setSelecdtion ${start} ${end}");
-    this.keyboardClientBase.setSelection(start, end);
+  } catch(e) {
+
+  }
+    //this.keyboardClientBase.setSelection(start, end);
     this.markNeedsPaint();
   }
 }

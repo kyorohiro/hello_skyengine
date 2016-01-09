@@ -1,3 +1,11 @@
+# Draw Vertexs demo, 3d cube animation
+
+https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices_demo
+
+![](screen.png)
+
+```
+// following code is checked in 2015/12/21 master branch
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -31,10 +39,7 @@ class DrawVertexsObject extends RenderBox {
       anime();
     });
   }
-  @override
-  void performLayout() {
-    size = constraints.biggest;
-  }
+
   void paint(PaintingContext context, Offset offset) {
     context.canvas.scale(4.0, 4.0);
     context.canvas.translate(80.0, 80.0);
@@ -55,7 +60,6 @@ class DrawVertexsObject extends RenderBox {
   }
 
   void drawSurface(PaintingContext context, Offset offset, Matrix4 mat) {
-
     Paint paint = new Paint();
     sky.VertexMode vertexMode = sky.VertexMode.triangleFan;
     Vector3 vec1 = mat * new Vector3(-25.0, -25.0, -25.0);
@@ -84,16 +88,13 @@ class DrawVertexsObject extends RenderBox {
       const Color.fromARGB(0xaa, 0xff, 0xff, 0xff),
       const Color.fromARGB(0xaa, 0xff, 0xff, 0xff)
     ];
-
     sky.TransferMode transferMode = sky.TransferMode.color;
     sky.TileMode tmx = sky.TileMode.clamp;
     sky.TileMode tmy = sky.TileMode.clamp;
     Float64List matrix4 = new Matrix4.identity().storage;
-
     sky.ImageShader imgShader = new sky.ImageShader(img, tmx, tmy, matrix4);
     paint.shader = imgShader;
     List<int> indicies = [0, 1, 2, 3];
-
     context.canvas.drawVertices(vertexMode, vertices, textureCoordinates,
         colors, transferMode, indicies, paint);
   }
@@ -113,3 +114,12 @@ class ImageLoader {
     return resource.first;
   }
 }
+
+```
+
+```
+# flutter.yaml
+assets:
+  - assets/icon.jpeg
+  - assets/a.png
+```
