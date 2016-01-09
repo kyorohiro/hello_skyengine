@@ -5,9 +5,7 @@ import 'dart:ui' as sky;
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:vector_math/vector_math_64.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'dart:math' as math;
 
 sky.Image img = null;
 main() async {
@@ -17,7 +15,7 @@ main() async {
   sky.TileMode tmy = sky.TileMode.clamp;
   Float64List matrix4 = new Matrix4.identity().storage;
 
-  sky.ImageShader imgShader = new sky.ImageShader(img, tmx, tmy, matrix4);
+   new sky.ImageShader(img, tmx, tmy, matrix4);
 }
 
 class ImageLoader {
