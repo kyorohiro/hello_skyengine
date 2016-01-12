@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/touch_event
 
 ```
 //
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
 //  from  2015/11/07 need override
 //    need bool hitTest(HitTestResult result, {Point position})
 //
