@@ -8,7 +8,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/rotate_image
 ```
 // following code is checked in 2015/11/07
 //
-// need flutter.yaml from 2015/12/13
+// need flutter.yaml from 2016/01/13
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
