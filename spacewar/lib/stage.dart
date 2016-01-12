@@ -22,7 +22,8 @@ class Stage extends RenderBox {
     }
     animeIsStart = true;
     isInit = false;
-    animeId = scheduler.addFrameCallback(_innerTick);
+
+    animeId = Scheduler.instance.addFrameCallback(_innerTick);
   }
 
   void _innerTick(Duration timeStamp) {
@@ -35,13 +36,13 @@ class Stage extends RenderBox {
       this.markNeedsPaint();
     }
     if (animeIsStart == true) {
-      animeId = scheduler.addFrameCallback(_innerTick);
+      animeId = Scheduler.instance.addFrameCallback(_innerTick);
     }
   }
 
   void stop() {
     if (animeIsStart == true) {
-      scheduler.cancelFrameCallbackWithId(animeId);
+      Scheduler.instance.cancelFrameCallbackWithId(animeId);
     }
     animeIsStart = false;
   }
