@@ -13,6 +13,11 @@ class DrawVertexsWidget extends OneChildRenderObjectWidget {
 }
 
 class DrawVertexsObject extends RenderBox {
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+  }
+
   void paint(PaintingContext context, Offset offset) {
     context.canvas.scale(2.5, 2.5);
     context.canvas.translate(50.0, 50.0);

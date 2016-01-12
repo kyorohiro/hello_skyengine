@@ -5,7 +5,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_vertices
 ![](screen.png)
 
 ```
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
+// failed to draw vertex now!!
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:ui' as sky;
@@ -21,6 +22,11 @@ class DrawVertexsWidget extends OneChildRenderObjectWidget {
 }
 
 class DrawVertexsObject extends RenderBox {
+  @override
+  void performLayout() {
+    size = constraints.biggest;
+  }
+
   void paint(PaintingContext context, Offset offset) {
     context.canvas.scale(2.5, 2.5);
     context.canvas.translate(50.0, 50.0);
