@@ -40,11 +40,10 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      print("${Uri.base}");/*
-      ImageLoader.load("${Uri.base.origin}assets/icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("https://avatars0.githubusercontent.com/u/1310669?v=3&s=460").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
-      });*/
+      });
     }
   }
 

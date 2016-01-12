@@ -4,16 +4,13 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/draw_image
 
 ![](screen.png)
 
-This code is checked in 2015/11/05. but, failed to draw image!!
-
-* check following code is drawable image.
-[draw_image_from_assets](../../draw_image_from_assets/doc/README.md)
 
 
 ```
 //
-// following code is checked in 2015/11/05. but, failed to draw image!!
+// following code is checked in 2016/01/13.
 //
+// fetchUrl(url) can not load assets image now.
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:async';
@@ -56,8 +53,7 @@ class DrawImageObject extends RenderBox {
 
   void loadImage() {
     if (image == null) {
-      //"${Uri.base.origin}/");
-      ImageLoader.load("icon.jpeg").then((sky.Image img) {
+      ImageLoader.load("https://avatars0.githubusercontent.com/u/1310669?v=3&s=460").then((sky.Image img) {
         image = img;
         this.markNeedsPaint();
       });
