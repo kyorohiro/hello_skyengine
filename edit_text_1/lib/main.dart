@@ -56,17 +56,17 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
     print("##e");
     if (event is PointerDownEvent) {
 //      keyboard.service.showByRequest();
-        keyboard.show(this.stub, KeyboardType.TEXT);
-        keyboard.service.setText("");
-        keyboard.service.setSelection(0, 0);
-        //pService.ptr.showByRequest();
-      }
-      markNeedsPaint();
+      keyboard.show(this.stub, KeyboardType.TEXT);
+      keyboard.service.setText("");
+      keyboard.service.setSelection(0, 0);
+      //pService.ptr.showByRequest();
+    }
+    markNeedsPaint();
   }
 
   void paint(PaintingContext context, Offset offset) {
     Color textColor = const Color.fromARGB(0xaa, 0xff, 0, 0);
-    PlainTextSpan textSpan = new PlainTextSpan(inputText);
+    PlainTextSpan textSpan = new PlainTextSpan(inputText+composingText);
     TextStyle textStyle = new TextStyle(fontSize: 50.0, color: textColor);
     StyledTextSpan testStyledSpan = new StyledTextSpan(textStyle, [textSpan]);
     TextPainter textPainter = new TextPainter(testStyledSpan);
@@ -82,11 +82,9 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
   @override
   void submit(SubmitAction action) {
     try {
-    print("submit ${action}");
-  } catch(e) {
-
-  }
-  //  this.keyboardClientBase.submit(action);
+      print("submit ${action}");
+    } catch (e) {}
+    //  this.keyboardClientBase.submit(action);
     this.markNeedsPaint();
   }
 
@@ -98,63 +96,67 @@ class EditableRenderObject extends RenderBox implements KeyboardClient {
 
   void commitCorrection(CorrectionData correction) {
     try {
-    print("commitCorrection");
-  } catch(e) {
-
-  }
+      print("commitCorrection");
+    } catch (e) {}
     //this.keyboardClientBase.commitCorrection(correction);
     this.markNeedsPaint();
   }
 
   void commitText(String text, int newCursorPosition) {
     try {
-    print("##commitText ${text.length} ${text.codeUnits} ${newCursorPosition}");
-    print("##commitText ${text} ${text == null} ${text.length} ${newCursorPosition}");
-    inputText += text;
-  } catch(e) {
-    print("DDD ${e}");
-  }
+      print("##commitText ${text.length} ${text.codeUnits} ${newCursorPosition}");
+      print("##commitText ${text} ${text == null} ${text.length} ${newCursorPosition}");
+      inputText += text;
+      sCursol+= text.length;
+      eCursol+= text.length;
+      composingText = "";
+    } catch (e) {
+      print("DDD ${e}");
+    }
     //this.keyboardClientBase.commitText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void deleteSurroundingText(int beforeLength, int afterLength) {
     try {
-    print("deleteSurroundingText ${beforeLength} ${afterLength}");
-  } catch(e) {
-
-  }
+      print("deleteSurroundingText ${beforeLength} ${afterLength}");
+      if(inputText.length <= sCursol) {
+        sCursol = inputText.length;
+        eCursol = inputText.length;
+        inputText = inputText.substring(0,sCursol-1);
+      } else if(sCursol > 0){
+        String a = inputText.substring(sCursol-1);
+        String b = inputText.substring(sCursol,inputText.length);
+        inputText = a+b;
+      }
+      sCursol--;
+      eCursol--;
+    } catch (e) {}
     //this.keyboardClientBase.deleteSurroundingText(beforeLength, afterLength);
     this.markNeedsPaint();
   }
 
   void setComposingRegion(int start, int end) {
     try {
-    print("setComposingRegion ${start} ${end}");
-  } catch(e) {
-
-  }
+      print("setComposingRegion ${start} ${end}");
+    } catch (e) {}
     //this.keyboardClientBase.setComposingRegion(start, end);
     this.markNeedsPaint();
   }
 
   void setComposingText(String text, int newCursorPosition) {
     try {
-
-    print("setComposingText ${text} ${newCursorPosition}");
-  } catch(e) {
-
-  }
+      print("setComposingText ${text} ${newCursorPosition}");
+      composingText = text;
+    } catch (e) {}
     //this.keyboardClientBase.setComposingText(text, newCursorPosition);
     this.markNeedsPaint();
   }
 
   void setSelection(int start, int end) {
     try {
-    print("setSelecdtion ${start} ${end}");
-  } catch(e) {
-
-  }
+      print("setSelecdtion ${start} ${end}");
+    } catch (e) {}
     //this.keyboardClientBase.setSelection(start, end);
     this.markNeedsPaint();
   }
