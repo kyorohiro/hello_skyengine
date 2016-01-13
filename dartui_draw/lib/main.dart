@@ -1,5 +1,4 @@
 import 'dart:ui' as ui;
-import 'dart:typed_data';
 import 'package:vector_math/vector_math_64.dart';
 
 // ex 3:4 game screen

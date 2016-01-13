@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartui_event
 ![](screen.png)
 
 ```
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
 import 'dart:ui' as ui;
 import 'package:vector_math/vector_math_64.dart';
 import 'dart:typed_data';
