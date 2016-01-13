@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_text
 ![](screen.png)
 
 ```
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
 import 'package:flutter/widgets.dart';
 import 'dart:ui' as ui;
 
