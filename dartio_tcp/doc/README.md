@@ -5,6 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/dartio_tcp
 ![](screen.png)
 
 ```
+// following code is checked in 2016/01/13
 import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'dart:convert';

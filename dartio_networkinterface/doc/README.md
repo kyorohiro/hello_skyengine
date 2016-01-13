@@ -10,6 +10,7 @@ https://github.com/flutter/engine/issues/1655
 ![](screen.png)
 
 ```
+// following code is checked in 2016/01/13
 import 'package:flutter/widgets.dart';
 import 'dart:io';
 import 'dart:convert';
