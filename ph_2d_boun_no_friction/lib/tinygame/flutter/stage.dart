@@ -27,7 +27,7 @@ class TinyFlutterStage extends RenderBox with TinyStage{
     }
     animeIsStart = true;
     isInit = false;
-    animeId = scheduler.addFrameCallback(_innerTick);
+    animeId = Scheduler.instance.addFrameCallback(_innerTick);
   }
 
   void _innerTick(Duration timeStamp) {
@@ -40,13 +40,13 @@ class TinyFlutterStage extends RenderBox with TinyStage{
       this.markNeedsPaint();
     }
     if (animeIsStart == true) {
-      animeId = scheduler.addFrameCallback(_innerTick);
+      animeId = Scheduler.instance.addFrameCallback(_innerTick);
     }
   }
 
   void stop() {
     if (animeIsStart == true) {
-      scheduler.cancelFrameCallbackWithId(animeId);
+      Scheduler.instance.cancelFrameCallbackWithId(animeId);
     }
     animeIsStart = false;
   }
