@@ -9,7 +9,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scrollableviewpo
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 void main() {
-  // ScrollDirection.vertical.both is developping now. 2015/10/20
+  // ScrollDirection.vertical.both is developping now. 2016/01/13
   //https://github.com/flutter/engine/issues/888
   Widget b1 = new AssetImage(name: "assets/a.png", width: 300.0, height: 300.0, bundle:rootBundle);
   Widget b2 = new AssetImage(name: "assets/b.png", width: 300.0, height: 300.0, bundle:rootBundle);

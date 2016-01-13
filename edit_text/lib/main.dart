@@ -18,6 +18,7 @@ main() async {
   EditableString st = new EditableString(text: "test:",
   onUpdated: () {},
   onSubmitted:(){print("onSubmit");});
+
   EditableText text = new EditableText(
       key: new Key("editabletext"),
       value: st,
@@ -25,12 +26,13 @@ main() async {
       scrollOffset: offset,
       focused: true,
       cursorColor: textColor,
-      onContentSizeChanged:
-      (Size newSize) {print("onContentSizeChange");}
+      onContentSizeChanged:(Size newSize) {print("onContentSizeChange");}
       );
   Center r = new Center(child: text);
-
 // run & show ime
   runApp(r);
+
   keyboard.show(st.stub, KeyboardType.TEXT);
+  keyboard.service.setText("");
+  keyboard.service.setSelection(0, 0);
 }

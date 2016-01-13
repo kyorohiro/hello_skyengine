@@ -4,12 +4,9 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/edit_text
 
 ![](screen.png)
 
-**[ERROR]**
- * https://github.com/flutter/engine/issues/1662
- * https://github.com/flutter/engine/issues/1663
 
 ```
-// following code is checked in 2015/10/31
+// following code is checked in 2016/01/13
 import 'package:flutter/widgets.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
@@ -30,6 +27,7 @@ main() async {
   EditableString st = new EditableString(text: "test:",
   onUpdated: () {},
   onSubmitted:(){print("onSubmit");});
+
   EditableText text = new EditableText(
       key: new Key("editabletext"),
       value: st,
@@ -37,13 +35,15 @@ main() async {
       scrollOffset: offset,
       focused: true,
       cursorColor: textColor,
-      onContentSizeChanged:
-      (Size newSize) {print("onContentSizeChange");}
+      onContentSizeChanged:(Size newSize) {print("onContentSizeChange");}
       );
   Center r = new Center(child: text);
-
 // run & show ime
   runApp(r);
+
   keyboard.show(st.stub, KeyboardType.TEXT);
+  keyboard.service.setText("");
+  keyboard.service.setSelection(0, 0);
 }
+
 ```
