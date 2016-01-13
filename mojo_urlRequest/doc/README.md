@@ -4,8 +4,8 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_urlRequest
 
 
 ```
-// flutter: ">=0.0.15"
-// following code is checked in 2015/10/31
+//
+// following code is checked in 2016/01/13
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:convert';
@@ -44,76 +44,14 @@ class MyGet {
     return completer.future;
   }
 
-  static Future<Stream<ByteData>> loadAsStream(String url, {method: "GET", redirect: true}) async {
+  static Future<ByteData> loadAsStream(String url, {method: "GET", redirect: true}) async {
     UrlResponse response = await load(url, method: method, redirect: redirect);
-
-    // Normally we use the DataPipeDrainer#drain()
     core.MojoDataPipeConsumer consumer = response.body;
-    return MojoDataPipeConsumer2ByteDataStream.loadAsStream(consumer);
-
+    return await core.DataPipeDrainer.drainHandle(consumer);
   }
 
   static Future<ByteData> loadAsByteData(String url, {method: "GET", redirect: true}) async {
-    Stream<ByteData> stream =
-        await loadAsStream(url, method: method, redirect: redirect);
-    StreamIterator<ByteData> itr = new StreamIterator(stream);
-    List<ByteData> buffers = [];
-
-    int dataLength = 0;
-    while (await itr.moveNext()) {
-      buffers.add(itr.current);
-      dataLength += itr.current.lengthInBytes;
-    }
-    ByteData data = new ByteData(dataLength);
-    int index = 0;
-    for (ByteData d in buffers) {
-      data.buffer.asUint8List().setAll(index, d.buffer.asUint8List());
-      index += d.lengthInBytes;
-    }
-    return data;
-  }
-}
-
-class MojoDataPipeConsumer2ByteDataStream {
-  static ByteData _cloneByteData(ByteData byteData) {
-    Uint8List d = byteData.buffer.asUint8List();
-    ByteBuffer b = new Uint8List.fromList(d).buffer;
-    return new ByteData.view(b);
-  }
-
-  // Normally we use the DataPipeDrainer#drain()
-  static Stream<ByteData> loadAsStream(core.MojoDataPipeConsumer consumer) {
-    StreamController<ByteData> returnStream = new StreamController<ByteData>();
-    core.MojoEventStream eventStream = new core.MojoEventStream(consumer.handle);
-    eventStream.listen((List<int> v) {
-      core.MojoHandleSignals signals = new core.MojoHandleSignals(v[1]);
-      if (!signals.isReadable && signals.isPeerClosed) {
-        eventStream.close();
-        returnStream.close();
-        return;
-      }
-      if (!signals.isReadable) {
-        returnStream.addError("");
-        returnStream.close();
-        return;
-      }
-
-      ByteData d = consumer.beginRead();
-      if (d == null) {
-        returnStream.addError("");
-        returnStream.close();
-        eventStream.close();
-        return;
-      }
-      returnStream.add(_cloneByteData(d));
-      if (!consumer.endRead(d.lengthInBytes).isOk) {
-        eventStream.close();
-        returnStream.close();
-        return;
-      }
-      eventStream.enableReadEvents();
-    });
-    return returnStream.stream;
+    return await loadAsStream(url, method: method, redirect: redirect);
   }
 }
 
@@ -123,4 +61,5 @@ main() async {
   String s1 = UTF8.decode(data.buffer.asUint8List(), allowMalformed: true);
   print("### ${data.buffer.lengthInBytes} ${s1}");
 }
+
 ```
