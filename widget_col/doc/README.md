@@ -6,7 +6,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_row
 
 ```
 //
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
 //
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';

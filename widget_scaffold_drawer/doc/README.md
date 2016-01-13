@@ -5,7 +5,7 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/widget_scaffold_drawer
 ![](screen.png)
 
 ```
-// following code is checked in 2015/12/13
+// following code is checked in 2016/01/13
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -42,11 +42,16 @@ class DrawerTestState extends State<DrawerTest> {
       createMyItem("---n 0002")
     ]);
     Widget toolBar = new ToolBar(
-        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
+      //  left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
         center: new Text("center"));
     Scaffold s = new Scaffold(
-      key: scaffoldKey,toolBar: toolBar, body: body, drawer:  new Drawer(child:block)
-    ,        floatingActionButton: new Text("AB"));
+      key: scaffoldKey,toolBar: toolBar, body: body,
+      drawer:  new Drawer(child:block),
+      floatingActionButton: new FloatingActionButton(child: new Icon(
+        icon: 'content/add',
+        size: IconSize.s24
+      ),onPressed: showMyDrawer)
+    );
 
     return s;
   }

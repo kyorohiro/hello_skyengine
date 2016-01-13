@@ -34,11 +34,16 @@ class DrawerTestState extends State<DrawerTest> {
       createMyItem("---n 0002")
     ]);
     Widget toolBar = new ToolBar(
-        left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
+      //  left: new IconButton(icon: "navigation/menu", onPressed: showMyDrawer),
         center: new Text("center"));
     Scaffold s = new Scaffold(
-      key: scaffoldKey,toolBar: toolBar, body: body, drawer:  new Drawer(child:block)
-    ,        floatingActionButton: new Text("AB"));
+      key: scaffoldKey,toolBar: toolBar, body: body,
+      drawer:  new Drawer(child:block),
+      floatingActionButton: new FloatingActionButton(child: new Icon(
+        icon: 'content/add',
+        size: IconSize.s24
+      ),onPressed: showMyDrawer)
+    );
 
     return s;
   }

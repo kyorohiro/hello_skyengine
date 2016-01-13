@@ -13,7 +13,6 @@ main() async {
       height: height);
   Text t = new Text("Text");
   //
-  // 2015 12/13 icon.jpeg is error
 //  AssetImage i = new AssetImage(name:"assets/icon.jpeg",bundle:rootBundle);
   AssetImage i = new AssetImage(name:"assets/a.png",bundle:rootBundle);
 //  NetworkImage i = new NetworkImage(src: "./icon.jpeg");
