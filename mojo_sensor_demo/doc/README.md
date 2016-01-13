@@ -6,13 +6,15 @@ https://github.com/kyorohiro/hello_skyengine/tree/master/mojo_sensor_demo
 
 
 ```
-// flutter: ">=0.0.15"
-// following code is checked in 2015/11/07
+//
+// following code is checked in 2016/01/13
+//
 import 'package:flutter/services.dart';
 import 'package:mojo_services/sensors/sensors.mojom.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/animation.dart';
+import 'package:flutter/scheduler.dart';
+
 import 'dart:ui' as sky;
 
 //
@@ -61,7 +63,7 @@ class DrawRectObject extends RenderBox {
   @override
   void performLayout() {
     size = constraints.biggest;
-    scheduler.requestAnimationFrame(onTick);
+    Scheduler.instance.addFrameCallback(onTick);
   }
 
   @override
@@ -76,7 +78,7 @@ class DrawRectObject extends RenderBox {
   }
 
   onTick(Duration timeStamp) {
-    scheduler.requestAnimationFrame(onTick);
+    Scheduler.instance.addFrameCallback(onTick);
     x += dx;
     y += dy;
     if(y-s < paintBounds.top) {
@@ -100,4 +102,5 @@ class DrawRectObject extends RenderBox {
     markNeedsPaint();
   }
 }
+
 ```

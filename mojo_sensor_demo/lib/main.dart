@@ -2,7 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:mojo_services/sensors/sensors.mojom.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/animation.dart';
+import 'package:flutter/scheduler.dart';
+
 import 'dart:ui' as sky;
 
 //
@@ -51,7 +52,7 @@ class DrawRectObject extends RenderBox {
   @override
   void performLayout() {
     size = constraints.biggest;
-    scheduler.requestAnimationFrame(onTick);
+    Scheduler.instance.addFrameCallback(onTick);
   }
 
   @override
@@ -66,7 +67,7 @@ class DrawRectObject extends RenderBox {
   }
 
   onTick(Duration timeStamp) {
-    scheduler.requestAnimationFrame(onTick);
+    Scheduler.instance.addFrameCallback(onTick);
     x += dx;
     y += dy;
     if(y-s < paintBounds.top) {
