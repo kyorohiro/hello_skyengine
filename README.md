@@ -1,3 +1,7 @@
+This Memo is deprecated.
+
+
+
 # Flutter (skyengine)
 
 This book is memo that kyorohiro have been learning about flutter with dart.. 
