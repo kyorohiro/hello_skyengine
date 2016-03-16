@@ -1,7 +1,6 @@
 **This Memo is deprecated.**
 
 I'm checking for umiuni2d only about flutter func now.
-following
 
 [flutter api check]
 * https://github.com/kyorohiro/umiuni2d_check
