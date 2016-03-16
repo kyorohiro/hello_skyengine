@@ -1,5 +1,10 @@
-This Memo is deprecated.
+**This Memo is deprecated.**
 
+I'm checking for umiuni2d only about flutter func now.
+following
+* https://github.com/kyorohiro/umiuni2d_check
+* https://github.com/kyorohiro/umiuni2d
+* https://github.com/kyorohiro/umiuni2d_example
 
 
 # Flutter (skyengine)
