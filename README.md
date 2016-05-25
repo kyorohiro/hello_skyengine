@@ -55,6 +55,7 @@ http://creativecommons.org/licenses/by/4.0/
   * [build as linux app (no content)](build_linux/README.md)
   * [build as mac app (no content)](build_linux/README.md)
   * [build mojo](mojo_na_install/README.md)
+  * [build as chromeapp](build_chromeapp/README.md)_
 * [rendering](doc/rendering/README.md)
   * [draw_rect](draw_rect/doc/README.md)
   * [anime_rect](anime_rect/doc/README.md)
