@@ -21,34 +21,37 @@ $ pub get
 $ pub upgrade
 ```
 
-#### [3] install arc welder
+#### [3] make release apk
 
-http://www.howtogeek.com/214734/how-to-use-googles-arc-welder-to-run-android-apps-in-chrome/
-
-
-#### [4] make release apk
-
-###### [4-1] draw rect test
+###### [3-1] draw rect test
 
 ```
 $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=umiuni2d  --keystore-key-alias=umiuni2d --target ./lib/render/animeRect_scheduller.dart 
 ```
 
-###### [4-2] anime rect test
+###### [3-2] anime rect test
 
 ```
 $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=umiuni2d  --keystore-key-alias=umiuni2d --target ./lib/render/drawImage_assets.dart
 ```
 
-###### [4-3] draw image test
+###### [3-3] draw image test
 
 ```
 $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=umiuni2d  --keystore-key-alias=umiuni2d --target ./lib/render/drawImage_assets.dart
 ```
 comment : failed to draw png now(2016y5m26d)
 
-##### [4-4] touch test
+###### [3-4] touch test
 
 ```
 $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=umiuni2d  --keystore-key-alias=umiuni2d --target ./lib/render/touchTest.dart 
 ```
+
+#### [4] install arc welder & bake chrome app
+
+http://www.howtogeek.com/214734/how-to-use-googles-arc-welder-to-run-android-apps-in-chrome/
+
+
+
+#### [5] Check on MAC
