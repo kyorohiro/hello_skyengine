@@ -56,3 +56,8 @@ http://www.howtogeek.com/214734/how-to-use-googles-arc-welder-to-run-android-app
 
 #### [5] Check on MAC
 ![](img.png)
+### memo
+
+run flutter_c/lib/demo/3ddemo_drawvertex.dart, app was  terminate.
+maybe, could not display image repeatly
+
