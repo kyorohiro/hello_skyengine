@@ -1,6 +1,6 @@
-# Make Chromeapp from android app
+# Make Chromeapp from android app on Mac
 
-check 2016y5m26d
+check 2016y5m26d on mac
 
 Dart x Flutter  --( ARC Welder )--> Chrome App 
 
@@ -42,7 +42,7 @@ $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=u
 ```
 $ flutter build apk --release  --keystore=./dummy.keystore --keystore-password=umiuni2d  --keystore-key-alias=umiuni2d --target ./lib/render/drawImage_assets.dart
 ```
-comment : failed to draw png now(2016y5m26d)
+comment : failed to draw png now(2016y5m26d) on mac chrome
 
 ###### [3-4] touch test
 
@@ -61,5 +61,5 @@ http://www.howtogeek.com/214734/how-to-use-googles-arc-welder-to-run-android-app
 ### memo
 
 run flutter_c/lib/demo/3ddemo_drawvertex.dart, app was  terminate.
-maybe, could not display image repeatly
+maybe, could not display image repeatly on mac chrome
 
