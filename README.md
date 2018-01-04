@@ -4,7 +4,7 @@
 
 * I'm checking for umiuni2d only about flutter func now.
 
-* _**2018/01/04: re-learning**_[_** Dart x Flutter Memo \(0\)**_](https://medium.com/@kyorohiro_72753/dart-x-flutter-memo-0-7ab0f2e8877a)
+* _**2018/01/04: re-learning**_[_** Dart x Flutter Memo \(0\)\[2018\]**_](https://medium.com/@kyorohiro_72753/dart-x-flutter-memo-0-7ab0f2e8877a)
 
 \[flutter api check\]
 
